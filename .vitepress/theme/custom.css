@@ -190,13 +190,13 @@ body.cc-settings-modal-open {
 /* 3. Hero 操作按钮磁吸悬浮与光晕反馈 */
 .VPHomeHero .action .VPButton.brand {
   position: relative;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.2s ease;
   box-shadow: 0 4px 16px rgba(86, 114, 205, 0.35);
 }
 
 .VPHomeHero .action .VPButton.brand:hover {
-  transform: translateY(-2.5px) scale(1.025);
-  box-shadow: 0 8px 26px rgba(86, 114, 205, 0.52);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(86, 114, 205, 0.48);
 }
 
 .VPHomeHero .action .VPButton.brand:active {
@@ -204,7 +204,7 @@ body.cc-settings-modal-open {
 }
 
 .VPHomeHero .action .VPButton.alt {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .VPHomeHero .action .VPButton.alt:hover {
@@ -216,14 +216,14 @@ body.cc-settings-modal-open {
 /* 4. 首页 19 个章节卡片灵动悬浮与辉光边框 */
 .VPHomeFeatures .VPFeature {
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
   overflow: hidden;
 }
 
 .VPHomeFeatures .VPFeature:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: color-mix(in srgb, #5672CD 55%, transparent);
-  box-shadow: 0 16px 32px -10px rgba(86, 114, 205, 0.22);
+  box-shadow: 0 14px 28px -8px rgba(86, 114, 205, 0.22);
 }
 
 .VPHomeFeatures .VPFeature::after {
@@ -236,7 +236,7 @@ body.cc-settings-modal-open {
   background: linear-gradient(90deg, transparent, #5672CD, #8b5cf6, transparent);
   opacity: 0;
   transform: scaleX(0.6);
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .VPHomeFeatures .VPFeature:hover::after {

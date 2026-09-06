@@ -31,9 +31,8 @@ function onClick() {
 }
 
 const tiltStyle = computed(() => {
-  const base = flipped.value ? 180 : 0;
   return {
-    transform: `rotateX(${rx.value}deg) rotateY(${base + ry.value}deg)`,
+    transform: `rotateX(${rx.value}deg) rotateY(${ry.value}deg)`,
   };
 });
 </script>
@@ -48,11 +47,11 @@ const tiltStyle = computed(() => {
     @click="onClick"
   >
     <div class="levitate-box" :class="{ 'is-hovered': hover }">
-      <div
-        class="flip-card"
-        :class="{ active: hover, 'is-flipped': flipped }"
-        :style="tiltStyle"
-      >
+      <div class="tilt-layer" :style="tiltStyle">
+        <div
+          class="flip-card"
+          :class="{ 'is-flipped': flipped }"
+        >
         <!-- ====== FRONT: Notebook + Animated Atom ====== -->
         <div class="face front">
           <svg viewBox="0 0 330 380" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,11 +183,12 @@ const tiltStyle = computed(() => {
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Floating Interactive Hint Pill -->
     <div class="flip-hint" :class="{ 'is-flipped': flipped }">
       <span class="hint-sparkle">{{ flipped ? '🔄' : '✨' }}</span>
-      <span class="hint-label">{{ flipped ? '再次点击翻回' : '点击翻转彩蛋' }}</span>
+      <span class="hint-label">{{ flipped ? '再次点击翻回' : '点击翻页探索' }}</span>
     </div>
   </div>
 </template>
@@ -203,7 +203,7 @@ const tiltStyle = computed(() => {
   width: 100%;
   max-width: 320px;
   margin: 0 auto;
-  perspective: 900px;
+  perspective: 1000px;
   cursor: pointer;
   user-select: none;
 }
@@ -211,7 +211,7 @@ const tiltStyle = computed(() => {
 /* Ambient Anti-gravity levitation */
 .levitate-box {
   width: 100%;
-  animation: notebook-float 5s ease-in-out infinite;
+  animation: notebook-float 6s ease-in-out infinite;
   will-change: transform;
 }
 
@@ -219,17 +219,24 @@ const tiltStyle = computed(() => {
   animation-play-state: paused;
 }
 
+.tilt-layer {
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
 .flip-card {
   position: relative;
   width: 100%;
   aspect-ratio: 330 / 380;
   transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(0.34, 1.4, 0.64, 1);
+  transition: transform 0.7s cubic-bezier(0.34, 1.25, 0.64, 1);
   will-change: transform;
 }
 
-.flip-card.active {
-  transition: transform 0.1s ease-out;
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
 }
 
 .face {
@@ -250,8 +257,8 @@ const tiltStyle = computed(() => {
   transform: rotateY(180deg);
 }
 
-.flip-card.active .front svg,
-.flip-card.active .back svg {
+.flip-wrap:hover .front svg,
+.flip-wrap:hover .back svg {
   filter: drop-shadow(0 14px 28px rgba(86, 114, 205, 0.35));
 }
 
@@ -352,20 +359,20 @@ const tiltStyle = computed(() => {
 /* ---- Keyframe Animations ---- */
 @keyframes notebook-float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px) rotate(0.4deg);
   }
 }
 
 @keyframes halo-pulse {
   0%, 100% {
-    transform: scale(0.9);
-    opacity: 0.12;
+    transform: scale(0.92);
+    opacity: 0.14;
   }
   50% {
-    transform: scale(1.25);
+    transform: scale(1.2);
     opacity: 0.28;
   }
 }
@@ -375,7 +382,7 @@ const tiltStyle = computed(() => {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
 }
 
@@ -419,18 +426,22 @@ const tiltStyle = computed(() => {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
   }
 }
 
 @keyframes arrow-drop {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.55;
+  0% {
+    transform: translateY(-2px);
+    opacity: 0.3;
   }
   50% {
-    transform: translateY(4px);
+    transform: translateY(2px);
     opacity: 1;
+  }
+  100% {
+    transform: translateY(6px);
+    opacity: 0;
   }
 }
 
