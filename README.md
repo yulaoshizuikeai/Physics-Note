@@ -15,7 +15,7 @@
   <img src="./public/images/activity-trend.svg" alt="Activity Trend" width="240" />
 </p>
 
-1. **在线阅读**: [https://yulaoshizuikeai.github.io/Physics-Note/](https://yulaoshizuikeai.github.io/Physics-Note/)
+1. **在线阅读**: [https://note.physics.nx.kg/](https://note.physics.nx.kg/)
 2. **最新 PDF 下载**:
    - 📕 **[完整版 PDF (单文件全书)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-Complete.pdf)** (由 GitHub Actions 随代码更新自动生成)
    - 📦 **[全套分册归档 (.zip)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-All-PDFs.zip)** (包含 19 大专题 99 篇独立高清矢量 PDF)
