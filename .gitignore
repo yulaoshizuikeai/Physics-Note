@@ -19,3 +19,4 @@ pdf-repo-single/
 pdf-repo/
 scripts/pdf-repo-test.txt
 scripts/gen_ch*.py
+package-lock.json

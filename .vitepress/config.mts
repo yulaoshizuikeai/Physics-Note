@@ -23,7 +23,7 @@ export default defineConfig({
   description: defaultDescription,
   lang: "zh-CN",
   head: [
-    ["link", { rel: "icon", type: "image/svg+xml", href: "/images/icon.svg" }],
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/Physics-Note/images/icon.svg" }],
     ["meta", { name: "author", content: "yulaoshizuikeai" }],
     [
       "meta",
