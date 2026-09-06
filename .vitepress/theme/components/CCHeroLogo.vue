@@ -56,15 +56,18 @@ const tiltStyle = computed(() => {
           <g filter="url(#f-shadow)">
             <rect x="45.5" y="10" width="274" height="352" rx="18" fill="white"/>
             <rect x="45.5" y="10" width="274" height="352" rx="18" fill="url(#f-lines)"/>
-            <!-- Bohr Atom -->
-            <ellipse cx="182" cy="165" rx="55" ry="19" stroke="#546ec6" stroke-width="3" fill="none"/>
-            <ellipse cx="182" cy="165" rx="55" ry="19" stroke="#546ec6" stroke-width="3" fill="none" transform="rotate(60 182 165)"/>
-            <ellipse cx="182" cy="165" rx="55" ry="19" stroke="#546ec6" stroke-width="3" fill="none" transform="rotate(120 182 165)"/>
-            <circle cx="182" cy="165" r="10" fill="#546ec6"/>
-            <circle cx="237" cy="165" r="5" fill="#546ec6"/>
-            <circle cx="154.5" cy="117.3" r="5" fill="#546ec6"/>
-            <circle cx="154.5" cy="212.7" r="5" fill="#546ec6"/>
-            <path d="M97.5 271H267" stroke="#546ec6" stroke-width="11" stroke-linecap="round"/>
+            <!-- Bold Physics Bohr Atom Icon (thick, tactile stroke weight) -->
+            <ellipse cx="182.5" cy="165" rx="66" ry="26" stroke="#5672CD" stroke-width="8.5" fill="none"/>
+            <ellipse cx="182.5" cy="165" rx="66" ry="26" stroke="#5672CD" stroke-width="8.5" fill="none" transform="rotate(60 182.5 165)"/>
+            <ellipse cx="182.5" cy="165" rx="66" ry="26" stroke="#5672CD" stroke-width="8.5" fill="none" transform="rotate(120 182.5 165)"/>
+            <!-- Nucleus -->
+            <circle cx="182.5" cy="165" r="15" fill="#5672CD"/>
+            <!-- Electrons -->
+            <circle cx="248.5" cy="165" r="7.5" fill="#5672CD"/>
+            <circle cx="149.5" cy="107.8" r="7.5" fill="#5672CD"/>
+            <circle cx="149.5" cy="222.2" r="7.5" fill="#5672CD"/>
+            <!-- Underline -->
+            <path d="M97.5326 271H267.033" stroke="#5672CD" stroke-width="11" stroke-linecap="round"/>
           </g>
           <defs>
             <filter id="f-shadow" x="35.5" y="0" width="294" height="372" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
