@@ -14,7 +14,8 @@ img {
 [data-waline] img,
 .VPNavBarTitle .logo,
 .VPHomeHero img,
-.atom-wrap svg {
+.atom-wrap svg,
+.flip-card svg {
   filter: none !important;
 }
 
@@ -136,4 +137,168 @@ html.cc-hide-outline .VPLocalNavOutlineDropdown {
 
 body.cc-settings-modal-open {
   overflow: hidden;
+}
+
+/* ============================================================
+   动态微交互与视觉灵动系统 (Dynamic Motion & Lively Micro-Interactions)
+   ============================================================ */
+
+/* 1. 首页 Hero 标题文字流光呼吸 */
+.VPHomeHero .name.clip {
+  background: linear-gradient(
+    125deg,
+    #5672CD 0%,
+    #3b82f6 25%,
+    #8b5cf6 50%,
+    #3b82f6 75%,
+    #5672CD 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hero-text-flow 8s ease-in-out infinite;
+}
+
+@keyframes hero-text-flow {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* 2. Hero 区域背景光晕缓慢有机脉动 */
+.VPHomeHero .image-bg {
+  animation: hero-ambient-pulse 8s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes hero-ambient-pulse {
+  0% {
+    transform: scale(0.92) translate(0, 0);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.08) translate(6px, -8px);
+    opacity: 0.92;
+  }
+  100% {
+    transform: scale(0.96) translate(-6px, 6px);
+    opacity: 0.72;
+  }
+}
+
+/* 3. Hero 操作按钮磁吸悬浮与光晕反馈 */
+.VPHomeHero .action .VPButton.brand {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 16px rgba(86, 114, 205, 0.35);
+}
+
+.VPHomeHero .action .VPButton.brand:hover {
+  transform: translateY(-2.5px) scale(1.025);
+  box-shadow: 0 8px 26px rgba(86, 114, 205, 0.52);
+}
+
+.VPHomeHero .action .VPButton.brand:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.VPHomeHero .action .VPButton.alt {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.VPHomeHero .action .VPButton.alt:hover {
+  transform: translateY(-2px);
+  border-color: #5672CD;
+  box-shadow: 0 4px 14px rgba(86, 114, 205, 0.18);
+}
+
+/* 4. 首页 19 个章节卡片灵动悬浮与辉光边框 */
+.VPHomeFeatures .VPFeature {
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  overflow: hidden;
+}
+
+.VPHomeFeatures .VPFeature:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, #5672CD 55%, transparent);
+  box-shadow: 0 16px 32px -10px rgba(86, 114, 205, 0.22);
+}
+
+.VPHomeFeatures .VPFeature::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #5672CD, #8b5cf6, transparent);
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.VPHomeFeatures .VPFeature:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.VPHomeFeatures .VPFeature .title {
+  transition: color 0.3s ease;
+}
+
+.VPHomeFeatures .VPFeature:hover .title {
+  color: var(--vp-c-brand-1);
+}
+
+/* 5. 章节概览卡片交互动效 */
+.chapter-card {
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.chapter-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 18px rgba(86, 114, 205, 0.15);
+}
+
+.chapter-card .card-arrow {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chapter-card:hover .card-arrow {
+  transform: translateX(4px);
+}
+
+/* 6. 文档数学公式块优雅微动 */
+.vp-doc .katex-display {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 2%, var(--vp-c-bg-soft));
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vp-doc .katex-display:hover {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-soft));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent);
+}
+
+/* 7. 全局丝滑滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--vp-c-text-3) 30%, transparent);
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 60%, transparent);
 }
