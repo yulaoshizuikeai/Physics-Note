@@ -14,8 +14,7 @@ img {
 [data-waline] img,
 .VPNavBarTitle .logo,
 .VPHomeHero img,
-.image-src,
-.cc-hero-logo-wrapper svg {
+.atom-wrap svg {
   filter: none !important;
 }
 

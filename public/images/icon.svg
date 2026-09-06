@@ -1,137 +1,18 @@
-<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- Minimal ambient shadow -->
-    <filter id="shadow" x="-20%" y="-15%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#1e3a5f" flood-opacity="0.25"/>
-    </filter>
-
-    <!-- Subtle glow for nucleus only -->
-    <filter id="core-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="glow"/>
-      <feMerge>
-        <feMergeNode in="glow"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-
-    <!-- Very subtle orbit glow -->
-    <filter id="orbit-glow" x="-20%" y="-40%" width="140%" height="180%">
-      <feGaussianBlur stdDeviation="2"/>
-    </filter>
-
-    <!-- Glass fill: soft frosted blue -->
-    <linearGradient id="glass-fill" x1="40" y1="40" x2="280" y2="280" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#dbeafe" stop-opacity="0.7"/>
-      <stop offset="40%" stop-color="#93c5fd" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#bfdbfe" stop-opacity="0.5"/>
-    </linearGradient>
-
-    <!-- Glass border: chromatic thin rim -->
-    <linearGradient id="glass-border" x1="40" y1="40" x2="280" y2="280" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.8"/>
-      <stop offset="40%" stop-color="#a5b4fc" stop-opacity="0.7"/>
-      <stop offset="80%" stop-color="#f0abfc" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#93c5fd" stop-opacity="0.8"/>
-    </linearGradient>
-
-    <!-- Specular highlight -->
-    <linearGradient id="specular" x1="60" y1="50" x2="170" y2="140" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
-      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-
-    <!-- Nucleus radial -->
-    <radialGradient id="nucleus" cx="45%" cy="40%" r="55%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="35%" stop-color="#7dd3fc"/>
-      <stop offset="70%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#2563eb"/>
-    </radialGradient>
-
-    <!-- Nucleus outer halo -->
-    <radialGradient id="nucleus-halo" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-
-  <style>
-    /* Orbit rotation animations - physically correct continuous motion */
-    .orbit-1 { transform-origin: 160px 160px; animation: spin1 12s linear infinite; }
-    .orbit-2 { transform-origin: 160px 160px; animation: spin2 16s linear infinite; }
-    .orbit-3 { transform-origin: 160px 160px; animation: spin3 14s linear infinite reverse; }
-
-    /* Nucleus gentle breathing */
-    .nucleus { transform-origin: 160px 160px; animation: breathe 3s ease-in-out infinite; }
-
-    @keyframes spin1 { to { transform: rotate(360deg); } }
-    @keyframes spin2 { to { transform: rotate(360deg); } }
-    @keyframes spin3 { to { transform: rotate(360deg); } }
-
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.08); opacity: 0.9; }
-    }
-
-    /* Hover: speed up orbits, brighten nucleus */
-    svg:hover .orbit-1 { animation-duration: 3s; }
-    svg:hover .orbit-2 { animation-duration: 4s; }
-    svg:hover .orbit-3 { animation-duration: 3.5s; }
-    svg:hover .nucleus { animation-duration: 1.5s; }
-  </style>
-
-  <!-- ===== GLASS CONTAINER ===== -->
-  <g filter="url(#shadow)">
-    <!-- Frosted glass body -->
-    <rect x="40" y="40" width="240" height="240" rx="56" fill="url(#glass-fill)"/>
-    <!-- Thin chromatic border -->
-    <rect x="40" y="40" width="240" height="240" rx="56" fill="none" stroke="url(#glass-border)" stroke-width="1.8"/>
-    <!-- Top-left specular highlight -->
-    <path d="M 72 120 C 72 76 88 60 120 60 C 170 60 196 78 148 112 C 104 142 72 138 72 120 Z" fill="url(#specular)"/>
-  </g>
-
-  <!-- ===== BOHR ATOM ===== -->
-  <!-- Nucleus ambient halo -->
-  <circle cx="160" cy="160" r="40" fill="url(#nucleus-halo)"/>
-
-  <!-- Orbit 1: tilted 0° (horizontal plane view) -->
-  <g class="orbit-1">
-    <!-- Glow layer -->
-    <ellipse cx="160" cy="160" rx="80" ry="28" fill="none" stroke="#60a5fa" stroke-width="3" stroke-opacity="0.3" filter="url(#orbit-glow)"/>
-    <!-- Main stroke -->
-    <ellipse cx="160" cy="160" rx="80" ry="28" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.85"/>
-    <!-- Electron -->
-    <circle cx="240" cy="160" r="4" fill="#60a5fa"/>
-    <circle cx="240" cy="160" r="1.8" fill="#ffffff"/>
-  </g>
-
-  <!-- Orbit 2: tilted 60° -->
-  <g class="orbit-2" transform="rotate(60 160 160)">
-    <!-- Glow layer -->
-    <ellipse cx="160" cy="160" rx="80" ry="28" fill="none" stroke="#c084fc" stroke-width="3" stroke-opacity="0.3" filter="url(#orbit-glow)"/>
-    <!-- Main stroke -->
-    <ellipse cx="160" cy="160" rx="80" ry="28" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.75"/>
-    <!-- Electron -->
-    <circle cx="240" cy="160" r="4" fill="#c084fc"/>
-    <circle cx="240" cy="160" r="1.8" fill="#ffffff"/>
-  </g>
-
-  <!-- Orbit 3: tilted 120° -->
-  <g class="orbit-3" transform="rotate(120 160 160)">
-    <!-- Glow layer -->
-    <ellipse cx="160" cy="160" rx="80" ry="28" fill="none" stroke="#38bdf8" stroke-width="3" stroke-opacity="0.3" filter="url(#orbit-glow)"/>
-    <!-- Main stroke -->
-    <ellipse cx="160" cy="160" rx="80" ry="28" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.75"/>
-    <!-- Electron -->
-    <circle cx="240" cy="160" r="4" fill="#38bdf8"/>
-    <circle cx="240" cy="160" r="1.8" fill="#ffffff"/>
-  </g>
-
-  <!-- Central Nucleus -->
-  <g class="nucleus">
-    <circle cx="160" cy="160" r="16" fill="url(#nucleus)" filter="url(#core-glow)"/>
-    <!-- Specular dot -->
-    <ellipse cx="156" cy="156" rx="4" ry="2.5" transform="rotate(-25 156 156)" fill="#ffffff" opacity="0.9"/>
-  </g>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Static icon for navbar / favicon (no animation) -->
+  <!-- Orbit 1: 0° -->
+  <ellipse cx="100" cy="100" rx="65" ry="22" stroke="#94a3b8" stroke-width="1.2" stroke-opacity="0.6"/>
+  <!-- Orbit 2: 60° -->
+  <ellipse cx="100" cy="100" rx="65" ry="22" transform="rotate(60 100 100)" stroke="#94a3b8" stroke-width="1.2" stroke-opacity="0.6"/>
+  <!-- Orbit 3: 120° -->
+  <ellipse cx="100" cy="100" rx="65" ry="22" transform="rotate(120 100 100)" stroke="#94a3b8" stroke-width="1.2" stroke-opacity="0.6"/>
+  <!-- Electron 1 -->
+  <circle cx="165" cy="100" r="3.5" fill="#60a5fa"/>
+  <!-- Electron 2 -->
+  <circle cx="67.5" cy="56.3" r="3.5" fill="#a78bfa"/>
+  <!-- Electron 3 -->
+  <circle cx="67.5" cy="143.7" r="3.5" fill="#38bdf8"/>
+  <!-- Nucleus -->
+  <circle cx="100" cy="100" r="7" fill="#3b82f6"/>
+  <circle cx="98" cy="98" r="2.5" fill="#ffffff" opacity="0.8"/>
 </svg>
