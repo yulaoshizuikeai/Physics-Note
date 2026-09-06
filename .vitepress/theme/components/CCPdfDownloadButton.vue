@@ -2,55 +2,30 @@
 import { useData } from "vitepress";
 import { computed } from "vue";
 
-import { trackUmamiEvent } from "../utils/umami";
-
 const { page } = useData();
 
-const PDF_BASE_URL = "https://cnb.cool/Seeridia/Chemistry-Note-File/-/git/raw/main/";
-
-const pdfUrl = computed(() => {
-  const filePath = page.value.filePath ?? "";
-  if (!filePath.endsWith(".md")) return "";
-  const pdfPath = filePath.replace(/\.md$/i, ".pdf");
-  return `${PDF_BASE_URL}${encodeURI(pdfPath)}?download=true`;
-});
-
-// 只有在文档页面才显示下载 PDF 按钮
+// 只有在文档页面才显示打印/导出按钮
 const isDocPage = computed(() => (page.value.frontmatter?.layout ?? "doc") === "doc");
-const shouldShow = computed(() => isDocPage.value && pdfUrl.value);
 
-const trackPdfDownload = (kind: "page" | "all") => {
-  trackUmamiEvent(kind === "page" ? "pdf_download_page" : "pdf_download_all", {
-    page_path: page.value.relativePath || page.value.filePath || "",
-    page_title: page.value.title || "",
-    source: "nav_download",
-  });
+const handlePrint = () => {
+  if (typeof window !== "undefined") {
+    window.print();
+  }
 };
 </script>
 
 <template>
   <div class="CCPdfDownloadButton">
-    <a
-      v-if="shouldShow"
+    <button
+      v-if="isDocPage"
+      type="button"
       class="CCPdfDownloadButtonBtn"
-      :href="pdfUrl"
-      target="_blank"
-      rel="noopener"
-      @click="trackPdfDownload('page')"
+      title="通过浏览器原生打印功能另存为 A4 矢量 PDF"
+      @click="handlePrint"
     >
-      <span class="CCPdfDownloadButtonBtnLabel">下载本页</span>
+      <span class="CCPdfDownloadButtonBtnLabel">打印 / 导出本页</span>
       <span class="CCPdfDownloadButtonBtnHint">PDF</span>
-    </a>
-    <a
-      class="CCPdfDownloadButtonBtn"
-      href="https://umami.seeridia.top/q/e8e52FUHV"
-      target="_blank"
-      rel="noopener"
-      @click="trackPdfDownload('all')"
-    >
-      <span class="CCPdfDownloadButtonBtnLabel">下载全部</span>
-      <span class="CCPdfDownloadButtonBtnHint">PDF</span>
-    </a>
+    </button>
   </div>
 </template>
 
@@ -80,6 +55,7 @@ const trackPdfDownload = (kind: "page" | "all") => {
     background-color 0.25s,
     color 0.25s;
   cursor: pointer;
+  font-family: inherit;
 }
 
 .CCPdfDownloadButtonBtn:hover {
@@ -107,7 +83,7 @@ const trackPdfDownload = (kind: "page" | "all") => {
 
   .CCPdfDownloadButtonBtn {
     justify-content: center;
-    flex: 1 1 calc(50% - 6px);
+    flex: 1 1 100%;
     min-width: 0;
   }
 }

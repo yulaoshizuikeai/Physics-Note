@@ -69,7 +69,8 @@ function copyLink() {
 }
 
 onMounted(() => {
-  origin.value = window.location.origin;
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+  origin.value = window.location.origin + base;
 });
 </script>
 

@@ -1,15 +1,15 @@
 ---
 layout: home
 
-description: "Anyayay's Physics Note 是基于中国普通高中物理教科书（人教版）与可汗学院（Khan Academy）直观物理思维的免费物理笔记项目，涵盖运动学、相互作用、牛顿定律、曲线与圆周、万有引力、动能与动量、电场电路与磁场、电磁感应、振动与波、光学、热学、近代物理及物理实验等 19 大板块，提供严谨公式推导、核心物理模型与解题算法。"
+description: "yulaoshizuikeai's Physics Note 是基于中国普通高中物理教科书（人教版）与可汗学院（Khan Academy）直观物理思维的免费物理笔记项目，涵盖运动学、相互作用、牛顿定律、曲线与圆周、万有引力、动能与动量、电场电路与磁场、电磁感应、振动与波、光学、热学、近代物理及物理实验等 19 大板块，提供严谨公式推导、核心物理模型与解题算法。"
 
 hero:
-  name: "Anyayay's \nPhysics Note"
+  name: "yulaoshizuikeai's \nPhysics Note"
   text: "物理笔记"
   tagline: "结合人教版课本与可汗学院思维，覆盖高考物理 19 大板块，持续更新中"
   image:
     src: /images/icon.svg
-    alt: Anyayay's Physics Note
+    alt: yulaoshizuikeai's Physics Note
   actions:
     - theme: brand
       text: 开始阅读
@@ -90,7 +90,7 @@ features:
 - **守恒量与时空对称性**：从对称性深入理解机械能守恒、动量守恒、电荷守恒与质能方程的本质内涵。
 
 ### 🛠️ 工程基础与致敬
-本项目工程框架与设计风格基于优秀开源项目 [Anyayay/Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来。继承其成熟现代的 VitePress 2.0 文档系统、MathJax 公式排版规范、组件化考点展示模块（`<CCChapterOverview />`）、短链重定向与极速本地搜索系统，并针对物理学科特性研发了全套 78 幅高清矢量 SVG 图解与高考 19 大专题模型。
+本项目工程框架与设计风格基于优秀开源项目 [Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来。继承其成熟现代的 VitePress 2.0 文档系统、MathJax 公式排版规范、组件化考点展示模块（`<CCChapterOverview />`）、短链重定向与极速本地搜索系统，并针对物理学科特性研发了全套 78 幅高清矢量 SVG 图解与高考 19 大专题模型。
 
 ## 👥 核心贡献者 (Contributors)
 

@@ -1,14 +1,14 @@
 ---
-description: "Anyayay's Physics Note 的使用说明，包括创作来源、灵感来源、工程架构致敬、如何浏览、搜索、下载PDF，以及参考资料说明。"
+description: "yulaoshizuikeai's Physics Note 的使用说明，包括创作来源、灵感来源、工程架构致敬、如何浏览、搜索、下载PDF，以及参考资料说明。"
 ---
 
 # Readme
 
 <p align="center">
-  <img src="/images/icon.svg" alt="Anyayay's Physics Note" width="140" />
+  <img src="/images/icon.svg" alt="yulaoshizuikeai's Physics Note" width="140" />
 </p>
 
-欢迎来到 **Anyayay's Physics Note**！
+欢迎来到 **yulaoshizuikeai's Physics Note**！
 
 这是一个系统梳理高中物理全体系知识、融合可汗学院直观教学思维与高考题型解题模型的开源物理笔记项目。不仅完整覆盖人教版高中物理教材中的全部概念、定理定律、数学推导与实验操作规范，更深度整理了高考大题中常见的典型物理模型（板块模型、传送带、竖直面轻绳轻杆圆周、天体双星与变轨、带电粒子偏转与磁场回旋、电磁感应导轨滑棒等），辅以 78 幅高清矢量 SVG 图解。
 
@@ -26,7 +26,7 @@ description: "Anyayay's Physics Note 的使用说明，包括创作来源、灵�
 - **守恒量与时空对称性**：从物理系统的时间平移不变性理解能量守恒，从空间平移不变性理解动量守恒，将物理规律统一于对称美之中。
 
 ### 3. 🛠️ 基于什么修改而来（开源工程架构致敬）
-本项目的工程架构、排版美学与交互组件基于优秀开源项目 [Anyayay/Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来：
+本项目的工程架构、排版美学与交互组件基于优秀开源项目 [Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来：
 - **静态站点架构**：沿用基于 VitePress 2.0 的极速响应引擎与分层模块化设计；
 - **排版与渲染系统**：全面继承 MathJax 3 深度集成方案，确保每一个矢量微元公式均达到出版级排版精度；
 - **组件系统定制**：基于原项目的 `<CCChapterOverview />` 组件，定制了物理基础课与「考点专题」的双栏卡片聚合；自研了 78 幅匹配物理学科特性的矢量 SVG 图解；
@@ -49,12 +49,12 @@ description: "Anyayay's Physics Note 的使用说明，包括创作来源、灵�
 - **全局搜索**：顶部提供快速搜索栏，支持按关键词即时全文检索概念、公式与模型。
 - **章节概览**：每个大专题的首页均通过卡片组件（`<CCChapterOverview />`）清晰展示基础课与考点专题。
 
-## 如何下载 PDF？
+## 如何打印 / 导出 PDF？
 
-1. 页面顶部菜单展开后的「下载」可以直接下载当前页面的 PDF。
-2. 支持使用本地脚本批量无头导出整站高保真 A4 打印级 PDF：
+1. **单页保存为 PDF**：在文档页面点击顶部导航栏中的「下载」->「打印 / 导出本页」，或在任意页面直接使用快捷键 `Ctrl + P`（Mac 为 `Cmd + P`），即可通过系统打印预览另存为高质量矢量 PDF（全站已内置针对 A4 纸张优化的打印排版样式）。
+2. **本地批量导出整站 PDF**：支持使用项目内置的 Playwright 无头浏览器脚本批量生成全站 PDF：
    ```bash
-   npm run pdf:single # 导出单页调试
+   npm run pdf:single # 导出单页测试
    npm run pdf:all    # 批量并发导出全站
    ```
 
@@ -75,13 +75,8 @@ description: "Anyayay's Physics Note 的使用说明，包括创作来源、灵�
 
 ---
 
-## 主要参考文献与数据源
+## 主要参考文献与致谢
 
-1. **普通高中教科书 物理（人教版 必修第一/二/三册、选择性必修第一/二/三册）**，人民教育出版社 课程教材研究所 物理课程教材研究开发中心
+1. **普通高中教科书 物理（人教版，必修第一、二、三册及选择性必修第一、二、三册）**，人民教育出版社 课程教材研究所 物理课程教材研究开发中心
 2. **可汗学院（Khan Academy Physics & AP Physics）**，[_Khan Academy_](https://zh.khanacademy.org/science/physics)
-3. **国家中小学智慧教育平台 物理数字教材** [_国家智慧教育平台_](https://www.zxx.edu.cn/elecEdu)
-4. **费曼物理学讲义（The Feynman Lectures on Physics）**
-5. **解题觉醒 · 物理**，天星教育
-6. **高考必刷题 · 物理**，众望教育
-7. **一本涂书 / 教材划重点**
-8. **维基百科 / 维基教科书 《高中物理》**
+3. **[Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note)**，开源文档系统工程架构与交互排版致敬

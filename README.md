@@ -1,7 +1,7 @@
-# Anyayay's Physics Note
+# yulaoshizuikeai's Physics Note
 
 <p align="center">
-  <img src="./public/images/icon.svg" alt="Anyayay's Physics Note" width="160" />
+  <img src="./public/images/icon.svg" alt="yulaoshizuikeai's Physics Note" width="160" />
 </p>
 
 <p align="center">
@@ -24,7 +24,7 @@
   - **几何面积与微元累积**：从 $v-t$ 图像面积理解位移、$F-x$ 曲线面积理解做功、$F-t$ 曲线面积理解冲量；
   - **守恒量与时空对称性**：从时间与空间平移对称性理解能量守恒与动量守恒，将物理公式还原为清晰的几何物理直觉。
 - **🛠️ 基于什么修改而来（开源工程架构致敬）**：
-  本项目前端文档工程架构与设计风格基于优秀开源项目 [Anyayay/Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来。继承其成熟现代的 VitePress 2.0 静态文档引擎架构、MathJax 3 矢量公式排版规范、组件化考点聚合展示模块（`<CCChapterOverview />`）、短链映射及极速本地搜索系统，并针对物理学科特性研发了全套 78 幅高清矢量 SVG 图解与力热电光原全套高考模型。
+  本项目前端文档工程架构与设计风格基于优秀开源项目 [Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来。继承其成熟现代的 VitePress 2.0 静态文档引擎架构、MathJax 3 矢量公式排版规范、组件化考点聚合展示模块（`<CCChapterOverview />`）、短链映射及极速本地搜索系统，并针对物理学科特性研发了全套 78 幅高清矢量 SVG 图解与力热电光原全套高考模型。
 
 ---
 
@@ -164,10 +164,7 @@
 
 ## 参考文献与致谢
 
-1. 普通高中教科书 物理（人教版 必修第一/二/三册、选择性必修第一/二/三册）
-2. [可汗学院（Khan Academy Physics）](https://zh.khanacademy.org/science/physics)
-3. 费曼物理学讲义（The Feynman Lectures on Physics）
-4. 国家中小学智慧教育平台
-5. 解题觉醒 · 物理
-6. 高考必刷题 · 物理
+1. **普通高中教科书 物理（人教版 必修第一/二/三册、选择性必修第一/二/三册）** —— 人民教育出版社
+2. **[可汗学院（Khan Academy Physics）](https://zh.khanacademy.org/science/physics)**
+3. **[Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note)** —— 开源文档工程架构与排版规范致敬
 

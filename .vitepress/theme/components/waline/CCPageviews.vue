@@ -8,6 +8,7 @@ const { serverURL, route } = useWalineBase();
 let abortPageview = null;
 
 const runPageview = (path) => {
+  if (!serverURL) return;
   if (abortPageview) abortPageview();
   abortPageview = pageviewCount({ serverURL, path });
 };

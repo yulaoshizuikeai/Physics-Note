@@ -19,6 +19,7 @@ const { serverURL, path } = useWalineBase();
 
 <template>
   <Waline
+    v-if="serverURL"
     :server-u-r-l="serverURL"
     :path="path"
     :dark="isDark"

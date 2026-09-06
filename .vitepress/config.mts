@@ -11,7 +11,7 @@ import mapShortUrl from "./theme/components/shortUrl/mapShortUrl";
 const configDir = path.dirname(fileURLToPath(import.meta.url));
 const contentRoot = path.resolve(configDir, "..");
 const siteUrl = "https://yulaoshizuikeai.github.io/Physics-Note";
-const siteName = "Anyayay's Physics Note";
+const siteName = "yulaoshizuikeai's Physics Note";
 const defaultDescription =
   "免费高中物理笔记与知识架构体系，覆盖运动学、动力学、圆周与万有引力、机械能与动量、静电场与恒定电流、磁场与电磁感应、交变电流、振动与光、热学、近代物理及物理实验等核心板块，结合人教版教材与可汗学院直观思维，适合高中同步学习与高考复习。";
 const navItems = buildNavItems(contentRoot);
