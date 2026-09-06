@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DefaultTheme } from "vitepress";
 
-import { useData, useRoute } from "vitepress";
+import { useData, useRoute, withBase } from "vitepress";
 import { computed } from "vue";
 
 type SidebarItem = DefaultTheme.SidebarItem;
@@ -10,7 +10,7 @@ type ChapterLinkItem = {
   link: string;
 };
 
-const { theme } = useData();
+const { theme, site, page } = useData();
 const route = useRoute();
 
 const normalizePath = (value: string): string => {
@@ -22,11 +22,23 @@ const normalizePath = (value: string): string => {
 };
 
 const getSectionKey = (value: string): string => {
-  const segments = normalizePath(value).split("/").filter(Boolean);
+  let normalized = normalizePath(value);
+  const base = normalizePath(site.value.base || "/");
+  if (base && base !== "/" && normalized.startsWith(base)) {
+    normalized = normalized.slice(base.length);
+  }
+  const segments = normalized.split("/").filter(Boolean);
   return segments[0] || "";
 };
 
-const currentSectionKey = computed(() => getSectionKey(route.path));
+const currentSectionKey = computed(() => {
+  const filePath = page.value.filePath || page.value.relativePath || "";
+  if (filePath) {
+    const segs = filePath.replace(/\\/g, "/").split("/").filter(Boolean);
+    if (segs.length > 0) return segs[0];
+  }
+  return getSectionKey(route.path);
+});
 
 const rootSidebar = computed<SidebarItem[]>(() => {
   const sidebar = theme.value.sidebar;
@@ -38,7 +50,9 @@ const rootSidebar = computed<SidebarItem[]>(() => {
 const currentChapter = computed<SidebarItem | undefined>(() => {
   const key = currentSectionKey.value;
   if (!key) return undefined;
-  return rootSidebar.value.find((item) => getSectionKey(item.link || "") === key);
+  return rootSidebar.value.find(
+    (item) => item.text === key || getSectionKey(item.link || "") === key,
+  );
 });
 
 const chapterItems = computed<SidebarItem[]>(() => {
@@ -47,7 +61,7 @@ const chapterItems = computed<SidebarItem[]>(() => {
 
 const toChapterLinkItem = (item: SidebarItem): ChapterLinkItem => ({
   text: item.text ?? "",
-  link: item.link ?? "#",
+  link: item.link ? withBase(item.link) : "#",
 });
 
 const chapterLinkItems = computed<ChapterLinkItem[]>(() => {

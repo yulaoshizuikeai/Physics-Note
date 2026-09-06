@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { useData } from "vitepress";
+import { useData, withBase } from "vitepress";
 import { ref, watchEffect } from "vue";
 
 type Breadcrumb = {
@@ -21,13 +21,13 @@ const { page } = useData();
 const items = ref<Breadcrumb[]>([]);
 
 watchEffect(() => {
-  const filePath = page.value.filePath || "";
+  const filePath = page.value.filePath || page.value.relativePath || "";
   if (!filePath || filePath === "index.md" || filePath === "README.md") {
     items.value = [];
     return;
   }
 
-  const pathSegs = filePath.split("/");
+  const pathSegs = filePath.replace(/\\/g, "/").split("/").filter(Boolean);
   if (!pathSegs.length) return;
 
   const rawChapter = pathSegs[0];
@@ -37,7 +37,7 @@ watchEffect(() => {
   const list: Breadcrumb[] = [
     {
       name: cleanChapter,
-      link: isChapterIndex ? "" : `/${encodeURI(rawChapter)}/index`,
+      link: isChapterIndex ? "" : withBase(`/${encodeURI(rawChapter)}/index`),
     },
   ];
 
