@@ -92,3 +92,11 @@ features:
 ### 🛠️ 工程基础与致敬
 本项目工程框架与设计风格基于优秀开源项目 [Anyayay/Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来。继承其成熟现代的 VitePress 2.0 文档系统、MathJax 公式排版规范、组件化考点展示模块（`<CCChapterOverview />`）、短链重定向与极速本地搜索系统，并针对物理学科特性研发了全套 78 幅高清矢量 SVG 图解与高考 19 大专题模型。
 
+## 👥 核心贡献者 (Contributors)
+
+本项目由以下 AI 智能体与开发者协同研发构建：
+
+- 🤖 **Codex**（OpenAI）—— 架构规划、概念梳理与工程转化支持
+- ⚡ **Claude Code**（Anthropic） —— 深度数理推导、知识架构对齐与物理模型沉淀
+
+

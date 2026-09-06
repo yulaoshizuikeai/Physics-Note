@@ -64,6 +64,17 @@ description: "Anyayay's Physics Note 的使用说明，包括创作来源、灵�
 
 ---
 
+## 👥 项目贡献者 (Contributors)
+
+本项目由以下 AI 智能体与开发者协同研发构建，感谢各位伙伴的深度贡献：
+
+| 贡献者 (Contributor) | 角色与核心贡献 | 平台与技术支持 |
+| :--- | :--- | :--- |
+| 🤖 **Codex** | 架构规划、概念梳理与工程转化支持 | OpenAI Advanced Coding Intelligence |
+| ⚡ **Claude Code** | 深度数理推导、知识架构对齐与物理模型沉淀 | Anthropic Agentic Coding System |
+
+---
+
 ## 主要参考文献与数据源
 
 1. **普通高中教科书 物理（人教版 必修第一/二/三册、选择性必修第一/二/三册）**，人民教育出版社 课程教材研究所 物理课程教材研究开发中心
