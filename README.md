@@ -11,6 +11,10 @@
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey?style=flat-square" alt="License" /></a>
 </p>
 
+<p align="center">
+  <img src="./public/images/activity-trend.svg" alt="Activity Trend" width="240" />
+</p>
+
 1. **在线阅读**: [https://yulaoshizuikeai.github.io/Physics-Note/](https://yulaoshizuikeai.github.io/Physics-Note/)
 2. **知识架构**: 涵盖中国普通高中教科书物理（人教版必修 3 册 + 选必 3 册共 6 本），深度融合**可汗学院（Khan Academy）**直观物理思维与微积分极限方法。
 

@@ -8,6 +8,10 @@ description: "yulaoshizuikeai's Physics Note 的使用说明，包括创作来�
   <img src="/images/icon.svg" alt="yulaoshizuikeai's Physics Note" width="140" />
 </p>
 
+<ClientOnly>
+  <CCActivitySparkline />
+</ClientOnly>
+
 欢迎来到 **yulaoshizuikeai's Physics Note**！
 
 这是一个系统梳理高中物理全体系知识、融合可汗学院直观教学思维与高考题型解题模型的开源物理笔记项目。不仅完整覆盖人教版高中物理教材中的全部概念、定理定律、数学推导与实验操作规范，更深度整理了高考大题中常见的典型物理模型（板块模型、传送带、竖直面轻绳轻杆圆周、天体双星与变轨、带电粒子偏转与磁场回旋、电磁感应导轨滑棒等），辅以 78 幅高清矢量 SVG 图解。

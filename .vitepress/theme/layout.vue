@@ -7,7 +7,6 @@ import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
 import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCAmbientParticles from "./components/CCAmbientParticles.vue";
-import CCActivitySparkline from "./components/CCActivitySparkline.vue";
 import CCFooter from "./components/CCFooter.vue";
 import CCHeroLogo from "./components/CCHeroLogo.vue";
 import { CCPageviews, CCWaline } from "./components/waline";
@@ -109,12 +108,6 @@ watch(
       <CCHeroLogo />
     </template>
 
-    <!-- 首页高级感折线图 (零数字，纯视觉律动与静默计数) -->
-    <template #home-hero-info-after>
-      <ClientOnly>
-        <CCActivitySparkline />
-      </ClientOnly>
-    </template>
 
     <!-- 面包屑 -->
     <template #doc-before>

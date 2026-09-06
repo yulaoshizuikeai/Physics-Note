@@ -2,6 +2,7 @@ import type { App } from "vue";
 
 import DefaultTheme from "vitepress/theme";
 
+import CCActivitySparkline from "./components/CCActivitySparkline.vue";
 import CCChapterOverview from "./components/CCChapterOverview.vue";
 import "./custom.css";
 import "@waline/client/style";
@@ -19,5 +20,6 @@ export default {
     app.component("CCSiteSettings", CCSiteSettings);
     app.component("CCShare", CCShare);
     app.component("CCChapterOverview", CCChapterOverview);
+    app.component("CCActivitySparkline", CCActivitySparkline);
   },
 };
