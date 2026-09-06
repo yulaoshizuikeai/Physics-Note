@@ -4,6 +4,7 @@ import DefaultTheme from "vitepress/theme";
 
 import CCActivitySparkline from "./components/CCActivitySparkline.vue";
 import CCChapterOverview from "./components/CCChapterOverview.vue";
+import CCDailyQuote from "./components/CCDailyQuote.vue";
 import "./custom.css";
 import "@waline/client/style";
 
@@ -21,5 +22,6 @@ export default {
     app.component("CCShare", CCShare);
     app.component("CCChapterOverview", CCChapterOverview);
     app.component("CCActivitySparkline", CCActivitySparkline);
+    app.component("CCDailyQuote", CCDailyQuote);
   },
 };

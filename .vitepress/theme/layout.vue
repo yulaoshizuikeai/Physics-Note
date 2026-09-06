@@ -7,6 +7,7 @@ import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
 import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCAmbientParticles from "./components/CCAmbientParticles.vue";
+import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCFooter from "./components/CCFooter.vue";
 import CCHeroLogo from "./components/CCHeroLogo.vue";
 import { CCPageviews, CCWaline } from "./components/waline";
@@ -106,6 +107,13 @@ watch(
     <!-- 首页动态交互 Logo -->
     <template #home-hero-image>
       <CCHeroLogo />
+    </template>
+
+    <!-- 首页高中物理微速记 (每次刷新随机一条，几秒读完，点击可切换) -->
+    <template #home-hero-info-after>
+      <ClientOnly>
+        <CCDailyQuote />
+      </ClientOnly>
     </template>
 
 
