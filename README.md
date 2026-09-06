@@ -16,7 +16,10 @@
 </p>
 
 1. **在线阅读**: [https://yulaoshizuikeai.github.io/Physics-Note/](https://yulaoshizuikeai.github.io/Physics-Note/)
-2. **知识架构**: 涵盖中国普通高中教科书物理（人教版必修 3 册 + 选必 3 册共 6 本），深度融合**可汗学院（Khan Academy）**直观物理思维与微积分极限方法。
+2. **最新 PDF 下载**:
+   - 📕 **[完整版 PDF (单文件全书)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-Complete.pdf)** (由 GitHub Actions 随代码更新自动生成)
+   - 📦 **[全套分册归档 (.zip)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-All-PDFs.zip)** (包含 19 大专题 99 篇独立高清矢量 PDF)
+3. **知识架构**: 涵盖中国普通高中教科书物理（人教版必修 3 册 + 选必 3 册共 6 本），深度融合**可汗学院（Khan Academy）**直观物理思维与微积分极限方法。
 
 ---
 

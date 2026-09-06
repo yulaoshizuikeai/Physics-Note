@@ -53,13 +53,19 @@ description: "yulaoshizuikeai's Physics Note 的使用说明，包括创作来�
 - **全局搜索**：顶部提供快速搜索栏，支持按关键词即时全文检索概念、公式与模型。
 - **章节概览**：每个大专题的首页均通过卡片组件（`<CCChapterOverview />`）清晰展示基础课与考点专题。
 
-## 如何打印 / 导出 PDF？
+## 如何下载 / 打印 PDF？
 
-1. **单页保存为 PDF**：在文档页面点击顶部导航栏中的「下载」->「打印 / 导出本页」，或在任意页面直接使用快捷键 `Ctrl + P`（Mac 为 `Cmd + P`），即可通过系统打印预览另存为高质量矢量 PDF（全站已内置针对 A4 纸张优化的打印排版样式）。
-2. **本地批量导出整站 PDF**：支持使用项目内置的 Playwright 无头浏览器脚本批量生成全站 PDF：
+本项目已接入 **GitHub Actions 自动化构建流程**，每当项目发布新版本更新时，云端 CI 会自动编译整站并通过无头浏览器生成最新版矢量 PDF：
+
+1. **📥 在线直接下载最新版 PDF**：
+   - **[完整版 PDF (单文件全书)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-Complete.pdf)**：包含全书 19 个大专题与全部考点模型（推荐 iPad / 电子书 / 电脑离线完整阅读）。
+   - **[全套分册打包 (.zip)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-All-PDFs.zip)**：包含按章节归类的 99 篇独立高清矢量 PDF 归档包。
+   - 也可随时点击顶部导航栏右上角的 **「下载」** 菜单直接获取。
+2. **🖨️ 浏览器原生打印 / 导出当前页**：在任意文档页面使用快捷键 `Ctrl + P`（Mac 为 `Cmd + P`），或点击导航栏「下载」->「打印 / 导出本页」，即可调用优化好的 A4 排版导出当前单篇。
+3. **💻 本地批量导出整站 PDF**：
    ```bash
-   npm run pdf:single # 导出单页测试
-   npm run pdf:all    # 批量并发导出全站
+   npm run pdf:all     # 批量并发导出全站
+   npm run pdf:package # 打包为完整版单文件与 ZIP 归档
    ```
 
 ## 发现错误？
