@@ -1,206 +1,253 @@
-﻿<svg width="330" height="380" viewBox="0 0 330 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Background Glass Shadow -->
-    <filter id="glass-shadow" x="0" y="0" width="330" height="380" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#1e1b4b" flood-opacity="0.38"/>
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#4338ca" flood-opacity="0.2"/>
+    <!-- Liquid Glass Drop Shadow -->
+    <filter id="glass-shadow" x="-15%" y="-15%" width="135%" height="140%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#090d16" flood-opacity="0.38" />
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0284c7" flood-opacity="0.25" />
     </filter>
 
-    <!-- Intense Atom Neon Glow -->
-    <filter id="atom-glow" x="-50%" y="-50%" width="200%" height="200%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="7" result="blur1"/>
-      <feGaussianBlur stdDeviation="3" result="blur2"/>
+    <!-- Neon Glow Filter for Atom Orbits -->
+    <filter id="neon-glow" x="-40%" y="-40%" width="180%" height="180%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="5.5" result="coloredBlur" />
       <feMerge>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
 
-    <!-- Soft Blur for Specular Highlights -->
-    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2.5"/>
+    <!-- Intense Nucleus Glow -->
+    <filter id="nucleus-glow" x="-60%" y="-60%" width="220%" height="220%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="9" result="blur1" />
+      <feGaussianBlur stdDeviation="3" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
     </filter>
 
-    <!-- Back Glass Slab Gradient -->
-    <linearGradient id="back-glass-fill" x1="20" y1="30" x2="300" y2="370" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.45"/>
-      <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.35"/>
+    <!-- Soft Edge Blur -->
+    <filter id="soft-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" />
+    </filter>
+
+    <!-- Translucent Liquid Glass Fill Gradient -->
+    <linearGradient id="liquid-surface" x1="24" y1="24" x2="296" y2="296" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
+      <stop offset="28%" stop-color="#f0f9ff" stop-opacity="0.24" />
+      <stop offset="68%" stop-color="#e0e7ff" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.32" />
     </linearGradient>
 
-    <!-- Front Glass Main Surface Gradient (Liquid Translucent) -->
-    <linearGradient id="front-glass-surface" x1="45" y1="10" x2="315" y2="360" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
-      <stop offset="25%" stop-color="#f0f9ff" stop-opacity="0.30"/>
-      <stop offset="60%" stop-color="#e0e7ff" stop-opacity="0.20"/>
-      <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.45"/>
+    <!-- Chromatic Dispersion Edge (Prism Liquid Rim) -->
+    <linearGradient id="chromatic-rim" x1="24" y1="24" x2="296" y2="296" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="18%" stop-color="#38bdf8" stop-opacity="0.9" />
+      <stop offset="42%" stop-color="#818cf8" stop-opacity="0.8" />
+      <stop offset="70%" stop-color="#c084fc" stop-opacity="0.85" />
+      <stop offset="88%" stop-color="#f472b6" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95" />
     </linearGradient>
 
-    <!-- Chromatic Dispersion Rim Gradient (Liquid Glass Edge) -->
-    <linearGradient id="chromatic-rim" x1="40" y1="10" x2="320" y2="360" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="18%" stop-color="#38bdf8" stop-opacity="0.9"/>
-      <stop offset="42%" stop-color="#818cf8" stop-opacity="0.8"/>
-      <stop offset="70%" stop-color="#c084fc" stop-opacity="0.85"/>
-      <stop offset="88%" stop-color="#f472b6" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95"/>
+    <!-- Inner Refraction Stroke -->
+    <linearGradient id="inner-rim" x1="27" y1="27" x2="293" y2="293" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="75%" stop-color="#38bdf8" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.5" />
     </linearGradient>
 
-    <!-- Inner Refraction Border Gradient -->
-    <linearGradient id="inner-refract-rim" x1="45" y1="15" x2="310" y2="350" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.3"/>
-      <stop offset="70%" stop-color="#38bdf8" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.6"/>
+    <!-- Curved Specular Lens Sheen -->
+    <linearGradient id="specular-lens" x1="35" y1="35" x2="160" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
     </linearGradient>
 
-    <!-- Fluid Corner Specular Highlight -->
-    <linearGradient id="specular-sheen" x1="45" y1="15" x2="160" y2="130" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <!-- Orbit Gradients -->
+    <linearGradient id="orbit-grad-1" x1="74" y1="130" x2="246" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="60%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
     </linearGradient>
 
-    <!-- Diagonal Glass Caustic Beam -->
-    <linearGradient id="diagonal-caustic" x1="50" y1="40" x2="280" y2="280" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
-      <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.12"/>
-      <stop offset="70%" stop-color="#c084fc" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <linearGradient id="orbit-grad-2" x1="80" y1="110" x2="240" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
     </linearGradient>
 
-    <!-- Quantum Atom Orbits Gradient -->
-    <linearGradient id="orbit-grad-1" x1="110" y1="100" x2="245" y2="240" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#00f0ff"/>
-      <stop offset="50%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#8b5cf6"/>
-    </linearGradient>
-    <linearGradient id="orbit-grad-2" x1="120" y1="120" x2="240" y2="220" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="50%" stop-color="#818cf8"/>
-      <stop offset="100%" stop-color="#c084fc"/>
-    </linearGradient>
-    <linearGradient id="orbit-grad-3" x1="240" y1="120" x2="120" y2="220" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#a855f7"/>
-      <stop offset="50%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#06b6d4"/>
+    <linearGradient id="orbit-grad-3" x1="240" y1="110" x2="80" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="45%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#06b6d4" />
     </linearGradient>
 
-    <!-- Core Nucleus Radial Gradient -->
-    <radialGradient id="nucleus-grad" cx="40%" cy="35%" r="65%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="25%" stop-color="#67e8f9"/>
-      <stop offset="65%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#6366f1"/>
+    <!-- Nucleus Radial Gradients -->
+    <radialGradient id="nucleus-body" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="25%" stop-color="#67e8f9" />
+      <stop offset="60%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#6366f1" />
     </radialGradient>
 
-    <!-- Core Halo Ambient Glow -->
-    <radialGradient id="core-halo" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45"/>
-      <stop offset="60%" stop-color="#818cf8" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    <radialGradient id="nucleus-ambient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45" />
+      <stop offset="55%" stop-color="#818cf8" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0" />
     </radialGradient>
-
-    <!-- Frosted Texture Lines -->
-    <pattern id="glass-grid" width="274" height="24" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="24" x2="274" y2="24" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
-    </pattern>
   </defs>
 
-  <!-- ================= LAYER 1: TILTED BACK GLASS SLAB ================= -->
-  <g transform="rotate(-5.75 150 190)" filter="url(#glass-shadow)">
-    <!-- Back glass body -->
-    <rect x="18" y="26" width="280" height="344" rx="26" fill="url(#back-glass-fill)"/>
-    <!-- Back glass chromatic bevel rim -->
-    <rect x="18" y="26" width="280" height="344" rx="26" fill="none" stroke="url(#chromatic-rim)" stroke-width="2.5" stroke-opacity="0.75"/>
-    <!-- Back glass inner edge reflection -->
-    <rect x="21" y="29" width="274" height="338" rx="23" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.4"/>
-  </g>
+  <style>
+    /* Continuous animations */
+    .glass-squircle {
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.5s ease;
+      transform-origin: 160px 160px;
+    }
 
-  <!-- ================= LAYER 2: MAIN FRONT LIQUID GLASS SLAB ================= -->
-  <g filter="url(#glass-shadow)">
-    <!-- Main Frosted Glass Plate -->
-    <rect x="45.5" y="10" width="274" height="352" rx="26" fill="url(#front-glass-surface)"/>
-    
-    <!-- Subtle Frosted Line Grid (Notebook Heritage) -->
-    <rect x="45.5" y="10" width="274" height="352" rx="26" fill="url(#glass-grid)"/>
+    .orbit-1 {
+      transform-origin: 160px 160px;
+      animation: spin-1 18s linear infinite;
+    }
+    .orbit-2 {
+      transform-origin: 160px 160px;
+      animation: spin-2 24s linear infinite reverse;
+    }
+    .orbit-3 {
+      transform-origin: 160px 160px;
+      animation: spin-3 20s linear infinite;
+    }
 
-    <!-- Chromatic Beveled Outer Edge (Liquid Prism Reflection) -->
-    <rect x="45.5" y="10" width="274" height="352" rx="26" fill="none" stroke="url(#chromatic-rim)" stroke-width="2.5"/>
-    
-    <!-- Inner Lens Reflection Rim (Glass Thickness) -->
-    <rect x="48.5" y="13" width="268" height="346" rx="23" fill="none" stroke="url(#inner-refract-rim)" stroke-width="1.5"/>
+    .atom-core {
+      transform-origin: 160px 160px;
+      animation: pulse-core 3.6s ease-in-out infinite;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-    <!-- Diagonal Fluid Caustic Sheen Across Surface -->
-    <path d="M 46 80 L 120 11 L 285 180 L 210 250 Z" fill="url(#diagonal-caustic)" opacity="0.6"/>
+    .specular-glide {
+      transform-origin: 160px 160px;
+      animation: sweep-glide 6s ease-in-out infinite;
+    }
 
-    <!-- Top-Left Fluid Specular Reflection Crescent -->
-    <path d="M 48 42 C 48 24 60 12 80 12 C 140 12 180 30 110 80 C 60 115 48 85 48 42 Z" fill="url(#specular-sheen)"/>
+    @keyframes spin-1 {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spin-2 {
+      from { transform: rotate(60deg); }
+      to { transform: rotate(420deg); }
+    }
+    @keyframes spin-3 {
+      from { transform: rotate(120deg); }
+      to { transform: rotate(480deg); }
+    }
 
-    <!-- Top Crisp Glass Edge Glint -->
-    <path d="M 75 11 L 230 11" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.95" filter="url(#soft-glow)"/>
+    @keyframes pulse-core {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+      }
+      50% {
+        transform: scale(1.14);
+        filter: drop-shadow(0 0 18px rgba(129, 140, 248, 0.9));
+      }
+    }
 
-    <!-- ================= LAYER 3: QUANTUM LIQUID ATOM ================= -->
-    <!-- Ambient Core Plasma Halo -->
-    <circle cx="182.5" cy="162" r="75" fill="url(#core-halo)"/>
+    @keyframes sweep-glide {
+      0%, 100% {
+        opacity: 0.75;
+        transform: translate(0, 0);
+      }
+      50% {
+        opacity: 0.95;
+        transform: translate(3px, 3px);
+      }
+    }
 
-    <!-- Orbit 1: Vertical 90° (Electric Cyan to Blue) -->
-    <!-- Glow aura -->
-    <ellipse cx="182.5" cy="162" rx="72" ry="25" transform="rotate(90 182.5 162)" fill="none" stroke="url(#orbit-grad-1)" stroke-width="7" stroke-opacity="0.75" filter="url(#atom-glow)"/>
-    <!-- Sharp crystal core stroke -->
-    <ellipse cx="182.5" cy="162" rx="72" ry="25" transform="rotate(90 182.5 162)" fill="none" stroke="#e0f2fe" stroke-width="2.2" stroke-opacity="0.95"/>
+    /* Interactive hover styling */
+    svg:hover .glass-squircle {
+      filter: url(#glass-shadow) drop-shadow(0 0 24px rgba(56, 189, 248, 0.5));
+      transform: scale(1.03);
+    }
 
-    <!-- Orbit 2: Tilted +35° (Sky Blue to Violet) -->
-    <!-- Glow aura -->
-    <ellipse cx="182.5" cy="162" rx="72" ry="25" transform="rotate(35 182.5 162)" fill="none" stroke="url(#orbit-grad-2)" stroke-width="7" stroke-opacity="0.75" filter="url(#atom-glow)"/>
-    <!-- Sharp crystal core stroke -->
-    <ellipse cx="182.5" cy="162" rx="72" ry="25" transform="rotate(35 182.5 162)" fill="none" stroke="#eef2ff" stroke-width="2.2" stroke-opacity="0.95"/>
+    svg:hover .orbit-1 {
+      animation-duration: 5s;
+    }
+    svg:hover .orbit-2 {
+      animation-duration: 6s;
+    }
+    svg:hover .orbit-3 {
+      animation-duration: 5.5s;
+    }
 
-    <!-- Orbit 3: Tilted -35° (Purple to Turquoise) -->
-    <!-- Glow aura -->
-    <ellipse cx="182.5" cy="162" rx="72" ry="25" transform="rotate(-35 182.5 162)" fill="none" stroke="url(#orbit-grad-3)" stroke-width="7" stroke-opacity="0.75" filter="url(#atom-glow)"/>
-    <!-- Sharp crystal core stroke -->
-    <ellipse cx="182.5" cy="162" rx="72" ry="25" transform="rotate(-35 182.5 162)" fill="none" stroke="#fdf4ff" stroke-width="2.2" stroke-opacity="0.95"/>
+    svg:hover .atom-core {
+      transform: scale(1.22);
+    }
 
-    <!-- Central Nucleus: Iridescent Floating Glass Orb -->
-    <!-- Deep outer ring -->
-    <circle cx="182.5" cy="162" r="23" fill="none" stroke="url(#chromatic-rim)" stroke-width="2" stroke-opacity="0.8" filter="url(#atom-glow)"/>
-    <!-- Inner glowing sphere -->
-    <circle cx="182.5" cy="162" r="17" fill="url(#nucleus-grad)" filter="url(#atom-glow)"/>
-    <!-- 3D Specular Highlight on Nucleus (Liquid Glass Shine) -->
-    <ellipse cx="177" cy="156.5" rx="5.5" ry="3" transform="rotate(-30 177 156.5)" fill="#ffffff" opacity="0.95"/>
+    svg:hover .electron-glow {
+      filter: drop-shadow(0 0 10px #ffffff);
+    }
+  </style>
 
-    <!-- Quantum Electron Nodes (Luminous Liquid Droplets) -->
-    <!-- Electron 1: Top Apex (Cyan Droplet) -->
-    <g filter="url(#atom-glow)">
-      <circle cx="182.5" cy="90" r="7.5" fill="#00f0ff"/>
-      <circle cx="182.5" cy="90" r="3" fill="#ffffff"/>
-      <circle cx="181" cy="88.5" r="1.2" fill="#ffffff" opacity="0.9"/>
+  <!-- ================= BASE: CLEAN LIQUID GLASS CONTAINER ================= -->
+  <g class="glass-squircle" filter="url(#glass-shadow)">
+    <!-- Frosted Translucent Glass Body -->
+    <rect x="24" y="24" width="272" height="272" rx="64" fill="url(#liquid-surface)" />
+
+    <!-- Chromatic Prism Edge Refraction Rim -->
+    <rect x="24" y="24" width="272" height="272" rx="64" fill="none" stroke="url(#chromatic-rim)" stroke-width="2.5" />
+
+    <!-- Inner Glass Depth Rim -->
+    <rect x="27" y="27" width="266" height="266" rx="61" fill="none" stroke="url(#inner-rim)" stroke-width="1.2" />
+
+    <!-- Top-Left Organic Specular Lens Sheen -->
+    <path class="specular-glide" d="M 48 110 C 48 60 68 40 110 40 C 170 40 210 65 145 110 C 90 148 48 140 48 110 Z" fill="url(#specular-lens)" />
+
+    <!-- Crisp Glass Glint Line Along Top Curve -->
+    <path d="M 80 26 C 120 25 200 25 240 26" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.95" filter="url(#soft-blur)" />
+
+    <!-- ================= FOREGROUND: LUMINOUS QUANTUM ATOM ================= -->
+    <!-- Ambient Core Halo -->
+    <circle cx="160" cy="160" r="70" fill="url(#nucleus-ambient)" />
+
+    <!-- Orbit 1: Dynamic revolving ellipse -->
+    <g class="orbit-1">
+      <ellipse cx="160" cy="160" rx="86" ry="30" fill="none" stroke="url(#orbit-grad-1)" stroke-width="6.5" stroke-opacity="0.65" filter="url(#neon-glow)" />
+      <ellipse cx="160" cy="160" rx="86" ry="30" fill="none" stroke="#f0f9ff" stroke-width="2" stroke-opacity="0.95" />
+      <g class="electron-glow" filter="url(#neon-glow)">
+        <circle cx="246" cy="160" r="6.5" fill="#00f0ff" />
+        <circle cx="246" cy="160" r="2.5" fill="#ffffff" />
+      </g>
     </g>
 
-    <!-- Electron 2: Bottom-Right (Violet Droplet) -->
-    <g filter="url(#atom-glow)">
-      <circle cx="241.5" cy="203.5" r="7.5" fill="#c084fc"/>
-      <circle cx="241.5" cy="203.5" r="3" fill="#ffffff"/>
-      <circle cx="240" cy="202" r="1.2" fill="#ffffff" opacity="0.9"/>
+    <!-- Orbit 2: Dynamic revolving ellipse -->
+    <g class="orbit-2">
+      <ellipse cx="160" cy="160" rx="86" ry="30" fill="none" stroke="url(#orbit-grad-2)" stroke-width="6.5" stroke-opacity="0.65" filter="url(#neon-glow)" />
+      <ellipse cx="160" cy="160" rx="86" ry="30" fill="none" stroke="#f5f3ff" stroke-width="2" stroke-opacity="0.95" />
+      <g class="electron-glow" filter="url(#neon-glow)">
+        <circle cx="246" cy="160" r="6.5" fill="#c084fc" />
+        <circle cx="246" cy="160" r="2.5" fill="#ffffff" />
+      </g>
     </g>
 
-    <!-- Electron 3: Bottom-Left (Azure Droplet) -->
-    <g filter="url(#atom-glow)">
-      <circle cx="123.5" cy="203.5" r="7.5" fill="#38bdf8"/>
-      <circle cx="123.5" cy="203.5" r="3" fill="#ffffff"/>
-      <circle cx="122" cy="202" r="1.2" fill="#ffffff" opacity="0.9"/>
+    <!-- Orbit 3: Dynamic revolving ellipse -->
+    <g class="orbit-3">
+      <ellipse cx="160" cy="160" rx="86" ry="30" fill="none" stroke="url(#orbit-grad-3)" stroke-width="6.5" stroke-opacity="0.65" filter="url(#neon-glow)" />
+      <ellipse cx="160" cy="160" rx="86" ry="30" fill="none" stroke="#eff6ff" stroke-width="2" stroke-opacity="0.95" />
+      <g class="electron-glow" filter="url(#neon-glow)">
+        <circle cx="246" cy="160" r="6.5" fill="#38bdf8" />
+        <circle cx="246" cy="160" r="2.5" fill="#ffffff" />
+      </g>
     </g>
 
-    <!-- ================= LAYER 4: REFRACTIVE GLASS PEDESTAL ================= -->
-    <!-- Liquid Glass Capsule Bar Underneath -->
-    <rect x="97.5" y="266" width="170" height="11" rx="5.5" fill="url(#front-glass-surface)"/>
-    <rect x="97.5" y="266" width="170" height="11" rx="5.5" fill="none" stroke="url(#chromatic-rim)" stroke-width="1.8"/>
-    <!-- Top specular gleam on pedestal -->
-    <line x1="102" y1="267.5" x2="263" y2="267.5" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.9"/>
-
-    <!-- Bottom-right subtle reflection glint -->
-    <circle cx="295" cy="340" r="2.5" fill="#ffffff" opacity="0.7" filter="url(#soft-glow)"/>
+    <!-- Central Nucleus: Iridescent Crystal Core -->
+    <g class="atom-core">
+      <!-- Chromatic outer ring -->
+      <circle cx="160" cy="160" r="20" fill="none" stroke="url(#chromatic-rim)" stroke-width="1.8" stroke-opacity="0.85" filter="url(#nucleus-glow)" />
+      <!-- Glowing inner sphere -->
+      <circle cx="160" cy="160" r="14" fill="url(#nucleus-body)" filter="url(#nucleus-glow)" />
+      <!-- Specular Highlight -->
+      <ellipse cx="155.5" cy="155" rx="4.5" ry="2.5" transform="rotate(-30 155.5 155)" fill="#ffffff" opacity="0.95" />
+    </g>
   </g>
 </svg>

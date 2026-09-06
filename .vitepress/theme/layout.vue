@@ -7,6 +7,7 @@ import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
 import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCFooter from "./components/CCFooter.vue";
+import CCHeroLogo from "./components/CCHeroLogo.vue";
 import { CCPageviews, CCWaline } from "./components/waline";
 import { bootstrapSiteSettings } from "./composables/useSiteSettings";
 
@@ -94,6 +95,11 @@ watch(
 
 <template>
   <Layout>
+    <!-- 首页动态交互 Logo -->
+    <template #home-hero-image>
+      <CCHeroLogo />
+    </template>
+
     <!-- 面包屑 -->
     <template #doc-before>
       <Breadcrumb />
