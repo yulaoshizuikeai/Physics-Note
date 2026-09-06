@@ -62,7 +62,7 @@ export default defineConfig({
     siteTitle: "Physics Note",
     nav: navItems,
     sidebar: { "/": sidebarItems },
-    socialLinks: [{ icon: "github", link: "https://github.com/Seeridia/Physics-Note" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/yulaoshizuikeai/Physics-Note" }],
     search: {
       provider: "local",
       options: {
@@ -84,12 +84,12 @@ export default defineConfig({
       },
     },
     editLink: {
-      pattern: "https://github.com/Seeridia/Physics-Note/edit/master/:path",
+      pattern: "https://github.com/yulaoshizuikeai/Physics-Note/edit/master/:path",
       text: "在 GitHub 上查看此页",
     },
     footer: {
       message: "高中物理知识架构与高考复习指南",
-      copyright: "Copyright © 2026 Seeridia",
+      copyright: "Copyright © 2026 yulaoshizuikeai",
     },
   },
   markdown: {
