@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">简谐运动位移、速度、加速度三角波形与超前滞后相位矩阵</text>
+
+  <!-- 左侧波形图 -->
+  <g transform="translate(30, 45)">
+    <rect width="360" height="235" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="180" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">x-t, v-t, a-t 导数波形对比</text>
+
+    <!-- 坐标轴 -->
+    <line x1="30" y1="80" x2="330" y2="80" stroke="#64748b" stroke-width="1"/>
+    <line x1="30" y1="140" x2="330" y2="140" stroke="#64748b" stroke-width="1"/>
+    <line x1="30" y1="200" x2="330" y2="200" stroke="#64748b" stroke-width="1"/>
+
+    <!-- x-t (正弦) -->
+    <path d="M 40 80 Q 90 40 140 80 T 240 80 T 320 80" fill="none" stroke="#38bdf8" stroke-width="2"/>
+    <text x="15" y="83" fill="#38bdf8" font-size="12" font-weight="bold">x</text>
+
+    <!-- v-t (余弦，超前 π/2) -->
+    <path d="M 40 115 Q 90 140 140 165 T 240 115 T 320 165" fill="none" stroke="#4ade80" stroke-width="2"/>
+    <text x="15" y="143" fill="#4ade80" font-size="12" font-weight="bold">v</text>
+
+    <!-- a-t (反相，超前 π / 与 x 反向) -->
+    <path d="M 40 200 Q 90 240 140 200 T 240 200 T 320 200" fill="none" stroke="#f43f5e" stroke-width="2"/>
+    <text x="15" y="203" fill="#f43f5e" font-size="12" font-weight="bold">a</text>
+  </g>
+
+  <!-- 右侧动力学方程矩阵 -->
+  <g transform="translate(410, 45)">
+    <rect width="320" height="235" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="160" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">微积分动力学严格推导</text>
+
+    <rect x="15" y="40" width="290" height="42" rx="5" fill="#0f172a"/>
+    <text x="25" y="58" fill="#38bdf8" font-size="12" font-weight="bold">位移：x(t) = A · sin(ωt + φ₀)</text>
+    <text x="25" y="74" fill="#cbd5e1" font-size="10.5">描述偏离平衡位置的有向线段</text>
+
+    <rect x="15" y="90" width="290" height="42" rx="5" fill="#0f172a"/>
+    <text x="25" y="108" fill="#4ade80" font-size="12" font-weight="bold">速度：v(t) = dx/dt = ωA · cos(ωt + φ₀)</text>
+    <text x="25" y="124" fill="#cbd5e1" font-size="10.5">速度超前位移 π/2 相位；平衡位置速度最大</text>
+
+    <rect x="15" y="140" width="290" height="48" rx="5" fill="#0f172a"/>
+    <text x="25" y="158" fill="#f43f5e" font-size="12" font-weight="bold">加速度：a(t) = -ω² · x(t)</text>
+    <text x="25" y="174" fill="#cbd5e1" font-size="10.5">加速度超前位移 π 相位；方向恒指向平衡位置</text>
+
+    <text x="160" y="215" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">简谐运动判据：回复力 F_回 = -kx 恒成立！</text>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 200" width="100%" height="100%">
+  <defs>
+    <marker id="axis-arr-c" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+    </marker>
+    <marker id="disp-arr-c" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="disp-arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="10"/>
+
+  <!-- 一维坐标轴 -->
+  <line x1="40" y1="120" x2="600" y2="120" stroke="#1e293b" stroke-width="3" marker-end="url(#axis-arr-c)"/>
+  <text x="590" y="150" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e293b">x / m</text>
+
+  <!-- 刻度线 -->
+  <!-- 0刻度 -->
+  <line x1="120" y1="110" x2="120" y2="130" stroke="#1e293b" stroke-width="2"/>
+  <text x="115" y="150" font-family="sans-serif" font-size="15" fill="#334155">0</text>
+  <text x="105" y="170" font-family="sans-serif" font-size="13" fill="#64748b">(原点 O)</text>
+
+  <!-- x1 刻度 (2m) -->
+  <line x1="220" y1="110" x2="220" y2="130" stroke="#1e293b" stroke-width="2"/>
+  <text x="215" y="150" font-family="sans-serif" font-size="15" font-weight="bold" fill="#2563eb">2</text>
+  <circle cx="220" cy="120" r="6" fill="#2563eb"/>
+  <text x="180" y="95" font-family="sans-serif" font-size="15" font-weight="bold" fill="#2563eb">A (初位置 x₁)</text>
+
+  <!-- x2 刻度 (7m) -->
+  <line x1="470" y1="110" x2="470" y2="130" stroke="#1e293b" stroke-width="2"/>
+  <text x="465" y="150" font-family="sans-serif" font-size="15" font-weight="bold" fill="#2563eb">7</text>
+  <circle cx="470" cy="120" r="6" fill="#2563eb"/>
+  <text x="430" y="95" font-family="sans-serif" font-size="15" font-weight="bold" fill="#2563eb">B (末位置 x₂)</text>
+
+  <!-- 正向位移矢量箭头 Δx -->
+  <line x1="220" y1="65" x2="464" y2="65" stroke="#2563eb" stroke-width="4" marker-end="url(#disp-arr-c)"/>
+  <text x="260" y="50" font-family="sans-serif" font-size="15" font-weight="bold" fill="#2563eb">位移 Δx = x₂ - x₁ = 7m - 2m = +5m (沿 x 轴正向)</text>
+  <!-- 辅助垂线 -->
+  <line x1="220" y1="65" x2="220" y2="114" stroke="#93c5fd" stroke-dasharray="3 3"/>
+  <line x1="470" y1="65" x2="470" y2="114" stroke="#93c5fd" stroke-dasharray="3 3"/>
+</svg>

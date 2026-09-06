@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 360" width="100%" height="360">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="a2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+    </marker>
+    <marker id="a3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="370" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">向心加速度的微元几何极限推导 (可汗学院微积分直观)</text>
+
+  <!-- Left: Circular Arc -->
+  <g transform="translate(180, 200)">
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+    <circle cx="0" cy="0" r="5" fill="#0f172a"/>
+    <text x="-15" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#0f172a">O (圆心)</text>
+
+    <!-- Radius to P1 (angle -30 deg) -->
+    <line x1="0" y1="0" x2="112" y2="-65" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="112" cy="-65" r="5" fill="#2563eb"/>
+    <text x="122" y="-60" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">P_A</text>
+    <!-- v1 tangent at P1 -->
+    <line x1="112" y1="-65" x2="152" y2="4" stroke="#2563eb" stroke-width="2.5" marker-end="url(#a1)"/>
+    <text x="156" y="20" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">v_A</text>
+
+    <!-- Radius to P2 (angle +15 deg) -->
+    <line x1="0" y1="0" x2="125" y2="33" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="125" cy="33" r="5" fill="#2563eb"/>
+    <text x="135" y="45" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">P_B</text>
+    <!-- v2 tangent at P2 -->
+    <line x1="125" y1="33" x2="103" y2="110" stroke="#2563eb" stroke-width="2.5" marker-end="url(#a1)"/>
+    <text x="110" y="125" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">v_B</text>
+
+    <!-- Angle Delta theta -->
+    <path d="M 40 -23 A 46 46 0 0 1 45 12" fill="none" stroke="#dc2626" stroke-width="2"/>
+    <text x="52" y="-3" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">Δθ</text>
+    <text x="70" y="-80" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">弧长 Δs = v·Δt</text>
+  </g>
+
+  <!-- Right: Velocity Vector Triangle -->
+  <g transform="translate(500, 150)">
+    <text x="80" y="-30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">速度矢量差三角形 (相似三角形 ΔOP_AP_B ~ Δv)</text>
+    <!-- vA -->
+    <line x1="0" y1="0" x2="120" y2="0" stroke="#2563eb" stroke-width="3" marker-end="url(#a1)"/>
+    <text x="55" y="-8" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb">v_A</text>
+    <!-- vB -->
+    <line x1="0" y1="0" x2="100" y2="65" stroke="#2563eb" stroke-width="3" marker-end="url(#a1)"/>
+    <text x="40" y="55" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb">v_B</text>
+    <!-- Delta v from tip of vA to tip of vB -->
+    <line x1="120" y1="0" x2="100" y2="65" stroke="#dc2626" stroke-width="3" marker-end="url(#a2)"/>
+    <text x="122" y="45" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#dc2626">Δv</text>
+
+    <!-- Angle Delta theta -->
+    <path d="M 30 0 A 30 30 0 0 1 25 16" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="32" y="14" font-family="system-ui, sans-serif" font-size="11" fill="#dc2626">Δθ</text>
+
+    <text x="80" y="120" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#334155">几何相似性: |Δv| / v = |Δs| / r</text>
+    <text x="80" y="140" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#334155">a_n = lim (Δv / Δt) = (v / r) · lim(Δs / Δt) = v² / r = ω²r</text>
+  </g>
+
+  <!-- Bottom alert -->
+  <rect x="50" y="315" width="640" height="35" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="65" y="338" font-family="system-ui, sans-serif" font-size="12.5" fill="#166534">结论：当 Δt → 0 时，Δv 矢量严格垂直于瞬时速度 v，恒定指向圆周中心！故称向心加速度。</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">爱因斯坦质能方程、质量亏损与比结合能稳态曲线</text>
+
+  <!-- 左侧：质能方程 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">质能方程与核反应释放核能计算</text>
+
+    <rect x="15" y="38" width="305" height="52" rx="5" fill="#0f172a"/>
+    <text x="167" y="60" fill="#f87171" font-size="16" font-weight="bold" text-anchor="middle">ΔE = Δm · c²</text>
+    <text x="167" y="78" fill="#cbd5e1" font-size="11" text-anchor="middle">质量亏损：Δm = ∑m_反应前 - ∑m_反应后</text>
+
+    <rect x="15" y="98" width="305" height="100" rx="5" fill="#0f172a"/>
+    <text x="25" y="120" fill="#4ade80" font-size="13" font-weight="bold">★ 统一原子质量单位等价换算：</text>
+    <text x="25" y="142" fill="#fbbf24" font-size="14" font-weight="bold">1 u 质量亏损 对应 931.5 MeV 释放能量</text>
+    <text x="25" y="165" fill="#cbd5e1" font-size="11.5">若 Δm 以 kg 为单位：代入 ΔE = Δm · (3×10⁸)² J</text>
+    <text x="25" y="185" fill="#cbd5e1" font-size="11.5">若 Δm 以 u 为单位：直接写 ΔE = Δm × 931.5 MeV</text>
+  </g>
+
+  <!-- 右侧：比结合能曲线 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">比结合能 (Binding Energy per Nucleon) 曲线</text>
+
+    <!-- 曲线图 -->
+    <path d="M 35 160 Q 60 70 120 60 Q 180 75 300 100" fill="none" stroke="#f472b6" stroke-width="2.5"/>
+    <line x1="30" y1="170" x2="310" y2="170" stroke="#64748b" stroke-width="1"/>
+    <text x="310" y="185" fill="#94a3b8" font-size="10">质量数 A</text>
+    <line x1="30" y1="170" x2="30" y2="45" stroke="#64748b" stroke-width="1"/>
+    <text x="15" y="42" fill="#94a3b8" font-size="9">E/A</text>
+
+    <!-- 铁56最高峰 -->
+    <circle cx="120" cy="60" r="4" fill="#fbbf24"/>
+    <text x="120" y="50" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">⁵⁶Fe (铁峰值约 8.8 MeV)</text>
+
+    <rect x="15" y="125" width="305" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="145" fill="#38bdf8" font-size="11.5">• 中等质量核比结合能最大，原子核最稳定！</text>
+    <text x="25" y="165" fill="#4ade80" font-size="11.5">• 重核裂变：重核裂解为中等核，比结合能增加，放能</text>
+    <text x="25" y="185" fill="#fbbf24" font-size="11.5">• 轻核聚变：轻核聚合成中等核，比结合能剧增，暴烈放能</text>
+  </g>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">分子间相互作用力 F 与分子势能 E_p 随间距 r 变化双曲线</text>
+
+  <!-- 左侧：分子力 F - r 曲线 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="235" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">分子力 F - r 曲线 (斥正引负)</text>
+
+    <!-- 坐标轴 -->
+    <line x1="40" y1="125" x2="315" y2="125" stroke="#64748b" stroke-width="1.5"/>
+    <text x="315" y="140" fill="#94a3b8" font-size="11">r</text>
+    <line x1="70" y1="210" x2="70" y2="40" stroke="#64748b" stroke-width="1.5"/>
+    <text x="50" y="42" fill="#94a3b8" font-size="11">F</text>
+    <text x="30" y="65" fill="#f87171" font-size="10">斥力(+)</text>
+    <text x="30" y="195" fill="#38bdf8" font-size="10">引力(-)</text>
+
+    <!-- F 曲线 -->
+    <path d="M 75 45 Q 85 85 105 125 Q 125 165 150 165 Q 190 165 240 135 Q 275 128 310 125" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+
+    <!-- r0 平衡点 -->
+    <line x1="105" y1="125" x2="105" y2="45" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+    <circle cx="105" cy="125" r="4" fill="#4ade80"/>
+    <text x="105" y="115" fill="#4ade80" font-size="11" font-weight="bold" text-anchor="middle">r = r₀ (F=0)</text>
+
+    <text x="167" y="205" fill="#cbd5e1" font-size="11" text-anchor="middle">r &lt; r₀ 表现为斥力；r &gt; r₀ 表现为引力；r &gt; 10r₀ 忽略不计</text>
+  </g>
+
+  <!-- 右侧：分子势能 Ep - r 曲线 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="235" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">分子势能 E_p - r 曲线 (r=r₀ 势能最小)</text>
+
+    <!-- 坐标轴 -->
+    <line x1="40" y1="90" x2="315" y2="90" stroke="#64748b" stroke-width="1.5"/>
+    <text x="315" y="105" fill="#94a3b8" font-size="11">r</text>
+    <line x1="70" y1="210" x2="70" y2="40" stroke="#64748b" stroke-width="1.5"/>
+    <text x="45" y="42" fill="#94a3b8" font-size="11">E_p</text>
+
+    <!-- Ep 曲线 (碗状势阱) -->
+    <path d="M 75 45 Q 85 100 95 150 Q 105 180 120 180 Q 150 180 210 115 Q 260 95 310 90" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+
+    <!-- 最低点 r0 -->
+    <line x1="115" y1="180" x2="115" y2="90" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+    <circle cx="115" cy="180" r="4" fill="#f43f5e"/>
+    <text x="115" y="200" fill="#f43f5e" font-size="11" font-weight="bold" text-anchor="middle">r = r₀ (势能最低点 E_p min)</text>
+
+    <text x="167" y="222" fill="#fbbf24" font-size="11" text-anchor="middle">★ 分子力做功与势能：W_分 = -ΔE_p；引力做正功，斥力做负功</text>
+  </g>
+</svg>

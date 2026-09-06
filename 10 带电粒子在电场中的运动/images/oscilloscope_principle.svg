@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="100%" height="360">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="380" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">示波管结构与示波原理（电子枪、偏转电极与荧光屏）</text>
+
+  <!-- Glass tube outline -->
+  <path d="M 60 140 L 220 140 L 450 80 L 680 50 L 680 270 L 450 240 L 220 180 L 60 180 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Electron gun -->
+  <g transform="translate(80, 160)">
+    <circle cx="0" cy="0" r="10" fill="#f59e0b"/>
+    <text x="0" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#b45309">阴极 K</text>
+    <rect x="25" y="-14" width="8" height="28" fill="#475569"/>
+    <text x="29" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#475569">栅极 G</text>
+    <rect x="50" y="-16" width="12" height="32" fill="#2563eb" rx="2"/>
+    <text x="56" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#2563eb">阳极 A</text>
+  </g>
+
+  <!-- Y plates (Vertical) -->
+  <g transform="translate(250, 160)">
+    <rect x="0" y="-30" width="40" height="6" fill="#dc2626" rx="2"/>
+    <rect x="0" y="24" width="40" height="6" fill="#dc2626" rx="2"/>
+    <text x="20" y="-40" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">竖直偏转板 Y-Y'</text>
+    <text x="20" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">(接输入信号电压)</text>
+  </g>
+
+  <!-- X plates (Horizontal) -->
+  <g transform="translate(350, 160)">
+    <rect x="0" y="-20" width="45" height="40" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="3 3"/>
+    <text x="22" y="-30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">水平偏转板 X-X'</text>
+    <text x="22" y="38" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">(接锯齿波扫描电压)</text>
+  </g>
+
+  <!-- Fluorescent screen -->
+  <path d="M 680 50 Q 700 160 680 270" fill="#dcfce7" stroke="#16a34a" stroke-width="4"/>
+  <text x="720" y="165" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d">荧光屏</text>
+
+  <!-- Beam path -->
+  <path d="M 140 160 L 250 160 Q 290 160 350 145 L 685 110" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+  <circle cx="685" cy="110" r="5" fill="#15803d"/>
+
+  <!-- Explanation -->
+  <rect x="50" y="300" width="660" height="45" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="65" y="328" font-family="system-ui, sans-serif" font-size="12.5" fill="#334155">扫描原理：X 板加周期性锯齿波电压使亮斑水平匀速拉开，Y 板加待测信号电压，屏幕即可完整展现待测信号随时间变化的波形！</text>
+</svg>

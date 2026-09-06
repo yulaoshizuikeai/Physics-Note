@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">LC 电磁振荡能量转换与电磁波谱全景</text>
+
+  <!-- 左侧：LC回路 -->
+  <g transform="translate(30, 48)">
+    <rect width="320" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="160" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">LC 振荡回路周期与能量互换</text>
+
+    <!-- 周期公式 -->
+    <rect x="15" y="40" width="290" height="42" rx="5" fill="#0f172a"/>
+    <text x="160" y="65" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">固有周期：T = 2π√(LC)   (f = 1 / 2π√LC)</text>
+
+    <!-- 能量转化循环 -->
+    <rect x="15" y="90" width="290" height="110" rx="5" fill="#0f172a"/>
+    <text x="25" y="110" fill="#fbbf24" font-size="11.5">• 放电过程：q ↓，i ↑，电场能 ⇒ 磁场能</text>
+    <text x="25" y="132" fill="#38bdf8" font-size="11.5">• 充电过程：q ↑，i ↓，磁场能 ⇒ 电场能</text>
+    <text x="25" y="154" fill="#cbd5e1" font-size="11.5">• 电荷最大时：i = 0，电场能最大，磁场能为零</text>
+    <text x="25" y="176" fill="#cbd5e1" font-size="11.5">• 电流最大时：q = 0，磁场能最大，电场能为零</text>
+    <text x="25" y="195" fill="#94a3b8" font-size="10.5">能量每周期振荡 2 次：能量振荡频率 = 2 · f_LC</text>
+  </g>
+
+  <!-- 右侧：电磁波谱 -->
+  <g transform="translate(370, 48)">
+    <rect width="360" height="215" rx="8" fill="#1e293b" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="180" y="24" fill="#f472b6" font-size="13" font-weight="bold" text-anchor="middle">电磁波谱 (按频率递增 / 波长递减排列)</text>
+
+    <g transform="translate(15, 45)">
+      <!-- 谱带色块 -->
+      <rect x="0" y="0" width="45" height="40" rx="4" fill="#3b82f6"/><text x="22" y="25" fill="#fff" font-size="9" text-anchor="middle">无线电波</text>
+      <rect x="50" y="0" width="45" height="40" rx="4" fill="#06b6d4"/><text x="72" y="25" fill="#fff" font-size="9" text-anchor="middle">微波</text>
+      <rect x="100" y="0" width="45" height="40" rx="4" fill="#ef4444"/><text x="122" y="25" fill="#fff" font-size="9" text-anchor="middle">红外线</text>
+      <rect x="150" y="0" width="45" height="40" rx="4" fill="#eab308"/><text x="172" y="25" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">可见光</text>
+      <rect x="200" y="0" width="40" height="40" rx="4" fill="#a855f7"/><text x="220" y="25" fill="#fff" font-size="9" text-anchor="middle">紫外线</text>
+      <rect x="245" y="0" width="40" height="40" rx="4" fill="#6366f1"/><text x="265" y="25" fill="#fff" font-size="9" text-anchor="middle">X射线</text>
+      <rect x="290" y="0" width="40" height="40" rx="4" fill="#ec4899"/><text x="310" y="25" fill="#fff" font-size="9" text-anchor="middle">γ射线</text>
+    </g>
+
+    <!-- 箭头与特性 -->
+    <text x="180" y="115" fill="#f472b6" font-size="11" text-anchor="middle">波长 λ 变短 ──────────────► 频率 ν 变高，光子能量 E=hν 剧增</text>
+
+    <rect x="15" y="130" width="330" height="70" rx="5" fill="#0f172a"/>
+    <text x="25" y="150" fill="#cbd5e1" font-size="11">• 红外线：显著热效应（遥控、夜视仪、理疗）</text>
+    <text x="25" y="170" fill="#cbd5e1" font-size="11">• 紫外线：显著化学效应、荧光效应、灭菌消毒</text>
+    <text x="25" y="190" fill="#cbd5e1" font-size="11">• X/γ射线：极高穿透力与电离本领（CT透视、工业探伤）</text>
+  </g>
+</svg>

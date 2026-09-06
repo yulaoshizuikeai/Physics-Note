@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" width="100%" height="100%">
+  <defs>
+    <marker id="arr-g" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arr-fn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-f" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="10"/>
+
+  <!-- 顶点 A (重力起点) -->
+  <circle cx="200" cy="40" r="6" fill="#1e293b"/>
+  
+  <!-- 恒力：重力 G (竖直向下，大小方向恒定) -->
+  <line x1="200" y1="40" x2="200" y2="230" stroke="#1e293b" stroke-width="4" marker-end="url(#arr-g)"/>
+  <text x="140" y="140" font-family="sans-serif" font-size="15" font-weight="bold" fill="#1e293b">重力 G (大小方向恒定)</text>
+
+  <!-- 方向不变力：支持力 F_N 作用线 (射线倾角 30°) -->
+  <line x1="200" y1="40" x2="480" y2="180" stroke="#2563eb" stroke-width="3" stroke-dasharray="6 4"/>
+  <text x="400" y="130" font-family="sans-serif" font-size="14" font-weight="bold" fill="#2563eb">F_N 射线 (方向恒定)</text>
+
+  <!-- 动态力 F 的三种状态 (连接重力末端与 F_N 射线) -->
+  <!-- 状态 1 -->
+  <line x1="200" y1="230" x2="300" y2="90" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-f)"/>
+  <text x="260" y="180" font-family="sans-serif" font-size="12" fill="#64748b">F₁</text>
+
+  <!-- 状态 2: 垂线 (垂直于 F_N，取最小值 F_min) -->
+  <line x1="200" y1="230" x2="330" y2="105" stroke="#dc2626" stroke-width="4" marker-end="url(#arr-f)"/>
+  <text x="240" y="150" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">F_min ⊥ F_N</text>
+
+  <!-- 状态 3 -->
+  <line x1="200" y1="230" x2="410" y2="145" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-f)"/>
+  <text x="325" y="210" font-family="sans-serif" font-size="12" fill="#64748b">F₃</text>
+
+  <!-- 极值与变化趋势总结框 -->
+  <rect x="360" y="180" width="220" height="80" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="375" y="205" font-family="sans-serif" font-size="13" font-weight="bold" fill="#991b1b">矢量三角形动态极值法则：</text>
+  <text x="375" y="228" font-family="sans-serif" font-size="12" fill="#b91c1c">当拉力 F 与支持力 F_N 垂直时，</text>
+  <text x="375" y="248" font-family="sans-serif" font-size="12" fill="#b91c1c">拉力取得最小值：F_min = G·sin θ</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">全反射临界条件与光导纤维全反射传输模型</text>
+
+  <!-- 左侧：全反射临界 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">全反射 (Total Internal Reflection)</text>
+
+    <rect x="15" y="40" width="305" height="60" rx="5" fill="#0f172a"/>
+    <text x="25" y="60" fill="#fbbf24" font-size="12" font-weight="bold">● 全反射必须同时满足两大充要条件：</text>
+    <text x="25" y="78" fill="#cbd5e1" font-size="11">1. 光从<tspan fill="#38bdf8" font-weight="bold">光密介质</tspan>射入<tspan fill="#4ade80" font-weight="bold">光疏介质</tspan> (n_密 &gt; n_疏)</text>
+    <text x="25" y="93" fill="#cbd5e1" font-size="11">2. 入射角大于或等于临界角：θ ≥ C</text>
+
+    <rect x="15" y="110" width="305" height="90" rx="5" fill="#0f172a"/>
+    <text x="25" y="130" fill="#4ade80" font-size="13" font-weight="bold">临界角公式：sin C = 1 / n</text>
+    <text x="25" y="150" fill="#cbd5e1" font-size="11">• 水的折射率 n=1.33 ⇒ C ≈ 48.5°</text>
+    <text x="25" y="170" fill="#cbd5e1" font-size="11">• 玻璃折射率 n=1.50 ⇒ C ≈ 32° ~ 42°</text>
+    <text x="25" y="190" fill="#cbd5e1" font-size="11">• 金刚石钻石 n=2.42 ⇒ C ≈ 24.4° (极易全反射，光芒璀璨)</text>
+  </g>
+
+  <!-- 右侧：光导纤维模型 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">光导纤维 (Optical Fiber) 传输机理</text>
+
+    <!-- 光纤剖面 -->
+    <rect x="20" y="55" width="295" height="70" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+    <rect x="20" y="70" width="295" height="40" fill="#0284c7" opacity="0.3" stroke="#38bdf8" stroke-dasharray="2 2"/>
+    <text x="240" y="66" fill="#94a3b8" font-size="9">包层 (折射率 n₂ 较小)</text>
+    <text x="240" y="94" fill="#38bdf8" font-size="10" font-weight="bold">纤芯 (n₁ 较大)</text>
+
+    <!-- 光线在纤芯内全反射曲折推进 -->
+    <path d="M 20 90 L 80 70 L 140 110 L 200 70 L 260 110 L 315 75" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+
+    <rect x="15" y="140" width="305" height="60" rx="5" fill="#0f172a"/>
+    <text x="25" y="160" fill="#4ade80" font-size="11.5" font-weight="bold">• 核心结构铁律：内芯折射率必须严格大于外包层 (n₁ &gt; n₂)</text>
+    <text x="25" y="180" fill="#cbd5e1" font-size="11">• 信号在纤芯界面持续发生全反射，近乎零损耗超高速传输</text>
+  </g>
+</svg>

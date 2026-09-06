@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">斯涅尔折射定律、折射率定义与平行玻璃砖侧移模型</text>
+
+  <!-- 左侧：折射定律基本模型 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">斯涅尔定律 (Snell's Law)</text>
+
+    <!-- 介质分界面 -->
+    <line x1="20" y1="90" x2="315" y2="90" stroke="#64748b" stroke-width="2"/>
+    <text x="35" y="80" fill="#94a3b8" font-size="11">介质 1 (真空/空气 n₁=1)</text>
+    <text x="35" y="110" fill="#94a3b8" font-size="11">介质 2 (折射率 n₂=n)</text>
+
+    <!-- 法线 -->
+    <line x1="167" y1="35" x2="167" y2="150" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="175" y="45" fill="#94a3b8" font-size="10">法线 N</text>
+
+    <!-- 入射光线与折射光线 -->
+    <line x1="80" y1="40" x2="167" y2="90" stroke="#fbbf24" stroke-width="2.5"/>
+    <line x1="167" y1="90" x2="225" y2="150" stroke="#fbbf24" stroke-width="2.5"/>
+    <polygon points="125,65 115,58 128,55" fill="#fbbf24"/>
+    <polygon points="198,120 190,110 202,110" fill="#fbbf24"/>
+
+    <text x="135" y="65" fill="#fbbf24" font-size="11">θ₁</text>
+    <text x="180" y="115" fill="#4ade80" font-size="11">θ₂</text>
+
+    <!-- 公式框 -->
+    <rect x="15" y="155" width="305" height="48" rx="5" fill="#0f172a"/>
+    <text x="167" y="174" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">折射率定义：n = sinθ₁ / sinθ₂ = c / v</text>
+    <text x="167" y="193" fill="#cbd5e1" font-size="10.5" text-anchor="middle">光从真空射入介质，波速变慢：v = c / n，波长变短：λ = λ₀ / n</text>
+  </g>
+
+  <!-- 右侧：平行玻璃砖侧移 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">平行玻璃砖光学特征：平移不偏转</text>
+
+    <!-- 玻璃砖主体 -->
+    <rect x="40" y="60" width="255" height="70" fill="#0284c7" opacity="0.15" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="260" y="100" fill="#38bdf8" font-size="11">厚度 d</text>
+
+    <!-- 光线路径 -->
+    <line x1="30" y1="35" x2="90" y2="60" stroke="#fbbf24" stroke-width="2"/>
+    <line x1="90" y1="60" x2="150" y2="130" stroke="#fbbf24" stroke-width="2"/>
+    <line x1="150" y1="130" x2="210" y2="155" stroke="#fbbf24" stroke-width="2"/>
+
+    <!-- 原光线延长虚线 -->
+    <line x1="90" y1="60" x2="250" y2="127" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="210" y="180" fill="#fb923c" font-size="11">侧向平移 Δx</text>
+
+    <rect x="15" y="150" width="305" height="55" rx="5" fill="#0f172a"/>
+    <text x="25" y="170" fill="#4ade80" font-size="11.5" font-weight="bold">• 出射光线严格平行于入射光线（无偏转角）！</text>
+    <text x="25" y="190" fill="#cbd5e1" font-size="11">• 视深减小（视浅）：池底看起来变浅 h' = h / n</text>
+  </g>
+</svg>

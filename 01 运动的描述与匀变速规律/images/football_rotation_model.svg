@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="100%" height="100%">
+  <defs>
+    <marker id="arr-curve" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="10"/>
+
+  <!-- 足球 -->
+  <circle cx="120" cy="120" r="45" fill="#ffffff" stroke="#1e293b" stroke-width="3"/>
+  <!-- 足球五边形花纹 -->
+  <polygon points="120,105 133,115 128,130 112,130 107,115" fill="#1e293b"/>
+  <line x1="120" y1="105" x2="120" y2="75" stroke="#1e293b" stroke-width="2"/>
+  <line x1="133" y1="115" x2="158" y2="105" stroke="#1e293b" stroke-width="2"/>
+  <line x1="128" y1="130" x2="148" y2="152" stroke="#1e293b" stroke-width="2"/>
+  <line x1="112" y1="130" x2="92" y2="152" stroke="#1e293b" stroke-width="2"/>
+  <line x1="107" y1="115" x2="82" y2="105" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- 旋转箭头 (马格努斯效应) -->
+  <path d="M 85 65 A 58 58 0 0 1 155 65" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="5 3"/>
+  <text x="80" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#2563eb">自转角速度 ω</text>
+
+  <!-- 弯曲香蕉球轨迹 -->
+  <path d="M 120 120 Q 320 80, 520 180" fill="none" stroke="#ea580c" stroke-width="4" marker-end="url(#arr-curve)"/>
+  <text x="260" y="90" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ea580c">“香蕉球”弧线运动轨迹</text>
+
+  <!-- 右侧球门 -->
+  <line x1="530" y1="140" x2="530" y2="210" stroke="#475569" stroke-width="4"/>
+  <line x1="530" y1="140" x2="560" y2="150" stroke="#475569" stroke-width="3"/>
+  <text x="540" y="205" font-family="sans-serif" font-size="14" fill="#64748b">球门</text>
+
+  <!-- 结论框 -->
+  <rect x="220" y="145" width="280" height="70" rx="8" fill="#fef3c7" stroke="#fde047"/>
+  <text x="235" y="170" font-family="sans-serif" font-size="13" font-weight="bold" fill="#854d0e">核心判据：</text>
+  <text x="235" y="190" font-family="sans-serif" font-size="12" fill="#713f12">球的旋转导致空气阻力差，产生侧向偏转，</text>
+  <text x="235" y="208" font-family="sans-serif" font-size="12" fill="#713f12">旋转特征不可忽略，因此绝对不能看成质点！</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 360" width="100%" height="360">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#9333ea" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="32" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">曲线运动的动力学条件与速度偏转机制</text>
+  
+  <path d="M 80 280 C 220 280 260 180 460 110 C 560 75 620 60 660 55" fill="none" stroke="#475569" stroke-width="3" stroke-dasharray="6 4"/>
+  <text x="90" y="295" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">运动轨迹 (平滑曲线)</text>
+
+  <circle cx="350" cy="150" r="7" fill="#0f172a" stroke="#ffffff" stroke-width="2"/>
+  <text x="335" y="140" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">P (质点)</text>
+
+  <line x1="350" y1="150" x2="470" y2="100" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <text x="475" y="95" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#2563eb">v (切线方向速度)</text>
+
+  <line x1="350" y1="150" x2="400" y2="240" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+  <text x="405" y="255" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#dc2626">F_合 (合外力，恒指向轨迹内凹侧)</text>
+
+  <line x1="350" y1="150" x2="315" y2="234" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-green)"/>
+  <text x="230" y="240" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a">Fn (法向分力：改变速度方向)</text>
+
+  <line x1="350" y1="150" x2="435" y2="156" stroke="#9333ea" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-purple)"/>
+  <text x="445" y="165" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#9333ea">Ft (切向分力：改变速度大小)</text>
+
+  <line x1="315" y1="234" x2="400" y2="240" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <line x1="435" y1="156" x2="400" y2="240" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+  <rect x="50" y="300" width="600" height="42" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="65" y="326" font-family="system-ui, sans-serif" font-size="13" fill="#1e40af">规律判据：① 合外力与速度不在同一直线上；② 合外力恒指向凹侧；③ 夹角为锐角则加速，钝角则减速，直角则速率不变。</text>
+</svg>

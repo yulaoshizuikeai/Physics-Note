@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">波的相干干涉条件与多普勒效应频移物理机制</text>
+
+  <!-- 左侧：波的干涉 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">波的相干干涉 (Wave Interference)</text>
+
+    <rect x="15" y="40" width="305" height="42" rx="5" fill="#0f172a"/>
+    <text x="25" y="58" fill="#4ade80" font-size="12" font-weight="bold">相干条件：两波源频率相同、初相差恒定</text>
+    <text x="25" y="74" fill="#cbd5e1" font-size="10.5">波程差：Δr = |S₁P - S₂P|</text>
+
+    <rect x="15" y="90" width="305" height="50" rx="5" fill="#0f172a"/>
+    <text x="25" y="110" fill="#fbbf24" font-size="12" font-weight="bold">● 振动加强点：Δr = k · λ  (k=0,1,2...)</text>
+    <text x="25" y="128" fill="#cbd5e1" font-size="11">振幅达到最大 A_加 = A₁ + A₂，振动最剧烈</text>
+
+    <rect x="15" y="148" width="305" height="50" rx="5" fill="#0f172a"/>
+    <text x="25" y="168" fill="#f43f5e" font-size="12" font-weight="bold">● 振动减弱点：Δr = (2k + 1) · (λ/2)</text>
+    <text x="25" y="186" fill="#cbd5e1" font-size="11">若 A₁ = A₂，两波完全相消抵消，质点静止不动！</text>
+  </g>
+
+  <!-- 右侧：多普勒效应 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">多普勒效应 (Doppler Effect)</text>
+
+    <!-- 压缩波面示意 -->
+    <circle cx="120" cy="80" r="30" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="130" cy="80" r="20" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="140" cy="80" r="10" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="145" cy="80" r="4" fill="#fbbf24"/>
+    <text x="145" y="70" fill="#fbbf24" font-size="10">波源 S →</text>
+    <text x="200" y="85" fill="#4ade80" font-size="11" font-weight="bold">前方：波面密集</text>
+
+    <rect x="15" y="120" width="305" height="80" rx="5" fill="#0f172a"/>
+    <text x="25" y="140" fill="#fbbf24" font-size="12" font-weight="bold">• 相对靠近：接收频率 f_收 &gt; f_源（音调变高）</text>
+    <text x="25" y="162" fill="#38bdf8" font-size="12" font-weight="bold">• 相对远离：接收频率 f_收 &lt; f_源（音调变低）</text>
+    <text x="25" y="184" fill="#cbd5e1" font-size="11">★ 核心本质：波源实际发射频率与介质波速恒定不变！</text>
+  </g>
+</svg>

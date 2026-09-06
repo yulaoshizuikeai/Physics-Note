@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="500" y="34" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0f172a" text-anchor="middle">守恒定律验证实验：机械能守恒与动量守恒落点圆心法</text>
+
+  <!-- 左区：验证机械能守恒定律 -->
+  <g transform="translate(40, 55)">
+    <rect width="435" height="425" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="217" y="26" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">1. 验证机械能守恒定律（重锤自由下落）</text>
+
+    <!-- 重锤与打点装置草图 -->
+    <g transform="translate(30, 45)">
+      <!-- 铁架台与打点计时器 -->
+      <rect x="20" y="10" width="8" height="220" fill="#64748b"/>
+      <rect x="0" y="225" width="80" height="10" fill="#475569"/>
+      <!-- 打点计时器 -->
+      <rect x="28" y="25" width="40" height="30" fill="#38bdf8" stroke="#0284c7" stroke-width="1"/>
+      <!-- 纸带从打点计时器垂下 -->
+      <line x1="48" y1="55" x2="48" y2="190" stroke="#f59e0b" stroke-width="4"/>
+      <!-- 重锤 (Bob) -->
+      <circle cx="48" cy="195" r="12" fill="#334155"/>
+      <text x="48" y="222" font-family="sans-serif" font-size="10" font-weight="bold" fill="#334155" text-anchor="middle">重锤 m</text>
+    </g>
+
+    <!-- 右侧关键判断原则 -->
+    <g transform="translate(140, 50)">
+      <rect width="270" height="95" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="10" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">【纸带挑选铁律】：</text>
+      <text x="10" y="40" font-family="sans-serif" font-size="11" fill="#334155">第 1、2 点间距应接近 <tspan font-weight="bold" fill="#dc2626">2 mm</tspan>：</text>
+      <text x="10" y="58" font-family="sans-serif" font-size="11" fill="#334155">h = ½ g T² = ½ × 9.8 × (0.02)²</text>
+      <text x="10" y="76" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">≈ 1.96 mm ≈ 2 mm</text>
+      <text x="10" y="90" font-family="sans-serif" font-size="10" fill="#64748b">若明显大于 2mm 说明先释放了纸带！</text>
+    </g>
+
+    <!-- 速度计算与能量对比 -->
+    <g transform="translate(20, 290)">
+      <rect width="395" height="115" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="12" fill="#334155">【速度计算】严禁用 <tspan font-weight="bold" fill="#dc2626">v = gt</tspan> 或 <tspan font-weight="bold" fill="#dc2626">v = √(2gh)</tspan> 计算速度！</text>
+      <text x="15" y="42" font-family="sans-serif" font-size="11" fill="#64748b">（因为那是预先假设了机械能守恒，属于逻辑循环论证！）</text>
+      <text x="15" y="62" font-family="sans-serif" font-size="12" fill="#334155">【正确算法】由纸带平均速度求：<tspan font-weight="bold" fill="#2563eb">v_n = (h_{n+1} - h_{n-1}) / (2T)</tspan></text>
+      <text x="15" y="84" font-family="sans-serif" font-size="12" fill="#334155">【必然系统误差】：<tspan font-weight="bold" fill="#ea580c">ΔEp 略大于 ΔEk</tspan></text>
+      <text x="15" y="102" font-family="sans-serif" font-size="11" fill="#ea580c">（由于空气阻力与打点纸带阻力做负功：ΔEp = ΔEk + W_f）</text>
+    </g>
+  </g>
+
+  <!-- 右区：验证动量守恒定律（斜槽平抛落点圆心法） -->
+  <g transform="translate(525, 55)">
+    <rect width="435" height="425" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="217" y="26" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">2. 验证动量守恒定律（平抛水平位移法）</text>
+
+    <!-- 斜槽轨道与小球碰撞 -->
+    <g transform="translate(30, 45)">
+      <!-- 斜槽末端水平 -->
+      <path d="M 10 30 Q 30 110 90 110 L 120 110" fill="none" stroke="#475569" stroke-width="4"/>
+      <!-- 入射球与被碰球 -->
+      <circle cx="85" cy="100" r="10" fill="#2563eb"/>
+      <text x="85" y="82" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb" text-anchor="middle">m₁ (入射球)</text>
+      <circle cx="115" cy="100" r="10" fill="#16a34a"/>
+      <text x="125" y="82" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">m₂ (被碰球)</text>
+
+      <!-- 地面与竖直铅垂线 -->
+      <line x1="120" y1="110" x2="120" y2="240" stroke="#94a3b8" stroke-dasharray="3,3" stroke-width="1.5"/>
+      <circle cx="120" cy="240" r="3" fill="#dc2626"/>
+      <text x="120" y="256" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">O (投影点)</text>
+      <line x1="100" y1="240" x2="380" y2="240" stroke="#334155" stroke-width="2"/>
+
+      <!-- 抛出落点 M, P, N -->
+      <!-- P: 不碰撞时 m1 落点 -->
+      <line x1="120" y1="230" x2="260" y2="230" stroke="#2563eb" stroke-width="1.5"/>
+      <circle cx="260" cy="240" r="5" fill="#2563eb"/>
+      <text x="260" y="260" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">P (单独 m₁)</text>
+
+      <!-- M: 碰撞后 m1 落点 -->
+      <circle cx="190" cy="240" r="5" fill="#38bdf8"/>
+      <text x="190" y="260" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="middle">M (碰后 m₁)</text>
+
+      <!-- N: 碰撞后 m2 落点 -->
+      <circle cx="340" cy="240" r="5" fill="#16a34a"/>
+      <text x="340" y="260" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">N (碰后 m₂)</text>
+    </g>
+
+    <!-- 关键原理与圆心确定 -->
+    <g transform="translate(20, 315)">
+      <rect width="395" height="95" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="15" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a">【质量要求】：<tspan fill="#dc2626">m₁ &gt; m₂</tspan>（防止入射球反弹）</text>
+      <text x="15" y="40" font-family="sans-serif" font-size="12" fill="#334155">【等效原理】：下落高度相同，平抛时间 t 相同，水平位移正比于速度！</text>
+      <text x="15" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">守恒方程：m₁ · OP = m₁ · OM + m₂ · ON</text>
+      <text x="15" y="80" font-family="sans-serif" font-size="11" fill="#ea580c">【圆心法】：用圆规画最小外接圆，圆心作为平均落点以减小偶然误差。</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">质谱仪与回旋加速器两大核心仪器工作原理</text>
+
+  <!-- 左侧：质谱仪 -->
+  <g transform="translate(30, 50)">
+    <rect width="335" height="240" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">质谱仪 (测定比荷 q/m)</text>
+
+    <!-- 速度选择器 -->
+    <rect x="20" y="40" width="120" height="70" rx="4" fill="#0f172a" stroke="#64748b"/>
+    <text x="80" y="55" fill="#94a3b8" font-size="10" text-anchor="middle">速度选择器 (E, B₁)</text>
+    <line x1="30" y1="75" x2="130" y2="75" stroke="#fbbf24" stroke-width="2"/>
+    <text x="80" y="95" fill="#fbbf24" font-size="11" text-anchor="middle">v₀ = E / B₁</text>
+
+    <!-- 偏转磁场 -->
+    <rect x="160" y="40" width="155" height="110" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-dasharray="3 3"/>
+    <text x="237" y="55" fill="#38bdf8" font-size="10" text-anchor="middle">偏转磁场 B₂ (垂直纸面向外)</text>
+    <!-- 半圆轨迹 -->
+    <path d="M 160 75 A 40 40 0 0 0 160 135" fill="none" stroke="#f43f5e" stroke-width="2"/>
+    <circle cx="160" cy="135" r="3" fill="#f43f5e"/>
+    <text x="175" y="140" fill="#f43f5e" font-size="10">底片位置 d = 2R</text>
+
+    <!-- 公式 -->
+    <rect x="20" y="160" width="295" height="65" rx="6" fill="#0f172a"/>
+    <text x="30" y="180" fill="#cbd5e1" font-size="11">速度选择条件：qE = qvB₁ ⇒ v = E/B₁</text>
+    <text x="30" y="200" fill="#4ade80" font-size="12" font-weight="bold">比荷测量公式：q/m = E / (B₁ · B₂ · R)</text>
+    <text x="30" y="218" fill="#94a3b8" font-size="10.5">同位素分离：q 相同而 m 不同 ⇒ 半径 R 不同</text>
+  </g>
+
+  <!-- 右侧：回旋加速器 -->
+  <g transform="translate(395, 50)">
+    <rect width="335" height="240" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">回旋加速器 (高能粒子加速)</text>
+
+    <!-- D形盒示意 -->
+    <path d="M 110 50 A 50 50 0 0 1 110 150 Z" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+    <text x="80" y="105" fill="#fbbf24" font-size="11" font-weight="bold">D₁盒</text>
+    <path d="M 125 50 A 50 50 0 0 0 125 150 Z" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+    <text x="145" y="105" fill="#fbbf24" font-size="11" font-weight="bold">D₂盒</text>
+
+    <!-- 狭缝电场 -->
+    <rect x="110" y="50" width="15" height="100" fill="#38bdf8" opacity="0.3"/>
+    <text x="118" y="42" fill="#38bdf8" font-size="9" text-anchor="middle">交变电场</text>
+
+    <!-- 核心规律说明 -->
+    <rect x="20" y="160" width="295" height="65" rx="6" fill="#0f172a"/>
+    <text x="30" y="178" fill="#cbd5e1" font-size="11">同步共振条件：T_电 = T_回 = 2πm / (qB)</text>
+    <text x="30" y="198" fill="#4ade80" font-size="12" font-weight="bold">最大动能：E_km = q²B²R² / (2m)</text>
+    <text x="30" y="216" fill="#f87171" font-size="10.5">★ 最终动能与加速电压 U 无关！仅由盒半径 R 决定！</text>
+  </g>
+</svg>

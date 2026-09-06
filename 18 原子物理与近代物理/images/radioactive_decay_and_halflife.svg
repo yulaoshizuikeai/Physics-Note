@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">天然放射性三大射线穿透本领与指数半衰期衰变规律</text>
+
+  <!-- 左侧：三大射线对比 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">α、β、γ 三大射线特性矩阵</text>
+
+    <rect x="15" y="38" width="305" height="48" rx="5" fill="#0f172a"/>
+    <text x="25" y="56" fill="#fbbf24" font-size="12" font-weight="bold">● α射线 (氦核 ⁴₂He)：带 +2e 电荷，电离最强</text>
+    <text x="25" y="74" fill="#cbd5e1" font-size="11">穿透力极弱：一张薄白纸即可彻底完全阻挡！</text>
+
+    <rect x="15" y="92" width="305" height="48" rx="5" fill="#0f172a"/>
+    <text x="25" y="110" fill="#38bdf8" font-size="12" font-weight="bold">● β射线 (高速电子 ⁰₋₁e)：带 -e 电荷，近光速</text>
+    <text x="25" y="128" fill="#cbd5e1" font-size="11">穿透力中等：几毫米厚的铝板才能阻挡。</text>
+
+    <rect x="15" y="146" width="305" height="52" rx="5" fill="#0f172a"/>
+    <text x="25" y="164" fill="#f43f5e" font-size="12" font-weight="bold">● γ射线 (高能光子 γ)：不带电，中性波长极短</text>
+    <text x="25" y="184" fill="#cbd5e1" font-size="11">穿透力极强：需要数厘米厚的铅板才能有效屏蔽！</text>
+  </g>
+
+  <!-- 右侧：半衰期曲线 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">放射性元素衰变定律：N = N₀ · (1/2)^(t/τ)</text>
+
+    <!-- 衰变曲线 -->
+    <path d="M 40 50 Q 80 110 120 135 Q 180 160 280 170" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+    <line x1="40" y1="170" x2="295" y2="170" stroke="#64748b" stroke-width="1"/>
+    <line x1="40" y1="170" x2="40" y2="45" stroke="#64748b" stroke-width="1"/>
+    <text x="295" y="185" fill="#94a3b8" font-size="10">时间 t</text>
+    <text x="25" y="45" fill="#94a3b8" font-size="10">N</text>
+
+    <text x="20" y="55" fill="#fbbf24" font-size="10">N₀</text>
+    <text x="12" y="112" fill="#fbbf24" font-size="10">N₀/2</text>
+    <line x1="40" y1="110" x2="80" y2="110" stroke="#94a3b8" stroke-dasharray="2 2"/>
+    <line x1="80" y1="110" x2="80" y2="170" stroke="#94a3b8" stroke-dasharray="2 2"/>
+    <text x="80" y="185" fill="#4ade80" font-size="11" font-weight="bold" text-anchor="middle">t = τ (半衰期)</text>
+
+    <rect x="15" y="150" width="305" height="48" rx="4" fill="#0f172a"/>
+    <text x="167" y="168" fill="#fbbf24" font-size="11" font-weight="bold" text-anchor="middle">★ 半衰期 τ 是原子核内部固有属性！</text>
+    <text x="167" y="186" fill="#cbd5e1" font-size="10.5" text-anchor="middle">与外界温度、压强及所处化学化合态完全无关！</text>
+  </g>
+</svg>

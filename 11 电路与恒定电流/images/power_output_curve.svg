@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="100%" height="360">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="380" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">电源 U-I 伏安特性图线与外电阻输出功率极值规律 (R = r 时 P_出 最大)</text>
+
+  <!-- Left: U-I Graph of Power Source -->
+  <g transform="translate(60, 50)">
+    <rect x="0" y="0" width="290" height="240" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="145" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">电源端电压 U-I 特性图线</text>
+
+    <!-- Axes -->
+    <line x1="40" y1="180" x2="260" y2="180" stroke="#334155" stroke-width="1.5"/>
+    <text x="265" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#334155">I</text>
+    <line x1="40" y1="180" x2="40" y2="40" stroke="#334155" stroke-width="1.5"/>
+    <text x="35" y="35" font-family="system-ui, sans-serif" font-size="11" fill="#334155">U</text>
+
+    <!-- Falling straight line U = E - Ir -->
+    <line x1="40" y1="60" x2="220" y2="180" stroke="#dc2626" stroke-width="2.5"/>
+    <circle cx="40" cy="60" r="4" fill="#dc2626"/>
+    <text x="25" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">E</text>
+    <circle cx="220" cy="180" r="4" fill="#dc2626"/>
+    <text x="220" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">I_短 = E/r</text>
+
+    <text x="155" y="110" font-family="system-ui, sans-serif" font-size="12" fill="#334155">斜率绝对值: |k| = r (内阻)</text>
+    <text x="145" y="225" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">纵截距为电动势 E，横截距为短路电流 I_短</text>
+  </g>
+
+  <!-- Right: P_out vs R -->
+  <g transform="translate(410, 50)">
+    <rect x="0" y="0" width="290" height="240" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="145" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">电源输出功率随外电阻 R 变化曲线</text>
+
+    <!-- Axes -->
+    <line x1="40" y1="180" x2="260" y2="180" stroke="#334155" stroke-width="1.5"/>
+    <text x="265" y="185" font-family="system-ui, sans-serif" font-size="11" fill="#334155">R</text>
+    <line x1="40" y1="180" x2="40" y2="40" stroke="#334155" stroke-width="1.5"/>
+    <text x="30" y="35" font-family="system-ui, sans-serif" font-size="11" fill="#334155">P_出</text>
+
+    <!-- Hill curve -->
+    <path d="M 40 180 Q 80 70 120 70 Q 180 70 250 140" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+    <circle cx="120" cy="70" r="4" fill="#2563eb"/>
+    <line x1="120" y1="70" x2="120" y2="180" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="120" y="198" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">R = r</text>
+    
+    <line x1="40" y1="70" x2="120" y2="70" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="15" y="75" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">P_max</text>
+
+    <text x="145" y="225" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">最大输出功率: P_max = E² / (4r)</text>
+  </g>
+
+  <!-- Bottom rule -->
+  <rect x="50" y="305" width="660" height="40" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="65" y="330" font-family="system-ui, sans-serif" font-size="12.5" fill="#1d4ed8">功率双解对称性：对于任意小于 P_max 的输出功率 P，必然存在两个关于 r 呈倒数对称的外电阻 R1·R2 = r²！</text>
+</svg>

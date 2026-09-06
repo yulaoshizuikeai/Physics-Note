@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="500" y="34" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0f172a" text-anchor="middle">力学核心实验：纸带逐差法与牛顿第二定律系统误差分析</text>
+
+  <!-- 上区：打点计时器纸带处理与逐差法原理 -->
+  <g transform="translate(40, 55)">
+    <rect width="920" height="205" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="460" y="26" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">1. 纸带分析：计数点瞬时速度与六段逐差法求加速度 a</text>
+
+    <!-- 纸带示意图 (Paper Tape) -->
+    <rect x="40" y="45" width="840" height="42" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5" rx="3"/>
+    <!-- 打点位置 (0, 1, 2, 3, 4, 5, 6) -->
+    <!-- 点 0 (x=70) -->
+    <circle cx="70" cy="66" r="3.5" fill="#dc2626"/>
+    <text x="70" y="40" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">0</text>
+    <!-- 点 1 (x=130, dx=60) -->
+    <circle cx="130" cy="66" r="3.5" fill="#dc2626"/>
+    <text x="130" y="40" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">1</text>
+    <!-- 点 2 (x=210, dx=80) -->
+    <circle cx="210" cy="66" r="3.5" fill="#dc2626"/>
+    <text x="210" y="40" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">2</text>
+    <!-- 点 3 (x=310, dx=100) -->
+    <circle cx="310" cy="66" r="3.5" fill="#dc2626"/>
+    <text x="310" y="40" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">3</text>
+    <!-- 点 4 (x=430, dx=120) -->
+    <circle cx="430" cy="66" r="3.5" fill="#dc2626"/>
+    <text x="430" y="40" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">4</text>
+    <!-- 点 5 (x=570, dx=140) -->
+    <circle cx="570" cy="66" r="3.5" fill="#dc2626"/>
+    <text x="570" y="40" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">5</text>
+    <!-- 点 6 (x=730, dx=160) -->
+    <circle cx="730" cy="66" r="3.5" fill="#dc2626"/>
+    <text x="730" y="40" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">6</text>
+
+    <!-- 位移标注箭头与文字 -->
+    <line x1="70" y1="98" x2="130" y2="98" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="100" y="114" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">x₁</text>
+
+    <line x1="130" y1="98" x2="210" y2="98" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="170" y="114" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">x₂</text>
+
+    <line x1="210" y1="98" x2="310" y2="98" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="260" y="114" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">x₃</text>
+
+    <line x1="310" y1="98" x2="430" y2="98" stroke="#059669" stroke-width="1.5"/>
+    <text x="370" y="114" font-family="sans-serif" font-size="12" font-weight="bold" fill="#059669" text-anchor="middle">x₄</text>
+
+    <line x1="430" y1="98" x2="570" y2="98" stroke="#059669" stroke-width="1.5"/>
+    <text x="500" y="114" font-family="sans-serif" font-size="12" font-weight="bold" fill="#059669" text-anchor="middle">x₅</text>
+
+    <line x1="570" y1="98" x2="730" y2="98" stroke="#059669" stroke-width="1.5"/>
+    <text x="650" y="114" font-family="sans-serif" font-size="12" font-weight="bold" fill="#059669" text-anchor="middle">x₆</text>
+
+    <!-- 公式推导框 -->
+    <g transform="translate(40, 130)">
+      <rect width="840" height="65" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="20" y="24" font-family="sans-serif" font-size="13" fill="#334155">【瞬时速度求解】某点速度等于前后相邻区段的平均速度：<tspan font-weight="bold" fill="#2563eb">v₂ = (x₂ + x₃) / (2T)</tspan>，<tspan font-weight="bold" fill="#2563eb">v₅ = (x₅ + x₆) / (2T)</tspan></text>
+      <text x="20" y="48" font-family="sans-serif" font-size="13" fill="#334155">【逐差法消除随机误差】充分利用全部 6 段位移：<tspan font-weight="bold" fill="#dc2626">a = [(x₄ + x₅ + x₆) - (x₁ + x₂ + x₃)] / (9 T²)</tspan> （其中 T 为相邻计数点时间间隔）</text>
+    </g>
+  </g>
+
+  <!-- 下左区：探究牛顿第二定律装置与平衡摩擦力 -->
+  <g transform="translate(40, 275)">
+    <rect width="445" height="230" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="222" y="24" font-family="sans-serif" font-size="15" font-weight="bold" fill="#1e293b" text-anchor="middle">2. 平衡摩擦力操作标准与判据</text>
+
+    <!-- 倾斜长木板 -->
+    <path d="M 30 160 L 320 100 L 320 160 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="1"/>
+    <!-- 角度 θ -->
+    <path d="M 70 160 A 40 40 0 0 0 65 153" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="75" y="155" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">θ</text>
+
+    <!-- 小车 (Car M) -->
+    <g transform="translate(140, 115) rotate(-11.5)">
+      <rect x="0" y="-22" width="70" height="24" rx="3" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+      <circle cx="15" cy="4" r="5" fill="#475569"/>
+      <circle cx="55" cy="4" r="5" fill="#475569"/>
+      <text x="35" y="-6" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">小车 M</text>
+    </g>
+
+    <!-- 规范文字说明 -->
+    <g transform="translate(20, 168)">
+      <text x="0" y="16" font-family="sans-serif" font-size="12" fill="#334155">【平衡条件】<tspan font-weight="bold" fill="#dc2626">Mg sinθ = μ Mg cosθ ⟹ μ = tanθ</tspan></text>
+      <text x="0" y="34" font-family="sans-serif" font-size="12" fill="#334155">【操作要点】<tspan font-weight="bold" fill="#ea580c">不挂悬挂盘</tspan>，轻推小车，打点计时器在纸带上打出<tspan font-weight="bold" fill="#16a34a">间距均匀的点</tspan>。</text>
+      <text x="0" y="50" font-family="sans-serif" font-size="11" fill="#64748b">【注意】平衡摩擦力后，改变小车质量 M 或托盘质量 m 时，无需重新平衡！</text>
+    </g>
+  </g>
+
+  <!-- 下右区：m 远小于 M 理论推导与 a-F 图像下弯分析 -->
+  <g transform="translate(515, 275)">
+    <rect width="445" height="230" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="222" y="24" font-family="sans-serif" font-size="15" font-weight="bold" fill="#1e293b" text-anchor="middle">3. 绳子拉力 T 与托盘重力 mg 的系统误差机制</text>
+
+    <!-- a - F(mg) 图像 -->
+    <!-- 坐标系 -->
+    <line x1="50" y1="140" x2="210" y2="140" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="215" y="145" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b">F = mg</text>
+    <line x1="50" y1="140" x2="50" y2="40" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="50" y="34" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">a</text>
+
+    <!-- 理想线 (过原点直线) -->
+    <line x1="50" y1="140" x2="180" y2="50" stroke="#94a3b8" stroke-dasharray="4,4" stroke-width="1.5"/>
+    <text x="185" y="52" font-family="sans-serif" font-size="10" fill="#64748b">理论直线 (m≪M)</text>
+
+    <!-- 实际下弯曲线 -->
+    <path d="M 50 140 Q 120 90 190 78" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+    <text x="195" y="82" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">实际曲线下弯</text>
+
+    <!-- 理论推导公式 -->
+    <g transform="translate(230, 60)">
+      <rect width="200" height="90" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="10" y="20" font-family="sans-serif" font-size="11" fill="#334155">整体法：<tspan font-weight="bold">mg = (M + m) a</tspan></text>
+      <text x="10" y="40" font-family="sans-serif" font-size="11" fill="#334155">隔离小车：<tspan font-weight="bold">T = M a</tspan></text>
+      <text x="10" y="62" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">T = [M / (M + m)] mg &lt; mg</text>
+      <text x="10" y="80" font-family="sans-serif" font-size="11" fill="#dc2626">仅当 m ≪ M 时，T ≈ mg</text>
+    </g>
+
+    <!-- 消除该误差的现代方案 -->
+    <text x="20" y="185" font-family="sans-serif" font-size="12" fill="#334155">【高考避坑与改进】：若在小车端安装<tspan font-weight="bold" fill="#0284c7">力传感器</tspan>或采用<tspan font-weight="bold" fill="#0284c7">动滑轮测拉力</tspan>，</text>
+    <text x="20" y="205" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">直接测得真实拉力 T，则完全不需要满足 m ≪ M 的条件！</text>
+  </g>
+</svg>

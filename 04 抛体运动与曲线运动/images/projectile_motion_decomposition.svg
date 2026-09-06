@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" width="100%" height="400">
+  <defs>
+    <marker id="arr-b" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+    </marker>
+    <marker id="arr-g" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="360" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">平抛运动规律与核心几何定理 (tanθ = 2tanα)</text>
+
+  <line x1="80" y1="60" x2="650" y2="60" stroke="#334155" stroke-width="2" marker-end="url(#arr-b)"/>
+  <text x="655" y="65" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#334155">x (水平)</text>
+  
+  <line x1="80" y1="60" x2="80" y2="340" stroke="#334155" stroke-width="2" marker-end="url(#arr-b)"/>
+  <text x="75" y="360" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#334155">y (竖直)</text>
+  <text x="65" y="55" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#334155">O</text>
+
+  <line x1="80" y1="60" x2="170" y2="60" stroke="#2563eb" stroke-width="3" marker-end="url(#arr-b)"/>
+  <text x="120" y="50" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb">v_0</text>
+
+  <path d="M 80 60 Q 280 60 480 252" fill="none" stroke="#475569" stroke-width="2.5"/>
+
+  <circle cx="480" cy="252" r="6" fill="#0f172a"/>
+  <text x="495" y="255" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#0f172a">P (x, y)</text>
+
+  <line x1="480" y1="60" x2="480" y2="252" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <line x1="80" y1="252" x2="480" y2="252" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="480" y="50" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">x = v_0 · t</text>
+  <text x="30" y="256" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">y = ½gt²</text>
+
+  <line x1="80" y1="60" x2="480" y2="252" stroke="#16a34a" stroke-width="2" marker-end="url(#arr-g)"/>
+  <text x="260" y="175" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a">位移 s</text>
+  <path d="M 140 60 A 60 60 0 0 1 133 85" fill="none" stroke="#16a34a" stroke-width="2"/>
+  <text x="145" y="80" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a">α (位移偏角)</text>
+
+  <line x1="480" y1="252" x2="570" y2="252" stroke="#2563eb" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arr-b)"/>
+  <text x="575" y="256" font-family="system-ui, sans-serif" font-size="12" fill="#2563eb">v_x = v_0</text>
+  <line x1="480" y1="252" x2="480" y2="348" stroke="#dc2626" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arr-r)"/>
+  <text x="425" y="330" font-family="system-ui, sans-serif" font-size="12" fill="#dc2626">v_y = gt</text>
+  <line x1="480" y1="252" x2="570" y2="348" stroke="#dc2626" stroke-width="3" marker-end="url(#arr-r)"/>
+  <text x="578" y="360" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#dc2626">v (速度方向)</text>
+
+  <line x1="480" y1="252" x2="280" y2="60" stroke="#e11d48" stroke-width="2" stroke-dasharray="5 3"/>
+  <circle cx="280" cy="60" r="5" fill="#e11d48"/>
+  <text x="280" y="80" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#e11d48">x/2 (水平中点)</text>
+
+  <path d="M 320 60 A 40 40 0 0 1 315 98" fill="none" stroke="#e11d48" stroke-width="2"/>
+  <text x="328" y="85" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#e11d48">θ (速度偏角)</text>
+
+  <rect x="50" y="340" width="620" height="45" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+  <text x="65" y="368" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#be123c">核心几何结论：① tanθ = 2tanα 恒成立；② 任意时刻速度的反向延长线必过水平位移的中点 (x/2, 0)。</text>
+</svg>

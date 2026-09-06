@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad-steel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="50%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="grad-dial" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- 标题 -->
+  <text x="500" y="36" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0f172a" text-anchor="middle">高中物理基本测量仪器读数规范与刻度原理</text>
+
+  <!-- 左区：游标卡尺读数原理 (20分度) -->
+  <g transform="translate(40, 60)">
+    <rect width="430" height="200" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="215" y="28" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">1. 游标卡尺读数（以 20 分度为例）</text>
+    
+    <!-- 主尺 (Main Scale) -->
+    <rect x="25" y="45" width="380" height="50" fill="url(#grad-steel)" stroke="#94a3b8" stroke-width="1"/>
+    <!-- 主尺刻度 (mm) -->
+    <!-- 10mm (1cm), 20mm (2cm), 30mm (3cm) -->
+    <line x1="60" y1="45" x2="60" y2="70" stroke="#1e293b" stroke-width="2"/>
+    <text x="60" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">1</text>
+    <line x1="160" y1="45" x2="160" y2="70" stroke="#1e293b" stroke-width="2"/>
+    <text x="160" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">2</text>
+    <line x1="260" y1="45" x2="260" y2="70" stroke="#1e293b" stroke-width="2"/>
+    <text x="260" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">3</text>
+    <line x1="360" y1="45" x2="360" y2="70" stroke="#1e293b" stroke-width="2"/>
+    <text x="360" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">4 cm</text>
+    <!-- 毫米刻度 -->
+    <path d="M70 45 v12 M80 45 v12 M90 45 v12 M100 45 v12 M110 45 v18 M120 45 v12 M130 45 v12 M140 45 v12 M150 45 v12
+             M170 45 v12 M180 45 v12 M190 45 v12 M200 45 v12 M210 45 v18 M220 45 v12 M230 45 v12 M240 45 v12 M250 45 v12
+             M270 45 v12 M280 45 v12 M290 45 v12 M300 45 v12 M310 45 v18 M320 45 v12 M330 45 v12 M340 45 v12 M350 45 v12" stroke="#475569" stroke-width="1"/>
+
+    <!-- 游标尺 (Vernier Scale) 下方滑动，显示在 13mm 之后某处 -->
+    <!-- 设测量值为 13.35 mm -> 主尺整毫米为 13mm (对应 x=90), 游标第 7 条线对齐 (0.05 * 7 = 0.35) -->
+    <!-- 游标 0 刻度在 x = 93.5 -->
+    <rect x="93.5" y="95" width="280" height="40" fill="#e2e8f0" stroke="#64748b" stroke-width="1"/>
+    <!-- 游标 0 刻度 -->
+    <line x1="93.5" y1="95" x2="93.5" y2="115" stroke="#dc2626" stroke-width="2"/>
+    <text x="93.5" y="128" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">0</text>
+    
+    <!-- 第 7 条刻度线对齐 (x = 93.5 + 7 * 9.5 = 160，刚好对准主尺 20mm 刻度线) -->
+    <line x1="160" y1="95" x2="160" y2="118" stroke="#16a34a" stroke-width="2.5"/>
+    <text x="160" y="130" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">7</text>
+    
+    <!-- 游标其他线示意 -->
+    <line x1="103" y1="95" x2="103" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="112.5" y1="95" x2="112.5" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="122" y1="95" x2="122" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="131.5" y1="95" x2="131.5" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="141" y1="95" x2="141" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="150.5" y1="95" x2="150.5" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="169.5" y1="95" x2="169.5" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="179" y1="95" x2="179" y2="110" stroke="#64748b" stroke-width="1"/>
+    <line x1="188.5" y1="95" x2="188.5" y2="110" stroke="#64748b" stroke-width="1"/>
+    
+    <!-- 读数说明 -->
+    <rect x="25" y="145" width="380" height="42" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="35" y="162" font-family="sans-serif" font-size="12" fill="#334155">读数 = 主尺整毫米 + 游标格数 × 精度</text>
+    <text x="35" y="179" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0284c7">= 13 mm + 7 × 0.05 mm = 13.35 mm（绝不估读！）</text>
+  </g>
+
+  <!-- 右区：螺旋测微器读数原理 -->
+  <g transform="translate(530, 60)">
+    <rect width="430" height="200" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="215" y="28" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">2. 螺旋测微器读数（千分尺，精度 0.01 mm）</text>
+
+    <!-- 固定套管 (Sleeve) -->
+    <rect x="30" y="55" width="180" height="60" fill="url(#grad-steel)" stroke="#64748b" stroke-width="1.5"/>
+    <!-- 基准横线 -->
+    <line x1="30" y1="85" x2="210" y2="85" stroke="#1e293b" stroke-width="2"/>
+    <!-- 上方毫米刻度 (0, 1, 2, 3, 4, 5, 6, 7, 8) -->
+    <line x1="50" y1="70" x2="50" y2="85" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="50" y="66" font-family="sans-serif" font-size="10" fill="#334155" text-anchor="middle">0</text>
+    <line x1="90" y1="70" x2="90" y2="85" stroke="#1e293b" stroke-width="1.5"/>
+    <line x1="130" y1="70" x2="130" y2="85" stroke="#1e293b" stroke-width="1.5"/>
+    <line x1="170" y1="70" x2="170" y2="85" stroke="#1e293b" stroke-width="2"/>
+    <text x="170" y="66" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">6</text>
+    <!-- 下方半毫米刻度 (0.5, 1.5, ... 6.5) -->
+    <line x1="70" y1="85" x2="70" y2="98" stroke="#1e293b" stroke-width="1.5"/>
+    <line x1="110" y1="85" x2="110" y2="98" stroke="#1e293b" stroke-width="1.5"/>
+    <line x1="150" y1="85" x2="150" y2="98" stroke="#1e293b" stroke-width="1.5"/>
+    <!-- 半毫米线露出一半 -->
+    <line x1="190" y1="85" x2="190" y2="98" stroke="#dc2626" stroke-width="2"/>
+    <text x="190" y="112" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">半毫米线</text>
+
+    <!-- 可动刻度 (Thimble) -->
+    <rect x="210" y="45" width="120" height="80" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/>
+    <!-- 可动刻度分度线 (对准 35 略偏上，如 35.3) -->
+    <line x1="210" y1="85" x2="235" y2="85" stroke="#2563eb" stroke-width="2"/>
+    <text x="245" y="89" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">35</text>
+    <line x1="210" y1="65" x2="230" y2="65" stroke="#475569" stroke-width="1"/>
+    <text x="245" y="69" font-family="sans-serif" font-size="11" fill="#64748b">40</text>
+    <line x1="210" y1="105" x2="230" y2="105" stroke="#475569" stroke-width="1"/>
+    <text x="245" y="109" font-family="sans-serif" font-size="11" fill="#64748b">30</text>
+    <!-- 细分刻度线 -->
+    <line x1="210" y1="73" x2="222" y2="73" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="210" y1="77" x2="222" y2="77" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="210" y1="81" x2="222" y2="81" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="210" y1="89" x2="222" y2="89" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="210" y1="93" x2="222" y2="93" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="210" y1="97" x2="222" y2="97" stroke="#94a3b8" stroke-width="1"/>
+
+    <!-- 读数说明 -->
+    <rect x="25" y="145" width="380" height="42" rx="4" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="35" y="162" font-family="sans-serif" font-size="12" fill="#334155">读数 = 固定刻度 (含半毫米) + 可动刻度(含估读) × 0.01 mm</text>
+    <text x="35" y="179" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0284c7">= 6.5 mm + 35.3 × 0.01 mm = 6.853 mm（必须估读到千分位！）</text>
+  </g>
+
+  <!-- 下区：多用电表面板结构与欧姆挡调零 -->
+  <g transform="translate(40, 280)">
+    <rect width="920" height="195" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="460" y="26" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">3. 多用电表面板刻度与欧姆挡调零规范</text>
+
+    <!-- 表头弧形刻度面板 -->
+    <rect x="30" y="42" width="480" height="140" rx="6" fill="url(#grad-dial)" stroke="#94a3b8" stroke-width="1"/>
+    
+    <!-- 欧姆刻度 (顶层弧线，反向非线性，左无穷，右零) -->
+    <path d="M 60 75 Q 270 45 480 75" fill="none" stroke="#dc2626" stroke-width="2"/>
+    <text x="45" y="72" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">∞</text>
+    <text x="130" y="60" font-family="sans-serif" font-size="11" fill="#dc2626">100</text>
+    <text x="210" y="52" font-family="sans-serif" font-size="11" fill="#dc2626">40</text>
+    <text x="270" y="50" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">15 (中值电阻)</text>
+    <text x="350" y="54" font-family="sans-serif" font-size="11" fill="#dc2626">5</text>
+    <text x="420" y="62" font-family="sans-serif" font-size="11" fill="#dc2626">2</text>
+    <text x="485" y="72" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">0 Ω</text>
+
+    <!-- 直流电流/电压刻度 (中间弧线，线性，左零，右满偏) -->
+    <path d="M 60 105 Q 270 78 480 105" fill="none" stroke="#2563eb" stroke-width="2"/>
+    <text x="45" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">0</text>
+    <text x="150" y="93" font-family="sans-serif" font-size="11" fill="#2563eb">1</text>
+    <text x="265" y="86" font-family="sans-serif" font-size="11" fill="#2563eb">2.5</text>
+    <text x="380" y="93" font-family="sans-serif" font-size="11" fill="#2563eb">4</text>
+    <text x="485" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">5 (V/mA)</text>
+
+    <!-- 表针 (当前偏转至中值) -->
+    <line x1="270" y1="165" x2="270" y2="52" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="270" cy="165" r="7" fill="#0f172a"/>
+
+    <!-- 右侧操作与核心规程 -->
+    <g transform="translate(530, 42)">
+      <rect width="360" height="140" rx="6" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="20" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a">调零与测量四步铁律：</text>
+      <text x="20" y="48" font-family="sans-serif" font-size="12" fill="#334155">① <tspan font-weight="bold" fill="#ea580c">机械调零</tspan>：未通电前，用螺丝刀调零螺丝使指针指在左侧 0 刻度。</text>
+      <text x="20" y="70" font-family="sans-serif" font-size="12" fill="#334155">② <tspan font-weight="bold" fill="#ea580c">欧姆调零</tspan>：红黑表笔短接，调节欧姆调零旋钮使指针指在右侧 0 Ω。</text>
+      <text x="20" y="92" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold">③ 换挡必重新欧姆调零！指针在中值电阻附近（1/3 ~ 2/3）误差最小。</text>
+      <text x="20" y="114" font-family="sans-serif" font-size="12" fill="#2563eb">④ 内部电流方向：“红表笔进，黑表笔出”；黑表笔接内部电源正极！</text>
+      <text x="20" y="132" font-family="sans-serif" font-size="11" fill="#64748b">⑤ 测量完毕：必须将选择开关旋至 OFF 挡或交流电压最高挡。</text>
+    </g>
+  </g>
+</svg>

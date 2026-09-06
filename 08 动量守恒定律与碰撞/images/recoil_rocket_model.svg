@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="100%" height="360">
+  <defs>
+    <marker id="r-arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+    </marker>
+    <marker id="b-arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">反冲运动与人船模型 (m_1 · x_1 = m_2 · x_2 微元位移积累)</text>
+
+  <!-- Left: Rocket Recoil Model -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="290" height="230" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="145" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">火箭喷气反冲动力学模型</text>
+    
+    <!-- Rocket body -->
+    <path d="M 120 120 L 160 120 L 170 140 L 110 140 Z" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+    <rect x="120" y="70" width="40" height="50" rx="4" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+    <path d="M 120 70 L 140 45 L 160 70 Z" fill="#ef4444"/>
+    <text x="140" y="100" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#ffffff">M</text>
+
+    <!-- Velocity arrow rocket upwards -->
+    <line x1="140" y1="40" x2="140" y2="10" stroke="#2563eb" stroke-width="3" marker-end="url(#b-arr)"/>
+    <text x="155" y="25" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">v (火箭加速)</text>
+
+    <!-- Exhaust gas downwards -->
+    <path d="M 125 145 L 140 185 L 155 145 Z" fill="#f97316" opacity="0.8"/>
+    <line x1="140" y1="145" x2="140" y2="200" stroke="#dc2626" stroke-width="3" marker-end="url(#r-arr)"/>
+    <text x="155" y="185" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">u (气体喷出速度)</text>
+
+    <text x="145" y="220" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11.5" fill="#334155">动量守恒: M Δv + Δm · (-u) = 0</text>
+  </g>
+
+  <!-- Right: Boat Model m1 x1 = m2 x2 -->
+  <g transform="translate(410, 60)">
+    <rect x="0" y="0" width="290" height="230" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="145" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">经典“人船模型”位移守恒</text>
+
+    <!-- Boat on water -->
+    <path d="M 50 140 L 230 140 L 210 165 L 70 165 Z" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+    <text x="180" y="156" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">小船 M (长 L)</text>
+
+    <!-- Man walking on boat -->
+    <circle cx="75" cy="115" r="8" fill="#f59e0b"/>
+    <line x1="75" y1="123" x2="75" y2="140" stroke="#f59e0b" stroke-width="2.5"/>
+    <text x="60" y="115" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#d97706">人 m</text>
+
+    <!-- Walking arrow right -->
+    <line x1="85" y1="105" x2="145" y2="105" stroke="#2563eb" stroke-width="2" marker-end="url(#b-arr)"/>
+    <text x="115" y="98" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#2563eb">人向右走</text>
+    <!-- Boat moves left -->
+    <line x1="140" y1="175" x2="80" y2="175" stroke="#dc2626" stroke-width="2" marker-end="url(#r-arr)"/>
+    <text x="110" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#dc2626">船向左退 x_船</text>
+
+    <text x="145" y="215" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#0f172a">m · x_人 = M · x_船  (且 x_人 + x_船 = L)</text>
+  </g>
+
+  <rect x="60" y="310" width="640" height="35" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="75" y="333" font-family="system-ui, sans-serif" font-size="12.5" fill="#166534">人船模型公式秒杀解：人对地位移 x_人 = M·L / (m+M)，船对地位移 x_船 = m·L / (m+M)。</text>
+</svg>

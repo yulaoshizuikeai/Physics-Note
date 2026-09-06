@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">带电粒子在匀强磁场中的匀速圆周运动动力学推导</text>
+
+  <!-- 左侧：圆周运动图示 -->
+  <g transform="translate(40, 45)">
+    <!-- 磁场点阵 -->
+    <g fill="#475569" font-size="14">
+      <text x="20" y="40">×</text><text x="80" y="40">×</text><text x="140" y="40">×</text><text x="200" y="40">×</text><text x="260" y="40">×</text>
+      <text x="20" y="100">×</text><text x="80" y="100">×</text><text x="140" y="100">×</text><text x="200" y="100">×</text><text x="260" y="100">×</text>
+      <text x="20" y="160">×</text><text x="80" y="160">×</text><text x="140" y="160">×</text><text x="200" y="160">×</text><text x="260" y="160">×</text>
+      <text x="20" y="220">×</text><text x="80" y="220">×</text><text x="140" y="220">×</text><text x="200" y="220">×</text><text x="260" y="220">×</text>
+    </g>
+
+    <!-- 圆周轨迹 -->
+    <circle cx="140" cy="130" r="80" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5 3"/>
+    <circle cx="140" cy="130" r="3" fill="#cbd5e1"/>
+    <text x="145" y="130" fill="#cbd5e1" font-size="11">O (圆心)</text>
+
+    <!-- 粒子及受力与速度 (上顶点) -->
+    <circle cx="140" cy="50" r="7" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>
+    <text x="152" y="48" fill="#fbbf24" font-size="12" font-weight="bold">+q</text>
+    <!-- 速度切向 -->
+    <line x1="140" y1="50" x2="80" y2="50" stroke="#4ade80" stroke-width="2.5"/>
+    <polygon points="75,50 87,46 87,54" fill="#4ade80"/>
+    <text x="60" y="45" fill="#4ade80" font-size="12" font-weight="bold">v</text>
+    <!-- 洛伦兹力指向圆心 -->
+    <line x1="140" y1="50" x2="140" y2="100" stroke="#f43f5e" stroke-width="2.5"/>
+    <polygon points="140,105 136,93 144,93" fill="#f43f5e"/>
+    <text x="145" y="85" fill="#f43f5e" font-size="12" font-weight="bold">f = qvB</text>
+
+    <text x="140" y="240" fill="#94a3b8" font-size="11" text-anchor="middle">洛伦兹力始终与速度垂直 ⇒ 不做功！动能恒定</text>
+  </g>
+
+  <!-- 右侧：推导公式矩阵 -->
+  <g transform="translate(360, 45)">
+    <rect width="360" height="235" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="180" y="26" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">经典三大公式推导矩阵</text>
+
+    <!-- 动力学方程 -->
+    <rect x="20" y="42" width="320" height="42" rx="6" fill="#0f172a"/>
+    <text x="35" y="60" fill="#fbbf24" font-size="12" font-weight="bold">向心力方程：</text>
+    <text x="120" y="62" fill="#f8fafc" font-size="13">qvB = m · (v² / R) = m · ω²R</text>
+
+    <!-- 轨道半径 -->
+    <rect x="20" y="92" width="320" height="42" rx="6" fill="#0f172a"/>
+    <text x="35" y="110" fill="#4ade80" font-size="12" font-weight="bold">轨道半径 R：</text>
+    <text x="120" y="112" fill="#4ade80" font-size="14" font-weight="bold">R = mv / (qB) = p / (qB)</text>
+
+    <!-- 周期公式 -->
+    <rect x="20" y="142" width="320" height="42" rx="6" fill="#0f172a"/>
+    <text x="35" y="160" fill="#f472b6" font-size="12" font-weight="bold">运行周期 T：</text>
+    <text x="120" y="162" fill="#f472b6" font-size="14" font-weight="bold">T = 2πR / v = 2πm / (qB)</text>
+
+    <text x="20" y="202" fill="#e2e8f0" font-size="11.5" font-weight="bold">★ 高考关键物理洞见：</text>
+    <text x="20" y="220" fill="#cbd5e1" font-size="11">周期 T 与运动速度 v、轨道半径 R 完全无关！仅由比荷与 B 决定！</text>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">自感现象（通电/断电自感）与电磁阻尼/驱动机制</text>
+
+  <!-- 通电自感与断电自感 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">自感现象 (Self-Induction)</text>
+
+    <rect x="15" y="40" width="305" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="60" fill="#38bdf8" font-size="12" font-weight="bold">● 通电自感（开关闭合瞬间）：</text>
+    <text x="25" y="80" fill="#cbd5e1" font-size="11">• 线圈产生反向自感电动势阻碍电流增加</text>
+    <text x="25" y="98" fill="#4ade80" font-size="11.5">现象：支路灯泡<tspan fill="#fbbf24" font-weight="bold">缓慢逐渐变亮</tspan></text>
+
+    <rect x="15" y="125" width="305" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="145" fill="#f87171" font-size="12" font-weight="bold">● 断电自感（开关断开瞬间）：</text>
+    <text x="25" y="165" fill="#cbd5e1" font-size="11">• 线圈维持原电流，若断开前 I_L > I_灯：</text>
+    <text x="25" y="185" fill="#f43f5e" font-size="11.5">现象：灯泡<tspan fill="#f43f5e" font-weight="bold">猛烈闪亮一下</tspan>再缓慢熄灭！</text>
+  </g>
+
+  <!-- 涡流与电磁阻尼 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">涡流、电磁阻尼与电磁驱动</text>
+
+    <rect x="15" y="40" width="305" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="60" fill="#fb923c" font-size="12" font-weight="bold">● 涡流（Eddy Current）与电磁灶：</text>
+    <text x="25" y="80" fill="#cbd5e1" font-size="11">• 块状导体处于交变磁场，内部感应出闭合涡旋电流</text>
+    <text x="25" y="98" fill="#cbd5e1" font-size="11">• 产生高热：变压器铁芯采用涂绝缘漆薄硅钢片叠压</text>
+
+    <rect x="15" y="125" width="305" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="145" fill="#4ade80" font-size="12" font-weight="bold">● 电磁阻尼与电磁驱动：</text>
+    <text x="25" y="165" fill="#cbd5e1" font-size="11">• 阻尼：导体相对磁场运动，安培力<tspan fill="#f87171">阻碍运动</tspan>使之速停</text>
+    <text x="25" y="185" fill="#cbd5e1" font-size="11">• 驱动：旋转磁场产生安培力<tspan fill="#4ade80">推动导体同向旋转</tspan>(v_导 &lt; v_磁)</text>
+  </g>
+</svg>

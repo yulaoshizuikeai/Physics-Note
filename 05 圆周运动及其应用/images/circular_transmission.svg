@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="100%" height="360">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="380" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">传动装置中的同轴转动与皮带传动比较</text>
+
+  <!-- Left: Big Wheel A (radius 100) and Coaxial Small Wheel B (radius 50) -->
+  <g transform="translate(180, 180)">
+    <!-- Wheel A -->
+    <circle cx="0" cy="0" r="100" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+    <!-- Wheel B -->
+    <circle cx="0" cy="0" r="50" fill="#cbd5e1" stroke="#334155" stroke-width="2"/>
+    <circle cx="0" cy="0" r="6" fill="#0f172a"/>
+    <text x="0" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#0f172a">轴心 O_1</text>
+    
+    <!-- Point A -->
+    <circle cx="0" cy="-100" r="5" fill="#2563eb"/>
+    <text x="12" y="-95" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb">A (边缘)</text>
+    <line x1="0" y1="-100" x2="60" y2="-100" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr)"/>
+    <text x="65" y="-105" font-family="system-ui, sans-serif" font-size="12" fill="#2563eb">v_A</text>
+
+    <!-- Point B -->
+    <circle cx="0" cy="-50" r="5" fill="#0891b2"/>
+    <text x="12" y="-45" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#0891b2">B (边缘)</text>
+    <line x1="0" y1="-50" x2="30" y2="-50" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="35" y="-55" font-family="system-ui, sans-serif" font-size="12" fill="#0891b2">v_B</text>
+
+    <text x="0" y="125" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">同轴转动：角速度相同 (ω_A = ω_B)</text>
+    <text x="0" y="145" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">线速度与半径成正比: v_A / v_B = r_A / r_B</text>
+  </g>
+
+  <!-- Right: Belt connected Wheel C (radius 75) -->
+  <g transform="translate(560, 180)">
+    <circle cx="0" cy="0" r="75" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"/>
+    <circle cx="0" cy="0" r="6" fill="#0f172a"/>
+    <text x="0" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#0f172a">轴心 O_2</text>
+
+    <!-- Point C -->
+    <circle cx="0" cy="-75" r="5" fill="#dc2626"/>
+    <text x="12" y="-70" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#dc2626">C (边缘)</text>
+    <line x1="0" y1="-75" x2="45" y2="-75" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-red)"/>
+    <text x="50" y="-80" font-family="system-ui, sans-serif" font-size="12" fill="#dc2626">v_C</text>
+
+    <text x="0" y="125" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1e293b">皮带传动：线速度相同 (v_B = v_C)</text>
+    <text x="0" y="145" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#64748b">角速度与半径成反比: ω_B / ω_C = r_C / r_B</text>
+  </g>
+
+  <!-- Belt connecting Wheel B and Wheel C -->
+  <line x1="180" y1="130" x2="560" y2="105" stroke="#b45309" stroke-width="4"/>
+  <line x1="180" y1="230" x2="560" y2="255" stroke="#b45309" stroke-width="4"/>
+  <text x="370" y="110" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b45309">传动皮带 (不打滑)</text>
+</svg>

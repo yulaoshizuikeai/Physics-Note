@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">导轨滑棒动力学与能量守恒闭环模型</text>
+
+  <!-- 导轨物理装置 -->
+  <g transform="translate(30, 45)">
+    <rect width="345" height="235" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="172" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">水平光滑导轨滑棒系统</text>
+
+    <!-- 电阻 R -->
+    <rect x="30" y="70" width="16" height="40" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="25" y="62" fill="#cbd5e1" font-size="11">电阻 R</text>
+
+    <!-- 平行导轨 -->
+    <line x1="38" y1="70" x2="310" y2="70" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="38" y1="110" x2="310" y2="110" stroke="#94a3b8" stroke-width="3"/>
+    <text x="315" y="95" fill="#94a3b8" font-size="11">间距 L</text>
+
+    <!-- 磁场符号 -->
+    <g fill="#475569" font-size="12">
+      <text x="80" y="95">×</text><text x="140" y="95">×</text><text x="200" y="95">×</text><text x="260" y="95">×</text>
+    </g>
+
+    <!-- 金属棒 -->
+    <rect x="180" y="55" width="10" height="70" rx="3" fill="#fbbf24" stroke="#d97706" stroke-width="1"/>
+    <text x="185" y="48" fill="#fbbf24" font-size="11" text-anchor="middle">棒(m, r)</text>
+
+    <!-- 外力与安培力 -->
+    <line x1="190" y1="90" x2="250" y2="90" stroke="#4ade80" stroke-width="2.5"/>
+    <polygon points="255,90 245,86 245,94" fill="#4ade80"/>
+    <text x="235" y="82" fill="#4ade80" font-size="11" font-weight="bold">外力 F</text>
+
+    <line x1="180" y1="90" x2="130" y2="90" stroke="#f43f5e" stroke-width="2.5"/>
+    <polygon points="125,90 135,86 135,94" fill="#f43f5e"/>
+    <text x="130" y="82" fill="#f43f5e" font-size="11" font-weight="bold">F_安</text>
+
+    <!-- 动态平衡文字 -->
+    <rect x="15" y="145" width="315" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="165" fill="#cbd5e1" font-size="11.5">回路电流：I = BLv / (R + r)</text>
+    <text x="25" y="185" fill="#cbd5e1" font-size="11.5">阻尼安培力：F_安 = BIL = B²L²v / (R + r)</text>
+    <text x="25" y="205" fill="#4ade80" font-size="12" font-weight="bold">稳定收敛速度：v_m = F(R + r) / (B²L²)</text>
+  </g>
+
+  <!-- 综合能量与电荷推导 -->
+  <g transform="translate(395, 45)">
+    <rect width="335" height="235" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">电荷量与功能关系积分定理</text>
+
+    <!-- 电量积分 -->
+    <rect x="15" y="42" width="305" height="70" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="25" y="62" fill="#38bdf8" font-size="12.5" font-weight="bold">1. 迁移电荷量积分公式 (无视运动状态)：</text>
+    <text x="25" y="84" fill="#f8fafc" font-size="13">q = I_平 · Δt = (ΔΦ / R_总) · Δt = ΔΦ / R_总</text>
+    <text x="25" y="102" fill="#4ade80" font-size="12" font-weight="bold">q = B · L · x / (R + r)   (仅取决于位移 x！)</text>
+
+    <!-- 能量守恒 -->
+    <rect x="15" y="125" width="305" height="95" rx="6" fill="#0f172a" stroke="#fb923c" stroke-width="1"/>
+    <text x="25" y="145" fill="#fb923c" font-size="12.5" font-weight="bold">2. 功能全景守恒方程：</text>
+    <text x="25" y="167" fill="#cbd5e1" font-size="12">外力功 = 动能增量 + 回路总焦耳热：</text>
+    <text x="25" y="188" fill="#fbbf24" font-size="13" font-weight="bold">W_F = ΔE_k + Q_热   (W_克安 = Q_热)</text>
+    <text x="25" y="208" fill="#94a3b8" font-size="11">电阻分热比：Q_R / Q_r = R / r</text>
+  </g>
+</svg>

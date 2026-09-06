@@ -1,0 +1,119 @@
+/* 图片深色模式下反色 */
+.dark img:not([alt*="&keep-color"]) {
+  filter: invert(100%) hue-rotate(180deg) contrast(80%);
+}
+
+/* VitePress 默认将 img 设为 block，这会打断正文里的图文同行排版 */
+img {
+  display: inline-block !important;
+  margin: 0 0.35em;
+  vertical-align: middle;
+}
+
+.avatar-img,
+[data-waline] img {
+  filter: none !important;
+}
+
+.avatar-img {
+  margin: 0 !important;
+}
+
+.medium-zoom-overlay {
+  backdrop-filter: blur(5rem);
+}
+
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 999;
+}
+
+/* 预览副本会继承原图的内联 zoom 和全局 margin，导致 medium-zoom 重复缩放并定位偏移 */
+.medium-zoom-image--opened {
+  zoom: 1 !important;
+  margin: 0 !important;
+}
+
+/* 页面切换时正文上滑动画 */
+.vp-doc > div,
+.VPHome {
+  animation: page-slide-up 0.3s ease-out;
+}
+
+@keyframes page-slide-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 打印适配 */
+@media print {
+  .VPDocFooter .prev-next,
+  .VPDocFooter .edit-link,
+  .VPLocalNav,
+  .VPNav {
+    display: none;
+  }
+
+  body {
+    font-size: 10pt;
+    color: #000;
+  }
+
+  .vp-doc p {
+    line-height: 1.8;
+    margin: 0 0;
+  }
+}
+
+:root {
+  --vp-home-hero-image-background-image: linear-gradient(45deg, #546ec6 50%, #3551b2 50%);
+  --vp-home-hero-image-filter: blur(40px);
+  --vp-sidebar-bg-color: var(--vp-c-bg);
+}
+
+.VPNavBarTitle.has-sidebar .title {
+  border: none;
+}
+
+.VPNavBar.has-sidebar .divider {
+  display: none;
+}
+
+html.cc-font-serif {
+  --vp-font-family-base: "Songti SC", "Noto Serif SC", STSong, SimSun, Georgia, serif;
+}
+
+html.cc-font-serif .vp-doc {
+  font-size: 18px;
+}
+
+html.cc-font-serif .vp-doc p {
+  line-height: 32px;
+}
+
+html.cc-font-serif .vp-doc blockquote > p {
+  font-size: 18px;
+}
+
+html.cc-font-serif .vp-doc th,
+html.cc-font-serif .vp-doc td {
+  font-size: 18px;
+}
+
+html.cc-hide-comments .cc-comments-region,
+html.cc-hide-contributors .cc-contributors-region,
+html.cc-hide-outline .VPDocAsideOutline,
+html.cc-hide-outline .VPLocalNavOutlineDropdown {
+  display: none !important;
+}
+
+body.cc-settings-modal-open {
+  overflow: hidden;
+}

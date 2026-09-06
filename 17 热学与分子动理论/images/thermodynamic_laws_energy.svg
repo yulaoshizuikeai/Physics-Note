@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">热力学第一定律 ΔU = W + Q 符号法则与第二定律本质</text>
+
+  <!-- 左侧：符号法则表 -->
+  <g transform="translate(30, 48)">
+    <rect width="345" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="172" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">热力学第一定律核心方程：ΔU = W + Q</text>
+
+    <!-- W 规则 -->
+    <rect x="15" y="38" width="315" height="48" rx="5" fill="#0f172a"/>
+    <text x="25" y="56" fill="#fbbf24" font-size="12" font-weight="bold">● 做功 W 符号法则：</text>
+    <text x="25" y="74" fill="#cbd5e1" font-size="11">外界对气体做功 (体积压缩 ΔV&lt;0) ⇒ <tspan fill="#4ade80" font-weight="bold">W &gt; 0</tspan></text>
+    <text x="200" y="74" fill="#cbd5e1" font-size="11">气体对外界做功 (膨胀 ΔV&gt;0) ⇒ <tspan fill="#f87171" font-weight="bold">W &lt; 0</tspan></text>
+
+    <!-- Q 规则 -->
+    <rect x="15" y="92" width="315" height="48" rx="5" fill="#0f172a"/>
+    <text x="25" y="110" fill="#fbbf24" font-size="12" font-weight="bold">● 热量 Q 符号法则：</text>
+    <text x="25" y="128" fill="#cbd5e1" font-size="11">系统吸热 ⇒ <tspan fill="#4ade80" font-weight="bold">Q &gt; 0</tspan></text>
+    <text x="180" y="128" fill="#cbd5e1" font-size="11">系统放热 ⇒ <tspan fill="#f87171" font-weight="bold">Q &lt; 0</tspan></text>
+
+    <!-- ΔU 规则 -->
+    <rect x="15" y="146" width="315" height="52" rx="5" fill="#0f172a"/>
+    <text x="25" y="164" fill="#fbbf24" font-size="12" font-weight="bold">● 内能变化 ΔU (理想气体内能纯由温度 T 决定)：</text>
+    <text x="25" y="184" fill="#4ade80" font-size="11">温度升高 ⇒ ΔU &gt; 0；温度降低 ⇒ ΔU &lt; 0；等温过程 ⇒ ΔU = 0</text>
+  </g>
+
+  <!-- 右侧：热力学第二定律 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">热力学第二定律 (不可逆性与熵增)</text>
+
+    <rect x="15" y="38" width="305" height="65" rx="5" fill="#0f172a"/>
+    <text x="25" y="58" fill="#fbbf24" font-size="12" font-weight="bold">● 克劳修斯表述 (热传导方向性)：</text>
+    <text x="25" y="78" fill="#cbd5e1" font-size="11">热量不能自发地从低温物体传到高温物体而不产生其他影响！</text>
+
+    <rect x="15" y="110" width="305" height="65" rx="5" fill="#0f172a"/>
+    <text x="25" y="130" fill="#38bdf8" font-size="12" font-weight="bold">● 开尔文表述 (机械功与热转化不可逆)：</text>
+    <text x="25" y="150" fill="#cbd5e1" font-size="11">不可能从单一热库吸收热量，使之完全变成功而不产生其他影响！</text>
+
+    <text x="167" y="195" fill="#f87171" font-size="11.5" font-weight="bold" text-anchor="middle">★ 核心哲学推论：第二类永动机绝对不可能制成！</text>
+  </g>
+</svg>

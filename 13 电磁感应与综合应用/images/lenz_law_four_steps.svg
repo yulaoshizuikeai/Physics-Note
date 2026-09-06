@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">楞次定律本质与感应电流判定四步标准化流程</text>
+
+  <!-- 四步法流程卡片 -->
+  <g transform="translate(30, 50)">
+    <rect width="335" height="230" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="25" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">判定感应电流四步流程法</text>
+
+    <!-- 步骤 1 -->
+    <rect x="15" y="42" width="305" height="36" rx="5" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="25" y="65" fill="#fbbf24" font-size="12" font-weight="bold">第 1 步：</text>
+    <text x="75" y="65" fill="#e2e8f0" font-size="12">明确穿过闭合回路的原磁场方向 B_原</text>
+
+    <!-- 步骤 2 -->
+    <rect x="15" y="86" width="305" height="36" rx="5" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="25" y="109" fill="#fbbf24" font-size="12" font-weight="bold">第 2 步：</text>
+    <text x="75" y="109" fill="#e2e8f0" font-size="12">判断穿过回路的磁通量是增加还是减少</text>
+
+    <!-- 步骤 3 -->
+    <rect x="15" y="130" width="305" height="42" rx="5" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+    <text x="25" y="148" fill="#38bdf8" font-size="12" font-weight="bold">第 3 步：</text>
+    <text x="75" y="148" fill="#38bdf8" font-size="12" font-weight="bold">根据楞次定律确定感应磁场方向 B_感</text>
+    <text x="75" y="165" fill="#94a3b8" font-size="11">“增反减同”：增则 B_感 反向，减则 B_感 同向</text>
+
+    <!-- 步骤 4 -->
+    <rect x="15" y="180" width="305" height="36" rx="5" fill="#0f172a" stroke="#4ade80" stroke-width="1"/>
+    <text x="25" y="203" fill="#4ade80" font-size="12" font-weight="bold">第 4 步：</text>
+    <text x="75" y="203" fill="#4ade80" font-size="12">用右手安培定则确定感应电流 I_感</text>
+  </g>
+
+  <!-- 广义楞次定律推论 -->
+  <g transform="translate(395, 50)">
+    <rect width="335" height="230" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="25" fill="#4ade80" font-size="14" font-weight="bold" text-anchor="middle">“阻碍”思想的广义三大表现</text>
+
+    <!-- 阻碍磁通量变化 -->
+    <rect x="15" y="42" width="305" height="50" rx="5" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="25" y="62" fill="#38bdf8" font-size="12.5" font-weight="bold">1. 阻碍原磁通量变化：“增反减同”</text>
+    <text x="25" y="82" fill="#cbd5e1" font-size="11.5">感应磁场始终阻抗原磁通量的改变趋势</text>
+
+    <!-- 阻碍相对运动 -->
+    <rect x="15" y="100" width="305" height="50" rx="5" fill="#0f172a" stroke="#fb923c" stroke-width="1"/>
+    <text x="25" y="120" fill="#fb923c" font-size="12.5" font-weight="bold">2. 阻碍相对机械运动：“来拒去留”</text>
+    <text x="25" y="140" fill="#cbd5e1" font-size="11.5">磁极靠近时受排斥斥力，磁极远离时受吸引引力</text>
+
+    <!-- 阻碍面积改变 -->
+    <rect x="15" y="158" width="305" height="55" rx="5" fill="#0f172a" stroke="#f472b6" stroke-width="1"/>
+    <text x="25" y="178" fill="#f472b6" font-size="12.5" font-weight="bold">3. 阻碍面积改变：“增缩减扩”</text>
+    <text x="25" y="198" fill="#cbd5e1" font-size="11.5">磁通量增大回路面积收缩；磁通量减小回路扩张</text>
+  </g>
+</svg>

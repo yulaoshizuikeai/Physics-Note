@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">振动图像 (y-t) 与波动图像 (y-x) 本质对比与双图互推</text>
+
+  <!-- 左侧：振动图像 -->
+  <g transform="translate(30, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">振动图像：y - t 图（“个人的历史录像”）</text>
+
+    <path d="M 30 90 Q 75 50 120 90 T 210 90 T 300 90" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+    <line x1="20" y1="90" x2="315" y2="90" stroke="#64748b" stroke-width="1"/>
+    <text x="315" y="93" fill="#94a3b8" font-size="10">t</text>
+    <text x="15" y="55" fill="#38bdf8" font-size="11">y</text>
+
+    <rect x="15" y="125" width="305" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="145" fill="#38bdf8" font-size="11.5">• 物理对象：<tspan fill="#fbbf24" font-weight="bold">单个质点</tspan>在不同时刻的位移随时间变化</text>
+    <text x="25" y="165" fill="#cbd5e1" font-size="11.5">• 横坐标信息：读出振动<tspan fill="#4ade80" font-weight="bold">周期 T</tspan>（相邻两峰值间距）</text>
+    <text x="25" y="185" fill="#cbd5e1" font-size="11.5">• 发展趋势：沿 t 轴正方向看图即可直接判定下一刻位移</text>
+  </g>
+
+  <!-- 右侧：波动图像 -->
+  <g transform="translate(395, 48)">
+    <rect width="335" height="215" rx="8" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="167" y="24" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">波动图像：y - x 图（“全班的集体合影”）</text>
+
+    <path d="M 30 90 Q 75 50 120 90 T 210 90 T 300 90" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+    <line x1="20" y1="90" x2="315" y2="90" stroke="#64748b" stroke-width="1"/>
+    <text x="315" y="93" fill="#94a3b8" font-size="10">x</text>
+    <text x="15" y="55" fill="#4ade80" font-size="11">y</text>
+
+    <rect x="15" y="125" width="305" height="75" rx="5" fill="#0f172a"/>
+    <text x="25" y="145" fill="#4ade80" font-size="11.5">• 物理对象：<tspan fill="#fbbf24" font-weight="bold">某一固定时刻</tspan>介质中所有质点的瞬时位移</text>
+    <text x="25" y="165" fill="#cbd5e1" font-size="11.5">• 横坐标信息：读出波的<tspan fill="#38bdf8" font-weight="bold">波长 λ</tspan>（相邻两峰值间距）</text>
+    <text x="25" y="185" fill="#f87171" font-size="11.5">• 核心桥梁：波速公式 v = λ / T 联通双图！</text>
+  </g>
+</svg>

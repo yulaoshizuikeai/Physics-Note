@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#0f172a" rx="10" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="28" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">机械波空间传播规律与“上下坡/同侧法”质点运动判据</text>
+
+  <!-- 波动波形与波长 -->
+  <g transform="translate(40, 50)">
+    <rect width="680" height="205" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+
+    <!-- 波线与平衡位置 -->
+    <line x1="40" y1="100" x2="640" y2="100" stroke="#475569" stroke-width="1"/>
+
+    <!-- 正弦波形 -->
+    <path d="M 60 100 Q 120 40 180 100 T 300 100 T 420 100 T 540 100 T 620 100" fill="none" stroke="#38bdf8" stroke-width="3"/>
+
+    <!-- 波长 λ 标注 -->
+    <line x1="120" y1="35" x2="360" y2="35" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="240" y="28" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">波长 λ (相邻两同相点间距)</text>
+
+    <!-- 波速方向 -->
+    <line x1="380" y1="55" x2="440" y2="55" stroke="#4ade80" stroke-width="2.5"/>
+    <polygon points="445,55 435,51 435,59" fill="#4ade80"/>
+    <text x="410" y="48" fill="#4ade80" font-size="11" font-weight="bold" text-anchor="middle">波速 v (向右)</text>
+
+    <!-- 质点振动箭头 (上下坡法) -->
+    <!-- 上坡点 P -->
+    <circle cx="150" cy="70" r="5" fill="#f43f5e"/>
+    <line x1="150" y1="70" x2="150" y2="45" stroke="#f43f5e" stroke-width="2"/>
+    <polygon points="150,40 146,50 154,50" fill="#f43f5e"/>
+    <text x="165" y="65" fill="#f43f5e" font-size="11" font-weight="bold">P (上坡下沉 / 下坡上升)</text>
+
+    <!-- 下方三大解题法则说明 -->
+    <rect x="20" y="130" width="640" height="60" rx="5" fill="#0f172a"/>
+    <text x="30" y="152" fill="#4ade80" font-size="12" font-weight="bold">1. 波速关系铁律：v = λ / T = λ · f   （波速 v 纯由介质决定；频率 f 纯由波源决定！）</text>
+    <text x="30" y="175" fill="#fbbf24" font-size="12">2. 秒杀判定口诀：【上坡下沉，下坡上升】沿波传播方向看去，上坡质点向下振动，下坡质点向上振动！</text>
+  </g>
+</svg>

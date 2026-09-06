@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="boxgrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#fb923c"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)" rx="12" stroke="#334155" stroke-width="1.5"/>
+  <text x="380" y="32" fill="#f8fafc" font-size="18" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">纯电阻与非纯电阻电路能量转化模型对比</text>
+
+  <!-- 左侧：纯电阻电路 -->
+  <g transform="translate(30, 55)">
+    <rect width="330" height="240" rx="10" fill="url(#boxgrad1)" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect width="330" height="36" rx="10" fill="#0284c7" opacity="0.2"/>
+    <text x="165" y="24" fill="#38bdf8" font-size="15" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">纯电阻电路 (白炽灯 / 电炉)</text>
+
+    <!-- 能量流动 -->
+    <rect x="25" y="60" width="80" height="45" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="65" y="80" fill="#94a3b8" font-size="11" text-anchor="middle">输入电能</text>
+    <text x="65" y="97" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">W = UIt</text>
+
+    <line x1="105" y1="82" x2="185" y2="82" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="145" y="75" fill="#38bdf8" font-size="11" text-anchor="middle">100% 转化</text>
+
+    <rect x="185" y="60" width="120" height="45" rx="6" fill="#1e293b" stroke="#fb923c" stroke-width="1.5"/>
+    <text x="245" y="80" fill="#94a3b8" font-size="11" text-anchor="middle">焦耳热 (内能)</text>
+    <text x="245" y="97" fill="#fb923c" font-size="13" font-weight="bold" text-anchor="middle">Q = I²Rt = U²t/R</text>
+
+    <path d="M 30 130 L 300 130" stroke="#334155" stroke-width="1"/>
+
+    <text x="25" y="155" fill="#e2e8f0" font-size="13" font-weight="bold">核心特征规律：</text>
+    <text x="25" y="180" fill="#cbd5e1" font-size="12">• 欧姆定律成立：I = U / R</text>
+    <text x="25" y="202" fill="#cbd5e1" font-size="12">• 电功等于电热：W = Q</text>
+    <text x="25" y="224" fill="#38bdf8" font-size="12">• 功率关系：P_电 = P_热 = UI = I²R = U²/R</text>
+  </g>
+
+  <!-- 右侧：非纯电阻电路 -->
+  <g transform="translate(400, 55)">
+    <rect width="330" height="240" rx="10" fill="url(#boxgrad1)" stroke="#4ade80" stroke-width="1.5"/>
+    <rect width="330" height="36" rx="10" fill="#16a34a" opacity="0.2"/>
+    <text x="165" y="24" fill="#4ade80" font-size="15" font-weight="bold" text-anchor="middle" font-family="system-ui, sans-serif">非纯电阻电路 (电动机 / 电解槽)</text>
+
+    <!-- 能量流动 -->
+    <rect x="15" y="60" width="75" height="45" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="52" y="80" fill="#94a3b8" font-size="11" text-anchor="middle">总电能</text>
+    <text x="52" y="97" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">W = UIt</text>
+
+    <!-- 分支箭头 -->
+    <path d="M 90 82 L 130 82 L 155 65" fill="none" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+    <path d="M 90 82 L 130 82 L 155 100" fill="none" stroke="#fb923c" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+
+    <rect x="160" y="45" width="155" height="35" rx="6" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="237" y="67" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="middle">机械能/化学能 E_出</text>
+
+    <rect x="160" y="90" width="155" height="35" rx="6" fill="#1e293b" stroke="#fb923c" stroke-width="1.5"/>
+    <text x="237" y="112" fill="#fb923c" font-size="12" font-weight="bold" text-anchor="middle">热能损失 Q = I²rt</text>
+
+    <path d="M 20 135 L 310 135" stroke="#334155" stroke-width="1"/>
+
+    <text x="20" y="155" fill="#e2e8f0" font-size="13" font-weight="bold">核心特征规律：</text>
+    <text x="20" y="178" fill="#f87171" font-size="12">• 欧姆定律不成立：I ≠ U / r，实为 U > Ir</text>
+    <text x="20" y="198" fill="#cbd5e1" font-size="12">• 能量守恒：W = Q + E_机 ⇒ UIt = I²rt + E_机</text>
+    <text x="20" y="218" fill="#4ade80" font-size="12">• 输出机械功率：P_机 = UI - I²r；效率 η = P_机/P_入</text>
+  </g>
+</svg>

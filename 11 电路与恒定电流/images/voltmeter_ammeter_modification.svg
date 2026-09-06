@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="100%" height="380">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="380" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">电表改装原理：并联分流改电流表 vs 串联分压改电压表</text>
+
+  <!-- Left: Ammeter Modification (Parallel Shunt) -->
+  <g transform="translate(60, 50)">
+    <rect x="0" y="0" width="300" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="150" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">改装为电流表（并联小电阻分流）</text>
+
+    <!-- Galvanometer G -->
+    <circle cx="150" cy="80" r="22" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="150" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8">G</text>
+    <text x="150" y="118" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">I_g, R_g</text>
+
+    <!-- Parallel Resistor R_p -->
+    <rect x="110" y="150" width="80" height="25" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="3"/>
+    <text x="150" y="167" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">分流电阻 R_p</text>
+
+    <!-- Circuit wires -->
+    <path d="M 30 115 L 70 115 L 70 80 L 128 80 M 172 80 L 230 80 L 230 115 L 270 115 M 70 115 L 70 162 L 110 162 M 190 162 L 230 162" fill="none" stroke="#334155" stroke-width="2"/>
+
+    <!-- Formula -->
+    <text x="150" y="215" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#0f172a">I_g · R_g = (I - I_g) · R_p</text>
+    <text x="150" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#dc2626">R_p = I_g · R_g / (I - I_g)</text>
+  </g>
+
+  <!-- Right: Voltmeter Modification (Series Multiplier) -->
+  <g transform="translate(400, 50)">
+    <rect x="0" y="0" width="300" height="260" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="150" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#0f172a">改装为电压表（串联大电阻分压）</text>
+
+    <!-- Galvanometer G -->
+    <circle cx="90" cy="115" r="22" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="90" y="121" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8">G</text>
+    <text x="90" y="152" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">I_g, R_g</text>
+
+    <!-- Series Resistor R_s -->
+    <rect x="170" y="102" width="80" height="26" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="3"/>
+    <text x="210" y="119" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#d97706">分压电阻 R_s</text>
+
+    <!-- Wires -->
+    <line x1="30" y1="115" x2="68" y2="115" stroke="#334155" stroke-width="2"/>
+    <line x1="112" y1="115" x2="170" y2="115" stroke="#334155" stroke-width="2"/>
+    <line x1="250" y1="115" x2="270" y2="115" stroke="#334155" stroke-width="2"/>
+
+    <!-- Formula -->
+    <text x="150" y="215" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#0f172a">U = I_g · (R_g + R_s)</text>
+    <text x="150" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#d97706">R_s = (U / I_g) - R_g</text>
+  </g>
+
+  <!-- Bottom Tip -->
+  <rect x="50" y="325" width="660" height="40" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="65" y="350" font-family="system-ui, sans-serif" font-size="12.5" fill="#334155">电表内阻本质：改装后的电流表内阻极小 R_A ≈ R_p；改装后的电压表内阻极大 R_V ≈ R_s。</text>
+</svg>

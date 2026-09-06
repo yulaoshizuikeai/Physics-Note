@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="100%" height="380">
+  <defs>
+    <marker id="ar1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+    </marker>
+    <marker id="ar2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="380" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#0f172a">竖直平面圆周运动：轻绳模型 vs 轻杆模型 最高点临界对比</text>
+
+  <!-- Left: String Model -->
+  <g transform="translate(190, 190)">
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="0" cy="0" r="5" fill="#0f172a"/>
+    
+    <!-- String and ball at top -->
+    <line x1="0" y1="0" x2="0" y2="-110" stroke="#64748b" stroke-width="2" stroke-dasharray="3 3"/>
+    <circle cx="0" cy="-110" r="10" fill="#2563eb"/>
+    <text x="16" y="-105" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb">m (最高点)</text>
+
+    <!-- Forces at top -->
+    <line x1="0" y1="-110" x2="0" y2="-65" stroke="#dc2626" stroke-width="2.5" marker-end="url(#ar1)"/>
+    <text x="-48" y="-75" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">mg + T</text>
+    
+    <text x="0" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">轻绳模型（无支撑约束）</text>
+    <text x="0" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#334155">临界条件: 张力 T = 0</text>
+    <text x="0" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#dc2626">最小过顶速度: v_min = √(gR)</text>
+  </g>
+
+  <!-- Right: Rod Model -->
+  <g transform="translate(570, 190)">
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="0" cy="0" r="5" fill="#0f172a"/>
+
+    <!-- Rigid Rod and ball at top -->
+    <line x1="0" y1="0" x2="0" y2="-110" stroke="#047857" stroke-width="4"/>
+    <circle cx="0" cy="-110" r="10" fill="#059669"/>
+    <text x="16" y="-105" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#047857">m (最高点)</text>
+
+    <!-- Support force FN or pull -->
+    <line x1="0" y1="-110" x2="0" y2="-145" stroke="#2563eb" stroke-width="2" marker-end="url(#ar2)"/>
+    <text x="14" y="-135" font-family="system-ui, sans-serif" font-size="11" fill="#2563eb">支持力 FN (v &lt; √(gR))</text>
+    
+    <text x="0" y="130" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">轻杆 / 管状轨道模型（双向约束）</text>
+    <text x="0" y="150" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#334155">杆既能提供拉力，亦能提供支持力</text>
+    <text x="0" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#059669">最小过顶速度: v_min = 0</text>
+  </g>
+</svg>
