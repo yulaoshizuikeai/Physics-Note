@@ -2,7 +2,7 @@
   "name": "physics-note",
   "version": "1.0.0",
   "type": "module",
-  "description": "高中物理全套知识架构笔记与高考复习指南",
+  "description": "高中物理知识库与高考复习指南",
   "dependencies": {
     "@waline/client": "^3.15.2",
     "axios": "^1.16.1",

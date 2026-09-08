@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-blue-p" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    高中物理全景知识架构与六大科学思想方法导图
+  </text>
+
+  <!-- ==================== 左侧：五大知识板块全景 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#eff6ff"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      高考物理五大核心知识板块
+    </text>
+
+    <!-- 板块 1: 力学 -->
+    <g transform="translate(15, 34)">
+      <rect x="0" y="0" width="330" height="38" rx="4" fill="#f8fafc" stroke="#bfdbfe"/>
+      <rect x="0" y="0" width="85" height="38" rx="4" fill="#3b82f6"/>
+      <text x="42" y="24" font-family="system-ui, sans-serif" font-size="11.5" font-weight="bold" fill="#ffffff" text-anchor="middle">力学基石</text>
+      <text x="95" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#1e3a8a">动力学主线：F_合 = ma，牛顿三定律</text>
+      <text x="95" y="32" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">守恒主线：动能定理、机械能守恒、动量守恒</text>
+    </g>
+
+    <!-- 板块 2: 电磁学 -->
+    <g transform="translate(15, 78)">
+      <rect x="0" y="0" width="330" height="38" rx="4" fill="#f8fafc" stroke="#fed7aa"/>
+      <rect x="0" y="0" width="85" height="38" rx="4" fill="#f97316"/>
+      <text x="42" y="24" font-family="system-ui, sans-serif" font-size="11.5" font-weight="bold" fill="#ffffff" text-anchor="middle">电磁学体系</text>
+      <text x="95" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#7c2d12">场与路：静电场(E, φ)、恒定电流、磁场</text>
+      <text x="95" y="32" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">感应与波：电磁感应定律、交变电流、电磁波</text>
+    </g>
+
+    <!-- 板块 3: 振动与光学 -->
+    <g transform="translate(15, 122)">
+      <rect x="0" y="0" width="330" height="38" rx="4" fill="#f8fafc" stroke="#bbf7d0"/>
+      <rect x="0" y="0" width="85" height="38" rx="4" fill="#22c55e"/>
+      <text x="42" y="24" font-family="system-ui, sans-serif" font-size="11.5" font-weight="bold" fill="#ffffff" text-anchor="middle">振动与光学</text>
+      <text x="95" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#14532d">波动：简谐运动回复力、机械波空间传播</text>
+      <text x="95" y="32" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">光学：折射与全反射、干涉衍射偏振波动说</text>
+    </g>
+
+    <!-- 板块 4: 热学与近代物理 -->
+    <g transform="translate(15, 166)">
+      <rect x="0" y="0" width="330" height="38" rx="4" fill="#f8fafc" stroke="#ddd6fe"/>
+      <rect x="0" y="0" width="85" height="38" rx="4" fill="#a855f7"/>
+      <text x="42" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">热学与量子</text>
+      <text x="95" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#581c87">热学：气体实验三定律、热力学第一二定律</text>
+      <text x="95" y="32" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">近代：光电效应光子说、玻尔原子、核能</text>
+    </g>
+
+    <!-- 板块 5: 物理实验 -->
+    <g transform="translate(15, 210)">
+      <rect x="0" y="0" width="330" height="38" rx="4" fill="#f8fafc" stroke="#fecaca"/>
+      <rect x="0" y="0" width="85" height="38" rx="4" fill="#ef4444"/>
+      <text x="42" y="24" font-family="system-ui, sans-serif" font-size="11.5" font-weight="bold" fill="#ffffff" text-anchor="middle">物理实验</text>
+      <text x="95" y="17" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#7f1d1d">仪器读数：游标卡尺、螺旋测微器、多用电表</text>
+      <text x="95" y="32" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">核心实验：逐差法、验证守恒律、测电动势与内阻</text>
+    </g>
+  </g>
+
+  <!-- ==================== 右侧：六大物理思想方法 ==================== -->
+  <g transform="translate(400, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#fef2f2"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      贯穿全书的六大科学思想方法
+    </text>
+
+    <!-- 6 个方法卡片网格 -->
+    <g transform="translate(12, 34)">
+      <!-- 1. 理想化模型 -->
+      <rect x="0" y="0" width="160" height="66" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="10" y="18" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">1. 理想模型法</text>
+      <text x="10" y="34" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">质点、点电荷、轻绳杆</text>
+      <text x="10" y="49" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">匀变速、弹簧振子、简谐</text>
+
+      <!-- 2. 微元极限法 -->
+      <rect x="175" y="0" width="160" height="66" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="185" y="18" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#d97706">2. 微元极限法</text>
+      <text x="185" y="34" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">瞬时速度微分 v=dx/dt</text>
+      <text x="185" y="49" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">面积累积积分 x=∫v dt</text>
+
+      <!-- 3. 守恒观 -->
+      <rect x="0" y="74" width="160" height="66" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="10" y="92" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#059669">3. 守恒法</text>
+      <text x="10" y="108" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">机械能守恒、动量守恒</text>
+      <text x="10" y="123" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">直达初末状态，避开过程</text>
+
+      <!-- 4. 等效替代法 -->
+      <rect x="175" y="74" width="160" height="66" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="185" y="92" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#7c3aed">4. 等效替代法</text>
+      <text x="185" y="108" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">合力与分力等效替代</text>
+      <text x="185" y="123" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">等效电源、阻抗变换降维</text>
+
+      <!-- 5. 图像分析法 -->
+      <rect x="0" y="148" width="160" height="66" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="10" y="166" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">5. 图像分析法</text>
+      <text x="10" y="182" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">切线斜率提取物理导数</text>
+      <text x="10" y="197" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">图线包围面积提取累积量</text>
+
+      <!-- 6. 矢量对称法 -->
+      <rect x="175" y="148" width="160" height="66" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="185" y="166" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#0891b2">6. 矢量与对称法</text>
+      <text x="185" y="182" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">正交分解、平行四边形</text>
+      <text x="185" y="197" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">竖直上抛时间/轨迹对称</text>
+    </g>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    学好物理的核心纲领：掌握模型抓住本质，微积分理清时空累积，守恒定律直达本质终点！
+  </text>
+</svg>

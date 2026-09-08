@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-gi" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    伽利略理想斜面思想实验：惯性概念诞生与牛顿第一定律
+  </text>
+
+  <!-- ==================== 左侧：理想实验三阶段演进图 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="450" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="450" height="26" rx="6" fill="#eff6ff"/>
+    <text x="225" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      伽利略斜面思想实验推演图
+    </text>
+
+    <!-- 理想斜面几何 -->
+    <g transform="translate(20, 36)">
+      <!-- 释放高度水平基准虚线 (高度 h) -->
+      <line x1="20" y1="40" x2="400" y2="40" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="405" y="44" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#64748b">等高线 h</text>
+
+      <!-- 左侧固定释放斜面 (从 30,40 到 150,150) -->
+      <path d="M 30,40 Q 90,140 150,150" fill="none" stroke="#2563eb" stroke-width="3"/>
+      <!-- 释放小球 -->
+      <circle cx="30" cy="40" r="7" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.8"/>
+      <text x="25" y="26" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#1e40af">静止释放</text>
+
+      <!-- 地面最低点 -->
+      <circle cx="150" cy="150" r="3.5" fill="#334155"/>
+
+      <!-- 状态 1: 右侧陡斜面 (达到等高 h) -->
+      <path d="M 150,150 Q 210,140 250,40" fill="none" stroke="#059669" stroke-width="2.2"/>
+      <circle cx="250" cy="40" r="6" fill="#10b981"/>
+      <text x="255" y="32" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#047857">① 恢复原高度</text>
+
+      <!-- 状态 2: 右侧缓斜面 (更远路程达到等高 h) -->
+      <path d="M 150,150 Q 240,145 340,40" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="340" cy="40" r="6" fill="#f59e0b"/>
+      <text x="325" y="26" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#b45309">② 倾角变小，路程更长</text>
+
+      <!-- 状态 3: 极限状态水平面 (永远匀速滑行) -->
+      <line x1="150" y1="150" x2="390" y2="150" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-b-gi)"/>
+      <circle cx="280" cy="150" r="6" fill="#ef4444"/>
+      <text x="260" y="172" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#dc2626">③ 水平极限：永远匀速滑行下去！</text>
+    </g>
+
+    <!-- 说明便签 -->
+    <rect x="15" y="215" width="420" height="42" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="25" y="232" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#334155">✦ 科学逻辑：在完全没有摩擦阻力的理想极限下，物体为了达到原高度将一直运动</text>
+    <text x="25" y="248" font-family="system-ui, sans-serif" font-size="10" fill="#dc2626">✦ 结论：物体的运动不需要力来维持，力是改变物体运动状态的原因！</text>
+  </g>
+
+  <!-- ==================== 右侧：两大历史观念的科学革命 ==================== -->
+  <g transform="translate(490, 54)">
+    <rect x="0" y="0" width="270" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="270" height="26" rx="6" fill="#fef2f2"/>
+    <text x="135" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      力学认知革命与惯性本质
+    </text>
+
+    <!-- 对比卡片 1: 亚里士多德 -->
+    <g transform="translate(12, 34)">
+      <rect x="0" y="0" width="246" height="52" rx="4" fill="#fef2f2" stroke="#fecaca"/>
+      <text x="10" y="18" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#991b1b">❌ 亚里士多德直觉假想（被推翻）：</text>
+      <text x="10" y="36" font-family="system-ui, sans-serif" font-size="9.5" fill="#7f1d1d">“力是维持物体运动的原因，无力即静止”</text>
+    </g>
+
+    <!-- 对比卡片 2: 伽利略与牛顿 -->
+    <g transform="translate(12, 92)">
+      <rect x="0" y="0" width="246" height="58" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="10" y="18" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#1e40af">✅ 伽利略 · 牛顿第一定律（科学真理）：</text>
+      <text x="10" y="34" font-family="system-ui, sans-serif" font-size="9.5" fill="#1e3a8a">“力是改变物体运动状态（产生加速度）的原因”</text>
+      <text x="10" y="49" font-family="system-ui, sans-serif" font-size="9.5" font-weight="bold" fill="#2563eb">切断受力，物体保持静止或匀速直线运动！</text>
+    </g>
+
+    <!-- 惯性概念卡片 -->
+    <g transform="translate(12, 156)">
+      <rect x="0" y="0" width="246" height="98" rx="4" fill="#f0fdf4" stroke="#bbf7d0"/>
+      <text x="10" y="18" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#166534">✦ 惯性（Inertia）的铁律：</text>
+      <text x="10" y="36" font-family="system-ui, sans-serif" font-size="9.5" fill="#14532d">• 一切物体都具有抵抗运动状态改变的属性</text>
+      <text x="10" y="54" font-family="system-ui, sans-serif" font-size="9.5" fill="#14532d">• <tspan font-weight="bold" fill="#dc2626">质量是惯性大小的唯一量度</tspan>！</text>
+      <text x="10" y="72" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">• 惯性与速度、受力状态完全无关</text>
+      <text x="10" y="88" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">• 任何物体无论动静，惯性始终恒定存在</text>
+    </g>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    牛一定律核心灵魂：一切物体皆具惯性；力是改变运动状态之因，质量是惯性大小之唯一尺度！
+  </text>
+</svg>

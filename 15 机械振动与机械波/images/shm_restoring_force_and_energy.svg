@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-shm" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-r-shm" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    简谐运动回复力特征（F = -kx）与动能势能互换守恒模型
+  </text>
+
+  <!-- ==================== 左侧：弹簧振子回复力模型 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#eff6ff"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      1. 弹簧振子回复力与位移线性关系
+    </text>
+
+    <!-- 弹簧振子示意 -->
+    <g transform="translate(20, 36)">
+      <!-- 固定墙壁 -->
+      <rect x="10" y="20" width="8" height="60" fill="#64748b"/>
+      <!-- 地面 -->
+      <line x1="10" y1="80" x2="310" y2="80" stroke="#334155" stroke-width="2"/>
+
+      <!-- 弹簧 -->
+      <path d="M 18,50 L 35,50 L 42,40 L 54,60 L 66,40 L 78,60 L 90,40 L 102,60 L 114,40 L 126,60 L 133,50 L 150,50" fill="none" stroke="#64748b" stroke-width="2"/>
+
+      <!-- 滑块 (位于 x 处) -->
+      <rect x="150" y="35" width="40" height="30" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1.8"/>
+      <text x="170" y="54" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">m</text>
+
+      <!-- 平衡位置 O (x=0) -->
+      <line x1="120" y1="20" x2="120" y2="90" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="120" y="102" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#64748b" text-anchor="middle">O (平衡位置)</text>
+
+      <!-- 当前位移 x 箭头 (向右) -->
+      <line x1="120" y1="28" x2="170" y2="28" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arr-b-shm)"/>
+      <text x="145" y="22" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">位移 x</text>
+
+      <!-- 回复力 F 箭头 (指向平衡位置，向左) -->
+      <line x1="150" y1="42" x2="100" y2="42" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-r-shm)"/>
+      <text x="115" y="38" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#dc2626">F = -kx</text>
+    </g>
+
+    <!-- 规律卡片 -->
+    <rect x="12" y="150" width="336" height="106" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="170" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8">✦ 回复力动力学特征：F = - kx</text>
+    <text x="20" y="190" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">方向性</tspan>：负号表示方向恒指向平衡位置，与位移反向</text>
+    <text x="20" y="210" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold">平衡位置</tspan>：x = 0 ⇒ F = 0 ⇒ a = 0 ⇒ 速度达极大值 v_max</text>
+    <text x="20" y="228" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold">最大位移处</tspan>：x = ±A ⇒ |F| = kA ⇒ a_max ⇒ 速度瞬间为零</text>
+    <text x="20" y="246" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">加速度：a = - (k/m)x = - ω²x</text>
+  </g>
+
+  <!-- ==================== 右侧：动能势能互换守恒曲线 ==================== -->
+  <g transform="translate(400, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#fef2f2"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      2. 简谐运动机械能守恒图线
+    </text>
+
+    <!-- 能量抛物线坐标系 -->
+    <g transform="translate(30, 36)">
+      <!-- 坐标轴 -->
+      <line x1="20" y1="90" x2="280" y2="90" stroke="#334155" stroke-width="1.8" marker-end="url(#arr-b-shm)"/>
+      <line x1="150" y1="105" x2="150" y2="15" stroke="#334155" stroke-width="1.8" marker-end="url(#arr-b-shm)"/>
+      <text x="285" y="94" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">x</text>
+      <text x="135" y="18" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">E</text>
+
+      <!-- 总机械能水平直线 (绿色) -->
+      <line x1="50" y1="35" x2="250" y2="35" stroke="#059669" stroke-width="2.5"/>
+      <text x="255" y="38" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#059669">E_总 = ½ kA²</text>
+
+      <!-- 弹性势能抛物线 (开口向上，蓝色) -->
+      <!-- 顶点在 (150, 90)，两端在 (50, 35) 和 (250, 35) -->
+      <path d="M 50,35 Q 150,90 250,35" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+      <text x="60" y="55" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">E_p(x) = ½kx²</text>
+
+      <!-- 动能抛物线 (开口向下，红色) -->
+      <!-- 顶点在 (150, 35)，两端在 (50, 90) 和 (250, 90) -->
+      <path d="M 50,90 Q 150,35 250,90" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="180" y="55" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#dc2626">E_k(x)</text>
+
+      <!-- -A, O, +A 刻度 -->
+      <text x="50" y="104" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">-A</text>
+      <text x="150" y="104" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">O</text>
+      <text x="250" y="104" font-family="system-ui, sans-serif" font-size="10" fill="#334155" text-anchor="middle">+A</text>
+    </g>
+
+    <!-- 卡片说明 -->
+    <rect x="12" y="150" width="336" height="106" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="170" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#059669">✦ 机械能守恒铁律：E = E_k + E_p 恒等于常量</text>
+    <text x="20" y="190" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#2563eb">势能抛物线</tspan>：两端点势能最大，平衡位置势能为零</text>
+    <text x="20" y="210" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">动能抛物线</tspan>：平衡位置动能最大，两端点动能为零</text>
+    <text x="20" y="228" font-family="system-ui, sans-serif" font-size="10" fill="#7c3aed">✦ 周期对称性：动能与势能变化的周期是振动周期的半数（T_能 = T/2）！</text>
+    <text x="20" y="246" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">振幅 A 越大，系统总机械能越大（与 A² 成正比）</text>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    简谐运动能量纲领：力指平衡线性增，动势此消总能恒；振幅平方定总能，能量周期仅折半！
+  </text>
+</svg>

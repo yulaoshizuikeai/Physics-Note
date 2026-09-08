@@ -6,7 +6,7 @@
       <p class="cc-footer__meta">
         <span>note.physics.nx.kg</span>
         <span class="cc-footer__dot">•</span>
-        <span>yulaoshizuikeai's Physics Note</span>
+        <span>Yulaoshizuikeai's Physics Note</span>
       </p>
     </footer>
   </div>

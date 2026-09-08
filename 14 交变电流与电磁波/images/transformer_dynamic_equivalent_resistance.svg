@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-tf" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-r-tf" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arr-g-tf" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- 背景底板 -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    变压器动态分析全电路与等效电阻（阻抗变换）降维模型
+  </text>
+
+  <!-- ==================== 上半部分：完整变压器耦合电路 ==================== -->
+  <g transform="translate(20, 52)">
+    <rect x="0" y="0" width="740" height="152" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="740" height="24" rx="6" fill="#eff6ff"/>
+    <text x="370" y="17" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      1. 原副线圈互感耦合物理电路（含保护电阻 R₀ 与滑动变阻器 R）
+    </text>
+
+    <!-- 原线圈侧电路 -->
+    <!-- 交流源 U0 -->
+    <circle cx="50" cy="85" r="14" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <path d="M 42,85 Q 46,80 50,85 T 58,85" fill="none" stroke="#2563eb" stroke-width="2"/>
+    <text x="50" y="115" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb" text-anchor="middle">交流源 U₀</text>
+
+    <!-- 原回路导线 -->
+    <line x1="50" y1="71" x2="50" y2="48" stroke="#334155" stroke-width="2"/>
+    <line x1="50" y1="48" x2="100" y2="48" stroke="#334155" stroke-width="2"/>
+
+    <!-- 电流表 A1 -->
+    <circle cx="115" cy="48" r="11" fill="#f1f5f9" stroke="#334155" stroke-width="1.8"/>
+    <text x="115" y="52" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">A₁</text>
+    <line x1="126" y1="48" x2="160" y2="48" stroke="#334155" stroke-width="2"/>
+
+    <!-- 定值保护电阻 R0 -->
+    <rect x="160" y="40" width="45" height="16" rx="2" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+    <text x="182" y="52" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#9a3412" text-anchor="middle">R₀</text>
+    <line x1="205" y1="48" x2="280" y2="48" stroke="#334155" stroke-width="2"/>
+
+    <!-- 原线圈电感绕组 n1 -->
+    <!-- 下行导线至绕组 -->
+    <line x1="280" y1="48" x2="280" y2="60" stroke="#334155" stroke-width="2"/>
+    <!-- 绕组弧线 -->
+    <path d="M 280,60 A 8,8 0 0,1 280,74 A 8,8 0 0,1 280,88 A 8,8 0 0,1 280,102 A 8,8 0 0,1 280,116" fill="none" stroke="#2563eb" stroke-width="3"/>
+    <line x1="280" y1="116" x2="280" y2="130" stroke="#334155" stroke-width="2"/>
+    <!-- 回路底线 -->
+    <line x1="280" y1="130" x2="50" y2="130" stroke="#334155" stroke-width="2"/>
+    <line x1="50" y1="130" x2="50" y2="99" stroke="#334155" stroke-width="2"/>
+    <text x="255" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1e40af">n₁</text>
+    <text x="235" y="110" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">原端 U₁, I₁</text>
+
+    <!-- 变压器铁芯 (双实线) -->
+    <line x1="300" y1="45" x2="300" y2="135" stroke="#64748b" stroke-width="3"/>
+    <line x1="306" y1="45" x2="306" y2="135" stroke="#64748b" stroke-width="3"/>
+
+    <!-- 副线圈侧电路 -->
+    <!-- 副线圈电感绕组 n2 -->
+    <line x1="326" y1="48" x2="326" y2="60" stroke="#334155" stroke-width="2"/>
+    <path d="M 326,60 A 8,8 0 0,0 326,74 A 8,8 0 0,0 326,88 A 8,8 0 0,0 326,102 A 8,8 0 0,0 326,116" fill="none" stroke="#dc2626" stroke-width="3"/>
+    <line x1="326" y1="116" x2="326" y2="130" stroke="#334155" stroke-width="2"/>
+    <text x="345" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">n₂</text>
+    <text x="345" y="110" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">副端 U₂, I₂</text>
+
+    <!-- 副回路导线 -->
+    <line x1="326" y1="48" x2="400" y2="48" stroke="#334155" stroke-width="2"/>
+    <!-- 电流表 A2 -->
+    <circle cx="415" cy="48" r="11" fill="#f1f5f9" stroke="#334155" stroke-width="1.8"/>
+    <text x="415" y="52" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">A₂</text>
+    <line x1="426" y1="48" x2="490" y2="48" stroke="#334155" stroke-width="2"/>
+
+    <!-- 滑动变阻器 R -->
+    <line x1="490" y1="48" x2="490" y2="70" stroke="#334155" stroke-width="2"/>
+    <rect x="480" y="70" width="20" height="42" rx="2" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+    <text x="462" y="95" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b45309">R</text>
+    <!-- 滑片箭头 -->
+    <line x1="510" y1="85" x2="495" y2="85" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-r-tf)"/>
+    <line x1="490" y1="112" x2="490" y2="130" stroke="#334155" stroke-width="2"/>
+    <line x1="490" y1="130" x2="326" y2="130" stroke="#334155" stroke-width="2"/>
+
+    <!-- 右侧动态因果流图解卡片 -->
+    <rect x="535" y="35" width="190" height="105" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="545" y="52" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#1e293b">常规分析因果闭环：</text>
+    <text x="545" y="70" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">• 滑片下移 ⇒ R 增大</text>
+    <text x="545" y="87" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">• 等效电阻 R_等效 随之增大</text>
+    <text x="545" y="104" font-family="system-ui, sans-serif" font-size="9.5" fill="#dc2626">• 原回路 I₁ 减小，R₀ 分压减小</text>
+    <text x="545" y="121" font-family="system-ui, sans-serif" font-size="9.5" fill="#1d4ed8">• 原端 U₁ 增大 ⇒ 副端 U₂ 增大！</text>
+  </g>
+
+  <!-- ==================== 下半部分：阻抗变换等效电阻模型 ==================== -->
+  <g transform="translate(20, 212)">
+    <rect x="0" y="0" width="740" height="108" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="740" height="24" rx="6" fill="#fef2f2"/>
+    <text x="370" y="17" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      2. 高考降维秒杀神技：阻抗变换等效电阻模型（将变压器+副端整体打包）
+    </text>
+
+    <!-- 降维等效电路 -->
+    <g transform="translate(15, 30)">
+      <!-- 交流电源 -->
+      <circle cx="35" cy="40" r="13" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+      <path d="M 28,40 Q 32,36 35,40 T 42,40" fill="none" stroke="#2563eb" stroke-width="2"/>
+      <text x="35" y="66" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#2563eb" text-anchor="middle">U₀</text>
+
+      <line x1="35" y1="27" x2="35" y2="12" stroke="#334155" stroke-width="2"/>
+      <line x1="35" y1="12" x2="80" y2="12" stroke="#334155" stroke-width="2"/>
+
+      <!-- 定值电阻 R0 -->
+      <rect x="80" y="4" width="45" height="16" rx="2" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="102" y="16" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#9a3412" text-anchor="middle">R₀</text>
+
+      <line x1="125" y1="12" x2="175" y2="12" stroke="#334155" stroke-width="2"/>
+
+      <!-- 等效电阻 R_等效 (高亮紫色框) -->
+      <rect x="175" y="2" width="135" height="20" rx="3" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+      <text x="242" y="16" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#7e22ce" text-anchor="middle">
+        R_等效 = (n₁/n₂)² · R
+      </text>
+
+      <line x1="310" y1="12" x2="340" y2="12" stroke="#334155" stroke-width="2"/>
+      <line x1="340" y1="12" x2="340" y2="60" stroke="#334155" stroke-width="2"/>
+      <line x1="340" y1="60" x2="35" y2="60" stroke="#334155" stroke-width="2"/>
+      <line x1="35" y1="60" x2="35" y2="53" stroke="#334155" stroke-width="2"/>
+    </g>
+
+    <!-- 右侧推导与功率极值核心公式 -->
+    <g transform="translate(385, 30)">
+      <rect x="0" y="0" width="340" height="70" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="10" y="20" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#7e22ce">
+        ✦ 阻抗变换定理：从原端输入看，变压器回路等效为 R_等效 = (n₁/n₂)² R
+      </text>
+      <text x="10" y="40" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">
+        ✦ 回路总电流：I₁ = U₀ / [R₀ + (n₁/n₂)² R]；原端输入电压 U₁ = I₁ · R_等效
+      </text>
+      <text x="10" y="60" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#dc2626">
+        ✦ 输出功率极值定理：当 R_等效 = R₀ 时，变压器获得最大输出功率 P_max = U₀² / (4R₀)！
+      </text>
+    </g>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    阻抗变换秒杀口诀：变压器折算看匝比平方；原端串阻莫惊慌，等效电阻化纯串联分压！
+  </text>
+</svg>

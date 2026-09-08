@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-eq" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-r-eq" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arr-g-eq" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    共点力平衡两大经典建模范式（正交分解法 · 封闭矢量三角形法）
+  </text>
+
+  <!-- ==================== 左侧：正交分解平衡法 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#eff6ff"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      1. 正交分解平衡法（通用代数法）
+    </text>
+
+    <!-- 坐标系与力的分解示意 -->
+    <g transform="translate(40, 36)">
+      <!-- 坐标轴 -->
+      <line x1="20" y1="90" x2="260" y2="90" stroke="#334155" stroke-width="1.8" marker-end="url(#arr-b-eq)"/>
+      <line x1="140" y1="160" x2="140" y2="10" stroke="#334155" stroke-width="1.8" marker-end="url(#arr-b-eq)"/>
+      <text x="265" y="94" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">x</text>
+      <text x="145" y="12" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">y</text>
+      <circle cx="140" cy="90" r="3.5" fill="#1e293b"/>
+
+      <!-- 斜向拉力 F (第一象限，与 x 成 θ) -->
+      <line x1="140" y1="90" x2="220" y2="35" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-r-eq)"/>
+      <text x="225" y="32" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">F</text>
+      <!-- 分力 Fx, Fy 虚线投影 -->
+      <line x1="220" y1="35" x2="220" y2="90" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="220" y1="35" x2="140" y2="35" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2"/>
+      <line x1="140" y1="90" x2="215" y2="90" stroke="#059669" stroke-width="2" marker-end="url(#arr-g-eq)"/>
+      <line x1="140" y1="90" x2="140" y2="40" stroke="#059669" stroke-width="2" marker-end="url(#arr-g-eq)"/>
+      <text x="180" y="84" font-family="system-ui, sans-serif" font-size="9" fill="#059669">F cos θ</text>
+      <text x="100" y="55" font-family="system-ui, sans-serif" font-size="9" fill="#059669">F sin θ</text>
+
+      <!-- 其它平衡力示例 (向左的 f，向下的 G) -->
+      <line x1="140" y1="90" x2="65" y2="90" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-b-eq)"/>
+      <text x="50" y="85" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">f</text>
+      <line x1="140" y1="90" x2="140" y2="150" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-b-eq)"/>
+      <text x="145" y="152" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">G</text>
+    </g>
+
+    <!-- 方程卡片 -->
+    <rect x="12" y="185" width="336" height="72" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="206" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8">✦ 平衡方程组矩阵：</text>
+    <text x="20" y="226" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• x 轴方向：∑ F_x = 0  ⇒  F cos θ - f = 0</text>
+    <text x="20" y="246" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• y 轴方向：∑ F_y = 0  ⇒  F_N + F sin θ - mg = 0</text>
+  </g>
+
+  <!-- ==================== 右侧：封闭矢量三角形法 ==================== -->
+  <g transform="translate(400, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#fef2f2"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      2. 封闭矢量三角形法（几何秒杀法）
+    </text>
+
+    <!-- 首尾相接封闭三角形示意 -->
+    <g transform="translate(40, 36)">
+      <!-- 矢量 1: 重力 G 竖直向下 (从 60,20 到 60,130) -->
+      <line x1="60" y1="20" x2="60" y2="125" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-r-eq)"/>
+      <text x="40" y="80" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">G</text>
+
+      <!-- 矢量 2: 支持力 F_N 斜向右上 (从 60,130 到 190,40) -->
+      <line x1="60" y1="130" x2="185" y2="43" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr-b-eq)"/>
+      <text x="135" y="105" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">F_N</text>
+
+      <!-- 矢量 3: 拉力 F_拉 回到起点 (从 190,40 到 65,20) -->
+      <line x1="190" y1="40" x2="65" y2="20" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-g-eq)"/>
+      <text x="130" y="24" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#059669">F_拉</text>
+
+      <!-- 首尾闭合标记圈 -->
+      <circle cx="60" cy="20" r="3" fill="#1e293b"/>
+      <circle cx="60" cy="130" r="3" fill="#1e293b"/>
+      <circle cx="190" cy="40" r="3" fill="#1e293b"/>
+
+      <!-- 几何提示说明 -->
+      <text x="210" y="85" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#b91c1c">首尾相接</text>
+      <text x="210" y="105" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">构成闭合矢量回路</text>
+    </g>
+
+    <!-- 解题范式卡片 -->
+    <rect x="12" y="185" width="336" height="72" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="206" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#b91c1c">✦ 三力平衡几何破题工具箱：</text>
+    <text x="20" y="226" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold">直角三角形</tspan>：三角函数直接列比值（正切、正弦）</text>
+    <text x="20" y="246" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold">一般三角形</tspan>：正弦定理 F₁/sinα = F₂/sinβ = F₃/sinγ 或相似三角形</text>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    共点力平衡破题利刃：三力平衡优先画矢量三角形几何解，四力及以上果断建立正交坐标列方程！
+  </text>
+</svg>

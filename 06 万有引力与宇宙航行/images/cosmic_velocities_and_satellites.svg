@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-sat" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-r-sat" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arr-g-sat" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- 背景底板 -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    牛顿大炮三大宇宙速度轨道与三体（近地·同步·赤道）参量对比模型
+  </text>
+
+  <!-- ==================== 左列：牛顿大炮三大宇宙速度 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#eff6ff"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      1. 牛顿大炮思想实验与逃逸轨道
+    </text>
+
+    <!-- 地球圆形 (中心在 180, 140, 半径 45) -->
+    <circle cx="180" cy="140" r="45" fill="#93c5fd" stroke="#2563eb" stroke-width="2"/>
+    <text x="180" y="145" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1e40af" text-anchor="middle">地球</text>
+
+    <!-- 高山发射点 (180, 95) -->
+    <polygon points="177,95 183,95 180,88" fill="#64748b"/>
+    <circle cx="180" cy="88" r="3.5" fill="#dc2626"/>
+
+    <!-- 轨道 a: 落回地面 (v < 7.9 km/s) -->
+    <path d="M 180,88 Q 215,88 222,125" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 2"/>
+
+    <!-- 轨道 1: 第一宇宙速度 (v₁ = 7.9 km/s, 正圆轨道) -->
+    <circle cx="180" cy="140" r="52" fill="none" stroke="#059669" stroke-width="2"/>
+    <text x="238" y="142" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#059669">v₁ = 7.9 km/s (圆)</text>
+
+    <!-- 轨道 2: 第二宇宙速度 (v₂ = 11.2 km/s, 抛物线脱离) -->
+    <path d="M 180,88 Q 280,88 320,180" fill="none" stroke="#d97706" stroke-width="2"/>
+    <text x="275" y="98" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#d97706">v₂ = 11.2 km/s</text>
+
+    <!-- 轨道 3: 第三宇宙速度 (v₃ = 16.7 km/s, 双曲线逃逸) -->
+    <path d="M 180,88 Q 300,75 350,110" fill="none" stroke="#dc2626" stroke-width="2"/>
+    <text x="260" y="70" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#dc2626">v₃ = 16.7 km/s</text>
+
+    <!-- 结论卡片 -->
+    <rect x="10" y="202" width="340" height="58" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="18" y="220" font-family="system-ui, sans-serif" font-size="10" fill="#334155">
+      • <tspan font-weight="bold" fill="#059669">v₁ = 7.9 km/s</tspan>：最小发射速度、最大圆轨道环绕速度
+    </text>
+    <text x="18" y="237" font-family="system-ui, sans-serif" font-size="10" fill="#334155">
+      • <tspan font-weight="bold" fill="#d97706">v₂ = 11.2 km/s</tspan>：脱离地球引力束缚（成为人造行星）
+    </text>
+    <text x="18" y="254" font-family="system-ui, sans-serif" font-size="10" fill="#334155">
+      • <tspan font-weight="bold" fill="#dc2626">v₃ = 16.7 km/s</tspan>：逃逸太阳系引力束缚（飞出太阳系）
+    </text>
+  </g>
+
+  <!-- ==================== 右列：近地/同步/赤道对比 ==================== -->
+  <g transform="translate(400, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#fef2f2"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      2. 近地卫星 (A) · 同步卫星 (B) · 赤道物体 (C)
+    </text>
+
+    <!-- 轨道几何同心圆 (中心 180, 115) -->
+    <!-- 地球球体 (半径 35) -->
+    <circle cx="180" cy="115" r="35" fill="#93c5fd" stroke="#2563eb" stroke-width="1.8"/>
+    <!-- 地心 O -->
+    <circle cx="180" cy="115" r="3" fill="#1e40af"/>
+
+    <!-- 近地卫星轨道 A (贴地 rA = R) -->
+    <circle cx="180" cy="115" r="42" fill="none" stroke="#059669" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <!-- 质点 A (近地卫星) -->
+    <circle cx="180" cy="73" r="5" fill="#059669"/>
+    <text x="190" y="75" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#059669">A 近地卫星</text>
+
+    <!-- 地表赤道物体 C (rC = R, 随地球自转) -->
+    <circle cx="215" cy="115" r="4.5" fill="#d97706"/>
+    <text x="222" y="125" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#d97706">C 赤道物体</text>
+
+    <!-- 同步卫星轨道 B (rB ≈ 6.6 R) -->
+    <circle cx="180" cy="115" r="85" fill="none" stroke="#2563eb" stroke-width="2"/>
+    <!-- 质点 B (同步卫星, 与 C 处于同一条自转径向辐射线上) -->
+    <circle cx="265" cy="115" r="5" fill="#2563eb"/>
+    <text x="272" y="112" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">B 同步卫星</text>
+
+    <!-- 同步共轴虚线 (O -> C -> B) -->
+    <line x1="180" y1="115" x2="265" y2="115" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <text x="220" y="108" font-family="system-ui, sans-serif" font-size="9" fill="#ea580c">ω_B = ω_C</text>
+
+    <!-- 对比核心结论卡片 -->
+    <rect x="10" y="202" width="340" height="58" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="18" y="218" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#334155">
+      • 轨道半径：r_B &gt; r_A = r_C
+    </text>
+    <text x="18" y="235" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#059669">
+      • 角速度排序：ω_A &gt; ω_B = ω_C（A 万有引力全提供向心力，转速极快）
+    </text>
+    <text x="18" y="252" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">
+      • 线速度排序：v_A &gt; v_B &gt; v_C（7.9 km/s &gt; 3.1 km/s &gt; 0.46 km/s）
+    </text>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    天体航行黄金口诀：高轨低速大周期；同步物体同角速，近地同步比万有；近地速度是极大，赤道地表速度微！
+  </text>
+</svg>

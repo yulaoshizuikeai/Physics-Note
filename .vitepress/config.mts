@@ -11,9 +11,9 @@ import mapShortUrl from "./theme/components/shortUrl/mapShortUrl.ts";
 const configDir = path.dirname(fileURLToPath(import.meta.url));
 const contentRoot = path.resolve(configDir, "..");
 const siteUrl = "https://note.physics.nx.kg";
-const siteName = "yulaoshizuikeai's Physics Note";
+const siteName = "高考物理知识库 - Yulaoshizuikeai's Physics Note";
 const defaultDescription =
-  "免费高中物理笔记与知识架构体系，覆盖运动学、动力学、圆周与万有引力、机械能与动量、静电场与恒定电流、磁场与电磁感应、交变电流、振动与光、热学、近代物理及物理实验等核心板块，结合人教版教材与可汗学院直观思维，适合高中同步学习与高考复习。";
+  "免费高中物理知识库与高考复习指南，覆盖运动学、动力学、圆周与万有引力、机械能与动量、静电场与恒定电流、磁场与电磁感应、交变电流、振动与光、热学、近代物理及物理实验等核心板块，结合人教版教材与可汗学院直观思维，适合高中同步学习与高考复习。";
 const navItems = buildNavItems(contentRoot);
 const sidebarItems = buildSidebarItems(contentRoot);
 
@@ -24,13 +24,13 @@ export default defineConfig({
   lang: "zh-CN",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/images/icon.svg" }],
-    ["meta", { name: "author", content: "yulaoshizuikeai" }],
+    ["meta", { name: "author", content: "Yulaoshizuikeai" }],
     [
       "meta",
       {
         name: "keywords",
         content:
-          "高中物理,物理笔记,高考物理,物理模型,动力学,圆周运动,万有引力,动量守恒,电磁感应,变压器,光电效应,微元法,可汗学院",
+          "高考物理知识库,高中物理知识库,高考物理,高中物理,物理知识库,物理模型,动力学,圆周运动,万有引力,动量守恒,电磁感应,变压器,光电效应,微元法,可汗学院,Yulaoshizuikeai",
       },
     ],
     ["meta", { name: "theme-color", content: "#5672CD" }],
@@ -66,7 +66,7 @@ export default defineConfig({
   ],
   themeConfig: {
     logo: "/images/icon.svg",
-    siteTitle: "Physics Note",
+    siteTitle: "高考物理知识库",
     nav: navItems,
     sidebar: { "/": sidebarItems },
     socialLinks: [{ icon: "github", link: "https://github.com/yulaoshizuikeai/Physics-Note" }],
@@ -95,8 +95,8 @@ export default defineConfig({
       text: "在 GitHub 上查看此页",
     },
     footer: {
-      message: "高中物理知识架构与高考复习指南",
-      copyright: "Copyright © 2026 yulaoshizuikeai",
+      message: "高中物理知识库与高考复习指南",
+      copyright: "Copyright © 2026 Yulaoshizuikeai",
     },
   },
   markdown: {

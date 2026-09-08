@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-we" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    动能定理多过程全流程建模范式与做功时空累积机制
+  </text>
+
+  <!-- ==================== 左侧：多阶段运动全景 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="450" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="450" height="26" rx="6" fill="#eff6ff"/>
+    <text x="225" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      多过程连续运动做功链条示意（重力做功 + 摩擦做功 + 弹力做功）
+    </text>
+
+    <!-- 复合轨道图 -->
+    <g transform="translate(15, 36)">
+      <!-- 阶段 1: 光滑斜面 (从 20,40 到 120,130) -->
+      <polygon points="10,130 120,40 120,130" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- 物块初始释放 -->
+      <rect x="100" y="28" width="22" height="16" rx="2" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="110" y="20" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#1e40af">初态 v₁=0</text>
+      <text x="45" y="75" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">① 重力做功 W_G = mgh</text>
+
+      <!-- 阶段 2: 粗糙平面 (从 120,130 到 280,130) -->
+      <line x1="120" y1="130" x2="280" y2="130" stroke="#334155" stroke-width="2.5"/>
+      <rect x="180" y="114" width="24" height="16" rx="2" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+      <line x1="180" y1="122" x2="160" y2="122" stroke="#dc2626" stroke-width="1.8"/>
+      <text x="145" y="115" font-family="system-ui, sans-serif" font-size="9.5" fill="#dc2626">阻力 f</text>
+      <text x="150" y="150" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#ea580c">② 摩擦力做负功 W_f = -μmg s</text>
+
+      <!-- 阶段 3: 弹簧压缩 (从 280,130 到 390,130) -->
+      <line x1="280" y1="130" x2="390" y2="130" stroke="#334155" stroke-width="2.5"/>
+      <!-- 弹簧固定端竖直墙壁 -->
+      <rect x="385" y="90" width="10" height="40" fill="#64748b"/>
+      <!-- 弹簧压缩 -->
+      <path d="M 320,122 L 330,122 L 335,115 L 343,129 L 351,115 L 359,129 L 367,115 L 375,129 L 380,122 L 385,122" fill="none" stroke="#059669" stroke-width="2"/>
+      <rect x="296" y="114" width="24" height="16" rx="2" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="310" y="105" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#15803d">末态 v=0</text>
+      <text x="260" y="168" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#059669">③ 弹力做负功 W_弹 = -E_p</text>
+    </g>
+
+    <!-- 说明便签 -->
+    <rect x="15" y="210" width="420" height="45" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="25" y="228" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#1d4ed8">
+      ✦ 全程总功列式：W_总 = W_G + W_f + W_弹 = ΔE_k = 0 - 0 = 0
+    </text>
+    <text x="25" y="245" font-family="system-ui, sans-serif" font-size="10" fill="#334155">
+      完全避开中间各节点复杂瞬时速度计算，直接连通初末状态求得路程或压缩量！
+    </text>
+  </g>
+
+  <!-- ==================== 右侧：动能定理破题方法论 ==================== -->
+  <g transform="translate(490, 54)">
+    <rect x="0" y="0" width="270" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="270" height="26" rx="6" fill="#fef2f2"/>
+    <text x="135" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      动能定理破题四大铁律
+    </text>
+
+    <!-- 4 条法则卡片 -->
+    <g transform="translate(12, 34)">
+      <rect x="0" y="0" width="246" height="52" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="10" y="18" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#2563eb">1. 标量法则（代数求和）：</text>
+      <text x="10" y="36" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">功是标量，所有外力做功直接代数相加</text>
+
+      <rect x="0" y="58" width="246" height="52" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="10" y="76" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#059669">2. 路径普适（曲直通吃）：</text>
+      <text x="10" y="94" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">无论直线还是曲线运动，动能定理严格成立</text>
+
+      <rect x="0" y="116" width="246" height="52" rx="4" fill="#f8fafc" stroke="#e2e8f0"/>
+      <text x="10" y="134" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#d97706">3. 恒力变力通解：</text>
+      <text x="10" y="152" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155">可用 W_变 = ΔE_k - W_恒 逆向反求变力功</text>
+
+      <rect x="0" y="174" width="246" height="50" rx="4" fill="#fef2f2" stroke="#fecaca"/>
+      <text x="10" y="192" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#b91c1c">4. 全程列式降维秒杀：</text>
+      <text x="10" y="210" font-family="system-ui, sans-serif" font-size="9.5" fill="#7f1d1d">多段过程优先选全程，消灭中间过渡未知量</text>
+    </g>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    动能定理绝杀纲领：总功等于末动能减初动能；曲直不管过程不拘，正负代数和贯通始终！
+  </text>
+</svg>

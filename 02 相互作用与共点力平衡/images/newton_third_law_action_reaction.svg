@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-n3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-r-n3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    牛顿第三定律：作用力与反作用力 vs 一对平衡力深度辨析
+  </text>
+
+  <!-- ==================== 左侧：作用力与反作用力 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#eff6ff"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      1. 作用力与反作用力（相互作用）
+    </text>
+
+    <!-- 示意图：两物体 A 与 B 紧贴受力 -->
+    <g transform="translate(25, 34)">
+      <!-- 物体 A -->
+      <rect x="25" y="25" width="85" height="48" rx="4" fill="#93c5fd" stroke="#2563eb" stroke-width="2"/>
+      <text x="67" y="55" font-family="system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#1e40af" text-anchor="middle">物体 A</text>
+
+      <!-- 物体 B -->
+      <rect x="195" y="25" width="85" height="48" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="2"/>
+      <text x="237" y="55" font-family="system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#9a3412" text-anchor="middle">物体 B</text>
+
+      <!-- F_{A对B} 作用在 B 上 (在 B 上方标示向右的力) -->
+      <line x1="195" y1="15" x2="260" y2="15" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr-b-n3)"/>
+      <text x="227" y="8" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#2563eb" text-anchor="middle">F_A对B (作用在B上)</text>
+
+      <!-- F_{B对A} 作用在 A 上 (在 A 上方标示向左的力) -->
+      <line x1="110" y1="15" x2="45" y2="15" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-r-n3)"/>
+      <text x="77" y="8" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#dc2626" text-anchor="middle">F_B对A (作用在A上)</text>
+
+      <!-- 接触面碰撞虚线 -->
+      <line x1="152" y1="20" x2="152" y2="78" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="152" y="54" font-family="system-ui, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">接触面</text>
+
+      <!-- 地面接触线 -->
+      <line x1="10" y1="75" x2="295" y2="75" stroke="#334155" stroke-width="2"/>
+    </g>
+
+    <!-- 关键属性清单 -->
+    <rect x="12" y="125" width="336" height="132" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="146" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8">✦ 核心特性（异体、同质、同生同灭）：</text>
+    <text x="20" y="167" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">异体性</tspan>：分别作用在两个互为施受力的不同物体上</text>
+    <text x="20" y="187" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#059669">同质性</tspan>：性质严格相同（弹力对弹力，摩擦对摩擦）</text>
+    <text x="20" y="207" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#d97706">瞬时同步性</tspan>：同时产生、同时变化、同时消失</text>
+    <text x="20" y="227" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#b91c1c">⚠️ 绝不可合成：作用在不同物体，绝不能求合力！</text>
+    <text x="20" y="244" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">传感器数据证明：两力数值时刻严格对称反向！</text>
+  </g>
+
+  <!-- ==================== 右侧：一对平衡力 ==================== -->
+  <g transform="translate(400, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#fef2f2"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      2. 一对平衡力（单物体平衡）
+    </text>
+
+    <!-- 示意图：单个物体受两个平衡力 -->
+    <g transform="translate(25, 34)">
+      <!-- 物体 A (居中在 150) -->
+      <rect x="110" y="18" width="80" height="44" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="2"/>
+      <text x="150" y="45" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#14532d" text-anchor="middle">物体 A</text>
+
+      <!-- 地面 -->
+      <line x1="50" y1="62" x2="250" y2="62" stroke="#334155" stroke-width="2"/>
+
+      <!-- 支持力 FN (竖直向上) -->
+      <line x1="150" y1="18" x2="150" y2="2" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr-b-n3)"/>
+      <text x="162" y="12" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#2563eb">F_N (地面支持力)</text>
+
+      <!-- 重力 G (竖直向下) -->
+      <line x1="150" y1="62" x2="150" y2="82" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-r-n3)"/>
+      <text x="162" y="78" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#dc2626">G (地球吸引力)</text>
+    </g>
+
+    <!-- 关键属性清单 -->
+    <rect x="12" y="125" width="336" height="132" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="146" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#b91c1c">✦ 核心特性（同体、可异质、合力为零）：</text>
+    <text x="20" y="167" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#2563eb">同体性</tspan>：共同作用在同一个受力物体上</text>
+    <text x="20" y="187" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#059669">可异质性</tspan>：性质可以完全不同（引力与弹力平衡）</text>
+    <text x="20" y="207" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• <tspan font-weight="bold" fill="#d97706">独立性</tspan>：撤去其中一个力，另一个力仍可独立存在</text>
+    <text x="20" y="227" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#059669">✦ 效果抵消：合力为零（F_合 = 0），使物体静止或匀速！</text>
+    <text x="20" y="244" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">平衡力可等效合成；互不关联互不决定！</text>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    秒判口诀：同体平衡异体反；同质同灭相互力，性质可异是平衡；作用反作用绝不可求合力！
+  </text>
+</svg>

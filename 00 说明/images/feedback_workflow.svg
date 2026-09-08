@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-fb" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 标题 -->
+  <rect x="20" y="12" width="720" height="32" rx="6" fill="#1e293b"/>
+  <text x="380" y="33" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    Yulaoshizuikeai's Physics Note 错误反馈与持续迭代闭环流程
+  </text>
+
+  <!-- 流程四步走 -->
+  <!-- 步骤 1 -->
+  <g transform="translate(30, 60)">
+    <rect x="0" y="0" width="150" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="150" height="26" rx="6" fill="#eff6ff"/>
+    <text x="75" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8" text-anchor="middle">1. 发现疑问/纰漏</text>
+    <text x="12" y="48" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• 公式推导或下标错误</text>
+    <text x="12" y="68" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• 图解标注或逻辑歧义</text>
+    <text x="12" y="88" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">• 错别字与排版瑕疵</text>
+  </g>
+
+  <!-- 箭头 1 -->
+  <line x1="185" y1="112" x2="210" y2="112" stroke="#3b82f6" stroke-width="3" marker-end="url(#arr-b-fb)"/>
+
+  <!-- 步骤 2 -->
+  <g transform="translate(215, 60)">
+    <rect x="0" y="0" width="150" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="150" height="26" rx="6" fill="#f0fdf4"/>
+    <text x="75" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#15803d" text-anchor="middle">2. 提交反馈渠道</text>
+    <text x="12" y="48" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• GitHub Issues 提交</text>
+    <text x="12" y="68" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• 页面底部评论留言</text>
+    <text x="12" y="88" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">• 附带截图与修正建议</text>
+  </g>
+
+  <!-- 箭头 2 -->
+  <line x1="370" y1="112" x2="395" y2="112" stroke="#3b82f6" stroke-width="3" marker-end="url(#arr-b-fb)"/>
+
+  <!-- 步骤 3 -->
+  <g transform="translate(400, 60)">
+    <rect x="0" y="0" width="150" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="150" height="26" rx="6" fill="#fef2f2"/>
+    <text x="75" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c" text-anchor="middle">3. 严密教研复核</text>
+    <text x="12" y="48" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• 物理定律与考纲比对</text>
+    <text x="12" y="68" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• 重新推导验证量纲</text>
+    <text x="12" y="88" font-family="system-ui, sans-serif" font-size="10" fill="#dc2626">• 确定修正优化方案</text>
+  </g>
+
+  <!-- 箭头 3 -->
+  <line x1="555" y1="112" x2="580" y2="112" stroke="#3b82f6" stroke-width="3" marker-end="url(#arr-b-fb)"/>
+
+  <!-- 步骤 4 -->
+  <g transform="translate(585, 60)">
+    <rect x="0" y="0" width="145" height="105" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="145" height="26" rx="6" fill="#faf5ff"/>
+    <text x="72" y="18" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7e22ce" text-anchor="middle">4. 合并更新发布</text>
+    <text x="10" y="48" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• Git 仓库提交合并</text>
+    <text x="10" y="68" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• 全站静态构建发布</text>
+    <text x="10" y="88" font-family="system-ui, sans-serif" font-size="10" fill="#7e22ce">• 感谢贡献者致谢记录</text>
+  </g>
+
+  <!-- 底部说明条 -->
+  <rect x="20" y="180" width="720" height="26" rx="5" fill="#334155"/>
+  <text x="380" y="197" font-family="system-ui, sans-serif" font-size="11.5" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    致谢：感谢每一位细心读者的反馈与指正，共同打造最严谨、清晰的高中物理知识库！
+  </text>
+</svg>

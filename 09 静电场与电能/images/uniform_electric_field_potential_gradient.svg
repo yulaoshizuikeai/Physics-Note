@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-b-ug" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    匀强电场中电势差与电场强度关系（U = Ed）及等势面投影模型
+  </text>
+
+  <!-- ==================== 左侧：有效投影距离 d 的几何拆解 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#eff6ff"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      1. U = Ed 中“有效距离 d”的严格几何定义
+    </text>
+
+    <!-- 几何投影示意 -->
+    <g transform="translate(25, 36)">
+      <!-- 匀强电场线 (平行向右) -->
+      <line x1="10" y1="30" x2="290" y2="30" stroke="#93c5fd" stroke-width="1.8" marker-end="url(#arr-b-ug)"/>
+      <line x1="10" y1="75" x2="290" y2="75" stroke="#93c5fd" stroke-width="1.8" marker-end="url(#arr-b-ug)"/>
+      <line x1="10" y1="120" x2="290" y2="120" stroke="#93c5fd" stroke-width="1.8" marker-end="url(#arr-b-ug)"/>
+      <text x="295" y="79" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">E</text>
+
+      <!-- 点 A (40, 30) 与 点 B (220, 100) -->
+      <circle cx="50" cy="30" r="5" fill="#dc2626"/>
+      <text x="35" y="26" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">A</text>
+      <circle cx="210" cy="100" r="5" fill="#059669"/>
+      <text x="220" y="105" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#059669">B</text>
+
+      <!-- 空间连线 L -->
+      <line x1="50" y1="30" x2="210" y2="100" stroke="#334155" stroke-width="2"/>
+      <text x="120" y="55" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#334155">位移 L</text>
+
+      <!-- 沿电场线投影虚线 -->
+      <line x1="210" y1="30" x2="210" y2="100" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <!-- 水平有效距离 d (从 50,30 到 210,30) -->
+      <line x1="50" y1="20" x2="210" y2="20" stroke="#dc2626" stroke-width="2.2"/>
+      <line x1="50" y1="14" x2="50" y2="26" stroke="#dc2626" stroke-width="2"/>
+      <line x1="210" y1="14" x2="210" y2="26" stroke="#dc2626" stroke-width="2"/>
+      <text x="130" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">
+        有效投影距离 d = L cos θ
+      </text>
+
+      <!-- 夹角 θ -->
+      <path d="M 90,30 A 40,40 0 0,1 84,45" fill="none" stroke="#d97706" stroke-width="1.5"/>
+      <text x="95" y="42" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#d97706">θ</text>
+    </g>
+
+    <!-- 结论卡片 -->
+    <rect x="12" y="165" width="336" height="92" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="185" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8">✦ 核心推导：W_AB = q E d = q U_AB</text>
+    <text x="20" y="205" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">✦ 电势差计算公式：U_AB = E · d = E · L cos θ</text>
+    <text x="20" y="225" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">• d 绝非两点真实空间直线距离，必须是“沿电场线方向投影”！</text>
+    <text x="20" y="243" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">• 垂直于电场线方向（θ = 90°）投影为零 ⇒ U = 0 ⇒ 处于等势面！</text>
+  </g>
+
+  <!-- ==================== 右侧：等势面与电势梯度 ==================== -->
+  <g transform="translate(400, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#fef2f2"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      2. 场强 E 的微积分本质（电势降落梯度）
+    </text>
+
+    <!-- 平行等差等势面图解 -->
+    <g transform="translate(30, 36)">
+      <!-- 四条等差等势面 (竖直实线) -->
+      <line x1="50" y1="20" x2="50" y2="120" stroke="#059669" stroke-width="2"/>
+      <text x="50" y="14" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#059669" text-anchor="middle">40V</text>
+
+      <line x1="110" y1="20" x2="110" y2="120" stroke="#059669" stroke-width="2"/>
+      <text x="110" y="14" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#059669" text-anchor="middle">30V</text>
+
+      <line x1="170" y1="20" x2="170" y2="120" stroke="#059669" stroke-width="2"/>
+      <text x="170" y="14" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#059669" text-anchor="middle">20V</text>
+
+      <line x1="230" y1="20" x2="230" y2="120" stroke="#059669" stroke-width="2"/>
+      <text x="230" y="14" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#059669" text-anchor="middle">10V</text>
+
+      <!-- 垂直穿过的电场线 (向右) -->
+      <line x1="20" y1="70" x2="260" y2="70" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-b-ug)"/>
+      <text x="265" y="74" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#dc2626">E</text>
+
+      <!-- 间距 Δd -->
+      <line x1="50" y1="100" x2="110" y2="100" stroke="#334155" stroke-width="1.5"/>
+      <text x="80" y="115" font-family="system-ui, sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">Δd</text>
+    </g>
+
+    <!-- 卡片说明 -->
+    <rect x="12" y="165" width="336" height="92" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="185" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#b91c1c">✦ 场强的单位与梯度意义：</text>
+    <text x="20" y="205" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#334155">
+      E = U / d  （单位：1 V/m = 1 N/C）
+    </text>
+    <text x="20" y="225" font-family="system-ui, sans-serif" font-size="10" fill="#334155">
+      • <tspan font-weight="bold" fill="#059669">电场线方向</tspan>：是空间中电势降落最快（梯度最大）的方向
+    </text>
+    <text x="20" y="243" font-family="system-ui, sans-serif" font-size="9.5" fill="#64748b">
+      • 等差等势面越密集处，电势梯度越大 ⇒ 场强 E 越强！
+    </text>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    U=Ed 核心要诀：d 是沿线投影非直线；垂直等势线顺降，等差等势线密处场强极强！
+  </text>
+</svg>
