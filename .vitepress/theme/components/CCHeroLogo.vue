@@ -184,13 +184,7 @@ const tiltStyle = computed(() => {
       </div>
     </div>
   </div>
-
-    <!-- Floating Interactive Hint Pill -->
-    <div class="flip-hint" :class="{ 'is-flipped': flipped }">
-      <span class="hint-sparkle">{{ flipped ? '🔄' : '✨' }}</span>
-      <span class="hint-label">{{ flipped ? '再次点击翻回' : '点击翻页探索' }}</span>
-    </div>
-  </div>
+</div>
 </template>
 
 <style scoped>
@@ -321,41 +315,6 @@ const tiltStyle = computed(() => {
   animation: arrow-drop 1.8s ease-in-out infinite;
 }
 
-/* ---- Floating Interactive Hint Pill ---- */
-.flip-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 14px;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #5672CD;
-  background: color-mix(in srgb, #5672CD 10%, var(--vp-c-bg));
-  border: 1px solid color-mix(in srgb, #5672CD 25%, transparent);
-  box-shadow: 0 4px 12px rgba(86, 114, 205, 0.12);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation: hint-breathe 3s ease-in-out infinite;
-}
-
-.flip-wrap:hover .flip-hint {
-  transform: translateY(-2px) scale(1.05);
-  background: color-mix(in srgb, #5672CD 18%, var(--vp-c-bg));
-  border-color: #5672CD;
-  box-shadow: 0 6px 18px rgba(86, 114, 205, 0.25);
-}
-
-.hint-sparkle {
-  display: inline-block;
-  font-size: 13px;
-  transition: transform 0.4s ease;
-}
-
-.flip-wrap:hover .hint-sparkle {
-  transform: rotate(20deg) scale(1.15);
-}
-
 /* ---- Keyframe Animations ---- */
 @keyframes notebook-float {
   0%, 100% {
@@ -445,22 +404,9 @@ const tiltStyle = computed(() => {
   }
 }
 
-@keyframes hint-breathe {
-  0%, 100% {
-    box-shadow: 0 4px 12px rgba(86, 114, 205, 0.12);
-  }
-  50% {
-    box-shadow: 0 6px 18px rgba(86, 114, 205, 0.24);
-  }
-}
-
 @media (max-width: 640px) {
   .flip-wrap {
     max-width: 250px;
-  }
-  .flip-hint {
-    font-size: 12px;
-    padding: 4px 12px;
   }
 }
 </style>
