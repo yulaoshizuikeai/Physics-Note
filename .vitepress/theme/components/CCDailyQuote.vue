@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 
 interface PhysicsFlash {
@@ -342,26 +342,23 @@ const handleCopy = async (event: MouseEvent) => {
 
 @media (max-width: 640px) {
   .cc-physics-flash-card {
-    flex-wrap: wrap;
-    gap: 8px;
+    align-items: flex-start;
     padding: 10px 12px;
   }
 
-  .flash-content {
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  .flash-badge {
+    margin-top: 1px;
   }
 
   .flash-text-box {
+    display: block;
     font-size: 13px;
-    width: 100%;
-    order: 3;
+    line-height: 1.5;
   }
 
-  .flash-actions {
-    margin-left: auto;
+  .flash-content {
+    display: inline;
+    white-space: normal;
   }
 }
 </style>
