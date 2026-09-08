@@ -38,7 +38,7 @@ export const getSectionFiles = (sectionPath: string): string[] =>
 export const buildSidebarItems = (rootDir: string): DefaultTheme.SidebarItem[] => {
   const sections = getSections(rootDir);
 
-  return sections.map((sectionName) => {
+  const sectionItems: DefaultTheme.SidebarItem[] = sections.map((sectionName) => {
     const sectionPath = path.join(rootDir, sectionName);
     const files = getSectionFiles(sectionPath).filter((name) => name.toLowerCase() !== "index.md");
 
@@ -57,4 +57,15 @@ export const buildSidebarItems = (rootDir: string): DefaultTheme.SidebarItem[] =
       collapsed: true,
     };
   });
+
+  const specialItem: DefaultTheme.SidebarItem = {
+    text: "⚡ 考前速查与排雷",
+    items: [
+      { text: "50 大黄金结论与临界条件", link: "/golden-conclusions" },
+      { text: "全专题防踩坑排雷白皮书", link: "/warning-cheatsheet" },
+    ],
+    collapsed: false,
+  };
+
+  return [specialItem, ...sectionItems];
 };

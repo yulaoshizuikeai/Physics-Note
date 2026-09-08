@@ -13,6 +13,13 @@ export const buildNavItems = (rootDir: string): DefaultTheme.NavItem[] => {
   return [
     { text: "首页", link: "/" },
     {
+      text: "⚡ 考前速查",
+      items: [
+        { text: "50 大黄金结论与临界条件", link: "/golden-conclusions" },
+        { text: "全专题防踩坑排雷白皮书", link: "/warning-cheatsheet" },
+      ],
+    },
+    {
       text: "目录",
       items,
     },

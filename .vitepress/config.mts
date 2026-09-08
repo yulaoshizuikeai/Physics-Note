@@ -106,7 +106,7 @@ export default defineConfig({
   rewrites: {
     "hidePage/shortUrl.md": "s.md",
   },
-  srcExclude: ["README.md", "scripts/**", "pdf-repo/**", "pdf-repo-single/**"],
+  srcExclude: ["README.md", "AGENTS.md", "scripts/**", "pdf-repo/**", "pdf-repo-single/**"],
   transformHead: buildTransformHead(siteUrl, siteName, defaultDescription),
   lastUpdated: true,
   sitemap: {
