@@ -2,11 +2,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
 
-import { configureImageOptimization } from "./markdown/imageOptimization";
-import { buildNavItems } from "./siteData/nav";
-import { buildSidebarItems } from "./siteData/sidebar";
-import { buildTransformHead } from "./siteData/transformHead";
-import mapShortUrl from "./theme/components/shortUrl/mapShortUrl";
+import { configureImageOptimization } from "./markdown/imageOptimization.ts";
+import { buildNavItems } from "./siteData/nav.ts";
+import { buildSidebarItems } from "./siteData/sidebar.ts";
+import { buildTransformHead } from "./siteData/transformHead.ts";
+import mapShortUrl from "./theme/components/shortUrl/mapShortUrl.ts";
 
 const configDir = path.dirname(fileURLToPath(import.meta.url));
 const contentRoot = path.resolve(configDir, "..");
@@ -29,9 +29,11 @@ export default defineConfig({
       "meta",
       {
         name: "keywords",
-        content: "高中物理,物理笔记,高考物理,力学,电磁学,动量守恒,物理模型,可汗学院",
+        content:
+          "高中物理,物理笔记,高考物理,物理模型,动力学,圆周运动,万有引力,动量守恒,电磁感应,变压器,光电效应,微元法,可汗学院",
       },
     ],
+    ["meta", { name: "theme-color", content: "#5672CD" }],
     ["meta", { name: "robots", content: "index, follow, max-image-preview:large" }],
     ["meta", { property: "og:site_name", content: siteName }],
     ["meta", { property: "og:type", content: "website" }],
@@ -43,6 +45,10 @@ export default defineConfig({
     ["meta", { name: "twitter:image", content: `${siteUrl}/images/og-image.png` }],
     ["meta", { name: "twitter:title", content: siteName }],
     ["meta", { name: "twitter:description", content: defaultDescription }],
+    // 搜索引擎站长平台所有权验证（按需填入验证码即可启用）
+    // ["meta", { name: "google-site-verification", content: "YOUR_GOOGLE_VERIFICATION_CODE" }],
+    // ["meta", { name: "msvalidate.01", content: "YOUR_BING_VERIFICATION_CODE" }],
+    // ["meta", { name: "baidu-site-verification", content: "YOUR_BAIDU_VERIFICATION_CODE" }],
     [
       "script",
       {},
@@ -100,10 +106,26 @@ export default defineConfig({
   rewrites: {
     "hidePage/shortUrl.md": "s.md",
   },
+  srcExclude: ["README.md", "scripts/**", "pdf-repo/**", "pdf-repo-single/**"],
   transformHead: buildTransformHead(siteUrl, siteName, defaultDescription),
   lastUpdated: true,
   sitemap: {
     hostname: siteUrl,
+    transformItems(items) {
+      return items.filter((item) => {
+        const url = item.url;
+        // 排除 404、短链跳转页及任何内部隐藏页面
+        if (
+          url.includes("/404") ||
+          url.includes("/s.html") ||
+          url.includes("/s") ||
+          url.includes("/hidePage/")
+        ) {
+          return false;
+        }
+        return true;
+      });
+    },
   },
 
   // 生成哈希 - 路径对应表

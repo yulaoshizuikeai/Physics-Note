@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="100%" height="100%">
+  <defs>
+    <!-- 箭头定义 -->
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arr-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706"/>
+    </marker>
+  </defs>
+
+  <!-- 背景底板 -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部标题条 -->
+  <rect x="20" y="14" width="720" height="34" rx="6" fill="#1e293b"/>
+  <text x="380" y="37" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    斜面平抛运动两大经典约束模型与极值几何
+  </text>
+
+  <!-- 中间分割虚线 -->
+  <line x1="380" y1="58" x2="380" y2="280" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+  <!-- ==================== 左侧：情境 A 落回斜面 ==================== -->
+  <g transform="translate(10, 0)">
+    <!-- 模块小标题 -->
+    <rect x="25" y="58" width="320" height="24" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="185" y="75" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      情境 A：从顶点抛出落回斜面（位移角约束）
+    </text>
+
+    <!-- 斜面主体 -->
+    <polygon points="50,110 330,250 50,250" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+    <!-- 地面阴影斜线 -->
+    <line x1="40" y1="250" x2="340" y2="250" stroke="#334155" stroke-width="2.5"/>
+
+    <!-- 倾角 θ 弧度 -->
+    <path d="M 280,250 A 50,50 0 0,0 293,232" fill="none" stroke="#d97706" stroke-width="2"/>
+    <text x="272" y="240" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#b45309">θ</text>
+
+    <!-- 初速度 v0 -->
+    <line x1="50" y1="110" x2="110" y2="110" stroke="#2563eb" stroke-width="3" marker-end="url(#arr-blue)"/>
+    <text x="80" y="102" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb">v₀</text>
+
+    <!-- 抛物线轨迹 -->
+    <!-- y = x*tanθ0 + ... 从 (50,110) 抛出，到达 (260,215) -->
+    <path d="M 50,110 Q 140,115 260,215" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+
+    <!-- 抛出点与落点 -->
+    <circle cx="50" cy="110" r="4.5" fill="#2563eb"/>
+    <circle cx="260" cy="215" r="4.5" fill="#dc2626"/>
+    <text x="265" y="235" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#b91c1c">落点</text>
+
+    <!-- 离斜面最大距离点 d_max (速度与斜面平行) -->
+    <circle cx="150" cy="133" r="3.5" fill="#059669"/>
+    <!-- 切线平行斜面 -->
+    <line x1="115" y1="115" x2="190" y2="153" stroke="#059669" stroke-width="1.8" stroke-dasharray="3 3"/>
+    <!-- d_max 垂线 -->
+    <line x1="150" y1="133" x2="183" y2="176" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-emerald)"/>
+    <text x="175" y="150" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#059669">d_max</text>
+
+    <!-- 落点速度 v 与速度偏角 beta -->
+    <line x1="260" y1="215" x2="310" y2="270" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+    <text x="312" y="278" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#7c3aed">v</text>
+
+    <!-- 关键核心结论框 -->
+    <rect x="40" y="260" width="310" height="28" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="195" y="279" font-family="system-ui, sans-serif" font-size="11.5" font-weight="bold" fill="#334155" text-anchor="middle">
+      tan β = 2 tan θ  |  t = 2v₀ tan θ / g  |  t₁ = t / 2
+    </text>
+  </g>
+
+  <!-- ==================== 右侧：情境 B 垂直打在斜面上 ==================== -->
+  <g transform="translate(390, 0)">
+    <!-- 模块小标题 -->
+    <rect x="25" y="58" width="320" height="24" rx="4" fill="#fef2f2" stroke="#fecaca"/>
+    <text x="185" y="75" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      情境 B：从外部抛出垂直撞击斜面（速度角约束）
+    </text>
+
+    <!-- 斜面主体 -->
+    <polygon points="120,250 330,120 330,250" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+    <line x1="80" y1="250" x2="340" y2="250" stroke="#334155" stroke-width="2.5"/>
+
+    <!-- 倾角 θ 弧度 -->
+    <path d="M 170,250 A 50,50 0 0,0 162,224" fill="none" stroke="#d97706" stroke-width="2"/>
+    <text x="180" y="240" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#b45309">θ</text>
+
+    <!-- 外部抛出点与初速度 v0 -->
+    <circle cx="50" cy="115" r="4.5" fill="#2563eb"/>
+    <line x1="50" y1="115" x2="110" y2="115" stroke="#2563eb" stroke-width="3" marker-end="url(#arr-blue)"/>
+    <text x="80" y="105" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb">v₀</text>
+
+    <!-- 抛物线轨迹直达斜面撞击点 -->
+    <path d="M 50,115 Q 160,118 225,185" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+    <circle cx="225" cy="185" r="4.5" fill="#dc2626"/>
+
+    <!-- 撞击点法线与垂直直角标记 -->
+    <!-- 斜面斜率约 -130/210 ≈ -0.62，法线方向斜率约为 1.61 -->
+    <line x1="225" y1="185" x2="265" y2="245" stroke="#dc2626" stroke-width="3" marker-end="url(#arr-red)"/>
+    <text x="272" y="245" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" fill="#dc2626">v ⟂ 斜面</text>
+
+    <!-- 直角符号 -->
+    <path d="M 215,178 L 221,170 L 230,176" fill="none" stroke="#dc2626" stroke-width="1.8"/>
+
+    <!-- 速度矢量分解示意三角形 (v0 水平, vy 竖直, v 垂直斜面) -->
+    <g transform="translate(195, 85)">
+      <rect x="0" y="0" width="135" height="65" rx="5" fill="#ffffff" stroke="#cbd5e1"/>
+      <line x1="15" y1="20" x2="65" y2="20" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)"/>
+      <text x="35" y="15" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">v₀</text>
+
+      <line x1="65" y1="20" x2="65" y2="55" stroke="#059669" stroke-width="2" marker-end="url(#arr-emerald)"/>
+      <text x="70" y="40" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#059669">v_y = gt</text>
+
+      <line x1="15" y1="20" x2="65" y2="55" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-red)"/>
+      <text x="15" y="46" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">v</text>
+      <text x="25" y="60" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">α = 90°-θ</text>
+    </g>
+
+    <!-- 关键核心结论框 -->
+    <rect x="40" y="260" width="310" height="28" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="195" y="279" font-family="system-ui, sans-serif" font-size="11.5" font-weight="bold" fill="#334155" text-anchor="middle">
+      tan(90°-θ) = v_y / v₀  |  t = v₀ / (g tan θ)  |  v = v₀ / sin θ
+    </text>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="298" width="720" height="30" rx="5" fill="#334155"/>
+  <text x="380" y="318" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    高频思维口诀：落斜面看「位移角」tan θ = y/x；撞斜面看「速度角」tan(90°-θ) = v_y/v₀；平行切线离斜面最远！
+  </text>
+</svg>

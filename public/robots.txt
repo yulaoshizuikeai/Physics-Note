@@ -1,0 +1,12 @@
+﻿# Robots.txt for note.physics.nx.kg
+User-agent: *
+Allow: /
+
+# Disallow internal redirect utility and hidden routes
+Disallow: /s
+Disallow: /hidePage/
+Disallow: /hashmap.json
+Disallow: /shortmap.json
+
+# Sitemap location
+Sitemap: https://note.physics.nx.kg/sitemap.xml

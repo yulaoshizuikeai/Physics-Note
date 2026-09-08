@@ -134,6 +134,7 @@ export function buildTransformHead(siteUrl: string, siteName: string, defaultDes
     const tags: HeadConfig[] = [
       ["link", { rel: "canonical", href: canonicalUrl }],
       ["meta", { property: "og:url", content: canonicalUrl }],
+      ["meta", { property: "og:type", content: isHomePage ? "website" : "article" }],
       ["meta", { property: "og:title", content: pageTitle }],
       ["meta", { property: "og:description", content: pageDescription }],
       ["meta", { name: "twitter:title", content: pageTitle }],

@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arr-bl" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arr-rd" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arr-gr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <!-- 背景底板 -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="12" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- 顶部主标题条 -->
+  <rect x="20" y="12" width="740" height="34" rx="6" fill="#1e293b"/>
+  <text x="390" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    动量与能量综合两大高考核心模型（弹簧双滑块 · 子弹打木块）
+  </text>
+
+  <!-- ==================== 左列：弹簧双滑块模型 ==================== -->
+  <g transform="translate(20, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#eff6ff"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">
+      模型一：弹簧振子双滑块动力学演化
+    </text>
+
+    <!-- 状态 1：初态 (注入初速度 v0) -->
+    <g transform="translate(15, 36)">
+      <text x="0" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#64748b">① 初态：弹簧原长</text>
+      <!-- 滑块 1 (带初速 v0) -->
+      <rect x="15" y="22" width="45" height="25" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="37" y="39" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">m₁</text>
+      <line x1="60" y1="28" x2="85" y2="28" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-bl)"/>
+      <text x="75" y="24" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#2563eb">v₀</text>
+
+      <!-- 弹簧原长 -->
+      <path d="M 60,35 L 75,35 L 80,28 L 90,42 L 100,28 L 110,42 L 120,28 L 130,42 L 135,35 L 150,35" fill="none" stroke="#64748b" stroke-width="1.5"/>
+
+      <!-- 滑块 2 (静止) -->
+      <rect x="150" y="22" width="55" height="25" rx="3" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="177" y="39" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#9a3412" text-anchor="middle">m₂ 静止</text>
+
+      <!-- 光滑地面线 -->
+      <line x1="5" y1="47" x2="325" y2="47" stroke="#334155" stroke-width="1.8"/>
+    </g>
+
+    <!-- 状态 2：共速时刻 (最大压缩/最大弹性势能) -->
+    <g transform="translate(15, 95)">
+      <text x="0" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#b91c1c">② 极值态：两滑块共速（v₁ = v₂ = v_共）</text>
+      <!-- 滑块 1 -->
+      <rect x="35" y="22" width="45" height="25" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="57" y="39" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">m₁</text>
+      <line x1="80" y1="28" x2="100" y2="28" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-rd)"/>
+
+      <!-- 弹簧紧密压缩 -->
+      <path d="M 80,35 L 88,35 L 92,27 L 98,43 L 104,27 L 110,43 L 116,27 L 122,43 L 126,35 L 134,35" fill="none" stroke="#dc2626" stroke-width="1.8"/>
+
+      <!-- 滑块 2 -->
+      <rect x="134" y="22" width="55" height="25" rx="3" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="161" y="39" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#9a3412" text-anchor="middle">m₂</text>
+      <line x1="189" y1="28" x2="209" y2="28" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-rd)"/>
+
+      <line x1="5" y1="47" x2="325" y2="47" stroke="#334155" stroke-width="1.8"/>
+
+      <!-- 核心公式框 -->
+      <rect x="215" y="10" width="115" height="36" rx="4" fill="#fef2f2" stroke="#fecaca"/>
+      <text x="272" y="24" font-family="system-ui, sans-serif" font-size="9.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">弹性势能达最大值</text>
+      <text x="272" y="38" font-family="system-ui, sans-serif" font-size="9" fill="#7f1d1d" text-anchor="middle">E_pmax = ½ μ v₀²</text>
+    </g>
+
+    <!-- 状态 3：恢复原长 (完全弹性碰撞等价) -->
+    <g transform="translate(15, 155)">
+      <text x="0" y="14" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#15803d">③ 恢复原长态：等价完全弹性碰撞</text>
+      <!-- 滑块 1 -->
+      <rect x="20" y="22" width="45" height="25" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="42" y="39" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">m₁</text>
+      <line x1="65" y1="28" x2="80" y2="28" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arr-bl)"/>
+      <text x="72" y="23" font-family="system-ui, sans-serif" font-size="9" fill="#2563eb">v₁'</text>
+
+      <!-- 弹簧恢复原长 -->
+      <path d="M 65,35 L 80,35 L 86,28 L 98,42 L 110,28 L 122,42 L 134,28 L 146,42 L 152,35 L 165,35" fill="none" stroke="#059669" stroke-width="1.5"/>
+
+      <!-- 滑块 2 获得速度极值 -->
+      <rect x="165" y="22" width="55" height="25" rx="3" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="192" y="39" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#9a3412" text-anchor="middle">m₂</text>
+      <line x1="220" y1="28" x2="255" y2="28" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-gr)"/>
+      <text x="235" y="22" font-family="system-ui, sans-serif" font-size="9.5" font-weight="bold" fill="#059669">v₂max</text>
+
+      <line x1="5" y1="47" x2="325" y2="47" stroke="#334155" stroke-width="1.8"/>
+    </g>
+
+    <!-- 底部重点说明 -->
+    <rect x="10" y="218" width="340" height="42" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="20" y="234" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#334155">✦ 共速时：v_共 = m₁v₀ / (m₁ + m₂)，动能损失率最大</text>
+    <text x="20" y="250" font-family="system-ui, sans-serif" font-size="10" fill="#15803d">✦ 原长时：势能归零，m₂ 获得极大速度 v₂' = 2m₁v₀ / (m₁ + m₂)</text>
+  </g>
+
+  <!-- ==================== 右列：子弹打木块能量耗散 ==================== -->
+  <g transform="translate(400, 54)">
+    <rect x="0" y="0" width="360" height="268" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="360" height="26" rx="6" fill="#fef2f2"/>
+    <text x="180" y="18" font-family="system-ui, sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c" text-anchor="middle">
+      模型二：子弹打木块三大位移与生热机制
+    </text>
+
+    <!-- 示意图：子弹深入木块 -->
+    <g transform="translate(15, 34)">
+      <!-- 木块 M 初始虚线框 -->
+      <rect x="40" y="10" width="130" height="55" rx="3" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="105" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">木块初始位置</text>
+
+      <!-- 子弹初始位置 -->
+      <rect x="5" y="32" width="20" height="10" rx="2" fill="#ef4444"/>
+      <line x1="25" y1="37" x2="50" y2="37" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-rd)"/>
+      <text x="26" y="27" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" fill="#dc2626">v₀</text>
+
+      <!-- 木块 M 最终实线框 (位移了 s) -->
+      <rect x="130" y="10" width="130" height="55" rx="3" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+      <text x="195" y="42" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">木块 M (v_共)</text>
+
+      <!-- 子弹留在木块中 (深入了 d) -->
+      <rect x="180" y="32" width="20" height="10" rx="2" fill="#ef4444" stroke="#991b1b" stroke-width="1"/>
+      <!-- 共速箭头 -->
+      <line x1="260" y1="37" x2="295" y2="37" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr-bl)"/>
+      <text x="270" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">v_共</text>
+
+      <!-- 地面线 -->
+      <line x1="0" y1="65" x2="330" y2="65" stroke="#334155" stroke-width="2"/>
+
+      <!-- 位移关系标尺 -->
+      <!-- 1. 木块对地位移 s -->
+      <line x1="40" y1="80" x2="130" y2="80" stroke="#d97706" stroke-width="2"/>
+      <line x1="40" y1="75" x2="40" y2="85" stroke="#d97706" stroke-width="2"/>
+      <line x1="130" y1="75" x2="130" y2="85" stroke="#d97706" stroke-width="2"/>
+      <text x="85" y="95" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#d97706" text-anchor="middle">木块位移 s</text>
+
+      <!-- 2. 深入深度 d (相对位移) -->
+      <line x1="130" y1="80" x2="190" y2="80" stroke="#dc2626" stroke-width="2"/>
+      <line x1="190" y1="75" x2="190" y2="85" stroke="#dc2626" stroke-width="2"/>
+      <text x="160" y="95" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#dc2626" text-anchor="middle">深入深度 d</text>
+
+      <!-- 3. 子弹总位移 s + d -->
+      <line x1="25" y1="110" x2="190" y2="110" stroke="#2563eb" stroke-width="2"/>
+      <line x1="25" y1="105" x2="25" y2="115" stroke="#2563eb" stroke-width="2"/>
+      <line x1="190" y1="105" x2="190" y2="115" stroke="#2563eb" stroke-width="2"/>
+      <text x="105" y="125" font-family="system-ui, sans-serif" font-size="10.5" font-weight="bold" fill="#2563eb" text-anchor="middle">子弹总对地位移 s + d</text>
+    </g>
+
+    <!-- 能量耗散三大铁律框 -->
+    <rect x="10" y="178" width="340" height="82" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="18" y="196" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">
+      ① <tspan font-weight="bold" fill="#d97706">木块动能增量</tspan>：ΔE_kM = f · s（由阻力对木块做功决定）
+    </text>
+    <text x="18" y="216" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">
+      ② <tspan font-weight="bold" fill="#2563eb">子弹动能损失</tspan>：ΔE_km = f · (s + d)（阻力全程负功）
+    </text>
+    <text x="18" y="236" font-family="system-ui, sans-serif" font-size="10.5" fill="#334155">
+      ③ <tspan font-weight="bold" fill="#dc2626">系统内能生热量</tspan>：Q = f · d（由相对滑移深度 d 决定！）
+    </text>
+    <text x="18" y="252" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">
+      阻力内力做功代数和：- f(s + d) + f·s = - f·d = - Q
+    </text>
+  </g>
+
+  <!-- 底部全局口诀条 -->
+  <rect x="20" y="328" width="740" height="30" rx="5" fill="#334155"/>
+  <text x="390" y="348" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#f8fafc" text-anchor="middle">
+    做功与能量核心黄金法则：对地位移看动能，相对位移看生热；合外力为零动量守恒，保守内力转换势能！
+  </text>
+</svg>
