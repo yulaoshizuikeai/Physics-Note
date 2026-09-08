@@ -24,7 +24,7 @@ const PHYSICS_FLASHES: PhysicsFlash[] = [
   { text: "沿电场线方向电势一定降低，电场线密集处场强更大。", tag: "静电场" },
   { text: "路端电压随外电阻增大而增大，外电路断路时等于电动势。", tag: "恒定电流" },
   { text: "安培力左手定则，感应电动势右手定则，右手螺旋定磁场。", tag: "三大定则" },
-  { text: "洛伦兹力永远不做功，只改变带电粒子的运动方向。", tag: "磁场动力学" },
+  { text: "洛伦兹力永不做功，只能改变速度方向，不改变速率与动能。", tag: "磁场动力学" },
   { text: "楞次定律：感应电流效果总是反抗引起它的原因——增反减同，来拒去留。", tag: "电磁感应" },
   { text: "法拉第电磁感应：电动势大小取决于磁通量变化率，而非磁通量本身。", tag: "电磁感应" },
   { text: "简谐运动回复力恒指向平衡位置，加速度与位移反向。", tag: "机械振动" },
@@ -120,11 +120,9 @@ const handleCopy = async (event: MouseEvent) => {
         <span class="flash-tag">{{ currentItem.tag }}</span>
       </div>
 
-      <!-- 中间核心简短金句 (几秒读完) -->
+      <!-- 中间核心简短金句 -->
       <div class="flash-text-box" :class="{ 'is-swapping': isChanging }">
-        <span class="flash-quote-mark">“</span>
-        <span class="flash-content">{{ currentItem.text }}</span>
-        <span class="flash-quote-mark">”</span>
+        <span class="flash-quote-mark">“</span><span class="flash-content">{{ currentItem.text }}</span><span class="flash-quote-mark">”</span>
       </div>
 
       <!-- 右侧轻量操作：换一条 & 复制 -->
@@ -201,7 +199,7 @@ const handleCopy = async (event: MouseEvent) => {
 
 .cc-physics-flash-card {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
   max-width: 680px;
@@ -263,17 +261,16 @@ const handleCopy = async (event: MouseEvent) => {
   white-space: nowrap;
 }
 
-/* 中间极简速记正文 */
+/* 中间速记正文 */
 .flash-text-box {
   flex: 1;
   min-width: 0;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
+  display: block;
   font-size: 13.5px;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--vp-c-text-1);
   font-weight: 500;
+  word-break: break-word;
   transition: opacity 0.16s ease, transform 0.16s ease;
 }
 
@@ -289,9 +286,6 @@ const handleCopy = async (event: MouseEvent) => {
 }
 
 .flash-content {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   letter-spacing: 0.15px;
 }
 
@@ -347,18 +341,12 @@ const handleCopy = async (event: MouseEvent) => {
   }
 
   .flash-badge {
-    margin-top: 1px;
+    margin-top: 2px;
   }
 
   .flash-text-box {
-    display: block;
     font-size: 13px;
     line-height: 1.5;
-  }
-
-  .flash-content {
-    display: inline;
-    white-space: normal;
   }
 }
 </style>
