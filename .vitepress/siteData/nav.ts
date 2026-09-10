@@ -12,6 +12,7 @@ export const buildNavItems = (rootDir: string): DefaultTheme.NavItem[] => {
 
   return [
     { text: "首页", link: "/" },
+    { text: "🪐 交互空间", link: "/interactive" },
     {
       text: "⚡ 考前速查",
       items: [

@@ -14,6 +14,9 @@ hero:
     - theme: brand
       text: 开始阅读
       link: /00%20说明/Readme
+    - theme: brand
+      text: 🪐 交互空间
+      link: /interactive
     - theme: alt
       text: 50 大黄金结论
       link: /golden-conclusions
@@ -22,6 +25,9 @@ hero:
       link: /warning-cheatsheet
 
 features:
+  - title: 🪐 高考物理可视化交互空间
+    details: 运动学微元积分、斜面受力分解、平抛末速度合成、磁场回旋等 6 大核心模型动态仿真，直观物理直通考场。
+    link: /interactive
   - title: 50 大黄金结论与临界条件
     details: 高考高频必考临界判据、黄金代换与秒杀定理矩阵速查，覆盖力学、天体、电磁、近代物理与实验。
     link: /golden-conclusions
