@@ -30,6 +30,19 @@ watchEffect(() => {
   const pathSegs = filePath.replace(/\\/g, "/").split("/").filter(Boolean);
   if (!pathSegs.length) return;
 
+  const specialTitles: Record<string, string> = {
+    "interactive.md": "🪐 高考物理可视化交互空间",
+    "golden-conclusions.md": "50 大黄金结论与临界条件",
+    "warning-cheatsheet.md": "全专题防踩坑排雷白皮书",
+  };
+
+  if (pathSegs.length === 1) {
+    const rawName = pathSegs[0];
+    const cleanTitle = specialTitles[rawName] || page.value.title || "";
+    items.value = cleanTitle ? [{ name: cleanTitle, link: "" }] : [];
+    return;
+  }
+
   const rawChapter = pathSegs[0];
   const cleanChapter = rawChapter.replace(/^\d{2}\s*/, "");
   const isChapterIndex = pathSegs.length === 2 && pathSegs[1] === "index.md";
