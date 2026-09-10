@@ -60,6 +60,6 @@
 - `--vp-shadow-card`: `0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);` (Light) / `0 2px 8px rgba(0, 0, 0, 0.25);` (Dark)
 
 ### Verification Commands
-- `npm run typecheck`: 退出码 0，零类型报错
-- `npm run docs:build`: 退出码 0，全站 99 篇无语法错误生成
-- `npm run test:visual`: 桌面端与移动端无横向不可控溢出，核心截图生成
+- `npm run typecheck`: 退出码 0，零类型报错 (PASSED)
+- `npm run docs:build`: 退出码 0，全站 99 篇无语法错误生成 (PASSED)
+- `npm run test:visual`: 桌面端与移动端无横向不可控溢出，核心截图生成 (PASSED 16/16)
