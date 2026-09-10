@@ -6,7 +6,6 @@ import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
 
 import Breadcrumb from "./components/CCBreadCrumb.vue";
-import CCAmbientParticles from "./components/CCAmbientParticles.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCFooter from "./components/CCFooter.vue";
 import CCHeroLogo from "./components/CCHeroLogo.vue";
@@ -97,13 +96,6 @@ watch(
 
 <template>
   <Layout>
-    <!-- 首页背景量子光子粒子场 -->
-    <template #home-hero-before>
-      <ClientOnly>
-        <CCAmbientParticles />
-      </ClientOnly>
-    </template>
-
     <!-- 首页动态交互 Logo -->
     <template #home-hero-image>
       <CCHeroLogo />

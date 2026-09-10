@@ -5,6 +5,7 @@ import DefaultTheme from "vitepress/theme";
 import CCActivitySparkline from "./components/CCActivitySparkline.vue";
 import CCChapterOverview from "./components/CCChapterOverview.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
+import "./style/index.css";
 import "./custom.css";
 import "@waline/client/style";
 
