@@ -5,6 +5,7 @@ import DefaultTheme from "vitepress/theme";
 import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
 
+import CCBackToTop from "./components/CCBackToTop.vue";
 import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCFooter from "./components/CCFooter.vue";
@@ -165,6 +166,13 @@ watch(
     <!-- 页脚信息 -->
     <template #doc-bottom>
       <CCFooter />
+    </template>
+
+    <!-- 全局平滑返回顶部悬浮按钮 -->
+    <template #layout-bottom>
+      <ClientOnly>
+        <CCBackToTop />
+      </ClientOnly>
     </template>
   </Layout>
 </template>

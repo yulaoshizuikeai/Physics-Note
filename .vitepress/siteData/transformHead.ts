@@ -209,7 +209,7 @@ export function buildTransformHead(siteUrl: string, siteName: string, defaultDes
         },
         author: {
           "@type": "Person" as const,
-          name: "yulaoshizuikeai",
+          name: "Yulaoshizuikeai",
         },
         publisher: {
           "@type": "Organization" as const,

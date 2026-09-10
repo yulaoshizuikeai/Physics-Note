@@ -1,5 +1,5 @@
-/* 图片深色模式下反色 */
-.dark img:not([alt*="&keep-color"]):not([src$=".svg"]) {
+/* 图片深色模式下反色 (排除 SVG 矢量图及 Base64 内联 SVG) */
+.dark img:not([alt*="&keep-color"]):not([src*=".svg"]):not([src^="data:image/svg"]) {
   filter: invert(100%) hue-rotate(180deg) contrast(80%);
 }
 
@@ -34,6 +34,44 @@ img {
   height: auto;
   margin: 1.5rem auto;
   border-radius: 8px;
+}
+
+/* 物理矢量图解与图表卡片化外框 (Physics SVG Card Container) */
+.vp-doc img[src*=".svg"],
+.vp-doc img[src^="data:image/svg"],
+.physics-svg-card {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto !important;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-border);
+  box-shadow: var(--vp-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.04));
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.vp-doc img[src*=".svg"]:hover,
+.vp-doc img[src^="data:image/svg"]:hover,
+.physics-svg-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -2px rgba(0, 0, 0, 0.04);
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 35%, var(--vp-c-border));
+}
+
+.dark .vp-doc img[src*=".svg"],
+.dark .vp-doc img[src^="data:image/svg"],
+.dark .physics-svg-card {
+  background-color: var(--vp-c-bg-soft);
+  box-shadow: var(--vp-shadow-card, 0 4px 16px rgba(0, 0, 0, 0.35));
+}
+
+.dark .vp-doc img[src*=".svg"]:hover,
+.dark .vp-doc img[src^="data:image/svg"]:hover,
+.dark .physics-svg-card:hover {
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.55);
 }
 
 /* 顶部导航栏 Logo 悬浮交互 */
@@ -251,12 +289,11 @@ body {
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent) !important;
 }
 
-/* 3. 公式内部 SVG 保持自适应，不产生虚假延展 */
+/* 3. 公式内部 SVG 保持自适应，不产生虚假延展，保留 MathJax 原生计算的 vertical-align 基线 */
 .vp-doc mjx-container > svg {
   display: inline-block !important;
   max-width: none !important;
   overflow: visible !important;
-  vertical-align: middle !important;
 }
 
 /* 4. Assistive MathML 标签绝对限定为 0 尺寸，防止参与布局计算 */
@@ -273,3 +310,78 @@ body {
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* ============================================================
+   移动端与触控热区人机工效优化 (Touch Targets & Mobile Ergonomics >= 44px)
+   ============================================================ */
+
+/* 侧边栏折叠箭头触控热区提升至 44px */
+.VPSidebarItem .caret {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 侧边栏菜单项触控高度提升 */
+.VPSidebarItem > .item {
+  min-height: 38px;
+}
+
+@media (max-width: 959px) {
+  .VPSidebarItem > .item {
+    min-height: 44px !important;
+  }
+
+  .VPSidebarItem > .item > .link {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* 移动端本地目录浮层按钮触控尺寸 */
+  .VPLocalNavOutlineDropdown > button {
+    min-height: 44px !important;
+    padding: 0 14px !important;
+  }
+
+  /* 移动端大纲项点击热区 */
+  .VPDocAsideOutline .outline-link {
+    min-height: 38px !important;
+    padding: 6px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* 移动抽屉全屏导航项 */
+  .VPNavScreenMenuLink,
+  .VPNavScreenMenuGroupLink {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 8px 0 !important;
+  }
+
+  .VPNavScreenAppearance {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+/* 窄屏手机 (<= 640px) 正文与容器边距调优 */
+@media (max-width: 640px) {
+  .VPDoc {
+    padding: 24px 16px 80px !important;
+  }
+
+  .VPDocFooter .prev-next {
+    gap: 12px;
+  }
+
+  .VPDocFooter .pager-link {
+    min-height: 52px;
+    padding: 10px 14px;
+  }
+}
+

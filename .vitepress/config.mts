@@ -90,6 +90,20 @@ export default defineConfig({
         },
       },
     },
+    outline: {
+      level: [2, 3],
+      label: "本页目录",
+    },
+    docFooter: {
+      prev: "上一篇",
+      next: "下一篇",
+    },
+    sidebarMenuLabel: "目录",
+    returnToTopLabel: "返回顶部",
+    darkModeSwitchLabel: "深浅外观",
+    lastUpdated: {
+      text: "最后更新",
+    },
     editLink: {
       pattern: "https://github.com/yulaoshizuikeai/Physics-Note/edit/master/:path",
       text: "在 GitHub 上查看此页",

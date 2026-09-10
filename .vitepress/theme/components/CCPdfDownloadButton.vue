@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { useData } from "vitepress";
 import { computed } from "vue";
 
@@ -73,7 +73,8 @@ const handlePrint = () => {
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
+  min-height: 44px;
+  padding: 10px 14px;
   border-radius: 10px;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-alt);

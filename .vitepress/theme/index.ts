@@ -3,6 +3,7 @@ import type { App } from "vue";
 import DefaultTheme from "vitepress/theme";
 
 import CCActivitySparkline from "./components/CCActivitySparkline.vue";
+import CCBackToTop from "./components/CCBackToTop.vue";
 import CCChapterOverview from "./components/CCChapterOverview.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCPdfDownloadButton from "./components/CCPdfDownloadButton.vue";
@@ -22,6 +23,7 @@ export default {
   Layout: layout,
   enhanceApp({ app }: { app: App }) {
     app.component("CCPdfDownloadButton", CCPdfDownloadButton);
+    app.component("CCBackToTop", CCBackToTop);
     app.component("CCSiteSettings", CCSiteSettings);
     app.component("CCShare", CCShare);
     app.component("CCChapterOverview", CCChapterOverview);

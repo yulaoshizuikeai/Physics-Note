@@ -84,16 +84,26 @@ watchEffect(() => {
 }
 
 .bc-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 4px 6px;
+  border-radius: 6px;
   color: var(--vp-c-text-2);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: all 0.2s;
 }
 
 .bc-link:hover {
   color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-default-soft);
 }
 
 .bc-current {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 4px 6px;
   color: var(--vp-c-text-1);
   font-weight: 500;
 }

@@ -246,8 +246,10 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 8px;
   color: var(--vp-c-text-2);
   transition:
@@ -260,6 +262,7 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-1);
 }
 
+.cc-settings-dialog__close-icon,
 .cc-settings-dialog__close svg {
   width: 18px;
   height: 18px;
@@ -277,7 +280,8 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 36px;
+  min-height: 44px;
+  cursor: pointer;
 }
 
 .cc-settings-option__text,
@@ -288,15 +292,17 @@ onBeforeUnmount(() => {
 }
 
 .cc-settings-option__control {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   accent-color: var(--vp-c-brand-1);
 }
 
 .cc-settings-select__control {
   min-width: 116px;
-  height: 34px;
-  padding: 0 28px 0 10px;
+  height: 40px;
+  padding: 0 28px 0 12px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg-alt);
@@ -309,9 +315,10 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 80px;
-  height: 34px;
-  padding: 0 14px;
+  min-width: 88px;
+  min-height: 44px;
+  height: 44px;
+  padding: 0 16px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
