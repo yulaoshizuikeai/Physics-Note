@@ -12,6 +12,7 @@ import "./custom.css";
 import "@waline/client/style";
 
 import CCInteractiveLab from "./components/interactive/CCInteractiveLab.vue";
+import CCKnowledgeGraph from "./components/interactive/CCKnowledgeGraph.vue";
 import CCPhysicsSimulator from "./components/interactive/CCPhysicsSimulator.vue";
 import CCShare from "./components/shortUrl/CCShare.vue";
 import layout from "./layout.vue";
@@ -28,5 +29,6 @@ export default {
     app.component("CCDailyQuote", CCDailyQuote);
     app.component("CCPhysicsSimulator", CCPhysicsSimulator);
     app.component("CCInteractiveLab", CCInteractiveLab);
+    app.component("CCKnowledgeGraph", CCKnowledgeGraph);
   },
 };

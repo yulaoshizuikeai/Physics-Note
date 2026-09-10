@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+import CCKnowledgeGraph from "./CCKnowledgeGraph.vue";
 import CCPhysicsSimulator from "./CCPhysicsSimulator.vue";
 
-type ModelKey = "slope" | "kinematics" | "projectile" | "cyclotron" | "optics" | "wave";
+type ModelKey = "graph" | "slope" | "kinematics" | "projectile" | "cyclotron" | "optics" | "wave";
 
 interface ModelInfo {
   key: ModelKey;
@@ -16,9 +17,19 @@ interface ModelInfo {
   chapterTitle: string;
 }
 
-const activeKey = ref<ModelKey>("slope");
+const activeKey = ref<ModelKey>("graph");
 
 const models: ModelInfo[] = [
+  {
+    key: "graph",
+    title: "🪐 全景物理知识网络图谱",
+    badge: "高考 19 大专题关联拓扑",
+    desc: "宏观统揽高中物理五大领域（力学、电磁学、振动与光、热学近代物理、实验）全景关联图谱。支持画布自由拖拽平移、滚轮缩放、拖拽节点探索关联拓扑，点击任意节点即可锁定核心考点公式并直达对应章节。",
+    formula: "牛顿动力学 + 动量动能双守恒 + 电磁场路综合 + 波动量子化",
+    thinking: "系统化物理图景、时空对称性与跨专题迁移整合",
+    chapterLink: "/00%20说明/高考物理全景图与思想方法",
+    chapterTitle: "说明·高考物理全景图与思想方法",
+  },
   {
     key: "slope",
     title: "斜面滑块受力与滑动临界",
@@ -101,9 +112,10 @@ const currentModel = () => models.find((m) => m.key === activeKey.value) || mode
       </div>
     </div>
 
-    <!-- 仿真台组件 -->
+    <!-- 全景知识图谱或物理仿真台组件 -->
     <div class="lab-simulator-card">
-      <CCPhysicsSimulator :key="activeKey" :model="activeKey" :height="390" />
+      <CCKnowledgeGraph v-if="activeKey === 'graph'" />
+      <CCPhysicsSimulator v-else :key="activeKey" :model="activeKey" :height="390" />
     </div>
 
     <!-- 知识体系与考点剖析卡片 -->
