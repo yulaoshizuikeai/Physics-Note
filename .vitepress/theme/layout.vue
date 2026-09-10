@@ -52,9 +52,34 @@ const setupImageZoom = () => {
   imageZoom.attach(contentImageSelector);
 };
 
+// Track table horizontal scroll to toggle the right-edge fade class
+let tableScrollHandlers = null;
+
+const setupTableScrollFade = () => {
+  if (typeof window === "undefined") return;
+  // Clean up previous listeners
+  if (tableScrollHandlers) {
+    tableScrollHandlers.forEach((handler, table) => {
+      table.removeEventListener("scroll", handler);
+    });
+  }
+  tableScrollHandlers = new Map();
+  const tables = document.querySelectorAll(".vp-doc table");
+  tables.forEach((table) => {
+    const update = () => {
+      const atEnd = table.scrollLeft + table.clientWidth >= table.scrollWidth - 4;
+      table.classList.toggle("cc-scroll-end", atEnd);
+    };
+    update(); // initial state
+    table.addEventListener("scroll", update, { passive: true });
+    tableScrollHandlers.set(table, update);
+  });
+};
+
 const refreshPageEnhancements = () => {
   expandCurrentSidebarGroup();
   setupImageZoom();
+  setupTableScrollFade();
 };
 
 const onSectionTitleClick = (event) => {
@@ -82,6 +107,12 @@ onBeforeUnmount(() => {
   imageZoom?.detach();
   imageZoom = undefined;
   document.removeEventListener("click", onSectionTitleClick, true);
+  if (tableScrollHandlers) {
+    tableScrollHandlers.forEach((handler, table) => {
+      table.removeEventListener("scroll", handler);
+    });
+    tableScrollHandlers = null;
+  }
 });
 
 watch(
