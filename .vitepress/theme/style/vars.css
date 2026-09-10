@@ -1,0 +1,231 @@
+/**
+ * ============================================================
+ * Warm Neo-Minimalism Design System - CSS Custom Properties
+ * 高考物理知识库 (Yulaoshizuikeai's Physics Note)
+ * ============================================================
+ */
+
+:root {
+  /* ------------------------------------------------------------
+     1. Brand Accent: Cobalt / Electric Indigo (经典物理钴蓝)
+     ------------------------------------------------------------ */
+  --vp-c-brand-1: #5672cd;
+  --vp-c-brand-2: #435eb8;
+  --vp-c-brand-3: #374ea3;
+  --vp-c-brand-soft: rgba(86, 114, 205, 0.12);
+
+  /* ------------------------------------------------------------
+     2. Surface System (Light Mode: Warm Alabaster Paper / 纸本白)
+     ------------------------------------------------------------ */
+  --vp-c-bg: #faf9f5;
+  --vp-c-bg-alt: #ebe8e1;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #f3f1ec;
+
+  /* ------------------------------------------------------------
+     3. Typography & Ink Scale (Light Mode: Warm Charcoal / 暖炭墨黑)
+     ------------------------------------------------------------ */
+  --vp-c-text-1: #1f2328;
+  --vp-c-text-2: #57606a;
+  --vp-c-text-3: #8c959f;
+
+  /* ------------------------------------------------------------
+     4. Borders & Dividers (Light Mode: Ultra-light transparency)
+     ------------------------------------------------------------ */
+  --vp-c-border: rgba(0, 0, 0, 0.08);
+  --vp-c-divider: rgba(0, 0, 0, 0.06);
+  --vp-c-gutter: rgba(0, 0, 0, 0.04);
+
+  /* ------------------------------------------------------------
+     5. Font Stacks (Modern Humanist System First)
+     ------------------------------------------------------------ */
+  --vp-font-family-base:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --vp-font-family-mono:
+    "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* ------------------------------------------------------------
+     6. Soft Diffused Shadows (Eliminating heavy harsh black shadows)
+     ------------------------------------------------------------ */
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --vp-shadow-2: 0 3px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --vp-shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --vp-shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --vp-shadow-5: 0 25px 50px -12px rgba(0, 0, 0, 0.07);
+
+  /* ------------------------------------------------------------
+     7. Code Blocks (Light Mode: Paper Embedded Tone)
+     ------------------------------------------------------------ */
+  --vp-code-block-bg: #f2efe9;
+  --vp-code-line-highlight-color: rgba(86, 114, 205, 0.08);
+  --vp-code-line-number-color: #9a9489;
+  --vp-code-copy-code-bg: #e6e2da;
+  --vp-code-copy-code-hover-bg: #dad5cb;
+  --vp-code-copy-code-active-text: var(--vp-c-brand-1);
+  --vp-code-tab-bg: #ebe7df;
+  --vp-code-tab-text-color: var(--vp-c-text-2);
+  --vp-code-tab-active-text-color: var(--vp-c-brand-1);
+  --vp-code-tab-hover-text-color: var(--vp-c-text-1);
+  --vp-code-tab-divider: rgba(0, 0, 0, 0.06);
+
+  /* Inline code pill */
+  --vp-code-bg: rgba(0, 0, 0, 0.045);
+  --vp-code-color: #374ea3;
+
+  /* ------------------------------------------------------------
+     8. Custom Callouts (Light Mode: Subtle Paper Tints)
+     ------------------------------------------------------------ */
+  --vp-custom-block-info-border: rgba(86, 114, 205, 0.45);
+  --vp-custom-block-info-text: #2f448c;
+  --vp-custom-block-info-bg: rgba(86, 114, 205, 0.05);
+
+  --vp-custom-block-tip-border: #435eb8;
+  --vp-custom-block-tip-text: #2f448c;
+  --vp-custom-block-tip-bg: rgba(67, 94, 184, 0.06);
+
+  --vp-custom-block-warning-border: #c27803;
+  --vp-custom-block-warning-text: #724602;
+  --vp-custom-block-warning-bg: rgba(194, 120, 3, 0.06);
+
+  --vp-custom-block-danger-border: #b9423b;
+  --vp-custom-block-danger-text: #75201b;
+  --vp-custom-block-danger-bg: rgba(185, 66, 59, 0.06);
+
+  --vp-custom-block-details-border: rgba(0, 0, 0, 0.1);
+  --vp-custom-block-details-text: var(--vp-c-text-1);
+  --vp-custom-block-details-bg: var(--vp-c-bg-soft);
+
+  /* ------------------------------------------------------------
+     9. Navigation & Sidebar
+     ------------------------------------------------------------ */
+  --vp-nav-bg-color: rgba(250, 249, 245, 0.88);
+  --vp-nav-screen-bg-color: #faf9f5;
+  --vp-sidebar-bg-color: #faf9f5;
+  --vp-home-hero-name-background: linear-gradient(135deg, #374ea3 0%, #5672cd 50%, #758ee6 100%);
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at center,
+    rgba(86, 114, 205, 0.16) 0%,
+    rgba(86, 114, 205, 0) 70%
+  );
+  --vp-home-hero-image-filter: blur(48px);
+
+  /* ------------------------------------------------------------
+     10. Hero Physics Atom SVG Tokens (Light Mode)
+     ------------------------------------------------------------ */
+  --atom-card-bg: #faf9f5;
+  --atom-lines: #ebe7df;
+  --atom-cutout: #faf9f5;
+  --atom-cover: #5672cd;
+  --atom-ribbon: #435eb8;
+  --atom-nucleus: #5672cd;
+  --atom-orbit: #a2b4ea;
+  --atom-electron: #5672cd;
+  --atom-text: #5672cd;
+  --atom-title: #1f2328;
+  --atom-back-card-outer: #27376c;
+  --atom-back-card-bg: #f3f1ec;
+  --atom-back-card-border: #e0ddd5;
+  --atom-tag: #c27803;
+}
+
+/* ============================================================
+   Dark Mode: Deep Slate Charcoal / 沉静深玄灰 (Physics Blue)
+   ============================================================ */
+.dark {
+  /* Brand Accent: Luminous Cobalt / Sky Electric */
+  --vp-c-brand-1: #758ee6;
+  --vp-c-brand-2: #5672cd;
+  --vp-c-brand-3: #9cb1f5;
+  --vp-c-brand-soft: rgba(117, 142, 230, 0.16);
+
+  /* Surfaces */
+  --vp-c-bg: #151718;
+  --vp-c-bg-alt: #23272a;
+  --vp-c-bg-elv: #1c1f21;
+  --vp-c-bg-soft: #1c1f21;
+
+  /* Typography & Ink Scale */
+  --vp-c-text-1: #e3e5e8;
+  --vp-c-text-2: #9ba1a6;
+  --vp-c-text-3: #687076;
+
+  /* Borders & Dividers */
+  --vp-c-border: rgba(255, 255, 255, 0.09);
+  --vp-c-divider: rgba(255, 255, 255, 0.07);
+  --vp-c-gutter: rgba(255, 255, 255, 0.05);
+
+  /* Soft Diffused Shadows */
+  --vp-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --vp-shadow-2: 0 4px 8px -1px rgba(0, 0, 0, 0.4);
+  --vp-shadow-3: 0 10px 20px -4px rgba(0, 0, 0, 0.45);
+  --vp-shadow-4: 0 20px 30px -6px rgba(0, 0, 0, 0.5);
+  --vp-shadow-5: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+  /* Code Blocks */
+  --vp-code-block-bg: #1c1f21;
+  --vp-code-line-highlight-color: rgba(117, 142, 230, 0.12);
+  --vp-code-line-number-color: #5b6269;
+  --vp-code-copy-code-bg: #272a2e;
+  --vp-code-copy-code-hover-bg: #32363b;
+  --vp-code-copy-code-active-text: var(--vp-c-brand-1);
+  --vp-code-tab-bg: #151718;
+  --vp-code-tab-text-color: var(--vp-c-text-2);
+  --vp-code-tab-active-text-color: var(--vp-c-brand-1);
+  --vp-code-tab-hover-text-color: var(--vp-c-text-1);
+  --vp-code-tab-divider: rgba(255, 255, 255, 0.07);
+
+  /* Inline code pill */
+  --vp-code-bg: rgba(255, 255, 255, 0.08);
+  --vp-code-color: #a8bdfa;
+
+  /* Custom Callouts */
+  --vp-custom-block-info-border: rgba(117, 142, 230, 0.4);
+  --vp-custom-block-info-text: #b8c8fa;
+  --vp-custom-block-info-bg: rgba(117, 142, 230, 0.08);
+
+  --vp-custom-block-tip-border: #758ee6;
+  --vp-custom-block-tip-text: #c5d4fc;
+  --vp-custom-block-tip-bg: rgba(117, 142, 230, 0.09);
+
+  --vp-custom-block-warning-border: #d68f1c;
+  --vp-custom-block-warning-text: #f0c37b;
+  --vp-custom-block-warning-bg: rgba(214, 143, 28, 0.09);
+
+  --vp-custom-block-danger-border: #d45951;
+  --vp-custom-block-danger-text: #f49f99;
+  --vp-custom-block-danger-bg: rgba(212, 89, 81, 0.09);
+
+  --vp-custom-block-details-border: rgba(255, 255, 255, 0.1);
+  --vp-custom-block-details-text: var(--vp-c-text-1);
+  --vp-custom-block-details-bg: var(--vp-c-bg-soft);
+
+  /* Navigation & Sidebar */
+  --vp-nav-bg-color: rgba(21, 23, 24, 0.88);
+  --vp-nav-screen-bg-color: #151718;
+  --vp-sidebar-bg-color: #151718;
+  --vp-home-hero-name-background: linear-gradient(135deg, #5672cd 0%, #758ee6 50%, #b8c8fa 100%);
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at center,
+    rgba(117, 142, 230, 0.18) 0%,
+    rgba(117, 142, 230, 0) 70%
+  );
+  --vp-home-hero-image-filter: blur(52px);
+
+  /* Hero Physics Atom SVG Tokens (Dark Mode) */
+  --atom-card-bg: #1c1f21;
+  --atom-lines: #282c2e;
+  --atom-cutout: #1c1f21;
+  --atom-cover: #27376c;
+  --atom-ribbon: #758ee6;
+  --atom-nucleus: #758ee6;
+  --atom-orbit: #4b5f9e;
+  --atom-electron: #9cb1f5;
+  --atom-text: #758ee6;
+  --atom-title: #e3e5e8;
+  --atom-back-card-outer: #1c264a;
+  --atom-back-card-bg: #1c1f21;
+  --atom-back-card-border: rgba(255, 255, 255, 0.08);
+  --atom-tag: #f0c37b;
+}

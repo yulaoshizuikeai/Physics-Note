@@ -3,11 +3,18 @@
   filter: invert(100%) hue-rotate(180deg) contrast(80%);
 }
 
-/* VitePress 默认将 img 设为 block，这会打断正文里的图文同行排版 */
+/* VitePress 默认将 img 设为 block，保留行内图文同行，但排除独立排版图 */
 img {
-  display: inline-block !important;
-  margin: 0 0.35em;
+  display: inline-block;
+  margin: 0 0.25em;
   vertical-align: middle;
+}
+
+.vp-doc p > img:only-child,
+.vp-doc div[align="center"] > img,
+.vp-doc figure > img {
+  display: block;
+  margin: 1.25rem auto !important;
 }
 
 .avatar-img,
@@ -15,18 +22,27 @@ img {
 .VPNavBarTitle .logo,
 .VPHomeHero img,
 .atom-wrap svg,
-.flip-card svg {
+.flip-card svg,
+.neo-hero-logo svg {
   filter: none !important;
+}
+
+/* Markdown 内置物理矢量图解 (SVG) 响应式与居中展示规范 */
+.vp-doc svg:not(mjx-container svg):not(.waline-pageview-icon) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 8px;
 }
 
 /* 顶部导航栏 Logo 悬浮交互 */
 .VPNavBarTitle .logo {
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .VPNavBarTitle:hover .logo {
-  transform: scale(1.12) rotate(-6deg);
-  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.6));
+  transform: scale(1.06);
 }
 
 /* 首页 Hero 区域 Logo 容器排版 */
@@ -101,12 +117,6 @@ img {
   }
 }
 
-:root {
-  --vp-home-hero-image-background-image: linear-gradient(45deg, #546ec6 50%, #3551b2 50%);
-  --vp-home-hero-image-filter: blur(40px);
-  --vp-sidebar-bg-color: var(--vp-c-bg);
-}
-
 .VPNavBarTitle.has-sidebar .title {
   border: none;
 }
@@ -148,177 +158,6 @@ body.cc-settings-modal-open {
 }
 
 /* ============================================================
-   动态微交互与视觉灵动系统 (Dynamic Motion & Lively Micro-Interactions)
-   ============================================================ */
-
-/* 1. 首页 Hero 标题文字流光呼吸 */
-.VPHomeHero .name.clip {
-  background: linear-gradient(
-    125deg,
-    #5672CD 0%,
-    #3b82f6 25%,
-    #8b5cf6 50%,
-    #3b82f6 75%,
-    #5672CD 100%
-  );
-  background-size: 220% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: hero-text-flow 8s ease-in-out infinite;
-}
-
-@keyframes hero-text-flow {
-  0% { background-position: 0% center; }
-  50% { background-position: 100% center; }
-  100% { background-position: 0% center; }
-}
-
-/* 2. Hero 区域背景光晕缓慢有机脉动（保持居中在卡片后方） */
-.VPHomeHero .image-bg {
-  z-index: 0;
-  pointer-events: none;
-  animation: hero-ambient-pulse 8s ease-in-out infinite alternate;
-  will-change: transform, opacity;
-}
-
-.VPHomeHero .flip-wrap {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes hero-ambient-pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(0.95);
-    opacity: 0.65;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.08);
-    opacity: 0.88;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(0.98);
-    opacity: 0.72;
-  }
-}
-
-/* 3. Hero 操作按钮磁吸悬浮与光晕反馈 */
-.VPHomeHero .action .VPButton.brand {
-  position: relative;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.2s ease;
-  box-shadow: 0 4px 16px rgba(86, 114, 205, 0.35);
-}
-
-.VPHomeHero .action .VPButton.brand:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(86, 114, 205, 0.48);
-}
-
-.VPHomeHero .action .VPButton.brand:active {
-  transform: translateY(0) scale(0.98);
-}
-
-.VPHomeHero .action .VPButton.alt {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.VPHomeHero .action .VPButton.alt:hover {
-  transform: translateY(-2px);
-  border-color: #5672CD;
-  box-shadow: 0 4px 14px rgba(86, 114, 205, 0.18);
-}
-
-/* 4. 首页 19 个章节卡片灵动悬浮与辉光边框 */
-.VPHomeFeatures .VPFeature {
-  position: relative;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
-  overflow: hidden;
-}
-
-.VPHomeFeatures .VPFeature:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, #5672CD 55%, transparent);
-  box-shadow: 0 14px 28px -8px rgba(86, 114, 205, 0.22);
-}
-
-.VPHomeFeatures .VPFeature::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #5672CD, #8b5cf6, transparent);
-  opacity: 0;
-  transform: scaleX(0.6);
-  transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.VPHomeFeatures .VPFeature:hover::after {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-.VPHomeFeatures .VPFeature .title {
-  transition: color 0.3s ease;
-}
-
-.VPHomeFeatures .VPFeature:hover .title {
-  color: var(--vp-c-brand-1);
-}
-
-/* 5. 章节概览卡片交互动效 */
-.chapter-card {
-  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, box-shadow 0.25s ease !important;
-}
-
-.chapter-card:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 6px 18px rgba(86, 114, 205, 0.15);
-}
-
-.chapter-card .card-arrow {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.chapter-card:hover .card-arrow {
-  transform: translateX(4px);
-}
-
-/* 6. 文档数学公式块优雅微动 */
-.vp-doc .katex-display {
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--vp-c-brand-1) 2%, var(--vp-c-bg-soft));
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.vp-doc .katex-display:hover {
-  background: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-soft));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent);
-}
-
-/* 7. 全局丝滑滚动条 */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--vp-c-text-3) 30%, transparent);
-  border-radius: 9999px;
-  transition: background-color 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--vp-c-brand-1) 60%, transparent);
-}
-
-/* ============================================================
    移动端与特定场景排版修复 (Mobile & Specific Layout Fixes)
    ============================================================ */
 
@@ -329,18 +168,73 @@ body.cc-settings-modal-open {
   }
 }
 
-/* 修复移动端下长数学公式超出容器无滚动条的问题，并增加与原版一致的美化 */
-.vp-doc mjx-container[display="true"] {
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--vp-c-brand-1) 2%, var(--vp-c-bg-soft));
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+/* ============================================================
+   MathJax 数学公式与防无界横向溢出全局防御规范
+   ============================================================ */
+
+/* 1. 严格约束文档全局与正文外层，防止任何子元素将整个页面横向撑开产生无限留白 */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+.VPDoc,
+.VPDoc .container,
+.VPDoc .content,
+.vp-doc,
+.vp-doc > div {
+  max-width: 100% !important;
+  overflow-x: clip !important;
+}
+
+/* 2. MathJax 块级公式容器严格限制最大宽度与边界 */
+.vp-doc mjx-container,
+.vp-doc mjx-container[display="true"],
+.vp-doc mjx-container[jax="SVG"][display="true"],
+.vp-doc mjx-container[jax="CHTML"][display="true"] {
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  contain: paint layout !important; /* 彻底隔离尺寸计算，绝不撑大父级 flex/grid 容器 */
+  overscroll-behavior-x: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 0.85rem 1.1rem !important;
+  margin: 1.2rem 0 !important;
+  border-radius: 8px !important;
+  background: color-mix(in srgb, var(--vp-c-brand-1) 3%, var(--vp-c-bg-soft)) !important;
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease !important;
 }
 
 .vp-doc mjx-container[display="true"]:hover {
-  background: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-soft));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 6%, var(--vp-c-bg-soft)) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent) !important;
+}
+
+/* 3. 公式内部 SVG 保持自适应，不产生虚假延展 */
+.vp-doc mjx-container > svg {
+  display: inline-block !important;
+  max-width: none !important;
+  overflow: visible !important;
+  vertical-align: middle !important;
+}
+
+/* 4. Assistive MathML 标签绝对限定为 0 尺寸，防止参与布局计算 */
+.vp-doc mjx-assistive-mml {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }

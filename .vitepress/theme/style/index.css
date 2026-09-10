@@ -1,0 +1,518 @@
+/**
+ * ============================================================
+ * Warm Neo-Minimalism Theme Stylesheet
+ * 高考物理知识库 (Yulaoshizuikeai's Physics Note)
+ * ============================================================
+ */
+
+@import "./vars.css";
+
+/* ============================================================
+   1. Typography & Global Flow (Type-Driven Interface)
+   ============================================================ */
+html,
+body {
+  font-family: var(--vp-font-family-base);
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Document Content Typography */
+.vp-doc {
+  color: var(--vp-c-text-1);
+  line-height: 1.75;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+}
+
+.vp-doc p {
+  line-height: 1.75;
+  margin: 0.9rem 0;
+  color: var(--vp-c-text-1);
+}
+
+/* Headings with Magazine Solid Stature */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  color: var(--vp-c-text-1);
+  font-weight: 650;
+  letter-spacing: -0.022em;
+  position: relative;
+}
+
+.vp-doc h1 {
+  font-size: 2.15rem;
+  line-height: 1.25;
+  margin-top: 1.2rem;
+  margin-bottom: 1.4rem;
+  font-weight: 700;
+}
+
+.vp-doc h2 {
+  font-size: 1.52rem;
+  line-height: 1.35;
+  margin-top: 2.2rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc h3 {
+  font-size: 1.22rem;
+  line-height: 1.4;
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.vp-doc h4 {
+  font-size: 1.05rem;
+  line-height: 1.45;
+  margin-top: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Lists & Hierarchy */
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 1.35rem;
+  margin: 0.8rem 0;
+  line-height: 1.75;
+}
+
+.vp-doc li + li {
+  margin-top: 0.35rem;
+}
+
+/* Inline Links */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: all 0.18s ease;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration-color: var(--vp-c-brand-2);
+}
+
+/* Key Terms & Highlighted Text (.flash-kw, .kw, mark) */
+mark,
+.kw,
+.flash-kw {
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
+  color: var(--vp-c-brand-1);
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+  font-weight: 650;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+html.dark mark,
+html.dark .kw,
+html.dark .flash-kw {
+  background-color: color-mix(in srgb, #52b788 18%, transparent);
+  color: #74c69d;
+}
+
+/* Blockquotes: Warm Editorial Inset */
+.vp-doc blockquote {
+  margin: 1.2rem 0;
+  padding: 0.65rem 1.15rem;
+  border-left: 3px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  border-radius: 0 6px 6px 0;
+  color: var(--vp-c-text-2);
+  font-style: normal;
+}
+
+.vp-doc blockquote p {
+  margin: 0.35rem 0;
+  line-height: 1.7;
+}
+
+/* Dividers */
+.vp-doc hr {
+  border: none;
+  border-top: 1px solid var(--vp-c-divider);
+  margin: 2.2rem 0;
+}
+
+/* ============================================================
+   2. Code Blocks: Soft Embedded Warm Paper Tone
+   ============================================================ */
+.vp-doc div[class*="language-"] {
+  border-radius: 8px !important;
+  border: 1px solid var(--vp-c-border) !important;
+  box-shadow: none !important;
+  margin: 1.2rem 0 !important;
+  background-color: var(--vp-code-block-bg) !important;
+  transition: border-color 0.2s ease;
+}
+
+.vp-doc div[class*="language-"]:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 35%, var(--vp-c-border)) !important;
+}
+
+.vp-doc div[class*="language-"] pre {
+  padding: 1rem 1.15rem !important;
+}
+
+.vp-doc div[class*="language-"] code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* Inline Code Pill */
+.vp-doc :not(pre) > code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.88em;
+  padding: 0.18em 0.42em;
+  border-radius: 5px;
+  background-color: var(--vp-code-bg);
+  color: var(--vp-code-color);
+  border: 1px solid var(--vp-c-border);
+  letter-spacing: normal;
+}
+
+/* Code Copy Button Minimalist */
+.vp-doc div[class*="language-"] > button.copy {
+  border-radius: 6px;
+  background-color: var(--vp-code-copy-code-bg);
+  border: 1px solid var(--vp-c-border);
+  transition: all 0.2s ease;
+}
+
+.vp-doc div[class*="language-"] > button.copy:hover {
+  background-color: var(--vp-code-copy-code-hover-bg);
+}
+
+/* ============================================================
+   3. Custom Callouts (Containers): Paper Decluttering
+   ============================================================ */
+.vp-doc .custom-block {
+  border-radius: 8px !important;
+  padding: 0.85rem 1.15rem !important;
+  margin: 1.2rem 0 !important;
+  border: 1px solid var(--vp-c-border) !important;
+  border-left-width: 3.5px !important;
+  box-shadow: none !important;
+}
+
+.vp-doc .custom-block.info {
+  border-left-color: var(--vp-custom-block-info-border) !important;
+  background-color: var(--vp-custom-block-info-bg) !important;
+  color: var(--vp-custom-block-info-text);
+}
+
+.vp-doc .custom-block.tip {
+  border-left-color: var(--vp-custom-block-tip-border) !important;
+  background-color: var(--vp-custom-block-tip-bg) !important;
+  color: var(--vp-custom-block-tip-text);
+}
+
+.vp-doc .custom-block.warning {
+  border-left-color: var(--vp-custom-block-warning-border) !important;
+  background-color: var(--vp-custom-block-warning-bg) !important;
+  color: var(--vp-custom-block-warning-text);
+}
+
+.vp-doc .custom-block.danger {
+  border-left-color: var(--vp-custom-block-danger-border) !important;
+  background-color: var(--vp-custom-block-danger-bg) !important;
+  color: var(--vp-custom-block-danger-text);
+}
+
+.vp-doc .custom-block.details {
+  border-left-color: var(--vp-custom-block-details-border) !important;
+  background-color: var(--vp-custom-block-details-bg) !important;
+}
+
+.vp-doc .custom-block .custom-block-title {
+  font-weight: 650;
+  font-size: 0.94rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.35rem;
+}
+
+.vp-doc .custom-block p {
+  margin: 0.35rem 0;
+  line-height: 1.65;
+}
+
+/* ============================================================
+   4. Tables (Data & Comparison Grids)
+   ============================================================ */
+.vp-doc table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+  width: 100%;
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-soft);
+  font-weight: 650;
+  font-size: 0.92rem;
+  color: var(--vp-c-text-1);
+  border-bottom: 1px solid var(--vp-c-border);
+  padding: 0.65rem 0.95rem;
+  text-align: left;
+}
+
+.vp-doc td {
+  padding: 0.65rem 0.95rem;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc tr:last-child td {
+  border-bottom: none;
+}
+
+.vp-doc tr:nth-child(even) {
+  background-color: color-mix(in srgb, var(--vp-c-bg-soft) 45%, transparent);
+}
+
+/* ============================================================
+   5. Homepage De-noising & Editorial Quiet Power
+   ============================================================ */
+
+/* Hero Title: Solid, Confident, Crisp Typography */
+.VPHomeHero .name {
+  font-weight: 750 !important;
+  letter-spacing: -0.028em !important;
+}
+
+.VPHomeHero .name.clip {
+  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, var(--vp-c-brand-2) 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: none !important; /* Cancel rainbow flicker */
+}
+
+.dark .VPHomeHero .name.clip {
+  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, #74c69d 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.VPHomeHero .text {
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPHomeHero .tagline {
+  color: var(--vp-c-text-2) !important;
+  font-size: 1.12rem !important;
+  line-height: 1.65 !important;
+  max-width: 640px;
+}
+
+/* Hero Action Buttons: Disciplined Geometry, No Heavy Glow */
+.VPHomeHero .action .VPButton {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  box-shadow: none !important;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+.VPHomeHero .action .VPButton.brand {
+  background-color: var(--vp-c-brand-1) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  color: #ffffff !important;
+}
+
+.VPHomeHero .action .VPButton.brand:hover {
+  background-color: var(--vp-c-brand-2) !important;
+  border-color: var(--vp-c-brand-2) !important;
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 4px 12px -2px rgba(46, 107, 86, 0.25) !important;
+}
+
+.dark .VPHomeHero .action .VPButton.brand {
+  background-color: var(--vp-c-brand-1) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  color: #121415 !important;
+}
+
+.dark .VPHomeHero .action .VPButton.brand:hover {
+  background-color: var(--vp-c-brand-3) !important;
+  box-shadow: 0 4px 14px -2px rgba(82, 183, 136, 0.35) !important;
+}
+
+.VPHomeHero .action .VPButton.alt {
+  background-color: var(--vp-c-bg-soft) !important;
+  border: 1px solid var(--vp-c-border) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPHomeHero .action .VPButton.alt:hover {
+  background-color: var(--vp-c-bg-alt) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  transform: translateY(-1.5px) !important;
+}
+
+/* Features Grid: 16 Chapters Refined Cards */
+.VPHomeFeatures .VPFeature {
+  border-radius: 8px !important;
+  border: 1px solid var(--vp-c-border) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+  transition:
+    transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.24s ease,
+    background-color 0.24s ease,
+    box-shadow 0.24s ease !important;
+}
+
+/* Eliminate neon bar */
+.VPHomeFeatures .VPFeature::after {
+  display: none !important;
+}
+
+.VPHomeFeatures .VPFeature:hover {
+  transform: translateY(-2px) !important;
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent) !important;
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 2.5%, var(--vp-c-bg-soft)) !important;
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark .VPHomeFeatures .VPFeature:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 50%, transparent) !important;
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.45) !important;
+}
+
+.VPHomeFeatures .VPFeature .title {
+  font-weight: 650 !important;
+  font-size: 1.05rem !important;
+  letter-spacing: -0.015em !important;
+  color: var(--vp-c-text-1) !important;
+  transition: color 0.2s ease !important;
+}
+
+.VPHomeFeatures .VPFeature:hover .title {
+  color: var(--vp-c-brand-1) !important;
+}
+
+.VPHomeFeatures .VPFeature .details {
+  color: var(--vp-c-text-2) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.62 !important;
+}
+
+/* ============================================================
+   6. Navigation, Sidebar, TOC & Search
+   ============================================================ */
+.VPNavBar {
+  border-bottom: 1px solid var(--vp-c-divider) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.VPSidebar {
+  border-right: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPSidebarItem.level-0.is-link > .item > .link {
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.VPSidebarItem .is-active > .link {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+}
+
+.VPDocAsideOutline .outline-link.active {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+}
+
+.VPDocAsideOutline .outline-marker {
+  background-color: var(--vp-c-brand-1) !important;
+  width: 2px !important;
+  border-radius: 2px !important;
+}
+
+/* ============================================================
+   7. Global Subtle Scrollbar
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--vp-c-text-3) 25%, transparent);
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 50%, transparent);
+}
+
+/* ============================================================
+   8. Home Hero Typography & Spatial Hierarchy
+   ============================================================ */
+.VPHero .heading {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+}
+
+.VPHero .name {
+  font-size: clamp(34px, 5.2vw, 54px) !important;
+  line-height: 1.18 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.VPHero .text {
+  font-size: clamp(16px, 2.6vw, 24px) !important;
+  line-height: 1.35 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--vp-c-text-2) !important;
+  display: block !important;
+  margin: 0 !important;
+  font-family: var(--vp-font-family-base) !important;
+}
+
+.VPHero .tagline {
+  margin-top: 0.85rem !important;
+  font-size: clamp(15px, 1.8vw, 17px) !important;
+  line-height: 1.65 !important;
+  color: var(--vp-c-text-2) !important;
+}
+
