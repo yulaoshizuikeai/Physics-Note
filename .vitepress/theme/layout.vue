@@ -11,6 +11,7 @@ import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCFooter from "./components/CCFooter.vue";
 import CCHeroLogo from "./components/CCHeroLogo.vue";
+import CCHomeStats from "./components/CCHomeStats.vue";
 import { CCPageviews, CCWaline } from "./components/waline";
 import { bootstrapSiteSettings } from "./composables/useSiteSettings";
 
@@ -134,9 +135,10 @@ watch(
       <CCHeroLogo />
     </template>
 
-    <!-- 首页高中物理微速记 (每次刷新随机一条，几秒读完，点击可切换) -->
+    <!-- 首页统计横幅（知识库亮点数字） -->
     <template #home-hero-info-after>
       <ClientOnly>
+        <CCHomeStats />
         <CCDailyQuote />
       </ClientOnly>
     </template>

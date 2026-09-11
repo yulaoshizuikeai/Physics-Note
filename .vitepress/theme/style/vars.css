@@ -105,11 +105,11 @@
   --vp-nav-bg-color: rgba(250, 249, 245, 0.88);
   --vp-nav-screen-bg-color: #faf9f5;
   --vp-sidebar-bg-color: #faf9f5;
-  --vp-home-hero-name-background: linear-gradient(135deg, #374ea3 0%, #5672cd 50%, #758ee6 100%);
+  --vp-home-hero-name-background: linear-gradient(140deg, #3d56a3 0%, #5672cd 45%, #8aa8f8 100%);
   --vp-home-hero-image-background-image: radial-gradient(
-    circle at center,
-    rgba(86, 114, 205, 0.16) 0%,
-    rgba(86, 114, 205, 0) 70%
+    ellipse 60% 55% at 45% 50%,
+    rgba(86, 114, 205, 0.18) 0%,
+    rgba(86, 114, 205, 0) 68%
   );
   --vp-home-hero-image-filter: blur(48px);
 
@@ -207,11 +207,11 @@
   --vp-nav-bg-color: rgba(21, 23, 24, 0.88);
   --vp-nav-screen-bg-color: #151718;
   --vp-sidebar-bg-color: #151718;
-  --vp-home-hero-name-background: linear-gradient(135deg, #5672cd 0%, #758ee6 50%, #b8c8fa 100%);
+  --vp-home-hero-name-background: linear-gradient(140deg, #5672cd 0%, #9cb1f5 55%, #74c69d 100%);
   --vp-home-hero-image-background-image: radial-gradient(
-    circle at center,
-    rgba(117, 142, 230, 0.18) 0%,
-    rgba(117, 142, 230, 0) 70%
+    ellipse 60% 55% at 45% 50%,
+    rgba(117, 142, 230, 0.2) 0%,
+    rgba(117, 142, 230, 0) 68%
   );
   --vp-home-hero-image-filter: blur(52px);
 
