@@ -16,6 +16,7 @@ import "@waline/client/style";
 import CCInteractiveLab from "./components/interactive/CCInteractiveLab.vue";
 import CCKnowledgeGraph from "./components/interactive/CCKnowledgeGraph.vue";
 import CCPhysicsSimulator from "./components/interactive/CCPhysicsSimulator.vue";
+import CCJumper from "./components/shortUrl/CCJumper.vue";
 import CCShare from "./components/shortUrl/CCShare.vue";
 import layout from "./layout.vue";
 
@@ -27,6 +28,7 @@ export default {
     app.component("CCBackToTop", CCBackToTop);
     app.component("CCErrata", CCErrata);
     app.component("CCSiteSettings", CCSiteSettings);
+    app.component("CCJumper", CCJumper);
     app.component("CCShare", CCShare);
     app.component("CCChapterOverview", CCChapterOverview);
     app.component("CCActivitySparkline", CCActivitySparkline);

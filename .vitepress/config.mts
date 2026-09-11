@@ -133,14 +133,24 @@ export default defineConfig({
   rewrites: {
     "hidePage/shortUrl.md": "s.md",
   },
-  srcExclude: ["README.md", "AGENTS.md", "scripts/**", "pdf-repo/**", "pdf-repo-single/**"],
+  srcExclude: [
+    "README.md",
+    "AGENTS.md",
+    "PROJECT.md",
+    "TEST_INFRA.md",
+    "TEST_READY.md",
+    "scripts/**",
+    "pdf-repo/**",
+    "pdf-repo-single/**",
+  ],
   transformHead: buildTransformHead(siteUrl, siteName, defaultDescription),
   lastUpdated: true,
   sitemap: {
     hostname: siteUrl,
     transformItems(items) {
       return items.filter((item) => {
-        const url = item.url;
+        // VitePress 生成的 item.url 不带前导斜杠（如 "s.html"），需规范化后再匹配
+        const url = `/${item.url}`;
         // 排除 404、短链跳转页及任何内部隐藏页面
         if (
           url.includes("/404") ||

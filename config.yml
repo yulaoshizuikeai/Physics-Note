@@ -24,6 +24,9 @@ export:
       - "**/index.html"
       - "s.html"
       - "README.html"
+      - "PROJECT.html"
+      - "TEST_INFRA.html"
+      - "TEST_READY.html"
       - "hidePage/**"
     page:
       format: "A4"

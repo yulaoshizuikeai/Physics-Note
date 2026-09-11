@@ -1,4 +1,4 @@
-﻿name: Deploy and Build PDF
+name: Deploy and Build PDF
 
 on:
   push:
@@ -57,9 +57,9 @@ jobs:
         if: github.ref == 'refs/heads/master'
         with:
           tag_name: latest-pdf
-          name: "Latest Physics Note PDF (高中物理笔记最新版)"
+          name: "Latest Physics Note PDF (高中物理知识库最新版)"
           body: |
-            ## 📚 高中物理全套知识架构笔记 - 自动化编译 PDF 成果物
+            ## 📚 高中物理知识库 - 自动化编译 PDF 成果物
 
             - 📕 **单文件完整版全书**: `Physics-Note-Complete.pdf` (包含全书 19 个大专题、78 幅矢量图解与全部考点模型)
             - 📦 **全套分册 ZIP 归档包**: `Physics-Note-All-PDFs.zip` (包含按章节排版归档的 99 篇独立矢量 PDF)

@@ -47,8 +47,8 @@ const link = computed(() => {
   if (!baseUrl) return "";
   if (encodedPath.length < 10) return `${baseUrl}/${encodedPath}`;
 
-  // Must match the short-link jump page route.
-  return `${baseUrl}/s?q=${md5(normalizedPath).slice(0, 10)}`;
+  // Must match the short-link jump page route (GitHub Pages serves s.html, not extensionless /s).
+  return `${baseUrl}/s.html?q=${md5(normalizedPath).slice(0, 10)}`;
 });
 
 function copyLink() {
@@ -57,7 +57,7 @@ function copyLink() {
     trackUmamiEvent("share_copy_link", {
       page_path: page.value.relativePath || page.value.filePath || "",
       page_title: page.value.title || "",
-      is_short_link: link.value.includes("/s?q="),
+      is_short_link: link.value.includes("/s.html?q="),
     });
     expand.value = true;
     if (timer) clearTimeout(timer);

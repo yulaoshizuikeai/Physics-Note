@@ -71,7 +71,8 @@ export function buildTransformHead(siteUrl: string, siteName: string, defaultDes
     const pageTitle = pageData.title ? `${pageData.title} | ${siteName}` : siteName;
     const isHomePage = relativePath === "index.md";
     const is404Page = relativePath === "404.md";
-    const isHiddenUtilityPage = /^hidePage\//i.test(relativePath);
+    // VitePress alpha.18 的 relativePath 为重写后路径（如 "s.md"），需同时匹配重写前后的隐藏页路径
+    const isHiddenUtilityPage = /^hidePage\//i.test(relativePath) || /^s\.md$/i.test(relativePath);
     const isChapterIndex = isChapterIndexPath(relativePath);
     const publishedTime = toIsoDate((pageData.frontmatter as Record<string, unknown>)?.date);
     const modifiedTime =
