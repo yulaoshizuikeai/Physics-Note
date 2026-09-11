@@ -532,59 +532,47 @@ html.dark .flash-kw {
 }
 
 /* ============================================================
-   5. Homepage — Hero & Features: Google Material Design 3 Layout
-   (8dp base grid: 8 / 16 / 24 / 32 / 40 / 48 / 56 / 64 / 80 / 96px)
+   5. Homepage De-noising & Editorial Quiet Power
    ============================================================ */
 
-/* Hero: nav-height + 64px (8×8dp) top breathing room */
+/* Hero container: generous vertical rhythm and subtle centered spotlight */
 .VPHomeHero {
-  padding-top: calc(var(--vp-nav-height) + 64px) !important;
-  padding-bottom: 64px !important; /* 8×8dp — generous floor */
+  padding-top: calc(var(--vp-nav-height) + 56px) !important;
+  padding-bottom: 48px !important;
 }
 
 .VPHomeHero .container {
   position: relative;
 }
 
-/* Dual-tone radial glow: cobalt blue + warm accent */
 .VPHomeHero .container::before {
   content: "";
   position: absolute;
-  top: -96px;
+  top: -80px;
   left: 50%;
   transform: translateX(-50%);
-  width: 900px;
-  height: 520px;
+  width: 720px;
+  height: 420px;
   background: radial-gradient(
-    ellipse 55% 50% at 40% 50%,
+    ellipse at center,
     color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent) 0%,
-    transparent 65%
-  ),
-  radial-gradient(
-    ellipse 40% 40% at 68% 55%,
-    rgba(234, 179, 8, 0.065) 0%,
-    transparent 60%
+    transparent 70%
   );
   pointer-events: none;
   z-index: -1;
-  opacity: 0.9;
+  opacity: 0.7;
 }
 
 .dark .VPHomeHero .container::before {
   background: radial-gradient(
-    ellipse 55% 50% at 40% 50%,
+    ellipse at center,
     color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent) 0%,
-    transparent 65%
-  ),
-  radial-gradient(
-    ellipse 40% 40% at 68% 55%,
-    rgba(234, 179, 8, 0.045) 0%,
-    transparent 60%
+    transparent 70%
   );
-  opacity: 0.65;
+  opacity: 0.5;
 }
 
-/* Hero name */
+/* Hero Title: Solid, Confident, Crisp Typography */
 .VPHomeHero .name {
   font-weight: 800 !important;
   letter-spacing: -0.032em !important;
@@ -592,63 +580,57 @@ html.dark .flash-kw {
 }
 
 .VPHomeHero .name.clip {
-  background: linear-gradient(140deg, var(--vp-c-brand-2) 0%, var(--vp-c-brand-1) 45%, #8aa8f8 100%) !important;
+  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, var(--vp-c-brand-2) 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  animation: none !important;
+  animation: none !important; /* Cancel rainbow flicker */
 }
 
 .dark .VPHomeHero .name.clip {
-  background: linear-gradient(140deg, var(--vp-c-brand-1) 0%, #9cb1f5 55%, #74c69d 100%) !important;
+  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, #74c69d 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
 
-/* Subtitle: 8dp below name */
 .VPHomeHero .text {
-  font-weight: 600 !important;
-  letter-spacing: 0em !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.01em !important;
   color: var(--vp-c-text-2) !important;
-  margin-top: 8px !important;
+  margin-top: 0.5rem !important;
 }
 
-/* Tagline: 16dp below subtitle */
 .VPHomeHero .tagline {
   color: var(--vp-c-text-2) !important;
-  font-size: 1.05rem !important;
-  line-height: 1.75 !important;
-  max-width: 520px;
-  margin-top: 16px !important; /* 2×8dp */
+  font-size: 1.15rem !important;
+  line-height: 1.72 !important;
+  max-width: 640px;
+  margin-top: 1.25rem !important;
 }
 
-/* Action buttons: 32dp below tagline (4×8dp — clear visual break) */
+/* Hero Action Buttons: Disciplined Geometry, Clear Hierarchy */
 .VPHomeHero .actions {
-  gap: 12px !important;        /* 12px: Google button row gap */
-  margin-top: 32px !important; /* 4×8dp */
-  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+  margin-top: 1.5rem !important;
 }
 
-/* Material 3 "filled" button shape: 20px radius = pill-ish */
 .VPHomeHero .action .VPButton {
-  border-radius: 20px !important;
+  border-radius: 9px !important;
   font-weight: 600 !important;
-  letter-spacing: 0.015em !important;
+  letter-spacing: 0.01em !important;
+  font-size: 0.92rem !important;
   box-shadow: none !important;
-  min-height: 40px !important; /* Material standard touch target */
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  padding-left: 24px !important; /* 3×8dp */
-  padding-right: 24px !important;
+  min-height: var(--cc-touch-min);
+  padding-left: 1.15rem !important;
+  padding-right: 1.15rem !important;
   transition:
-    transform 0.2s cubic-bezier(0.2, 0, 0, 1),
-    background-color 0.2s cubic-bezier(0.2, 0, 0, 1),
-    border-color 0.2s cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease !important;
 }
 
-/* Primary "filled" button */
 .VPHomeHero .action .VPButton.brand {
   background-color: var(--vp-c-brand-1) !important;
   border-color: var(--vp-c-brand-1) !important;
@@ -658,211 +640,96 @@ html.dark .flash-kw {
 .VPHomeHero .action .VPButton.brand:hover {
   background-color: var(--vp-c-brand-2) !important;
   border-color: var(--vp-c-brand-2) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--vp-c-brand-1) 42%, transparent) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 18px -4px color-mix(in srgb, var(--vp-c-brand-1) 35%, transparent) !important;
 }
 
 .dark .VPHomeHero .action .VPButton.brand {
   background-color: var(--vp-c-brand-1) !important;
   border-color: var(--vp-c-brand-1) !important;
-  color: #0d0f10 !important;
+  color: #121415 !important;
 }
 
 .dark .VPHomeHero .action .VPButton.brand:hover {
   background-color: var(--vp-c-brand-3) !important;
-  box-shadow: 0 4px 14px -2px color-mix(in srgb, var(--vp-c-brand-1) 45%, transparent) !important;
+  box-shadow: 0 8px 20px -4px color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent) !important;
 }
 
-/* Secondary "outlined" button */
 .VPHomeHero .action .VPButton.alt {
-  background-color: transparent !important;
+  background-color: var(--vp-c-bg-elv) !important;
   border: 1px solid var(--vp-c-border) !important;
   color: var(--vp-c-text-1) !important;
 }
 
 .VPHomeHero .action .VPButton.alt:hover {
-  background-color: color-mix(in srgb, var(--vp-c-brand-1) 6%, var(--vp-c-bg)) !important;
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 48%, transparent) !important;
-  transform: translateY(-1px) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Hero logo */
+/* Hero image / logo lift */
 .VPHomeHero .image {
-  filter: drop-shadow(0 16px 32px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent));
-  transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1);
+  filter: drop-shadow(0 18px 36px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .VPHomeHero .image:hover {
-  transform: translateY(-4px) scale(1.015);
+  transform: translateY(-4px) scale(1.01);
 }
 
-/* ============================================================
-   5b. Features Grid — Material Design 3 Card Grid
-   ============================================================ */
-
-/* Outer section: 56dp top (7×8) / 88dp bottom (11×8) */
+/* Features Grid: 16 Chapters Refined Cards */
 .VPHomeFeatures {
-  padding-top: 56px !important;
-  padding-bottom: 88px !important;
+  padding-top: 40px !important;
+  padding-bottom: 56px !important;
 }
 
-/* Subtle full-width divider: separates hero from content */
-.VPHomeFeatures::before {
-  content: "";
-  display: block;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--vp-c-divider) 20%,
-    var(--vp-c-divider) 80%,
-    transparent 100%
-  );
-  margin-bottom: 48px; /* 6×8dp gap below divider */
-  opacity: 0.7;
-}
-
-/* Card grid gap: 16px (2×8dp) — Material baseline */
-.VPHomeFeatures .container > .items {
-  gap: 16px !important;
-}
-
-/* ---- Base card: Material "elevated" surface level 1 ---- */
 .VPHomeFeatures .VPFeature {
   border-radius: 12px !important;
   border: 1px solid var(--vp-c-border) !important;
-  background-color: var(--vp-c-bg-elv) !important;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.03),
-    0 2px 4px rgba(0, 0, 0, 0.02) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+  box-shadow: none !important;
   overflow: hidden;
   transition:
-    transform 0.2s cubic-bezier(0.2, 0, 0, 1),
-    border-color 0.2s ease,
-    box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+    transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.24s ease,
+    background-color 0.24s ease,
+    box-shadow 0.24s ease !important;
 }
 
-/* Suppress VitePress neon accent bar */
+/* Eliminate neon bar */
 .VPHomeFeatures .VPFeature::after {
   display: none !important;
 }
 
-/* Hover: elevation level 2 */
 .VPHomeFeatures .VPFeature:hover {
-  transform: translateY(-2px) !important;
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 38%, transparent) !important;
-  box-shadow:
-    0 2px 4px rgba(0,0,0,0.04),
-    0 6px 18px -4px color-mix(in srgb, var(--vp-c-brand-1) 16%, rgba(0,0,0,0.06)) !important;
-}
-
-.dark .VPHomeFeatures .VPFeature {
-  background-color: var(--vp-c-bg-soft) !important;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.22),
-    0 2px 6px rgba(0, 0, 0, 0.14) !important;
+  transform: translateY(-3px) !important;
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 45%, transparent) !important;
+  background-color: var(--vp-c-bg-elv) !important;
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.06) !important;
 }
 
 .dark .VPHomeFeatures .VPFeature:hover {
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 48%, transparent) !important;
-  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.48) !important;
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 55%, transparent) !important;
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* ---- Spotlight cards (first 3): Material "filled tonal" ---- */
-.VPHomeFeatures .VPFeature:nth-child(-n+3) {
-  background-color: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-elv)) !important;
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 18%, var(--vp-c-border)) !important;
-  box-shadow:
-    inset 3px 0 0 var(--vp-c-brand-1),
-    0 1px 3px rgba(0, 0, 0, 0.03) !important;
-}
-
-.dark .VPHomeFeatures .VPFeature:nth-child(-n+3) {
-  background-color: color-mix(in srgb, var(--vp-c-brand-1) 9%, var(--vp-c-bg-soft)) !important;
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 26%, var(--vp-c-border)) !important;
-}
-
-.VPHomeFeatures .VPFeature:nth-child(-n+3):hover {
-  box-shadow:
-    inset 3px 0 0 var(--vp-c-brand-1),
-    0 4px 12px rgba(0,0,0,0.04),
-    0 8px 24px -6px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent) !important;
-}
-
-/* Spotlight title: title-medium (16px/600) */
-.VPHomeFeatures .VPFeature:nth-child(-n+3) .title {
-  font-size: 1rem !important;
-  font-weight: 700 !important;
-}
-
-/* ---- Card content padding: 24px (3×8dp) all sides ---- */
-.VPHomeFeatures .VPFeature a {
-  position: relative;
-  display: block;
-  padding: 20px 24px !important; /* 20px top/bottom, 24px sides */
-  text-decoration: none !important;
-}
-
-/* Spotlight: uniform 24px (3×8dp) */
-.VPHomeFeatures .VPFeature:nth-child(-n+3) a {
-  padding: 24px !important;
-}
-
-/* Chapter cards: slightly compact, 20×24px */
-.VPHomeFeatures .VPFeature:nth-child(n+4) a {
-  padding: 18px 22px !important;
-}
-
-/* Full-cover click target */
-.VPHomeFeatures .VPFeature a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-/* ---- Typography inside cards ---- */
-/* Title: body-large (16px) / title-medium */
 .VPHomeFeatures .VPFeature .title {
-  font-weight: 600 !important;
-  font-size: 1rem !important;
-  letter-spacing: -0.01em !important;
+  font-weight: 650 !important;
+  font-size: 1.06rem !important;
+  letter-spacing: -0.015em !important;
   color: var(--vp-c-text-1) !important;
-  line-height: 1.4 !important;
-  transition: color 0.18s ease !important;
+  transition: color 0.2s ease !important;
 }
 
 .VPHomeFeatures .VPFeature:hover .title {
   color: var(--vp-c-brand-1) !important;
 }
 
-/* Details: body-small (14px) */
 .VPHomeFeatures .VPFeature .details {
   color: var(--vp-c-text-2) !important;
-  font-size: 0.875rem !important;
-  line-height: 1.6 !important;
-  margin-top: 6px !important;  /* 6px: tight coupling to title */
-  letter-spacing: 0.01em !important;
-}
-
-/* Link text: label-medium, 12px, brand color */
-.VPHomeFeatures .VPFeature .link-text {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  margin-top: 14px !important; /* 14px: clear visual separation */
-  font-size: 0.82rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.025em !important;
-  color: var(--vp-c-brand-1) !important;
-  opacity: 0.82;
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s cubic-bezier(0.2, 0, 0, 1) !important;
-}
-
-.VPHomeFeatures .VPFeature:hover .link-text {
-  opacity: 1 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.68 !important;
 }
 
 /* Feature link hover affordance: entire card feels clickable */
@@ -876,10 +743,9 @@ html.dark .flash-kw {
 .VPHomeFeatures .VPFeature a {
   position: relative;
   display: block;
-  padding: 1.25rem 1.35rem !important;
+  padding: 1.35rem !important;
   text-decoration: none !important;
 }
-
 
 /* ============================================================
    6. Navigation, Sidebar, TOC & Search — Touch-Target & Ergonomics
@@ -976,45 +842,38 @@ html.dark .flash-kw {
 }
 
 /* ============================================================
-   8. Home Hero Typography — Material Design 3 Type Scale
+   8. Home Hero Typography & Spatial Hierarchy
    ============================================================ */
-
-/* Heading group: 8dp between name, text, tagline */
 .VPHero .heading {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0 !important; /* Gaps controlled individually per element */
+  gap: 0.5rem !important;
 }
 
-/* Display large: clamp(36px, 5.6vw, 56px) */
 .VPHero .name {
-  font-size: clamp(36px, 5.6vw, 56px) !important;
-  line-height: 1.15 !important;
+  font-size: clamp(34px, 5.2vw, 54px) !important;
+  line-height: 1.18 !important;
   font-weight: 800 !important;
-  letter-spacing: -0.025em !important;
+  letter-spacing: -0.015em !important;
 }
 
-/* Title large: clamp(18px, 2.6vw, 24px) */
 .VPHero .text {
-  font-size: clamp(16px, 2.4vw, 22px) !important;
-  line-height: 1.4 !important;
+  font-size: clamp(16px, 2.6vw, 24px) !important;
+  line-height: 1.35 !important;
   font-weight: 600 !important;
-  letter-spacing: 0em !important;
+  letter-spacing: 0.02em !important;
   color: var(--vp-c-text-2) !important;
   display: block !important;
-  margin-top: 8px !important; /* 1×8dp */
+  margin: 0 !important;
   font-family: var(--vp-font-family-base) !important;
 }
 
-/* Body large: 16px, constrained width for optimal line length */
 .VPHero .tagline {
-  margin-top: 16px !important; /* 2×8dp */
-  font-size: clamp(14px, 1.6vw, 16px) !important;
-  line-height: 1.75 !important;
+  margin-top: 0.85rem !important;
+  font-size: clamp(15px, 1.8vw, 17px) !important;
+  line-height: 1.68 !important;
   color: var(--vp-c-text-2) !important;
-  max-width: 520px;
 }
-
 
 /* ============================================================
    9. Responsive & Mobile Layout Refinements

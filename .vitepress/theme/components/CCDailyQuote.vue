@@ -192,9 +192,8 @@ const handleCopy = async (event: MouseEvent) => {
 </template>
 
 <style scoped>
-/* 16px (2×8dp) gap between Stats and Quote — close siblings */
 .cc-physics-flash-wrap {
-  margin-top: 16px;
+  margin-top: 22px;
   width: 100%;
 }
 
@@ -203,20 +202,24 @@ const handleCopy = async (event: MouseEvent) => {
   display: flex;
   align-items: center;
   gap: 12px;
-  max-width: 592px;       /* Match Stats bar width for visual alignment */
+  max-width: 680px;
   width: 100%;
-  padding: 12px 16px;     /* 1.5×8dp / 2×8dp — compact but readable */
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 4%, var(--vp-c-bg-soft));
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 14%, transparent);
-  border-radius: 12px;    /* 1.5×8dp */
+  padding: 8px 14px;
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 5%, var(--vp-c-bg-soft));
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 18%, transparent);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 18px -4px rgba(86, 114, 205, 0.12);
   cursor: pointer;
   user-select: none;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cc-physics-flash-card:hover {
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 8%, var(--vp-c-bg-soft));
-  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 30%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 9%, var(--vp-c-bg-soft));
+  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 35%, transparent);
+  box-shadow: 0 6px 24px -4px rgba(86, 114, 205, 0.2);
   transform: translateY(-1px);
 }
 
