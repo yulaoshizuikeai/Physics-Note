@@ -6,6 +6,7 @@ import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
 
 import CCBackToTop from "./components/CCBackToTop.vue";
+import CCErrata from "./components/CCErrata.vue";
 import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCFooter from "./components/CCFooter.vue";
@@ -161,6 +162,13 @@ watch(
         <CCPageviews />
       </ClientOnly>
 
+    </template>
+
+    <!-- 读者勘误反馈卡片 -->
+    <template #doc-footer-before>
+      <ClientOnly>
+        <CCErrata />
+      </ClientOnly>
     </template>
 
     <!-- 页脚信息 -->
