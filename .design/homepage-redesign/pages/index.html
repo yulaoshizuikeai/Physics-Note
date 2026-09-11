@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高考物理知识库主页 - 优化版</title>
+    <style id="theme-vars">
+/**
+ * Homepage Redesign — Design Project Color Contract
+ * Based on Yulaoshizuikeai's Physics Note warm neo-minimalism
+ * with Google Design Library cleanliness references.
+ */
+
+:root {
+  --background: #faf9f5;
+  --foreground: #1f2328;
+  --card: #ffffff;
+  --card-foreground: #1f2328;
+  --popover: #f3f1ec;
+  --popover-foreground: #1f2328;
+
+  --primary: #4c67b9;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f1ec;
+  --secondary-foreground: #1f2328;
+  --muted: #f3f1ec;
+  --muted-foreground: #57606a;
+  --accent: #dbeafe;
+  --accent-foreground: #003e8f;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: #4c67b9;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-serif: Georgia, "Songti SC", "Noto Serif SC", STSong, SimSun, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  --physics-background: var(--background);
+  --physics-foreground: var(--foreground);
+  --physics-card: var(--card);
+  --physics-card-foreground: var(--card-foreground);
+  --physics-popover: var(--popover);
+  --physics-popover-foreground: var(--popover-foreground);
+  --physics-primary: var(--primary);
+  --physics-primary-foreground: var(--primary-foreground);
+  --physics-secondary: var(--secondary);
+  --physics-secondary-foreground: var(--secondary-foreground);
+  --physics-muted: var(--muted);
+  --physics-muted-foreground: var(--muted-foreground);
+  --physics-accent: var(--accent);
+  --physics-accent-foreground: var(--accent-foreground);
+  --physics-destructive: var(--destructive);
+  --physics-destructive-foreground: var(--destructive-foreground);
+  --physics-border: var(--border);
+  --physics-input: var(--input);
+  --physics-ring: var(--ring);
+  --physics-radius-sm: var(--radius-sm);
+  --physics-radius-md: var(--radius-md);
+  --physics-radius-lg: var(--radius-lg);
+}
+
+.dark {
+  --background: #151718;
+  --foreground: #e3e5e8;
+  --card: #1c1f21;
+  --card-foreground: #e3e5e8;
+  --popover: #23272a;
+  --popover-foreground: #e3e5e8;
+
+  --primary: #758ee6;
+  --primary-foreground: #121415;
+  --secondary: #1c1f21;
+  --secondary-foreground: #e3e5e8;
+  --muted: #1c1f21;
+  --muted-foreground: #9ba1a6;
+  --accent: #00266b;
+  --accent-foreground: #bfdbfe;
+
+  --border: rgba(255, 255, 255, 0.09);
+  --input: rgba(255, 255, 255, 0.09);
+  --ring: #758ee6;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--physics-background);
+    --color-foreground: var(--physics-foreground);
+    --color-card: var(--physics-card);
+    --color-card-foreground: var(--physics-card-foreground);
+    --color-popover: var(--physics-popover);
+    --color-popover-foreground: var(--physics-popover-foreground);
+    --color-primary: var(--physics-primary);
+    --color-primary-foreground: var(--physics-primary-foreground);
+    --color-secondary: var(--physics-secondary);
+    --color-secondary-foreground: var(--physics-secondary-foreground);
+    --color-muted: var(--physics-muted);
+    --color-muted-foreground: var(--physics-muted-foreground);
+    --color-accent: var(--physics-accent);
+    --color-accent-foreground: var(--physics-accent-foreground);
+    --color-destructive: var(--physics-destructive);
+    --color-destructive-foreground: var(--physics-destructive-foreground);
+    --color-border: var(--physics-border);
+    --color-input: var(--physics-input);
+    --color-ring: var(--physics-ring);
+    --radius-sm: var(--physics-radius-sm);
+    --radius-md: var(--physics-radius-md);
+    --radius-lg: var(--physics-radius-lg);
+  }
+  @layer base {
+    body { background: var(--physics-background); color: var(--physics-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--physics-background); }
+      .text-background { color: var(--physics-background); }
+      .border-background { border-color: var(--physics-background); }
+      .ring-background { --tw-ring-color: var(--physics-background); }
+      .bg-foreground { background-color: var(--physics-foreground); }
+      .text-foreground { color: var(--physics-foreground); }
+      .border-foreground { border-color: var(--physics-foreground); }
+      .ring-foreground { --tw-ring-color: var(--physics-foreground); }
+      .bg-card { background-color: var(--physics-card); }
+      .text-card { color: var(--physics-card); }
+      .border-card { border-color: var(--physics-card); }
+      .ring-card { --tw-ring-color: var(--physics-card); }
+      .bg-card-foreground { background-color: var(--physics-card-foreground); }
+      .text-card-foreground { color: var(--physics-card-foreground); }
+      .border-card-foreground { border-color: var(--physics-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--physics-card-foreground); }
+      .bg-popover { background-color: var(--physics-popover); }
+      .text-popover { color: var(--physics-popover); }
+      .border-popover { border-color: var(--physics-popover); }
+      .ring-popover { --tw-ring-color: var(--physics-popover); }
+      .bg-popover-foreground { background-color: var(--physics-popover-foreground); }
+      .text-popover-foreground { color: var(--physics-popover-foreground); }
+      .border-popover-foreground { border-color: var(--physics-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--physics-popover-foreground); }
+      .bg-primary { background-color: var(--physics-primary); }
+      .text-primary { color: var(--physics-primary); }
+      .border-primary { border-color: var(--physics-primary); }
+      .ring-primary { --tw-ring-color: var(--physics-primary); }
+      .bg-primary-foreground { background-color: var(--physics-primary-foreground); }
+      .text-primary-foreground { color: var(--physics-primary-foreground); }
+      .border-primary-foreground { border-color: var(--physics-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--physics-primary-foreground); }
+      .bg-secondary { background-color: var(--physics-secondary); }
+      .text-secondary { color: var(--physics-secondary); }
+      .border-secondary { border-color: var(--physics-secondary); }
+      .ring-secondary { --tw-ring-color: var(--physics-secondary); }
+      .bg-secondary-foreground { background-color: var(--physics-secondary-foreground); }
+      .text-secondary-foreground { color: var(--physics-secondary-foreground); }
+      .border-secondary-foreground { border-color: var(--physics-secondary-foreground); }
+      .ring-secondary-foreground { --tw-ring-color: var(--physics-secondary-foreground); }
+      .bg-muted { background-color: var(--physics-muted); }
+      .text-muted { color: var(--physics-muted); }
+      .border-muted { border-color: var(--physics-muted); }
+      .ring-muted { --tw-ring-color: var(--physics-muted); }
+      .bg-muted-foreground { background-color: var(--physics-muted-foreground); }
+      .text-muted-foreground { color: var(--physics-muted-foreground); }
+      .border-muted-foreground { border-color: var(--physics-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--physics-muted-foreground); }
+      .bg-accent { background-color: var(--physics-accent); }
+      .text-accent { color: var(--physics-accent); }
+      .border-accent { border-color: var(--physics-accent); }
+      .ring-accent { --tw-ring-color: var(--physics-accent); }
+      .bg-accent-foreground { background-color: var(--physics-accent-foreground); }
+      .text-accent-foreground { color: var(--physics-accent-foreground); }
+      .border-accent-foreground { border-color: var(--physics-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--physics-accent-foreground); }
+      .bg-destructive { background-color: var(--physics-destructive); }
+      .text-destructive { color: var(--physics-destructive); }
+      .border-destructive { border-color: var(--physics-destructive); }
+      .ring-destructive { --tw-ring-color: var(--physics-destructive); }
+      .bg-destructive-foreground { background-color: var(--physics-destructive-foreground); }
+      .text-destructive-foreground { color: var(--physics-destructive-foreground); }
+      .border-destructive-foreground { border-color: var(--physics-destructive-foreground); }
+      .ring-destructive-foreground { --tw-ring-color: var(--physics-destructive-foreground); }
+      .bg-border { background-color: var(--physics-border); }
+      .text-border { color: var(--physics-border); }
+      .border-border { border-color: var(--physics-border); }
+      .ring-border { --tw-ring-color: var(--physics-border); }
+      .bg-input { background-color: var(--physics-input); }
+      .text-input { color: var(--physics-input); }
+      .border-input { border-color: var(--physics-input); }
+      .ring-input { --tw-ring-color: var(--physics-input); }
+      .bg-ring { background-color: var(--physics-ring); }
+      .text-ring { color: var(--physics-ring); }
+      .border-ring { border-color: var(--physics-ring); }
+      .ring-ring { --tw-ring-color: var(--physics-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="logo">
+        <img src="../assets/icon.svg" alt="Logo">
+        <span>高考物理知识库</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">专题</a>
+        <a href="#">交互空间</a>
+        <a href="#">黄金结论</a>
+        <a href="#">关于</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h1 class="hero-name">高考物理知识库</h1>
+          <p class="hero-text">Yulaoshizuikeai's Physics Note</p>
+          <p class="hero-tagline">结合人教版课本与可汗学院思维，覆盖高考物理 19 大板块，打造系统化高中物理知识库。</p>
+          <div class="hero-actions">
+            <a href="#" class="btn btn-primary">开始阅读</a>
+            <a href="#" class="btn btn-primary">🪐 交互空间</a>
+            <a href="#" class="btn btn-secondary">50 大黄金结论</a>
+            <a href="#" class="btn btn-secondary">防踩坑排雷白皮书</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="../assets/icon.svg" alt="高考物理知识库原子图标">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-header">
+        <h2>19 大专题，系统通关高考物理</h2>
+        <p>从基础概念到压轴模型，覆盖高考物理全部核心板块</p>
+      </div>
+      <div class="features-grid">
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="🪐 高考物理可视化交互空间"></a>
+          <h3 class="feature-title">🪐 高考物理可视化交互空间</h3>
+          <p class="feature-details">运动学微元积分、斜面受力分解、平抛末速度合成、磁场回旋等 6 大核心模型动态仿真，直观物理直通考场。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="50 大黄金结论与临界条件"></a>
+          <h3 class="feature-title">50 大黄金结论与临界条件</h3>
+          <p class="feature-details">高考高频必考临界判据、黄金代换与秒杀定理矩阵速查，覆盖力学、天体、电磁、近代物理与实验。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="全专题防踩坑排雷白皮书"></a>
+          <h3 class="feature-title">全专题防踩坑排雷白皮书</h3>
+          <p class="feature-details">聚合 19 大专题易错陷阱、公式适用边界与考场雷区，考前 1 小时速通提分利器。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="01 运动的描述与匀变速规律"></a>
+          <h3 class="feature-title">01 运动的描述与匀变速规律</h3>
+          <p class="feature-details">质点与参考系、速度与加速度、匀变速四大公式与三大推论、运动图像与追及相遇。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="02 相互作用与共点力平衡"></a>
+          <h3 class="feature-title">02 相互作用与共点力平衡</h3>
+          <p class="feature-details">重力与弹力（胡克定律）、静与动摩擦力、力的合成与分解、受力分析规范与动态平衡。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="03 牛顿运动定律与动力学应用"></a>
+          <h3 class="feature-title">03 牛顿运动定律与动力学应用</h3>
+          <p class="feature-details">牛顿第一、第二、第三定律、力学单位制、超重失重、板块与传送带临界模型。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="04 抛体运动与曲线运动"></a>
+          <h3 class="feature-title">04 抛体运动与曲线运动</h3>
+          <p class="feature-details">曲线运动条件、运动合成与分解、平抛运动运动学与轨迹、斜面平抛解题模型。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="05 圆周运动及其应用"></a>
+          <h3 class="feature-title">05 圆周运动及其应用</h3>
+          <p class="feature-details">线速度与角速度、向心力与向心加速度、生活中的圆周、轻绳与轻杆竖直圆周临界模型。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="06 万有引力与宇宙航行"></a>
+          <h3 class="feature-title">06 万有引力与宇宙航行</h3>
+          <p class="feature-details">开普勒三定律、万有引力定律与卡文迪许扭秤、三大宇宙速度、卫星变轨与双星模型。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="07 机械能守恒与功能关系"></a>
+          <h3 class="feature-title">07 机械能守恒与功能关系</h3>
+          <p class="feature-details">恒力与变力功、机车启动、动能定理、重力势能与弹性势能、机械能守恒与摩擦生热。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="08 动量守恒定律与碰撞"></a>
+          <h3 class="feature-title">08 动量守恒定律与碰撞</h3>
+          <p class="feature-details">冲量与动量定理、动量守恒定律、完全弹性/非弹性/完全非弹性碰撞、反冲与滑块弹簧。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="09 静电场与电能"></a>
+          <h3 class="feature-title">09 静电场与电能</h3>
+          <p class="feature-details">库仑定律、场强与电场线、电势能与等势面、匀强电场 U=Ed、电容器电容动态分析。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="10 带电粒子在电场中的运动"></a>
+          <h3 class="feature-title">10 带电粒子在电场中的运动</h3>
+          <p class="feature-details">带电粒子在电场中的加速、类平抛偏转轨迹、示波管工作原理、交变电场粒子运动。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="11 电路与恒定电流"></a>
+          <h3 class="feature-title">11 电路与恒定电流</h3>
+          <p class="feature-details">电流微观式、电阻定律、电表改装、闭合电路欧姆定律、电路动态分析与电源输出极值。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="12 磁场与安培力洛伦兹力"></a>
+          <h3 class="feature-title">12 磁场与安培力洛伦兹力</h3>
+          <p class="feature-details">磁感应强度、安培力与左手定则、洛伦兹力、匀强磁场圆周运动几何轨迹与质谱仪。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="13 电磁感应与综合应用"></a>
+          <h3 class="feature-title">13 电磁感应与综合应用</h3>
+          <p class="feature-details">楞次定律右手定则、法拉第电磁感应定律、动生与感生电动势、导轨滑棒力电能量综合。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="14 交变电流与电磁波"></a>
+          <h3 class="feature-title">14 交变电流与电磁波</h3>
+          <p class="feature-details">正弦交变电流四值、理想变压器变压变流规律、远距离高压输电、电磁振荡与传感器。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="15 机械振动与机械波"></a>
+          <h3 class="feature-title">15 机械振动与机械波</h3>
+          <p class="feature-details">简谐运动回复力与能量、单摆与共振、机械波形成与图像、波动与振动图像综合互化。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="16 光学"></a>
+          <h3 class="feature-title">16 光学</h3>
+          <p class="feature-details">折射定律与折射率、全反射临界角与光纤、杨氏双缝干涉、薄膜干涉、衍射偏振与激光。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="17 热学与分子动理论"></a>
+          <h3 class="feature-title">17 热学与分子动理论</h3>
+          <p class="feature-details">分子动理论微观估算、气体三定律与理想气体状态方程、固体液体与热力学定律。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="18 原子物理与近代物理"></a>
+          <h3 class="feature-title">18 原子物理与近代物理</h3>
+          <p class="feature-details">黑体辐射与光电效应光子说、玻尔氢原子能级跃迁、原子核衰变半衰期、结合能与质能方程。</p>
+        </article>
+        <article class="feature-card">
+          <a href="#" class="feature-link" aria-label="19 物理实验专题"></a>
+          <h3 class="feature-title">19 物理实验专题</h3>
+          <p class="feature-details">游标卡尺螺旋测微器读数、打点计时器与力学验证、伏安法与电表内外接分压限流设计。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Yulaoshizuikeai's Physics Note · 高考物理知识库</p>
+    </div>
+  </footer>
+
+    <style>
+    :root {
+      --physics-background: #faf9f5;
+      --physics-foreground: #1f2328;
+      --physics-card: #ffffff;
+      --physics-card-foreground: #1f2328;
+      --physics-popover: #f3f1ec;
+      --physics-popover-foreground: #1f2328;
+      --physics-primary: #4c67b9;
+      --physics-primary-foreground: #ffffff;
+      --physics-secondary: #f3f1ec;
+      --physics-secondary-foreground: #1f2328;
+      --physics-muted: #f3f1ec;
+      --physics-muted-foreground: #57606a;
+      --physics-accent: #dbeafe;
+      --physics-accent-foreground: #003e8f;
+      --physics-destructive: #ef4444;
+      --physics-destructive-foreground: #ffffff;
+      --physics-border: rgba(0, 0, 0, 0.08);
+      --physics-input: rgba(0, 0, 0, 0.08);
+      --physics-ring: #4c67b9;
+      --physics-radius-sm: 0.5rem;
+      --physics-radius-md: 0.75rem;
+      --physics-radius-lg: 1rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--physics-background);
+      color: var(--physics-foreground);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--physics-border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--physics-foreground);
+    }
+
+    .logo img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--physics-muted-foreground);
+    }
+
+    .nav-links a:hover {
+      color: var(--physics-primary);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding-top: 140px;
+      padding-bottom: 80px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 520px;
+      background: radial-gradient(ellipse at center, rgba(76, 103, 185, 0.16) 0%, transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .hero-name {
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      background: linear-gradient(135deg, #4c67b9 0%, #6b8cff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .hero-text {
+      font-size: 1.35rem;
+      font-weight: 650;
+      color: var(--physics-muted-foreground);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .hero-tagline {
+      font-size: 1.08rem;
+      color: var(--physics-muted-foreground);
+      line-height: 1.72;
+      max-width: 560px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 46px;
+      padding: 0 22px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--physics-primary);
+      color: var(--physics-primary-foreground);
+      border-color: var(--physics-primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px -4px rgba(76, 103, 185, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--physics-card);
+      color: var(--physics-foreground);
+      border-color: var(--physics-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--physics-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      filter: drop-shadow(0 20px 40px rgba(76, 103, 185, 0.22));
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-image:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+    }
+
+    /* Features */
+    .features {
+      padding: 40px 0 80px;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .features-header h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .features-header p {
+      color: var(--physics-muted-foreground);
+      font-size: 1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      position: relative;
+      background: var(--physics-card);
+      border: 1px solid var(--physics-border);
+      border-radius: 12px;
+      padding: 22px;
+      transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.24s ease, background-color 0.24s ease, box-shadow 0.24s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--physics-primary), #6b8cff);
+      opacity: 0;
+      transition: opacity 0.24s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(76, 103, 185, 0.35);
+      background: var(--physics-popover);
+      box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.06);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card:hover .feature-title {
+      color: var(--physics-primary);
+    }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      color: var(--physics-foreground);
+      margin-bottom: 8px;
+      transition: color 0.2s ease;
+    }
+
+    .feature-details {
+      font-size: 0.88rem;
+      color: var(--physics-muted-foreground);
+      line-height: 1.65;
+    }
+
+    .feature-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 36px 0;
+      border-top: 1px solid var(--physics-border);
+      text-align: center;
+      color: var(--physics-muted-foreground);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-content {
+        max-width: 100%;
+      }
+      .hero-tagline {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-image {
+        order: -1;
+      }
+      .hero-image img {
+        max-width: 220px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</body>
+</html>

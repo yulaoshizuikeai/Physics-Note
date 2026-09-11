@@ -535,10 +535,48 @@ html.dark .flash-kw {
    5. Homepage De-noising & Editorial Quiet Power
    ============================================================ */
 
+/* Hero container: generous vertical rhythm and subtle centered spotlight */
+.VPHomeHero {
+  padding-top: calc(var(--vp-nav-height) + 56px) !important;
+  padding-bottom: 48px !important;
+}
+
+.VPHomeHero .container {
+  position: relative;
+}
+
+.VPHomeHero .container::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 720px;
+  height: 420px;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.dark .VPHomeHero .container::before {
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.5;
+}
+
 /* Hero Title: Solid, Confident, Crisp Typography */
 .VPHomeHero .name {
-  font-weight: 750 !important;
-  letter-spacing: -0.028em !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.032em !important;
+  line-height: 1.1 !important;
 }
 
 .VPHomeHero .name.clip {
@@ -557,25 +595,34 @@ html.dark .flash-kw {
 }
 
 .VPHomeHero .text {
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
-  color: var(--vp-c-text-1) !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--vp-c-text-2) !important;
+  margin-top: 0.5rem !important;
 }
 
 .VPHomeHero .tagline {
   color: var(--vp-c-text-2) !important;
-  font-size: 1.12rem !important;
-  line-height: 1.68 !important;
+  font-size: 1.15rem !important;
+  line-height: 1.72 !important;
   max-width: 640px;
+  margin-top: 1.25rem !important;
 }
 
-/* Hero Action Buttons: Disciplined Geometry, No Heavy Glow */
+/* Hero Action Buttons: Disciplined Geometry, Clear Hierarchy */
+.VPHomeHero .actions {
+  gap: 0.9rem !important;
+  margin-top: 1.75rem !important;
+}
+
 .VPHomeHero .action .VPButton {
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   font-weight: 600 !important;
   letter-spacing: 0.01em !important;
   box-shadow: none !important;
   min-height: var(--cc-touch-min);
+  padding-left: 1.35rem !important;
+  padding-right: 1.35rem !important;
   transition:
     transform 0.2s ease,
     background-color 0.2s ease,
@@ -592,8 +639,8 @@ html.dark .flash-kw {
 .VPHomeHero .action .VPButton.brand:hover {
   background-color: var(--vp-c-brand-2) !important;
   border-color: var(--vp-c-brand-2) !important;
-  transform: translateY(-1.5px) !important;
-  box-shadow: 0 4px 12px -2px rgba(46, 107, 86, 0.25) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 18px -4px color-mix(in srgb, var(--vp-c-brand-1) 35%, transparent) !important;
 }
 
 .dark .VPHomeHero .action .VPButton.brand {
@@ -604,24 +651,40 @@ html.dark .flash-kw {
 
 .dark .VPHomeHero .action .VPButton.brand:hover {
   background-color: var(--vp-c-brand-3) !important;
-  box-shadow: 0 4px 14px -2px rgba(82, 183, 136, 0.35) !important;
+  box-shadow: 0 8px 20px -4px color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent) !important;
 }
 
 .VPHomeHero .action .VPButton.alt {
-  background-color: var(--vp-c-bg-soft) !important;
+  background-color: var(--vp-c-bg-elv) !important;
   border: 1px solid var(--vp-c-border) !important;
   color: var(--vp-c-text-1) !important;
 }
 
 .VPHomeHero .action .VPButton.alt:hover {
-  background-color: var(--vp-c-bg-alt) !important;
+  background-color: var(--vp-c-bg-soft) !important;
   border-color: var(--vp-c-brand-1) !important;
-  transform: translateY(-1.5px) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Hero image / logo lift */
+.VPHomeHero .image {
+  filter: drop-shadow(0 18px 36px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.VPHomeHero .image:hover {
+  transform: translateY(-4px) scale(1.01);
 }
 
 /* Features Grid: 16 Chapters Refined Cards */
+.VPHomeFeatures {
+  padding-top: 40px !important;
+  padding-bottom: 56px !important;
+}
+
 .VPHomeFeatures .VPFeature {
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   border: 1px solid var(--vp-c-border) !important;
   background-color: var(--vp-c-bg-soft) !important;
   box-shadow: none !important;
@@ -639,20 +702,20 @@ html.dark .flash-kw {
 }
 
 .VPHomeFeatures .VPFeature:hover {
-  transform: translateY(-2px) !important;
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent) !important;
-  background-color: color-mix(in srgb, var(--vp-c-brand-1) 2.5%, var(--vp-c-bg-soft)) !important;
-  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.05) !important;
+  transform: translateY(-3px) !important;
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 45%, transparent) !important;
+  background-color: var(--vp-c-bg-elv) !important;
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.06) !important;
 }
 
 .dark .VPHomeFeatures .VPFeature:hover {
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 50%, transparent) !important;
-  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.45) !important;
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 55%, transparent) !important;
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5) !important;
 }
 
 .VPHomeFeatures .VPFeature .title {
   font-weight: 650 !important;
-  font-size: 1.05rem !important;
+  font-size: 1.06rem !important;
   letter-spacing: -0.015em !important;
   color: var(--vp-c-text-1) !important;
   transition: color 0.2s ease !important;
@@ -665,7 +728,22 @@ html.dark .flash-kw {
 .VPHomeFeatures .VPFeature .details {
   color: var(--vp-c-text-2) !important;
   font-size: 0.9rem !important;
-  line-height: 1.65 !important;
+  line-height: 1.68 !important;
+}
+
+/* Feature link hover affordance: entire card feels clickable */
+.VPHomeFeatures .VPFeature a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.VPHomeFeatures .VPFeature a {
+  position: relative;
+  display: block;
+  padding: 1.35rem !important;
+  text-decoration: none !important;
 }
 
 /* ============================================================
@@ -922,3 +1000,308 @@ html.dark .flash-kw {
    12. JS-Powered Table Scroll Fade Enhancement (via MutationObserver)
    Applied when scrolled to the end — remove right fade
    ============================================================ */
+
+/* ============================================================
+   13. Global UI System Unification (Homepage style → whole site)
+   ============================================================ */
+
+/* ------------------------------------------------------------------
+   A. Top Navigation Bar — clean frosted glass, subtle lift on scroll
+   ------------------------------------------------------------------ */
+.VPNavBar {
+  border-bottom: 1px solid var(--vp-c-divider) !important;
+  background-color: var(--vp-nav-bg-color) !important;
+  backdrop-filter: blur(14px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.VPNavBar.has-sidebar {
+  box-shadow: none !important;
+}
+
+/* Logo/title weight */
+.VPNavBar .title {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Nav menu links */
+.VPNavBarMenuLink {
+  font-weight: 500 !important;
+  color: var(--vp-c-text-2) !important;
+  transition: color 0.18s ease;
+}
+
+.VPNavBarMenuLink:hover,
+.VPNavBarMenuLink.active {
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* Active nav underline */
+.VPNavBarMenuLink .active-bar {
+  background-color: var(--vp-c-brand-1) !important;
+  border-radius: 2px !important;
+}
+
+/* Social / appearance icons */
+.VPNavBar .VPIcon {
+  color: var(--vp-c-text-2) !important;
+  transition: color 0.18s ease;
+}
+
+.VPNavBar .VPIcon:hover {
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* ------------------------------------------------------------------
+   B. Sidebar — paper card feeling, active item emphasis
+   ------------------------------------------------------------------ */
+.VPSidebar {
+  border-right: 1px solid var(--vp-c-divider) !important;
+  background-color: var(--vp-sidebar-bg-color) !important;
+}
+
+/* Group titles */
+.VPSidebarItem.level-0 > .item > .link {
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: -0.01em !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+/* Collapsible section headers */
+.VPSidebarItem .item > .link {
+  border-radius: 6px !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.VPSidebarItem .item > .link:hover {
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-soft)) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* Active link */
+.VPSidebarItem.is-active > .item > .link,
+.VPSidebarItem .is-active > .link {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600 !important;
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--vp-c-bg-soft)) !important;
+}
+
+/* Caret / arrow */
+.VPSidebarItem .caret {
+  color: var(--vp-c-text-3) !important;
+}
+
+/* ------------------------------------------------------------------
+   C. Local Search Box — modern flat pill
+   ------------------------------------------------------------------ */
+.VPLocalSearchBox {
+  --vp-c-brand-1: var(--vp-c-brand-1);
+}
+
+.VPLocalSearchBox .search-input {
+  border-radius: 10px !important;
+  border: 1px solid var(--vp-c-border) !important;
+  background-color: var(--vp-c-bg-elv) !important;
+  box-shadow: var(--vp-shadow-1) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.VPLocalSearchBox .search-input:focus-within {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 45%, var(--vp-c-border)) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent) !important;
+}
+
+.VPLocalSearchBox .search-input input {
+  color: var(--vp-c-text-1) !important;
+}
+
+/* Search results */
+.VPLocalSearchBox .result {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.VPLocalSearchBox .result.selected,
+.VPLocalSearchBox .result:hover {
+  background-color: var(--vp-c-bg-soft) !important;
+  border-color: var(--vp-c-border) !important;
+}
+
+/* ------------------------------------------------------------------
+   D. Global Buttons — same lift/shadow language as homepage
+   ------------------------------------------------------------------ */
+.VPButton {
+  border-radius: 9px !important;
+  font-weight: 600 !important;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+.VPButton.brand {
+  background-color: var(--vp-c-brand-1) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  color: #ffffff !important;
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 6px 16px -4px color-mix(in srgb, var(--vp-c-brand-1) 32%, transparent) !important;
+}
+
+.VPButton.alt {
+  background-color: var(--vp-c-bg-elv) !important;
+  border: 1px solid var(--vp-c-border) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPButton.alt:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  transform: translateY(-1.5px) !important;
+}
+
+/* ------------------------------------------------------------------
+   E. Document Page Container — airy, centred, paper-white card
+   ------------------------------------------------------------------ */
+.VPDoc .content {
+  padding-top: 32px !important;
+  padding-bottom: 48px !important;
+}
+
+/* Main content column max-width and reading comfort */
+@media (min-width: 1280px) {
+  .VPDoc .content-container {
+    max-width: 820px !important;
+  }
+}
+
+/* Page title area */
+.VPDoc h1 {
+  letter-spacing: -0.02em !important;
+}
+
+/* ------------------------------------------------------------------
+   F. Outline / TOC — active marker and hover
+   ------------------------------------------------------------------ */
+.VPDocAsideOutline {
+  border-left: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPDocAsideOutline .outline-link {
+  border-radius: 4px !important;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.VPDocAsideOutline .outline-link:hover {
+  color: var(--vp-c-brand-1) !important;
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 4%, transparent) !important;
+}
+
+.VPDocAsideOutline .outline-link.active {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600 !important;
+}
+
+.VPDocAsideOutline .outline-marker {
+  background-color: var(--vp-c-brand-1) !important;
+  width: 3px !important;
+  border-radius: 3px !important;
+}
+
+/* ------------------------------------------------------------------
+   G. Doc Footer Pager — stronger card affordance
+   ------------------------------------------------------------------ */
+.VPDocFooter .pager-link {
+  min-height: 68px !important;
+  border-radius: 10px !important;
+  background-color: var(--vp-c-bg-elv) !important;
+  border: 1px solid var(--vp-c-border) !important;
+  box-shadow: var(--vp-shadow-1) !important;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+.VPDocFooter .pager-link:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, var(--vp-c-border)) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.VPDocFooter .pager-link .title {
+  font-weight: 600 !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPDocFooter .pager-link:hover .title {
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* ------------------------------------------------------------------
+   H. Mobile Nav Screen — full-screen frosted sheet
+   ------------------------------------------------------------------ */
+.VPNavScreen {
+  background-color: var(--vp-nav-screen-bg-color) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+.VPNavScreen .container {
+  padding-top: 24px !important;
+}
+
+.VPNavScreenMenuLink,
+.VPNavScreenMenuGroupLink {
+  min-height: 48px !important;
+  border-radius: 8px !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.VPNavScreenMenuLink:hover,
+.VPNavScreenMenuGroupLink:hover {
+  background-color: var(--vp-c-bg-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* ------------------------------------------------------------------
+   I. LocalNav (mobile in-page) — clean border
+   ------------------------------------------------------------------ */
+.VPLocalNav {
+  border-bottom: 1px solid var(--vp-c-divider) !important;
+  background-color: var(--vp-nav-bg-color) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.VPLocalNavOutlineDropdown > button {
+  border-radius: 6px !important;
+  transition: background-color 0.15s ease;
+}
+
+.VPLocalNavOutlineDropdown > button:hover {
+  background-color: var(--vp-c-bg-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* ------------------------------------------------------------------
+   J. Appearance / Theme Toggle
+   ------------------------------------------------------------------ */
+.VPSwitch {
+  border-radius: 999px !important;
+  border: 1px solid var(--vp-c-border) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+}
+
+.VPSwitch .check {
+  background-color: var(--vp-c-brand-1) !important;
+  border-radius: 999px !important;
+}

@@ -1,0 +1,83 @@
+/**
+ * Homepage Redesign — Design Project Color Contract
+ * Based on Yulaoshizuikeai's Physics Note warm neo-minimalism
+ * with Google Design Library cleanliness references.
+ */
+
+:root {
+  --background: #faf9f5;
+  --foreground: #1f2328;
+  --card: #ffffff;
+  --card-foreground: #1f2328;
+  --popover: #f3f1ec;
+  --popover-foreground: #1f2328;
+
+  --primary: #4c67b9;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f1ec;
+  --secondary-foreground: #1f2328;
+  --muted: #f3f1ec;
+  --muted-foreground: #57606a;
+  --accent: #dbeafe;
+  --accent-foreground: #003e8f;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: #4c67b9;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-serif: Georgia, "Songti SC", "Noto Serif SC", STSong, SimSun, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  --physics-background: var(--background);
+  --physics-foreground: var(--foreground);
+  --physics-card: var(--card);
+  --physics-card-foreground: var(--card-foreground);
+  --physics-popover: var(--popover);
+  --physics-popover-foreground: var(--popover-foreground);
+  --physics-primary: var(--primary);
+  --physics-primary-foreground: var(--primary-foreground);
+  --physics-secondary: var(--secondary);
+  --physics-secondary-foreground: var(--secondary-foreground);
+  --physics-muted: var(--muted);
+  --physics-muted-foreground: var(--muted-foreground);
+  --physics-accent: var(--accent);
+  --physics-accent-foreground: var(--accent-foreground);
+  --physics-destructive: var(--destructive);
+  --physics-destructive-foreground: var(--destructive-foreground);
+  --physics-border: var(--border);
+  --physics-input: var(--input);
+  --physics-ring: var(--ring);
+  --physics-radius-sm: var(--radius-sm);
+  --physics-radius-md: var(--radius-md);
+  --physics-radius-lg: var(--radius-lg);
+}
+
+.dark {
+  --background: #151718;
+  --foreground: #e3e5e8;
+  --card: #1c1f21;
+  --card-foreground: #e3e5e8;
+  --popover: #23272a;
+  --popover-foreground: #e3e5e8;
+
+  --primary: #758ee6;
+  --primary-foreground: #121415;
+  --secondary: #1c1f21;
+  --secondary-foreground: #e3e5e8;
+  --muted: #1c1f21;
+  --muted-foreground: #9ba1a6;
+  --accent: #00266b;
+  --accent-foreground: #bfdbfe;
+
+  --border: rgba(255, 255, 255, 0.09);
+  --input: rgba(255, 255, 255, 0.09);
+  --ring: #758ee6;
+}

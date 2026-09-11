@@ -1,0 +1,193 @@
+{
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "builtin-latest",
+    "version_source": "builtin-design-library"
+  },
+  "project": {
+    "name": "homepage-redesign",
+    "displayName": "高考物理知识库主页优化",
+    "deviceType": "desktop",
+    "resolvedLane": "library_bound",
+    "selectedIntentWorkflowRead": true,
+    "contextRequirementsLoaded": [
+      {
+        "path": "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/page-rendering-quality-gate.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/design-artifact-validation.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/delivery-evidence-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "visual-experience/visual-experience-guidelines.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      }
+    ],
+    "designSource": {
+      "operatingMode": "library-bound",
+      "libraryIdentity": {
+        "name": "Google",
+        "id": "dl_builtin_google",
+        "version": 0,
+        "scope": "built-in-global",
+        "path": "c:\\Users\\Yu_233\\.trae-cn\\design_libraries\\Google",
+        "versionSource": "selected-context"
+      }
+    },
+    "styleContinuityAnchors": {
+      "colorSystem": "Warm alabaster paper background with cobalt blue primary; Google Design Library clean flat surfaces and thin borders as secondary reference.",
+      "shapeSystem": "8-12px radius for cards and buttons; subtle flat geometry with minimal elevation.",
+      "typographySystem": "Inter / system-ui sans-serif for UI; DM Sans reference from Google Library for headings; confident negative letter-spacing on hero titles.",
+      "spacingSystem": "Generous hero padding, 1.75rem action gap, 40/56px feature section rhythm.",
+      "componentLanguage": "Flat cards with border and tonal hover; crisp primary/secondary button hierarchy.",
+      "surfaceAndDepth": "Soft diffused shadows only on hover; background spotlight behind hero for focus.",
+      "imageryAndIconography": "Physics atom notebook SVG hero; minimal iconography.",
+      "interactionTone": "Gentle lift and shadow on hover; smooth 0.2-0.24s transitions."
+    },
+    "pages": [
+      {
+        "nodeId": "page-index",
+        "slug": "index",
+        "title": "高考物理知识库主页 - 优化版",
+        "htmlSrc": "pages/index.html",
+        "pageType": "showcase",
+        "businessScenario": "高考物理知识库主页，展示 19 大专题入口与核心功能",
+        "componentPlan": [
+          "button",
+          "card",
+          "navigation"
+        ],
+        "imagePlan": [],
+        "qualityRisks": []
+      },
+      {
+        "nodeId": "page-doc-example",
+        "slug": "doc-example",
+        "title": "专题文档页示例 - 统一全局样式",
+        "htmlSrc": "pages/doc-example.html",
+        "pageType": "content",
+        "businessScenario": "典型专题文档页，验证导航栏、侧边栏、文档内容、代码块、表格、翻页与目录的统一视觉风格",
+        "componentPlan": [
+          "navigation",
+          "sidebar",
+          "toc",
+          "callout",
+          "code-block",
+          "table",
+          "pager"
+        ],
+        "imagePlan": [],
+        "qualityRisks": []
+      }
+    ],
+    "dispatchPreflightManifest": [
+      {
+        "nodeId": "page-index",
+        "packetType": "LibraryBoundPagePacket",
+        "pageRuntimeGuide": "intent-workflows/intent-page-library-bound/library-bound-page-runtime.md",
+        "dispatchContract": "intent-workflows/intent-page-library-bound/dispatch-contract.md",
+        "allowedWritePaths": ["pages/index.html", "pages/doc-example.html"],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": ["pages/index.html", "pages/doc-example.html"]
+        }
+      },
+      {
+        "nodeId": "page-doc-example",
+        "packetType": "LibraryBoundPagePacket",
+        "pageRuntimeGuide": "intent-workflows/intent-page-library-bound/library-bound-page-runtime.md",
+        "dispatchContract": "intent-workflows/intent-page-library-bound/dispatch-contract.md",
+        "allowedWritePaths": ["pages/index.html", "pages/doc-example.html"],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": ["pages/index.html", "pages/doc-example.html"]
+        }
+      }
+    ],
+    "expectedDispatches": [
+      {
+        "nodeId": "page-doc-example",
+        "pageId": "page-doc-example",
+        "targetPageId": "page-doc-example",
+        "packetType": "LibraryBoundPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/doc-example.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "page-doc-example_global-style-unification_doc-mockup",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-11T14:15:51.350Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-doc-example",
+        "packetType": "LibraryBoundPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/doc-example.html"
+        ],
+        "toolCallLedger": {
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0,
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "page-doc-example_global-style-unification_doc-mockup"
+        }
+      }
+    ],
+    "validationRunDiscipline": {
+      "maxFullValidationRuns": 2,
+      "softWarningsTriggerRepair": false,
+      "blockingRepairMode": "targeted-once",
+      "forbiddenRepairTriggers": [
+        "soft-warning-only",
+        "provenance-warning-only",
+        "style-warning-only"
+      ]
+    },
+    "lowValueCallWatchdog": {
+      "applies": true,
+      "noProgressSignals": [
+        "no_tool_call",
+        "no_artifact_diff",
+        "no_structured_decision"
+      ],
+      "noProgressNextAction": "enter_readiness_or_blocked_summary"
+    },
+    "mainAgentPostDispatchMutations": []
+  }
+}

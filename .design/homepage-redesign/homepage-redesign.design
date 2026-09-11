@@ -1,0 +1,76 @@
+{
+  "data": [
+    {
+      "id": "page-index",
+      "title": "高考物理知识库主页 - 优化版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1789134884000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1920,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-dd7591af",
+          "measuredAt": 1789135351038
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-doc-example",
+      "title": "专题文档页示例 - 统一全局样式",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1789135889000,
+      "canvasData": {
+        "x": 1400,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/doc-example.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "知识库原子图标",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789134884000,
+      "canvasData": {
+        "x": 0,
+        "y": 2654,
+        "naturalSize": {
+          "width": 330,
+          "height": 380
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/icon.svg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "高考物理知识库主页优化",
+    "designLibrary": {
+      "name": "Google",
+      "id": "dl_builtin_google",
+      "version": 0,
+      "scope": "built-in-global",
+      "path": "c:\\Users\\Yu_233\\.trae-cn\\design_libraries\\Google",
+      "versionSource": "selected-context"
+    },
+    "visualEditorEnabled": false,
+    "showEdge": false
+  }
+}

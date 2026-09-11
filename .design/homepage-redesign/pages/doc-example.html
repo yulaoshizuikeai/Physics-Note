@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专题文档页示例 - 高考物理知识库</title>
+    <style id="theme-vars">
+/**
+ * Homepage Redesign — Design Project Color Contract
+ * Based on Yulaoshizuikeai's Physics Note warm neo-minimalism
+ * with Google Design Library cleanliness references.
+ */
+
+:root {
+  --background: #faf9f5;
+  --foreground: #1f2328;
+  --card: #ffffff;
+  --card-foreground: #1f2328;
+  --popover: #f3f1ec;
+  --popover-foreground: #1f2328;
+
+  --primary: #4c67b9;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f1ec;
+  --secondary-foreground: #1f2328;
+  --muted: #f3f1ec;
+  --muted-foreground: #57606a;
+  --accent: #dbeafe;
+  --accent-foreground: #003e8f;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: #4c67b9;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-serif: Georgia, "Songti SC", "Noto Serif SC", STSong, SimSun, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  --physics-background: var(--background);
+  --physics-foreground: var(--foreground);
+  --physics-card: var(--card);
+  --physics-card-foreground: var(--card-foreground);
+  --physics-popover: var(--popover);
+  --physics-popover-foreground: var(--popover-foreground);
+  --physics-primary: var(--primary);
+  --physics-primary-foreground: var(--primary-foreground);
+  --physics-secondary: var(--secondary);
+  --physics-secondary-foreground: var(--secondary-foreground);
+  --physics-muted: var(--muted);
+  --physics-muted-foreground: var(--muted-foreground);
+  --physics-accent: var(--accent);
+  --physics-accent-foreground: var(--accent-foreground);
+  --physics-destructive: var(--destructive);
+  --physics-destructive-foreground: var(--destructive-foreground);
+  --physics-border: var(--border);
+  --physics-input: var(--input);
+  --physics-ring: var(--ring);
+  --physics-radius-sm: var(--radius-sm);
+  --physics-radius-md: var(--radius-md);
+  --physics-radius-lg: var(--radius-lg);
+}
+
+.dark {
+  --background: #151718;
+  --foreground: #e3e5e8;
+  --card: #1c1f21;
+  --card-foreground: #e3e5e8;
+  --popover: #23272a;
+  --popover-foreground: #e3e5e8;
+
+  --primary: #758ee6;
+  --primary-foreground: #121415;
+  --secondary: #1c1f21;
+  --secondary-foreground: #e3e5e8;
+  --muted: #1c1f21;
+  --muted-foreground: #9ba1a6;
+  --accent: #00266b;
+  --accent-foreground: #bfdbfe;
+
+  --border: rgba(255, 255, 255, 0.09);
+  --input: rgba(255, 255, 255, 0.09);
+  --ring: #758ee6;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--physics-background);
+    --color-foreground: var(--physics-foreground);
+    --color-card: var(--physics-card);
+    --color-card-foreground: var(--physics-card-foreground);
+    --color-popover: var(--physics-popover);
+    --color-popover-foreground: var(--physics-popover-foreground);
+    --color-primary: var(--physics-primary);
+    --color-primary-foreground: var(--physics-primary-foreground);
+    --color-secondary: var(--physics-secondary);
+    --color-secondary-foreground: var(--physics-secondary-foreground);
+    --color-muted: var(--physics-muted);
+    --color-muted-foreground: var(--physics-muted-foreground);
+    --color-accent: var(--physics-accent);
+    --color-accent-foreground: var(--physics-accent-foreground);
+    --color-destructive: var(--physics-destructive);
+    --color-destructive-foreground: var(--physics-destructive-foreground);
+    --color-border: var(--physics-border);
+    --color-input: var(--physics-input);
+    --color-ring: var(--physics-ring);
+    --radius-sm: var(--physics-radius-sm);
+    --radius-md: var(--physics-radius-md);
+    --radius-lg: var(--physics-radius-lg);
+  }
+  @layer base {
+    body { background: var(--physics-background); color: var(--physics-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--physics-background); }
+      .text-background { color: var(--physics-background); }
+      .border-background { border-color: var(--physics-background); }
+      .ring-background { --tw-ring-color: var(--physics-background); }
+      .bg-foreground { background-color: var(--physics-foreground); }
+      .text-foreground { color: var(--physics-foreground); }
+      .border-foreground { border-color: var(--physics-foreground); }
+      .ring-foreground { --tw-ring-color: var(--physics-foreground); }
+      .bg-card { background-color: var(--physics-card); }
+      .text-card { color: var(--physics-card); }
+      .border-card { border-color: var(--physics-card); }
+      .ring-card { --tw-ring-color: var(--physics-card); }
+      .bg-card-foreground { background-color: var(--physics-card-foreground); }
+      .text-card-foreground { color: var(--physics-card-foreground); }
+      .border-card-foreground { border-color: var(--physics-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--physics-card-foreground); }
+      .bg-popover { background-color: var(--physics-popover); }
+      .text-popover { color: var(--physics-popover); }
+      .border-popover { border-color: var(--physics-popover); }
+      .ring-popover { --tw-ring-color: var(--physics-popover); }
+      .bg-popover-foreground { background-color: var(--physics-popover-foreground); }
+      .text-popover-foreground { color: var(--physics-popover-foreground); }
+      .border-popover-foreground { border-color: var(--physics-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--physics-popover-foreground); }
+      .bg-primary { background-color: var(--physics-primary); }
+      .text-primary { color: var(--physics-primary); }
+      .border-primary { border-color: var(--physics-primary); }
+      .ring-primary { --tw-ring-color: var(--physics-primary); }
+      .bg-primary-foreground { background-color: var(--physics-primary-foreground); }
+      .text-primary-foreground { color: var(--physics-primary-foreground); }
+      .border-primary-foreground { border-color: var(--physics-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--physics-primary-foreground); }
+      .bg-secondary { background-color: var(--physics-secondary); }
+      .text-secondary { color: var(--physics-secondary); }
+      .border-secondary { border-color: var(--physics-secondary); }
+      .ring-secondary { --tw-ring-color: var(--physics-secondary); }
+      .bg-secondary-foreground { background-color: var(--physics-secondary-foreground); }
+      .text-secondary-foreground { color: var(--physics-secondary-foreground); }
+      .border-secondary-foreground { border-color: var(--physics-secondary-foreground); }
+      .ring-secondary-foreground { --tw-ring-color: var(--physics-secondary-foreground); }
+      .bg-muted { background-color: var(--physics-muted); }
+      .text-muted { color: var(--physics-muted); }
+      .border-muted { border-color: var(--physics-muted); }
+      .ring-muted { --tw-ring-color: var(--physics-muted); }
+      .bg-muted-foreground { background-color: var(--physics-muted-foreground); }
+      .text-muted-foreground { color: var(--physics-muted-foreground); }
+      .border-muted-foreground { border-color: var(--physics-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--physics-muted-foreground); }
+      .bg-accent { background-color: var(--physics-accent); }
+      .text-accent { color: var(--physics-accent); }
+      .border-accent { border-color: var(--physics-accent); }
+      .ring-accent { --tw-ring-color: var(--physics-accent); }
+      .bg-accent-foreground { background-color: var(--physics-accent-foreground); }
+      .text-accent-foreground { color: var(--physics-accent-foreground); }
+      .border-accent-foreground { border-color: var(--physics-accent-foreground); }
+      .ring-accent-foreground { --tw-ring-color: var(--physics-accent-foreground); }
+      .bg-destructive { background-color: var(--physics-destructive); }
+      .text-destructive { color: var(--physics-destructive); }
+      .border-destructive { border-color: var(--physics-destructive); }
+      .ring-destructive { --tw-ring-color: var(--physics-destructive); }
+      .bg-destructive-foreground { background-color: var(--physics-destructive-foreground); }
+      .text-destructive-foreground { color: var(--physics-destructive-foreground); }
+      .border-destructive-foreground { border-color: var(--physics-destructive-foreground); }
+      .ring-destructive-foreground { --tw-ring-color: var(--physics-destructive-foreground); }
+      .bg-border { background-color: var(--physics-border); }
+      .text-border { color: var(--physics-border); }
+      .border-border { border-color: var(--physics-border); }
+      .ring-border { --tw-ring-color: var(--physics-border); }
+      .bg-input { background-color: var(--physics-input); }
+      .text-input { color: var(--physics-input); }
+      .border-input { border-color: var(--physics-input); }
+      .ring-input { --tw-ring-color: var(--physics-input); }
+      .bg-ring { background-color: var(--physics-ring); }
+      .text-ring { color: var(--physics-ring); }
+      .border-ring { border-color: var(--physics-ring); }
+      .ring-ring { --tw-ring-color: var(--physics-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="logo">
+        <img src="../assets/icon.svg" alt="Logo">
+        <span>高考物理知识库</span>
+      </a>
+      <div class="nav-links">
+        <a href="#">专题</a>
+        <a href="#">交互空间</a>
+        <a href="#">黄金结论</a>
+        <a href="#">关于</a>
+      </div>
+      <div class="nav-right">
+        <div class="search-pill">🔍 搜索文档</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-title">00 说明</div>
+        <a href="#" class="sidebar-link active">项目介绍</a>
+        <a href="#" class="sidebar-link">高考物理全景图</a>
+        <a href="#" class="sidebar-link">错误反馈</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-title">01 运动学</div>
+        <a href="#" class="sidebar-link">质点与参考系</a>
+        <a href="#" class="sidebar-link">时间与位移</a>
+        <a href="#" class="sidebar-link">速度与加速度</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-title">02 相互作用</div>
+        <a href="#" class="sidebar-link">重力与弹力</a>
+        <a href="#" class="sidebar-link">摩擦力</a>
+      </div>
+    </aside>
+
+    <main class="content doc">
+      <h1>01 质点与参考系</h1>
+      <p>在高中物理中，<strong>质点</strong>是一个理想化的物理模型。当物体的大小和形状对所研究的问题没有影响或影响可以忽略时，我们就可以把物体看成一个有质量的点，称为质点。</p>
+
+      <div class="callout info">
+        <div class="callout-title">ℹ️ 核心判断标准</div>
+        <p>物体能否视为质点，取决于研究问题的性质，而不是物体本身的大小。同一物体在不同问题中可能有时可视为质点，有时不能。</p>
+      </div>
+
+      <h2>一、参考系与相对运动</h2>
+      <p>描述物体的运动必须选择参考系。选择不同的参考系，对同一物体运动的描述可能不同。通常情况下，我们以地面或相对地面静止的物体作为参考系。</p>
+
+      <div class="callout tip">
+        <div class="callout-title">💡 解题习惯</div>
+        <p>分析运动前先在草稿纸上明确参考系，并在公式中保持统一。涉及多个物体时，优先选择让运动描述最简单的参考系。</p>
+      </div>
+
+      <h2>二、典型公式与代码示例</h2>
+      <p>匀变速直线运动的基本公式可以写成如下形式，其中 <code>a</code> 为加速度，<code>v₀</code> 为初速度：</p>
+
+      <div class="code-block">
+        <div class="code-header"><span>python</span><span>复制</span></div>
+        <pre># 匀变速直线运动位移公式
+def displacement(v0, a, t):
+    return v0 * t + 0.5 * a * t ** 2
+
+# 示例：初速度 2 m/s，加速度 3 m/s²，时间 4 s
+s = displacement(2, 3, 4)
+print(f"位移 = {s} m")  # 输出：32 m</pre>
+      </div>
+
+      <h2>三、常见运动模型对比</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>运动类型</th><th>加速度</th><th>典型图像</th><th>关键公式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>匀速直线运动</td><td>a = 0</td><td>v-t 水平线</td><td>x = vt</td></tr>
+            <tr><td>匀加速直线运动</td><td>a 恒定且与 v 同向</td><td>v-t 斜向上直线</td><td>v = v₀ + at</td></tr>
+            <tr><td>匀减速直线运动</td><td>a 恒定且与 v 反向</td><td>v-t 斜向下直线</td><td>x = v₀t + ½at²</td></tr>
+            <tr><td>自由落体运动</td><td>a = g ≈ 9.8 m/s²</td><td>v-t 过原点斜线</td><td>h = ½gt²</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <a href="#" class="pager-link">
+          <div class="pager-label">上一页</div>
+          <div class="pager-title">运动的描述与匀变速规律</div>
+        </a>
+        <a href="#" class="pager-link">
+          <div class="pager-label" style="text-align:right">下一页</div>
+          <div class="pager-title" style="text-align:right">02 时间与位移</div>
+        </a>
+      </div>
+    </main>
+
+    <aside class="toc">
+      <div class="toc-title">本页目录</div>
+      <a href="#" class="toc-link active">一、参考系与相对运动</a>
+      <a href="#" class="toc-link">二、典型公式与代码示例</a>
+      <a href="#" class="toc-link">三、常见运动模型对比</a>
+    </aside>
+  </div>
+
+    <style>
+    :root {
+      --physics-background: #faf9f5;
+      --physics-foreground: #1f2328;
+      --physics-card: #ffffff;
+      --physics-card-foreground: #1f2328;
+      --physics-popover: #f3f1ec;
+      --physics-popover-foreground: #1f2328;
+      --physics-primary: #4c67b9;
+      --physics-primary-foreground: #ffffff;
+      --physics-secondary: #f3f1ec;
+      --physics-secondary-foreground: #1f2328;
+      --physics-muted: #f3f1ec;
+      --physics-muted-foreground: #57606a;
+      --physics-accent: #dbeafe;
+      --physics-accent-foreground: #003e8f;
+      --physics-destructive: #ef4444;
+      --physics-destructive-foreground: #ffffff;
+      --physics-border: rgba(0, 0, 0, 0.08);
+      --physics-input: rgba(0, 0, 0, 0.08);
+      --physics-ring: #4c67b9;
+      --physics-radius-sm: 0.5rem;
+      --physics-radius-md: 0.75rem;
+      --physics-radius-lg: 1rem;
+
+      --vp-c-bg: #faf9f5;
+      --vp-c-bg-alt: #ebe8e1;
+      --vp-c-bg-elv: #ffffff;
+      --vp-c-bg-soft: #f3f1ec;
+      --vp-c-text-1: #1f2328;
+      --vp-c-text-2: #57606a;
+      --vp-c-text-3: #6e7781;
+      --vp-c-border: rgba(0, 0, 0, 0.08);
+      --vp-c-divider: rgba(0, 0, 0, 0.06);
+      --vp-c-brand-1: #4c67b9;
+      --vp-c-brand-2: #3d56a3;
+      --vp-c-brand-3: #2f438a;
+      --vp-code-block-bg: #f2efe9;
+      --vp-code-bg: rgba(0, 0, 0, 0.045);
+      --vp-code-color: #374ea3;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--physics-background);
+      color: var(--physics-foreground);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(14px) saturate(180%);
+      border-bottom: 1px solid var(--physics-border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-inner {
+      width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; }
+    .logo img { width: 28px; height: 28px; }
+
+    .nav-links { display: flex; gap: 28px; font-size: 0.9rem; font-weight: 500; color: var(--physics-muted-foreground); }
+    .nav-links a:hover { color: var(--physics-primary); }
+
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .search-pill {
+      height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--physics-border);
+      background: var(--physics-card); display: flex; align-items: center; gap: 8px;
+      font-size: 0.85rem; color: var(--physics-muted-foreground); min-width: 180px;
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr 220px;
+      gap: 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 96px 24px 48px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 96px);
+      overflow-y: auto;
+      padding-right: 12px;
+    }
+
+    .sidebar-group { margin-bottom: 22px; }
+    .sidebar-title {
+      font-size: 0.9rem; font-weight: 700; color: var(--physics-foreground);
+      margin-bottom: 8px; padding-left: 10px;
+    }
+
+    .sidebar-link {
+      display: block;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      color: var(--physics-muted-foreground);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .sidebar-link:hover { background: color-mix(in srgb, var(--physics-primary) 5%, var(--physics-muted)); color: var(--physics-primary); }
+    .sidebar-link.active { background: color-mix(in srgb, var(--physics-primary) 7%, var(--physics-muted)); color: var(--physics-primary); font-weight: 600; }
+
+    /* Main content */
+    .content { min-width: 0; }
+
+    .doc h1 {
+      font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25;
+      margin-bottom: 1.2rem; color: var(--physics-foreground);
+    }
+
+    .doc p {
+      font-size: 1rem; line-height: 1.82; margin: 1.1rem 0; color: var(--physics-foreground);
+    }
+
+    .doc h2 {
+      font-size: 1.45rem; font-weight: 650; margin-top: 2.2rem; margin-bottom: 0.9rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--physics-border); color: var(--physics-foreground);
+    }
+
+    .doc h3 { font-size: 1.15rem; font-weight: 650; margin-top: 1.6rem; margin-bottom: 0.7rem; color: var(--physics-foreground); }
+
+    .doc ul { padding-left: 1.4rem; margin: 0.9rem 0; }
+    .doc li { margin: 0.35rem 0; color: var(--physics-foreground); }
+
+    .doc a { color: var(--physics-primary); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+    .doc code {
+      font-family: "JetBrains Mono", monospace; font-size: 0.875em;
+      padding: 0.18em 0.44em; border-radius: 5px; background: var(--vp-code-bg); color: var(--vp-code-color);
+      border: 1px solid var(--physics-border);
+    }
+
+    /* Callouts */
+    .callout {
+      border-radius: 10px; padding: 1rem 1.3rem; margin: 1.4rem 0;
+      border: 1px solid var(--physics-border); border-left-width: 4px;
+      background: var(--physics-card); box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .callout.info { border-left-color: rgba(76, 103, 185, 0.45); background: rgba(86, 114, 205, 0.05); }
+    .callout.tip { border-left-color: #435eb8; background: rgba(67, 94, 184, 0.06); }
+    .callout-title { font-weight: 650; font-size: 0.96rem; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.45rem; }
+    .callout p { margin: 0.35rem 0; font-size: 0.94rem; line-height: 1.72; }
+
+    /* Code block */
+    .code-block {
+      border-radius: 8px; border: 1px solid var(--physics-border); margin: 1.25rem 0;
+      background: var(--vp-code-block-bg); overflow: hidden;
+    }
+
+    .code-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 14px; border-bottom: 1px solid var(--physics-border);
+      font-size: 0.8rem; color: var(--physics-muted-foreground); background: rgba(0,0,0,0.02);
+    }
+
+    .code-block pre {
+      padding: 1rem 1.15rem; font-family: "JetBrains Mono", monospace; font-size: 0.875rem;
+      line-height: 1.7; overflow-x: auto;
+    }
+
+    /* Table */
+    .table-wrap { margin: 1.4rem 0; border-radius: 10px; border: 1px solid var(--physics-border); overflow: hidden; box-shadow: 0 4px 16px -4px rgba(0,0,0,0.035); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th { background: var(--physics-muted); font-weight: 650; padding: 10px 16px; text-align: left; border-bottom: 2px solid var(--physics-border); color: var(--physics-foreground); }
+    td { padding: 10px 16px; border-bottom: 1px solid var(--physics-border); color: var(--physics-foreground); }
+    tr:nth-child(even) { background: rgba(0,0,0,0.015); }
+    tr:last-child td { border-bottom: none; }
+
+    /* Pager */
+    .pager {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 3rem;
+    }
+
+    .pager-link {
+      border-radius: 10px; border: 1px solid var(--physics-border); background: var(--physics-card);
+      padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pager-link:hover { border-color: color-mix(in srgb, var(--physics-primary) 40%, var(--physics-border)); transform: translateY(-2px); box-shadow: 0 6px 18px -4px rgba(0,0,0,0.05); }
+    .pager-label { font-size: 0.78rem; color: var(--physics-muted-foreground); margin-bottom: 4px; }
+    .pager-title { font-weight: 600; color: var(--physics-foreground); }
+    .pager-link:hover .pager-title { color: var(--physics-primary); }
+
+    /* TOC */
+    .toc {
+      position: sticky; top: 80px; height: calc(100vh - 96px);
+      border-left: 1px solid var(--physics-border); padding-left: 16px;
+    }
+
+    .toc-title { font-size: 0.78rem; font-weight: 700; color: var(--physics-muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .toc-link { display: block; padding: 4px 0 4px 10px; font-size: 0.82rem; color: var(--physics-muted-foreground); border-left: 2px solid transparent; transition: color 0.15s ease, border-color 0.15s ease; }
+    .toc-link:hover, .toc-link.active { color: var(--physics-primary); border-left-color: var(--physics-primary); }
+
+    @media (max-width: 1100px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar, .toc { display: none; }
+    }
+  </style>
+</body>
+</html>
