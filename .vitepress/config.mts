@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
 
 import { configureImageOptimization } from "./markdown/imageOptimization.ts";
+import { configureBracketAndMathPlugin } from "./markdown/bracketAndMathPlugin.ts";
 import { buildNavItems } from "./siteData/nav.ts";
 import { buildSidebarItems } from "./siteData/sidebar.ts";
 import { buildTransformHead } from "./siteData/transformHead.ts";
@@ -124,7 +125,10 @@ export default defineConfig({
   },
   markdown: {
     math: true,
-    config: configureImageOptimization,
+    config: (md) => {
+      configureImageOptimization(md);
+      configureBracketAndMathPlugin(md);
+    },
   },
   rewrites: {
     "hidePage/shortUrl.md": "s.md",
