@@ -23,7 +23,7 @@ function isChapterIndexPath(relativePath: string): boolean {
 }
 
 function toBreadcrumbItemPath(pathParts: string[], index: number): string {
-  if (index === 0) {
+  if (index === 0 && pathParts.length > 1) {
     return `/${pathParts[0]}/index.html`;
   }
   return `/${pathParts.slice(0, index + 1).join("/")}`;

@@ -27,6 +27,7 @@ export:
       - "PROJECT.html"
       - "TEST_INFRA.html"
       - "TEST_READY.html"
+      - "google*.html"
       - "hidePage/**"
     page:
       format: "A4"

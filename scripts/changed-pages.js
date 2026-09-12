@@ -52,10 +52,7 @@ const mdToHtml = (filePath) => {
   const dir = path.posix.dirname(normalized);
   const baseName = path.posix.basename(normalized);
   const lower = baseName.toLowerCase();
-  const targetName =
-    lower === "readme.md" || lower === "index.md"
-      ? "index.html"
-      : baseName.replace(/\.md$/i, ".html");
+  const targetName = lower === "index.md" ? "index.html" : baseName.replace(/\.md$/i, ".html");
   return dir === "." ? targetName : `${dir}/${targetName}`;
 };
 

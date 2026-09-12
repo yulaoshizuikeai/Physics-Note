@@ -79,14 +79,33 @@ async function packagePdfs() {
   try {
     console.log("Archiving all PDFs into Physics-Note-All-PDFs.zip...");
     if (process.platform === "win32") {
-      execSync(
-        `powershell -NoProfile -Command "Compress-Archive -Path '${pdfRepoDir}/*' -DestinationPath '${zipPath}' -Force"`,
-        { stdio: "inherit" },
-      );
+      // Enumerate files to compress, explicitly excluding the complete PDF and any existing zip
+      // to avoid the file-lock deadlock that occurs when PowerShell globs try to read the zip target
+      const filesToZip = fs
+        .readdirSync(pdfRepoDir, { recursive: true })
+        .filter((f) => {
+          const name = path.basename(f);
+          return (
+            !name.startsWith("Physics-Note-Complete") &&
+            !name.endsWith(".zip") &&
+            fs.statSync(path.join(pdfRepoDir, f)).isFile()
+          );
+        })
+        .map((f) => `'${path.join(pdfRepoDir, f)}'`)
+        .join(",");
+      if (filesToZip) {
+        execSync(
+          `powershell -NoProfile -Command "Compress-Archive -Path @(${filesToZip}) -DestinationPath '${zipPath}' -Force"`,
+          { stdio: "inherit" },
+        );
+      }
     } else {
-      execSync(`cd "${pdfRepoDir}" && zip -r "${zipPath}" . -x "Physics-Note-All-PDFs.zip"`, {
-        stdio: "inherit",
-      });
+      execSync(
+        `cd "${pdfRepoDir}" && zip -r "${zipPath}" . -x "Physics-Note-Complete*.pdf" -x "*.zip"`,
+        {
+          stdio: "inherit",
+        },
+      );
     }
     console.log("✓ Successfully created Physics-Note-All-PDFs.zip");
   } catch (err) {

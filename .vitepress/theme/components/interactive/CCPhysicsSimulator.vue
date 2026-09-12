@@ -586,7 +586,7 @@ const renderOptics = (ctx: CanvasRenderingContext2D, width: number, height: numb
 
   // 折射光线 (折射入空气中)
   if (!oResult.value.isTIR) {
-    const radRef = Math.asin(oParams.n * Math.sin(radInc));
+    const radRef = Math.asin(Math.min(oParams.n * Math.sin(radInc), 1));
     const outX = cX + rayLen * Math.sin(radRef);
     const outY = cY - rayLen * Math.cos(radRef);
     drawArrow(ctx, cX, cY, outX, outY, theme.blue, 2.5);

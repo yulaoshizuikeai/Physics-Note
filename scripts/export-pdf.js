@@ -103,6 +103,15 @@ const server = http.createServer((req, res) => {
 
 let files = [];
 if (listPath) {
+  if (!fs.existsSync(listPath)) {
+    console.error(
+      `[export-pdf] Error: list file not found: ${listPath}\n` +
+        `Please create the file first. Example:\n` +
+        `  cp scripts/pdf-repo-test.txt.example ${listPath}\n` +
+        `Then add the HTML paths (one per line) you want to export.`,
+    );
+    process.exit(1);
+  }
   const raw = fs.readFileSync(listPath, "utf8");
   files = raw
     .split("\n")
@@ -129,7 +138,9 @@ const serverPort = await new Promise((resolve) => {
 const browser = await chromium.launch();
 const pagePool = [];
 const customCssPath = path.resolve(__dirname, "pdf-custom.css");
-const customCssContent = fs.existsSync(customCssPath) ? fs.readFileSync(customCssPath, "utf-8") : "";
+const customCssContent = fs.existsSync(customCssPath)
+  ? fs.readFileSync(customCssPath, "utf-8")
+  : "";
 
 const pdfBaseStyle = `
     ${customCssContent}

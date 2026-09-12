@@ -27,12 +27,28 @@ export const getSections = (rootDir: string): string[] =>
     .map((dirent) => dirent.name)
     .sort((a, b) => a.localeCompare(b, "zh-CN"));
 
-export const getSectionFiles = (sectionPath: string): string[] =>
-  fs
+export const getSectionFiles = (sectionPath: string, sectionName?: string): string[] => {
+  const files = fs
     .readdirSync(sectionPath, { withFileTypes: true })
     .filter((dirent) => dirent.isFile() && dirent.name.endsWith(".md"))
-    .map((dirent) => dirent.name)
-    .sort((a, b) => a.localeCompare(b, "zh-CN"));
+    .map((dirent) => dirent.name);
+
+  // Special explicit ordering for '00 说明': Readme first, 错误反馈 last
+  if (sectionName && /^00\s/.test(sectionName)) {
+    const pinFirst = "Readme.md";
+    const pinLast = "错误反馈.md";
+    const middle = files
+      .filter((f) => f !== pinFirst && f !== pinLast)
+      .sort((a, b) => a.localeCompare(b, "zh-CN"));
+    const result: string[] = [];
+    if (files.includes(pinFirst)) result.push(pinFirst);
+    result.push(...middle);
+    if (files.includes(pinLast)) result.push(pinLast);
+    return result;
+  }
+
+  return files.sort((a, b) => a.localeCompare(b, "zh-CN"));
+};
 
 // Build sidebar from numbered top-level folders and their markdown files.
 export const buildSidebarItems = (rootDir: string): DefaultTheme.SidebarItem[] => {
@@ -40,7 +56,9 @@ export const buildSidebarItems = (rootDir: string): DefaultTheme.SidebarItem[] =
 
   const sectionItems: DefaultTheme.SidebarItem[] = sections.map((sectionName) => {
     const sectionPath = path.join(rootDir, sectionName);
-    const files = getSectionFiles(sectionPath).filter((name) => name.toLowerCase() !== "index.md");
+    const files = getSectionFiles(sectionPath, sectionName).filter(
+      (name) => name.toLowerCase() !== "index.md",
+    );
 
     const items: DefaultTheme.SidebarItem[] = files.map((filename) => {
       const name = filename.slice(0, -3);

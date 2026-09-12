@@ -21,6 +21,8 @@ const buildShortUrlMap = (pages: string[]): ShortUrlMap => {
   const shortMap: ShortUrlMap = {};
   for (const page of pages) {
     const normalizedPath = normalizePagePath(page);
+    // Skip the jumper page itself to avoid circular self-referencing redirects
+    if (normalizedPath === "hidePage/shortUrl") continue;
     shortMap[md5(normalizedPath).slice(0, 10)] = normalizedPath;
   }
   return shortMap;

@@ -49,13 +49,13 @@ body,
    3. 高密度正文与排版紧实度优化（物理讲义/教辅标准字级与行距）
    ------------------------------------------------------------ */
 .vp-doc {
-  font-size: 9.5pt !important;       /* 适中紧凑字号，容量比默认大 50%+ */
-  line-height: 1.45 !important;      /* 紧凑而易读的行距 */
-  color: #0f172a !important;         /* 墨黑印刷色 */
+  font-size: 9.5pt !important; /* 适中紧凑字号，容量比默认大 50%+ */
+  line-height: 1.45 !important; /* 紧凑而易读的行距 */
+  color: #0f172a !important; /* 墨黑印刷色 */
 }
 
 .vp-doc p {
-  margin: 4px 0 6px 0 !important;    /* 压缩纵向空白 */
+  margin: 4px 0 6px 0 !important; /* 压缩纵向空白 */
   line-height: 1.45 !important;
   color: #1e293b !important;
 }
@@ -83,7 +83,7 @@ body,
 
 .vp-doc h2 {
   font-size: 12.5pt !important;
-  margin: 12px 0 6px 0 !important;   /* 压减上边距 */
+  margin: 12px 0 6px 0 !important; /* 压减上边距 */
   padding-top: 0 !important;
   padding-bottom: 3px !important;
   border-bottom: 1px solid #e2e8f0 !important;
@@ -104,7 +104,7 @@ body,
    ------------------------------------------------------------ */
 .vp-doc table {
   margin: 6px 0 8px 0 !important;
-  font-size: 8.5pt !important;       /* 表格专用高密度字号 */
+  font-size: 8.5pt !important; /* 表格专用高密度字号 */
   line-height: 1.3 !important;
   background-color: #ffffff !important;
 }
@@ -134,10 +134,18 @@ body,
   margin: 2px 0 !important;
 }
 
-.vp-doc .custom-block.tip { border-color: #10b981 !important; }
-.vp-doc .custom-block.warning { border-color: #f59e0b !important; }
-.vp-doc .custom-block.danger { border-color: #ef4444 !important; }
-.vp-doc .custom-block.info { border-color: #0ea5e9 !important; }
+.vp-doc .custom-block.tip {
+  border-color: #10b981 !important;
+}
+.vp-doc .custom-block.warning {
+  border-color: #f59e0b !important;
+}
+.vp-doc .custom-block.danger {
+  border-color: #ef4444 !important;
+}
+.vp-doc .custom-block.info {
+  border-color: #0ea5e9 !important;
+}
 
 /* ------------------------------------------------------------
    6. 物理公式 (MathJax) 与矢量图解适配
@@ -180,7 +188,12 @@ body,
    8. 智能防截断与分页规避
    ------------------------------------------------------------ */
 @media print {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     break-after: avoid !important;
     page-break-after: avoid !important;
   }
