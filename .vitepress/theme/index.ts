@@ -11,7 +11,6 @@ import CCPdfDownloadButton from "./components/CCPdfDownloadButton.vue";
 import CCSiteSettings from "./components/CCSiteSettings.vue";
 import "./style/index.css";
 import "./custom.css";
-
 import CCInteractiveLab from "./components/interactive/CCInteractiveLab.vue";
 import CCKnowledgeGraph from "./components/interactive/CCKnowledgeGraph.vue";
 import CCPhysicsSimulator from "./components/interactive/CCPhysicsSimulator.vue";

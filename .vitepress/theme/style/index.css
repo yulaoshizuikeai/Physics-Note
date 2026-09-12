@@ -835,26 +835,6 @@ html.dark .flash-kw {
   font-weight: 600;
 }
 
-/* Active outline link */
-.VPDocAsideOutline .outline-link.active {
-  color: var(--vp-c-brand-1) !important;
-  font-weight: 600;
-}
-
-.VPDocAsideOutline .outline-marker {
-  background-color: var(--vp-c-brand-1) !important;
-  width: 2px !important;
-  border-radius: 2px !important;
-}
-
-/* Outline links — comfortable touch area */
-.VPDocAsideOutline .outline-link {
-  padding: 3px 0;
-  min-height: 28px;
-  display: flex;
-  align-items: center;
-}
-
 /* Mobile local nav (in-page TOC toggle) — larger tap area */
 .VPLocalNavOutlineDropdown > button {
   min-height: var(--cc-touch-min);
@@ -1273,33 +1253,75 @@ html.dark .flash-kw {
 }
 
 /* ------------------------------------------------------------------
-   F. Outline / TOC — active marker and hover
+   F. Outline / TOC — 页面目录自适应与防截断优化
    ------------------------------------------------------------------ */
-.VPDocAsideOutline {
-  border-left: 1px solid var(--vp-c-divider) !important;
+/* 扩展宽屏下的 Aside 宽度，赋予目录更充裕的展示空间 */
+@media (min-width: 1280px) {
+  .VPDoc .aside {
+    max-width: 280px !important;
+    padding-left: 24px !important;
+  }
+  .VPDoc .aside-container,
+  .VPDoc .aside-curtain {
+    width: 256px !important;
+  }
 }
 
-.VPDocAsideOutline .outline-link {
-  border-radius: 4px !important;
+@media (min-width: 1440px) {
+  .VPDoc .aside {
+    max-width: 304px !important;
+    padding-left: 28px !important;
+  }
+  .VPDoc .aside-container,
+  .VPDoc .aside-curtain {
+    width: 276px !important;
+  }
+}
+
+/* 目录链接：自然折行，彻底避免长标题溢出被切断或半边字残缺 */
+.VPDocAsideOutline .outline-link,
+.VPLocalNavOutlineDropdown .outline-link {
+  display: block !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.45 !important;
+  padding: 4px 6px !important;
+  margin: 1px 0 !important;
+  min-height: unset !important;
+  font-size: 13px !important;
+  border-radius: 6px !important;
   transition:
     color 0.15s ease,
     background-color 0.15s ease;
 }
 
-.VPDocAsideOutline .outline-link:hover {
+.VPDocAsideOutline .outline-link:hover,
+.VPLocalNavOutlineDropdown .outline-link:hover {
   color: var(--vp-c-brand-1) !important;
-  background-color: color-mix(in srgb, var(--vp-c-brand-1) 4%, transparent) !important;
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 8%, transparent) !important;
 }
 
-.VPDocAsideOutline .outline-link.active {
+.VPDocAsideOutline .outline-link.active,
+.VPLocalNavOutlineDropdown .outline-link.active {
   color: var(--vp-c-brand-1) !important;
   font-weight: 600 !important;
 }
 
+/* 目录指示条 (Active Marker) */
 .VPDocAsideOutline .outline-marker {
   background-color: var(--vp-c-brand-1) !important;
-  width: 3px !important;
-  border-radius: 3px !important;
+  width: 2.5px !important;
+  border-radius: 2.5px !important;
+}
+
+/* 嵌套子层级优化：保留清晰缩进，同时释放右侧内边距给文字 */
+.VPDocAsideOutline .nested,
+.VPLocalNavOutlineDropdown .nested {
+  padding-left: 12px !important;
+  padding-right: 0 !important;
 }
 
 /* ------------------------------------------------------------------
