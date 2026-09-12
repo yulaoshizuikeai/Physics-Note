@@ -38,7 +38,7 @@ jobs:
       - name: Install CJK fonts & PDF utilities
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra poppler-utils zip
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-cjk-extra poppler-utils ghostscript zip
           sudo fc-cache -fv
 
       - name: Install Playwright Browsers
@@ -46,7 +46,7 @@ jobs:
 
       - name: Export PDFs
         run: |
-          PDF_USE_GOOGLE_FONT=1 node scripts/export-pdf.js --concurrency 6
+          node scripts/export-pdf.js --concurrency 6
 
       - name: Package PDFs (Merge Complete Book & Zip)
         run: |

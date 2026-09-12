@@ -43,12 +43,12 @@ const concurrency = Math.max(
 const debugPdfFonts = process.env.DEBUG_PDF_FONTS === "1";
 const useGoogleFont = process.env.PDF_USE_GOOGLE_FONT === "1";
 const fontFamily =
-  '"Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif';
+  '"Noto Sans CJK SC","Noto Sans SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif';
 const footerFontFamily =
   '"Noto Sans CJK SC","Noto Sans SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif';
 const googleFontUrl =
   "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap";
-const fontPreloadList = ['400 16px "Noto Sans SC"', '700 16px "Noto Sans SC"'];
+const fontPreloadList = ['400 16px "Noto Sans CJK SC"', '700 16px "Noto Sans CJK SC"'];
 
 fs.mkdirSync(outDir, { recursive: true });
 
@@ -128,7 +128,12 @@ const serverPort = await new Promise((resolve) => {
 
 const browser = await chromium.launch();
 const pagePool = [];
+const customCssPath = path.resolve(__dirname, "pdf-custom.css");
+const customCssContent = fs.existsSync(customCssPath) ? fs.readFileSync(customCssPath, "utf-8") : "";
+
 const pdfBaseStyle = `
+    ${customCssContent}
+
     :root {
         --vp-font-family-base: ${fontFamily};
     }

@@ -1,4 +1,4 @@
-﻿import { execSync } from "child_process";
+import { execSync } from "child_process";
 import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
@@ -32,15 +32,46 @@ async function packagePdfs() {
 
   console.log(`Found ${pdfFiles.length} chapter PDFs. Preparing packaging...`);
 
-  // 2. 尝试使用 pdfunite 合并全书单文件完整版 PDF
+  // 2. 尝试合并全书单文件完整版 PDF 并进行 Ghostscript 字体去重与全局流优化
   const completePdfPath = path.join(pdfRepoDir, "Physics-Note-Complete.pdf");
+  const tempMergedPdfPath = path.join(pdfRepoDir, "Physics-Note-Complete-temp.pdf");
   try {
     const escapedPaths = pdfFiles.map((f) => `"${path.join(pdfRepoDir, f)}"`);
-    console.log("Merging all chapter PDFs into Physics-Note-Complete.pdf via pdfunite...");
-    execSync(`pdfunite ${escapedPaths.join(" ")} "${completePdfPath}"`, { stdio: "inherit" });
-    console.log("✓ Successfully created Physics-Note-Complete.pdf");
+    console.log("Merging all chapter PDFs...");
+
+    let merged = false;
+    try {
+      execSync(`pdfunite ${escapedPaths.join(" ")} "${tempMergedPdfPath}"`, { stdio: "inherit" });
+      merged = true;
+    } catch (e) {
+      console.warn("pdfunite execution warning:", e.message);
+    }
+
+    let hasGs = false;
+    try {
+      execSync("gs --version", { stdio: "ignore" });
+      hasGs = true;
+    } catch {
+      hasGs = false;
+    }
+
+    if (hasGs) {
+      console.log("Applying Ghostscript font deduplication & global stream compression...");
+      const inputForGs = merged ? `"${tempMergedPdfPath}"` : escapedPaths.join(" ");
+      execSync(
+        `gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile="${completePdfPath}" ${inputForGs}`,
+        { stdio: "inherit" },
+      );
+      if (fs.existsSync(tempMergedPdfPath)) {
+        fs.unlinkSync(tempMergedPdfPath);
+      }
+      console.log("✓ Successfully created and optimized Physics-Note-Complete.pdf via Ghostscript");
+    } else if (merged) {
+      fs.renameSync(tempMergedPdfPath, completePdfPath);
+      console.log("✓ Successfully created Physics-Note-Complete.pdf via pdfunite (fallback)");
+    }
   } catch (err) {
-    console.warn("pdfunite execution warning (will fallback to zip packaging):", err.message);
+    console.warn("PDF merge execution warning (will fallback to zip packaging):", err.message);
   }
 
   // 3. 打包压缩为全套分册 ZIP 归档包
