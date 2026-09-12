@@ -36,10 +36,20 @@ watchEffect(() => {
     "warning-cheatsheet.md": "全专题防踩坑排雷白皮书",
   };
 
+  const list: Breadcrumb[] = [
+    {
+      name: "首页",
+      link: withBase("/"),
+    },
+  ];
+
   if (pathSegs.length === 1) {
     const rawName = pathSegs[0];
     const cleanTitle = specialTitles[rawName] || page.value.title || "";
-    items.value = cleanTitle ? [{ name: cleanTitle, link: "" }] : [];
+    if (cleanTitle) {
+      list.push({ name: cleanTitle, link: "" });
+    }
+    items.value = list;
     return;
   }
 
@@ -47,12 +57,10 @@ watchEffect(() => {
   const cleanChapter = rawChapter.replace(/^\d{2}\s*/, "");
   const isChapterIndex = pathSegs.length === 2 && pathSegs[1] === "index.md";
 
-  const list: Breadcrumb[] = [
-    {
-      name: cleanChapter,
-      link: isChapterIndex ? "" : withBase(`/${encodeURI(rawChapter)}/index`),
-    },
-  ];
+  list.push({
+    name: cleanChapter,
+    link: isChapterIndex ? "" : withBase(`/${encodeURI(rawChapter)}/index`),
+  });
 
   if (pathSegs.length > 1 && !isChapterIndex) {
     const rawFile = pathSegs[1].replace(/\.md$/, "");

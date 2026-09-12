@@ -2,8 +2,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitepress";
 
-import { configureImageOptimization } from "./markdown/imageOptimization.ts";
 import { configureBracketAndMathPlugin } from "./markdown/bracketAndMathPlugin.ts";
+import { configureImageOptimization } from "./markdown/imageOptimization.ts";
 import { buildNavItems } from "./siteData/nav.ts";
 import { buildSidebarItems } from "./siteData/sidebar.ts";
 import { buildTransformHead } from "./siteData/transformHead.ts";
@@ -46,10 +46,7 @@ export default defineConfig({
     ["meta", { name: "twitter:image", content: `${siteUrl}/images/og-image.png` }],
     ["meta", { name: "twitter:title", content: siteName }],
     ["meta", { name: "twitter:description", content: defaultDescription }],
-    // 搜索引擎站长平台所有权验证（按需填入验证码即可启用）
-    // ["meta", { name: "google-site-verification", content: "YOUR_GOOGLE_VERIFICATION_CODE" }],
-    // ["meta", { name: "msvalidate.01", content: "YOUR_BING_VERIFICATION_CODE" }],
-    // ["meta", { name: "baidu-site-verification", content: "YOUR_BAIDU_VERIFICATION_CODE" }],
+    // 搜索引擎站长平台所有权验证（Google 已通过 public/google013928aed71dcb01.html 文件验证）
     [
       "script",
       {},
@@ -139,6 +136,7 @@ export default defineConfig({
     "PROJECT.md",
     "TEST_INFRA.md",
     "TEST_READY.md",
+    "design.md",
     "scripts/**",
     "pdf-repo/**",
     "pdf-repo-single/**",

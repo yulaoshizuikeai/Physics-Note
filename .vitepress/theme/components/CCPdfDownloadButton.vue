@@ -89,21 +89,21 @@ const handlePrint = () => {
 }
 
 .CCPdfDownloadButtonBtn:hover {
-  border-color: var(--vp-c-brand-1, #5672CD);
+  border-color: var(--vp-c-brand-1, #5672cd);
   background: var(--vp-c-bg-soft-hover);
-  color: var(--vp-c-brand-1, #5672CD);
+  color: var(--vp-c-brand-1, #5672cd);
   transform: translateY(-1px);
 }
 
 .CCPdfDownloadButtonBtn.is-primary {
-  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 35%, transparent);
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 10%, var(--vp-c-bg-alt));
-  color: var(--vp-c-brand-1, #5672CD);
+  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 35%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 10%, var(--vp-c-bg-alt));
+  color: var(--vp-c-brand-1, #5672cd);
 }
 
 .CCPdfDownloadButtonBtn.is-primary:hover {
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 18%, var(--vp-c-bg-alt));
-  border-color: var(--vp-c-brand-1, #5672CD);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 18%, var(--vp-c-bg-alt));
+  border-color: var(--vp-c-brand-1, #5672cd);
 }
 
 .CCPdfDownloadButtonBtnLabel {

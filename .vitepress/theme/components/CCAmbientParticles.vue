@@ -43,7 +43,7 @@ const particles = [
 
 <style scoped>
 .cc-physics-field {
-  --p-blue: #5672CD;
+  --p-blue: #5672cd;
   --p-cyan: #38bdf8;
   --p-purple: #a855f7;
   position: absolute;

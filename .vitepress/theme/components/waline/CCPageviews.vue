@@ -1,11 +1,8 @@
 <script setup>
-import { pageviewCount } from "@waline/client";
+import { useRoute } from "vitepress";
 import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-import { useWalineBase } from "./useWalineBase";
-
-const { serverURL, route } = useWalineBase();
-let abortPageview = null;
+const route = useRoute();
 const isLoading = ref(true);
 let observer = null;
 
@@ -21,20 +18,15 @@ const runBusuanzi = () => {
   document.head.appendChild(script);
 };
 
-const runPageview = (path) => {
+const runPageview = () => {
   isLoading.value = true;
-  if (serverURL) {
-    if (abortPageview) abortPageview();
-    abortPageview = pageviewCount({ serverURL, path });
-  } else {
-    runBusuanzi();
-  }
+  runBusuanzi();
 };
 
 const setupObserver = () => {
   const el = document.getElementById("busuanzi_value_page_pv");
   if (!el || typeof window === "undefined") return;
-  
+
   observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       if (mutation.type === "childList" || mutation.type === "characterData") {
@@ -44,25 +36,24 @@ const setupObserver = () => {
       }
     }
   });
-  
+
   observer.observe(el, { childList: true, characterData: true, subtree: true });
 };
 
 onMounted(() => {
   setupObserver();
-  runPageview(route.path);
+  runPageview();
 });
 
 watch(
   () => route.path,
-  (path) => {
+  () => {
     if (typeof window === "undefined") return;
-    runPageview(path);
+    runPageview();
   },
 );
 
 onBeforeUnmount(() => {
-  if (abortPageview) abortPageview();
   if (observer) observer.disconnect();
 });
 </script>
@@ -84,11 +75,13 @@ onBeforeUnmount(() => {
       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
       <circle cx="12" cy="12" r="3" />
     </svg>
-    <span 
-      id="busuanzi_value_page_pv" 
+    <span
+      id="busuanzi_value_page_pv"
       class="waline-pageview-count"
       :class="{ 'is-loading': isLoading }"
-    >--</span> views
+      >--</span
+    >
+    views
   </span>
 </template>
 

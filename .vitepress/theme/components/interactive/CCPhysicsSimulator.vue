@@ -1019,6 +1019,7 @@ watch(
   width: 100%;
   height: 100%;
   display: block;
+  touch-action: pan-y;
 }
 
 .sim-controls {
@@ -1050,6 +1051,7 @@ watch(
 .ctrl-row input[type="range"] {
   accent-color: var(--vp-c-brand-1);
   cursor: pointer;
+  min-height: 28px;
 }
 
 .toggle-row {

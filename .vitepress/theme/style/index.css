@@ -240,8 +240,8 @@ html.dark .flash-kw {
 }
 
 /* Hide lang pill on ASCII text code blocks */
-.vp-doc div[class*='language-text'] > button.copy + span.lang,
-.vp-doc div[class*='language-text'] > span.lang {
+.vp-doc div[class*="language-text"] > button.copy + span.lang,
+.vp-doc div[class*="language-text"] > span.lang {
   display: none !important;
 }
 
@@ -655,6 +655,24 @@ html.dark .flash-kw {
   box-shadow: 0 8px 20px -4px color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent) !important;
 }
 
+/* Accent Action Button: 🪐 交互空间 */
+.VPHomeHero .action a[href*="interactive"],
+.VPHomeHero .action:has(a[href*="interactive"]) .VPButton {
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg-elv)) !important;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 45%, var(--vp-c-border)) !important;
+  color: var(--vp-c-brand-1) !important;
+  box-shadow: 0 2px 8px -1px color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent) !important;
+}
+
+.VPHomeHero .action a[href*="interactive"]:hover,
+.VPHomeHero .action:has(a[href*="interactive"]) .VPButton:hover {
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 16%, var(--vp-c-bg-elv)) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  color: var(--vp-c-brand-1) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px -4px color-mix(in srgb, var(--vp-c-brand-1) 32%, transparent) !important;
+}
+
 .VPHomeHero .action .VPButton.alt {
   background-color: var(--vp-c-bg-elv) !important;
   border: 1px solid var(--vp-c-border) !important;
@@ -712,6 +730,40 @@ html.dark .flash-kw {
 .dark .VPHomeFeatures .VPFeature:hover {
   border-color: color-mix(in srgb, var(--vp-c-brand-1) 55%, transparent) !important;
   box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Flagship special features (Top 3: Interactive Space, Golden Conclusions, Warning Cheatsheet) */
+.VPHomeFeatures .item:nth-child(-n + 3) .VPFeature {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg-soft)) 0%,
+    var(--vp-c-bg-soft) 100%
+  ) !important;
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 32%, var(--vp-c-border)) !important;
+}
+
+.VPHomeFeatures .item:nth-child(-n + 3) .VPFeature:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 12%, var(--vp-c-bg-elv)) !important;
+  box-shadow: 0 12px 28px -6px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent) !important;
+}
+
+.VPHomeFeatures .item:nth-child(-n + 3) .VPFeature .title {
+  color: var(--vp-c-brand-1) !important;
+}
+
+.dark .VPHomeFeatures .item:nth-child(-n + 3) .VPFeature {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--vp-c-brand-1) 14%, var(--vp-c-bg-soft)) 0%,
+    var(--vp-c-bg-soft) 100%
+  ) !important;
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 38%, var(--vp-c-border)) !important;
+}
+
+.dark .VPHomeFeatures .item:nth-child(-n + 3) .VPFeature:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  box-shadow: 0 12px 30px -4px color-mix(in srgb, var(--vp-c-brand-1) 30%, transparent) !important;
 }
 
 .VPHomeFeatures .VPFeature .title {
@@ -1014,7 +1066,9 @@ html.dark .flash-kw {
   background-color: var(--vp-nav-bg-color) !important;
   backdrop-filter: blur(14px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .VPNavBar.has-sidebar {
@@ -1055,6 +1109,31 @@ html.dark .flash-kw {
   color: var(--vp-c-brand-1) !important;
 }
 
+/* Dropdown flyout menu viewport overflow protection (e.g. 20-item chapter directory) */
+.VPNavBarMenuGroup .VPMenu,
+.VPFlyout .menu,
+.VPMenu {
+  max-height: calc(100vh - var(--vp-nav-height, 64px) - 24px) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  scrollbar-width: thin !important;
+  border-radius: 10px !important;
+  box-shadow: var(--vp-shadow-3, 0 10px 24px -4px rgba(0, 0, 0, 0.08)) !important;
+}
+
+.VPNavBarMenuGroup .VPMenu::-webkit-scrollbar,
+.VPFlyout .menu::-webkit-scrollbar,
+.VPMenu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.VPNavBarMenuGroup .VPMenu::-webkit-scrollbar-thumb,
+.VPFlyout .menu::-webkit-scrollbar-thumb,
+.VPMenu::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 35%, transparent);
+  border-radius: 4px;
+}
+
 /* ------------------------------------------------------------------
    B. Sidebar — paper card feeling, active item emphasis
    ------------------------------------------------------------------ */
@@ -1074,7 +1153,9 @@ html.dark .flash-kw {
 /* Collapsible section headers */
 .VPSidebarItem .item > .link {
   border-radius: 6px !important;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .VPSidebarItem .item > .link:hover {
@@ -1107,7 +1188,9 @@ html.dark .flash-kw {
   border: 1px solid var(--vp-c-border) !important;
   background-color: var(--vp-c-bg-elv) !important;
   box-shadow: var(--vp-shadow-1) !important;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .VPLocalSearchBox .search-input:focus-within {
@@ -1123,7 +1206,9 @@ html.dark .flash-kw {
 .VPLocalSearchBox .result {
   border-radius: 8px !important;
   border: 1px solid transparent !important;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .VPLocalSearchBox .result.selected,
@@ -1196,7 +1281,9 @@ html.dark .flash-kw {
 
 .VPDocAsideOutline .outline-link {
   border-radius: 4px !important;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .VPDocAsideOutline .outline-link:hover {
@@ -1264,7 +1351,9 @@ html.dark .flash-kw {
 .VPNavScreenMenuGroupLink {
   min-height: 48px !important;
   border-radius: 8px !important;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .VPNavScreenMenuLink:hover,
@@ -1305,4 +1394,75 @@ html.dark .flash-kw {
 .VPSwitch .check {
   background-color: var(--vp-c-brand-1) !important;
   border-radius: 999px !important;
+}
+
+/* ------------------------------------------------------------------
+   K. Quick Navigation / Fast Index Pills (e.g. Golden Conclusions)
+   ------------------------------------------------------------------ */
+.cc-quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.cc-quick-nav__title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  margin-right: 4px;
+}
+
+.cc-quick-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--vp-c-text-1) !important;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 9999px;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.cc-quick-pill:hover {
+  color: var(--vp-c-brand-1) !important;
+  border-color: var(--vp-c-brand-1);
+  background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg));
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.cc-quick-pill--accent {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 12%, var(--vp-c-bg));
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+}
+
+.cc-quick-pill--accent:hover {
+  background: var(--vp-c-brand-1);
+  color: #ffffff !important;
+}
+
+@media (max-width: 640px) {
+  .cc-quick-nav {
+    padding: 0.75rem 0.85rem;
+    gap: 6px;
+  }
+  .cc-quick-pill {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
 }

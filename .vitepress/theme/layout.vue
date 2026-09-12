@@ -4,11 +4,10 @@ import { useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
-
 import CCBackToTop from "./components/CCBackToTop.vue";
-import CCErrata from "./components/CCErrata.vue";
 import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
+import CCErrata from "./components/CCErrata.vue";
 import CCFooter from "./components/CCFooter.vue";
 import CCHeroLogo from "./components/CCHeroLogo.vue";
 import { CCPageviews, CCWaline } from "./components/waline";
@@ -141,7 +140,6 @@ watch(
       </ClientOnly>
     </template>
 
-
     <!-- 面包屑 -->
     <template #doc-before>
       <Breadcrumb />
@@ -161,7 +159,6 @@ watch(
       <ClientOnly>
         <CCPageviews />
       </ClientOnly>
-
     </template>
 
     <!-- 读者勘误反馈卡片 -->

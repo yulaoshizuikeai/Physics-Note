@@ -122,7 +122,9 @@ const handleCopy = async (event: MouseEvent) => {
 
       <!-- 中间核心简短金句 -->
       <div class="flash-text-box" :class="{ 'is-swapping': isChanging }">
-        <span class="flash-quote-mark">“</span><span class="flash-content">{{ currentItem.text }}</span><span class="flash-quote-mark">”</span>
+        <span class="flash-quote-mark">“</span
+        ><span class="flash-content">{{ currentItem.text }}</span
+        ><span class="flash-quote-mark">”</span>
       </div>
 
       <!-- 右侧轻量操作：换一条 & 复制 -->
@@ -205,8 +207,8 @@ const handleCopy = async (event: MouseEvent) => {
   max-width: 680px;
   width: 100%;
   padding: 8px 14px;
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 5%, var(--vp-c-bg-soft));
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 18%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 5%, var(--vp-c-bg-soft));
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 18%, transparent);
   border-radius: 12px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -217,8 +219,8 @@ const handleCopy = async (event: MouseEvent) => {
 }
 
 .cc-physics-flash-card:hover {
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 9%, var(--vp-c-bg-soft));
-  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 35%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 9%, var(--vp-c-bg-soft));
+  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 35%, transparent);
   box-shadow: 0 6px 24px -4px rgba(86, 114, 205, 0.2);
   transform: translateY(-1px);
 }
@@ -236,8 +238,8 @@ const handleCopy = async (event: MouseEvent) => {
   flex-shrink: 0;
   padding: 2.5px 8px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 22%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 22%, transparent);
 }
 
 .flash-badge-icon {
@@ -248,7 +250,7 @@ const handleCopy = async (event: MouseEvent) => {
 .flash-badge-text {
   font-size: 11px;
   font-weight: 700;
-  color: var(--vp-c-brand-1, #5672CD);
+  color: var(--vp-c-brand-1, #5672cd);
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
@@ -257,7 +259,7 @@ const handleCopy = async (event: MouseEvent) => {
   font-size: 10.5px;
   color: var(--vp-c-text-2);
   padding-left: 5px;
-  border-left: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 24%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 24%, transparent);
   white-space: nowrap;
 }
 
@@ -271,7 +273,9 @@ const handleCopy = async (event: MouseEvent) => {
   color: var(--vp-c-text-1);
   font-weight: 500;
   word-break: break-word;
-  transition: opacity 0.16s ease, transform 0.16s ease;
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
 }
 
 .flash-text-box.is-swapping {
@@ -280,7 +284,7 @@ const handleCopy = async (event: MouseEvent) => {
 }
 
 .flash-quote-mark {
-  color: var(--vp-c-brand-1, #5672CD);
+  color: var(--vp-c-brand-1, #5672cd);
   font-weight: 700;
   font-size: 14px;
 }
@@ -312,9 +316,9 @@ const handleCopy = async (event: MouseEvent) => {
 }
 
 .flash-action-icon-btn:hover {
-  color: var(--vp-c-brand-1, #5672CD);
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 10%, transparent);
-  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 20%, transparent);
+  color: var(--vp-c-brand-1, #5672cd);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 10%, transparent);
+  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 20%, transparent);
 }
 
 .action-svg.is-spinning {

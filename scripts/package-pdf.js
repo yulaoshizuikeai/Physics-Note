@@ -1,7 +1,7 @@
-﻿import fg from "fast-glob";
+﻿import { execSync } from "child_process";
+import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
-import { execSync } from "child_process";
 import url from "url";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));

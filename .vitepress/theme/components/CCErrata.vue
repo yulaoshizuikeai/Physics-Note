@@ -31,7 +31,7 @@ const mailtoUrl = computed(() => {
       `【原文内容】：\n\n` +
       `【建议修改】：\n\n` +
       `【推导依据 / 参考资料】：\n\n` +
-      `---\n（感谢您对高考物理知识库的指正与支持！）`
+      `---\n（感谢您对高考物理知识库的指正与支持！）`,
   );
   return `mailto:imharlanyu@gmail.com?subject=${subject}&body=${body}`;
 });

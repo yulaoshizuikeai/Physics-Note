@@ -30,9 +30,16 @@
       "version": 1,
       "createdAt": 1789135889000,
       "canvasData": {
-        "x": 1400,
+        "x": 480,
         "y": 0,
-        "group": 0
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1567,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-0e4cdebb",
+          "measuredAt": 1789136312170
+        }
       },
       "devMetadata": {
         "htmlSrc": "pages/doc-example.html",
@@ -47,7 +54,7 @@
       "createdAt": 1789134884000,
       "canvasData": {
         "x": 0,
-        "y": 2654,
+        "y": 670,
         "naturalSize": {
           "width": 330,
           "height": 380

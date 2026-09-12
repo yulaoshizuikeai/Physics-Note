@@ -4,14 +4,13 @@ import DefaultTheme from "vitepress/theme";
 
 import CCActivitySparkline from "./components/CCActivitySparkline.vue";
 import CCBackToTop from "./components/CCBackToTop.vue";
-import CCErrata from "./components/CCErrata.vue";
 import CCChapterOverview from "./components/CCChapterOverview.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
+import CCErrata from "./components/CCErrata.vue";
 import CCPdfDownloadButton from "./components/CCPdfDownloadButton.vue";
 import CCSiteSettings from "./components/CCSiteSettings.vue";
 import "./style/index.css";
 import "./custom.css";
-import "@waline/client/style";
 
 import CCInteractiveLab from "./components/interactive/CCInteractiveLab.vue";
 import CCKnowledgeGraph from "./components/interactive/CCKnowledgeGraph.vue";

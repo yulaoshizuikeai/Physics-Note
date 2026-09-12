@@ -6,7 +6,7 @@ export:
       - "public/**"
       - "data/**"
       - "package.json"
-      - "bun.lock"
+      - "package-lock.json"
       - "config.yml"
     sourceExtensions:
       - ".md"

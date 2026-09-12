@@ -117,36 +117,60 @@ onBeforeUnmount(() => {
         </header>
 
         <div class="cc-settings-dialog__body">
+          <label class="cc-settings-option">
+            <span class="cc-settings-option__text">显示「贡献者名单」</span>
+            <span class="cc-switch">
+              <input
+                class="cc-switch__input"
+                type="checkbox"
+                :checked="settings.showContributors"
+                @change="updateBooleanSetting('showContributors', $event)"
+              />
+              <span class="cc-switch__track">
+                <span class="cc-switch__thumb"></span>
+              </span>
+            </span>
+          </label>
 
           <label class="cc-settings-option">
-            <span class="cc-settings-option__text">显示「大纲」</span>
-            <input
-              class="cc-settings-option__control"
-              type="checkbox"
-              :checked="settings.showOutline"
-              @change="updateBooleanSetting('showOutline', $event)"
-            />
+            <span class="cc-settings-option__text">显示「右侧大纲」</span>
+            <span class="cc-switch">
+              <input
+                class="cc-switch__input"
+                type="checkbox"
+                :checked="settings.showOutline"
+                @change="updateBooleanSetting('showOutline', $event)"
+              />
+              <span class="cc-switch__track">
+                <span class="cc-switch__thumb"></span>
+              </span>
+            </span>
           </label>
 
           <label class="cc-settings-option">
             <span class="cc-settings-option__text">显示「评论区」</span>
-            <input
-              class="cc-settings-option__control"
-              type="checkbox"
-              :checked="settings.showComments"
-              @change="updateBooleanSetting('showComments', $event)"
-            />
+            <span class="cc-switch">
+              <input
+                class="cc-switch__input"
+                type="checkbox"
+                :checked="settings.showComments"
+                @change="updateBooleanSetting('showComments', $event)"
+              />
+              <span class="cc-switch__track">
+                <span class="cc-switch__thumb"></span>
+              </span>
+            </span>
           </label>
 
           <label class="cc-settings-select">
-            <span class="cc-settings-select__label">字体</span>
+            <span class="cc-settings-select__label">字体样式</span>
             <select
               class="cc-settings-select__control"
               :value="settings.fontFamily"
               @change="updateFontFamily"
             >
-              <option value="default">默认</option>
-              <option value="serif">衬线体</option>
+              <option value="default">默认无衬线</option>
+              <option value="serif">优雅衬线体</option>
             </select>
           </label>
         </div>
@@ -291,12 +315,61 @@ onBeforeUnmount(() => {
   line-height: 1.5;
 }
 
-.cc-settings-option__control {
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  min-height: 20px;
-  accent-color: var(--vp-c-brand-1);
+.cc-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 44px;
+  height: 26px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cc-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+.cc-switch__track {
+  position: relative;
+  display: block;
+  width: 44px;
+  height: 24px;
+  border-radius: 9999px;
+  background-color: var(--vp-c-divider);
+  border: 1px solid var(--vp-c-divider);
+  transition:
+    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.25s ease;
+}
+
+.cc-switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cc-switch__input:checked + .cc-switch__track {
+  background-color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+}
+
+.cc-switch__input:checked + .cc-switch__track .cc-switch__thumb {
+  transform: translateX(20px);
+}
+
+.cc-switch__input:focus-visible + .cc-switch__track {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
 }
 
 .cc-settings-select__control {

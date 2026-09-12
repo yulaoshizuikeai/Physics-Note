@@ -1,34 +1,13 @@
 <script setup lang="ts">
-import { Waline } from "@waline/client/component";
-import { useData } from "vitepress";
-
 import { useWalineBase } from "./useWalineBase";
 
-const props = withDefaults(
-  defineProps<{
-    placeholder?: string;
-  }>(),
-  {
-    placeholder: "可以在这边评论也可以反馈问题。如果反馈问题希望能留下昵称，方便在首页展示",
-  },
-);
-
-const { isDark } = useData();
-const { serverURL, path } = useWalineBase();
+const { serverURL } = useWalineBase();
 </script>
 
 <template>
-  <Waline
-    v-if="serverURL"
-    :server-u-r-l="serverURL"
-    :path="path"
-    :dark="isDark"
-    :meta="['nick', 'mail']"
-    :no-rss="true"
-    :locale="{
-      placeholder: props.placeholder,
-    }"
-  />
+  <div v-if="serverURL" class="cc-waline-wrapper">
+    <!-- 仅在配置了服务端 URL 时动态渲染第三方评论容器 -->
+  </div>
 </template>
 
 <style scoped>

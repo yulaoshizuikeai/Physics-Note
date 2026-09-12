@@ -2,11 +2,11 @@ import type { MarkdownRenderer } from "vitepress";
 
 /**
  * 标点括号与 LaTeX 公式防断裂及展示公式解析增强插件
- * 
+ *
  * 1. math_display_inline:
  *    解决 markdown-it-mathjax3 在列表项、表格单元格及非独立段落中遇到 $$...$$ 时
  *    直接跳过不解析并导致裸 LaTeX 泄露且无法居中的严重缺陷。
- * 
+ *
  * 2. bracket_math_grouping:
  *    解决行内公式 ($...$) 与外围括号（如（$v=0$）、【$a>0$】）在浏览器行末折行时，
  *    因 <mjx-container> 为 inline-block 导致括号被孤立在行尾或行首的中文排版缺陷。

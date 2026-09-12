@@ -550,6 +550,104 @@ const findNodeAtPos = (worldX: number, worldY: number): GraphNode | null => {
   return null;
 };
 
+const getTouchPos = (touch: Touch) => {
+  const canvas = canvasRef.value;
+  if (!canvas) return { screenX: 0, screenY: 0, worldX: 0, worldY: 0 };
+  const rect = canvas.getBoundingClientRect();
+  const screenX = touch.clientX - rect.left;
+  const screenY = touch.clientY - rect.top;
+  const worldX = (screenX - transform.value.x) / transform.value.scale;
+  const worldY = (screenY - transform.value.y) / transform.value.scale;
+  return { screenX, screenY, worldX, worldY };
+};
+
+let touchDistanceStart = 0;
+let scaleStart = 1;
+let touchCenter = { x: 0, y: 0 };
+
+const onTouchStart = (e: TouchEvent) => {
+  if (e.touches.length === 1) {
+    const { screenX, screenY, worldX, worldY } = getTouchPos(e.touches[0]);
+    const targetNode = findNodeAtPos(worldX, worldY);
+    if (targetNode) {
+      draggedNode = targetNode;
+      activeNode.value = targetNode;
+    } else {
+      isDragging = true;
+      dragStartX = screenX - transform.value.x;
+      dragStartY = screenY - transform.value.y;
+    }
+    redraw();
+  } else if (e.touches.length === 2) {
+    isDragging = false;
+    draggedNode = null;
+    const t1 = e.touches[0];
+    const t2 = e.touches[1];
+    const dx = t1.clientX - t2.clientX;
+    const dy = t1.clientY - t2.clientY;
+    touchDistanceStart = Math.hypot(dx, dy);
+    scaleStart = transform.value.scale;
+    const canvas = canvasRef.value;
+    if (canvas) {
+      const rect = canvas.getBoundingClientRect();
+      touchCenter = {
+        x: (t1.clientX + t2.clientX) / 2 - rect.left,
+        y: (t1.clientY + t2.clientY) / 2 - rect.top,
+      };
+    }
+  }
+};
+
+const onTouchMove = (e: TouchEvent) => {
+  if (e.touches.length === 1) {
+    const { screenX, screenY, worldX, worldY } = getTouchPos(e.touches[0]);
+    if (draggedNode) {
+      draggedNode.x = worldX;
+      draggedNode.y = worldY;
+      redraw();
+      return;
+    }
+    if (isDragging) {
+      transform.value.x = screenX - dragStartX;
+      transform.value.y = screenY - dragStartY;
+      redraw();
+      return;
+    }
+  } else if (e.touches.length === 2 && touchDistanceStart > 0) {
+    const t1 = e.touches[0];
+    const t2 = e.touches[1];
+    const dx = t1.clientX - t2.clientX;
+    const dy = t1.clientY - t2.clientY;
+    const currentDist = Math.hypot(dx, dy);
+    const factor = currentDist / touchDistanceStart;
+    const newScale = Math.min(Math.max(scaleStart * factor, 0.55), 2.2);
+
+    transform.value.x =
+      touchCenter.x - (touchCenter.x - transform.value.x) * (newScale / transform.value.scale);
+    transform.value.y =
+      touchCenter.y - (touchCenter.y - transform.value.y) * (newScale / transform.value.scale);
+    transform.value.scale = newScale;
+    redraw();
+  }
+};
+
+const onTouchEnd = () => {
+  isDragging = false;
+  draggedNode = null;
+  touchDistanceStart = 0;
+};
+
+const closeDetail = () => {
+  activeNode.value = null;
+  redraw();
+};
+
+const onKeydown = (e: KeyboardEvent) => {
+  if (e.key === "Escape" && activeNode.value) {
+    closeDetail();
+  }
+};
+
 const onMouseDown = (e: MouseEvent) => {
   const { screenX, screenY, worldX, worldY } = getEventPos(e);
   const targetNode = findNodeAtPos(worldX, worldY);
@@ -652,10 +750,12 @@ onMounted(() => {
   resetView();
 
   window.addEventListener("resize", resetView);
+  window.addEventListener("keydown", onKeydown);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("resize", resetView);
+  window.removeEventListener("keydown", onKeydown);
 });
 </script>
 
@@ -691,11 +791,15 @@ onBeforeUnmount(() => {
         @mouseup="onMouseUp"
         @mouseleave="onMouseUp"
         @wheel="onWheel"
+        @touchstart.passive="onTouchStart"
+        @touchmove.prevent="onTouchMove"
+        @touchend="onTouchEnd"
+        @touchcancel="onTouchEnd"
       />
 
       <!-- 画布浮动操作小提示 -->
       <div class="canvas-hint">
-        <span>🖱️ 滚轮缩放 / 拖拽平移 / 拖拽节点重构拓扑 / 点击节点锁定剖析</span>
+        <span>🖱️ 滚轮/双指缩放 · 拖拽平移 · 拖动节点重构拓扑 · 点击节点锁定剖析</span>
       </div>
     </div>
 
@@ -715,7 +819,29 @@ onBeforeUnmount(() => {
             </span>
             <h3 class="detail-title">{{ activeNode.name }}</h3>
           </div>
-          <a :href="activeNode.link" class="detail-jump-link"> 👉 进入本章详细笔记 </a>
+          <div class="detail-actions">
+            <a :href="activeNode.link" class="detail-jump-link"> 👉 进入本章详细笔记 </a>
+            <button
+              type="button"
+              class="detail-close-btn"
+              title="关闭详情卡片 (Esc)"
+              aria-label="关闭详情卡片"
+              @click="closeDetail"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="15"
+                height="15"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <p class="detail-desc">{{ activeNode.desc }}</p>
@@ -845,6 +971,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   display: block;
+  touch-action: none;
 }
 
 .canvas-hint {
@@ -880,6 +1007,34 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.detail-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.detail-close-btn:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
 }
 
 .detail-cat-badge {

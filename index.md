@@ -14,7 +14,7 @@ hero:
     - theme: brand
       text: 开始阅读
       link: /00%20说明/Readme
-    - theme: brand
+    - theme: alt
       text: 🪐 交互空间
       link: /interactive
     - theme: alt

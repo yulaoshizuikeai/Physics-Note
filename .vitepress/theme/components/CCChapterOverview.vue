@@ -140,12 +140,15 @@ const topicItems = computed(() => chapterLinkItems.value.filter((item) => isTopi
   transition:
     border-color 0.2s ease,
     transform 0.2s ease,
+    box-shadow 0.2s ease,
     background-color 0.2s ease;
 }
 
 .chapter-card:hover {
   border-color: var(--vp-c-brand-1);
   background: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--vp-c-bg));
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .card-title {
@@ -156,6 +159,11 @@ const topicItems = computed(() => chapterLinkItems.value.filter((item) => isTopi
 .card-arrow {
   flex-shrink: 0;
   color: var(--vp-c-brand-1);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chapter-card:hover .card-arrow {
+  transform: translateX(4px);
 }
 
 .topic-card {

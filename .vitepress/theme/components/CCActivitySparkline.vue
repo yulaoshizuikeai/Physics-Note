@@ -151,14 +151,28 @@ onMounted(() => {
       >
         <defs>
           <!-- 面积渐变 -->
-          <linearGradient id="cycle-area" x1="0" y1="0" x2="0" y2="50" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="cycle-area"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="50"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stop-color="#5672CD" stop-opacity="0.32" />
             <stop offset="65%" stop-color="#38bdf8" stop-opacity="0.08" />
             <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
           </linearGradient>
 
           <!-- 7日周期折线流光渐变 -->
-          <linearGradient id="cycle-stroke" x1="0" y1="25" x2="260" y2="25" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="cycle-stroke"
+            x1="0"
+            y1="25"
+            x2="260"
+            y2="25"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stop-color="#5672CD" stop-opacity="0.55" />
             <stop offset="40%" stop-color="#38bdf8" />
             <stop offset="80%" stop-color="#818cf8" />
@@ -173,11 +187,7 @@ onMounted(() => {
         </defs>
 
         <!-- 阴影/面积填充 -->
-        <path
-          :d="areaD"
-          fill="url(#cycle-area)"
-          class="sparkline-fill"
-        />
+        <path :d="areaD" fill="url(#cycle-area)" class="sparkline-fill" />
 
         <!-- 高级感 7 天周期平滑滚动曲线 -->
         <path
@@ -244,8 +254,8 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   padding: 8px 14px 10px;
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 5%, transparent);
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 16%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 16%, transparent);
   border-radius: 18px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -256,8 +266,8 @@ onMounted(() => {
 
 .cycle-sparkline-card:hover {
   transform: translateY(-2px);
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 9%, transparent);
-  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 32%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 9%, transparent);
+  border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 32%, transparent);
   box-shadow: 0 8px 28px -4px rgba(86, 114, 205, 0.28);
 }
 
@@ -300,7 +310,7 @@ onMounted(() => {
   width: 14px;
   height: 2.5px;
   border-radius: 2px;
-  background: color-mix(in srgb, var(--vp-c-brand-1, #5672CD) 22%, transparent);
+  background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 22%, transparent);
   transition: all 0.3s ease;
 }
 
@@ -323,7 +333,8 @@ onMounted(() => {
 }
 
 @keyframes beacon-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(0.85);
     opacity: 0.15;
   }

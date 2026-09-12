@@ -50,14 +50,19 @@ img {
   border-radius: 12px;
   border: 1px solid var(--vp-c-border);
   box-shadow: var(--vp-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.04));
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .vp-doc img[src*=".svg"]:hover,
 .vp-doc img[src^="data:image/svg"]:hover,
 .physics-svg-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -2px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 6px 18px -4px rgba(0, 0, 0, 0.08),
+    0 2px 6px -2px rgba(0, 0, 0, 0.04);
   border-color: color-mix(in srgb, var(--vp-c-brand-1) 35%, var(--vp-c-border));
 }
 
@@ -553,4 +558,3 @@ body {
     padding: 10px 14px;
   }
 }
-

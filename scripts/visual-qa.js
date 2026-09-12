@@ -1,9 +1,9 @@
 ﻿/**
  * scripts/visual-qa.js
- * 
+ *
  * Playwright Multi-Viewport Visual & Ergonomics QA Test Runner
  * High School Physics Knowledge Base (高考物理知识库)
- * 
+ *
  * Features verified across viewports:
  *  1. No uncontrolled horizontal page overflow (scrollWidth <= clientWidth + 1)
  *  2. Table scrollability (canScroll or overflowX === 'auto')
@@ -11,8 +11,8 @@
  *  4. Automated visual artifact screenshots saved to .agents/visual_qa_artifacts/
  */
 
-import http from "node:http";
 import fs from "node:fs";
+import http from "node:http";
 import path from "node:path";
 import url from "node:url";
 import { chromium } from "playwright";
@@ -41,7 +41,8 @@ Options:
 const portIndex = args.indexOf("--port");
 const preferredPort = portIndex >= 0 ? Number(args[portIndex + 1]) : 8989;
 const artifactsIndex = args.indexOf("--artifacts-dir");
-const artifactsDir = artifactsIndex >= 0 ? path.resolve(process.cwd(), args[artifactsIndex + 1]) : defaultArtifactsDir;
+const artifactsDir =
+  artifactsIndex >= 0 ? path.resolve(process.cwd(), args[artifactsIndex + 1]) : defaultArtifactsDir;
 const strictTouch = args.includes("--strict-touch") || process.env.STRICT_TOUCH_TARGETS === "1";
 
 // Ensure dist exists
@@ -67,7 +68,7 @@ const mimeTypes = {
   ".webp": "image/webp",
   ".ico": "image/x-icon",
   ".woff": "font/woff",
-  ".woff2": "font/woff2"
+  ".woff2": "font/woff2",
 };
 
 // Static server helper
@@ -135,7 +136,7 @@ async function launchBrowser() {
     process.env.CHROME_PATH,
     "C:\\Users\\Yu_233\\AppData\\Local\\ms-playwright\\chromium-1243\\chrome-win64\\chrome.exe",
     "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
   ].filter(Boolean);
 
   for (const p of candidates) {
@@ -144,7 +145,7 @@ async function launchBrowser() {
         return await chromium.launch({
           executablePath: p,
           headless: true,
-          args: ["--no-sandbox", "--disable-setuid-sandbox"]
+          args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
       } catch (e) {
         // Try next
@@ -156,13 +157,13 @@ async function launchBrowser() {
     return await chromium.launch({
       channel: "chrome",
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
   } catch {}
 
   return await chromium.launch({
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 }
 
@@ -171,7 +172,7 @@ const viewports = [
   { id: "desktop", name: "Desktop", width: 1280, height: 800, isMobile: false },
   { id: "tablet", name: "Tablet", width: 768, height: 1024, isMobile: false },
   { id: "mobile", name: "Mobile", width: 390, height: 844, isMobile: true },
-  { id: "narrow-mobile", name: "Narrow Mobile", width: 375, height: 667, isMobile: true }
+  { id: "narrow-mobile", name: "Narrow Mobile", width: 375, height: 667, isMobile: true },
 ];
 
 const testPages = [
@@ -179,36 +180,42 @@ const testPages = [
     id: "home",
     name: "Home Page",
     path: "/index.html",
-    description: "Homepage hero, quick index cards & navigation"
+    description: "Homepage hero, quick index cards & navigation",
   },
   {
     id: "table-golden-conclusions",
     name: "Table Page (Golden Conclusions)",
     path: "/golden-conclusions.html",
-    description: "50 Golden Conclusions featuring dense wide comparison tables"
+    description: "50 Golden Conclusions featuring dense wide comparison tables",
   },
   {
     id: "svg-circular-motion",
     name: "SVG Diagram Page",
     path: "/05 圆周运动及其应用/考点 竖直面圆周运动轻绳与轻杆临界模型.html",
-    description: "Physics vector SVG diagrams and critical mechanics models"
+    description: "Physics vector SVG diagrams and critical mechanics models",
   },
   {
     id: "article-uniform-accel",
     name: "Article Page (Uniform Acceleration)",
     path: "/01 运动的描述与匀变速规律/04 匀变速直线运动规律与自由落体.html",
-    description: "Standard long-form chapter with formulas, tables & callouts"
-  }
+    description: "Standard long-form chapter with formulas, tables & callouts",
+  },
 ];
 
 // Main Test Execution
 async function runVisualQA() {
-  console.log("\x1b[1m======================================================================\x1b[0m");
+  console.log(
+    "\x1b[1m======================================================================\x1b[0m",
+  );
   console.log("\x1b[1;34m [E2E Visual QA] 高考物理知识库 (Yulaoshizuikeai's Physics Note)\x1b[0m");
-  console.log("\x1b[1m======================================================================\x1b[0m");
+  console.log(
+    "\x1b[1m======================================================================\x1b[0m",
+  );
 
   const { server, port } = await startStaticServer(distDir, preferredPort);
-  console.log(`\x1b[32m✔\x1b[0m Static server listening at \x1b[36mhttp://127.0.0.1:${port}\x1b[0m`);
+  console.log(
+    `\x1b[32m✔\x1b[0m Static server listening at \x1b[36mhttp://127.0.0.1:${port}\x1b[0m`,
+  );
 
   let browser;
   try {
@@ -270,7 +277,7 @@ async function runVisualQA() {
             scrollWidth,
             diff: Math.max(0, diff),
             scrolledX,
-            passed: !hasOverflow
+            passed: !hasOverflow,
           };
         });
 
@@ -302,14 +309,14 @@ async function runVisualQA() {
               canScroll,
               fitsWithinParent,
               isScrollStyle,
-              passed
+              passed,
             };
           });
 
           return {
             count: tables.length,
             allPassed: details.every((d) => d.passed),
-            details
+            details,
           };
         });
 
@@ -322,7 +329,7 @@ async function runVisualQA() {
             ".outline-link",
             ".copylink",
             ".CCPdfDownloadButtonBtn",
-            ".cc-settings-trigger"
+            ".cc-settings-trigger",
           ];
           const elements = Array.from(document.querySelectorAll(selectors.join(",")));
           let totalInteractive = 0;
@@ -349,7 +356,7 @@ async function runVisualQA() {
                       (el.textContent || "").trim().slice(0, 20) ||
                       el.getAttribute("aria-label") ||
                       el.className,
-                    height: Math.round(rect.height * 10) / 10
+                    height: Math.round(rect.height * 10) / 10,
                   });
                 }
               }
@@ -364,13 +371,14 @@ async function runVisualQA() {
               totalInteractive > 0
                 ? ((compliant44 / totalInteractive) * 100).toFixed(1) + "%"
                 : "100%",
-            samplesBelow44
+            samplesBelow44,
           };
         });
 
         // 4. Capture Screenshot Artifact
         await page.screenshot({ path: screenshotPath, fullPage: false });
-        const screenshotSaved = fs.existsSync(screenshotPath) && fs.statSync(screenshotPath).size > 0;
+        const screenshotSaved =
+          fs.existsSync(screenshotPath) && fs.statSync(screenshotPath).size > 0;
 
         // Determine pass/fail status
         const overflowPassed = overflow.passed;
@@ -385,22 +393,26 @@ async function runVisualQA() {
               `| Overflow: \x1b[32mOK\x1b[0m (w=${overflow.clientWidth}px) ` +
               `| Tables: \x1b[36m${tableCheck.count}\x1b[0m (\x1b[32m${tablesPassed ? "Scrollable/Fit" : "FAIL"}\x1b[0m) ` +
               `| Touch 44px: \x1b[33m${touchAudit.complianceRate}\x1b[0m (${touchAudit.compliant44}/${touchAudit.totalInteractive}) ` +
-              `| Artifact: \x1b[90m${screenshotName}\x1b[0m`
+              `| Artifact: \x1b[90m${screenshotName}\x1b[0m`,
           );
         } else {
           failedTests++;
           const reasons = [];
           if (!overflowPassed)
             reasons.push(
-              `Horizontal overflow detected (scrollWidth=${overflow.scrollWidth}, clientWidth=${overflow.clientWidth}, diff=${overflow.diff}px)`
+              `Horizontal overflow detected (scrollWidth=${overflow.scrollWidth}, clientWidth=${overflow.clientWidth}, diff=${overflow.diff}px)`,
             );
           if (!tablesPassed) reasons.push(`Unscrollable truncated table detected`);
           if (!touchPassed)
-            reasons.push(`Strict touch target standard violated: ${touchAudit.under44} items < 44px`);
+            reasons.push(
+              `Strict touch target standard violated: ${touchAudit.under44} items < 44px`,
+            );
           if (!screenshotSaved) reasons.push(`Failed to generate screenshot at ${screenshotPath}`);
 
           failureDetails.push({ testName, reasons });
-          console.log(`  \x1b[31m✖\x1b[0m \x1b[1;31m${tp.name}\x1b[0m | Failed: ${reasons.join("; ")}`);
+          console.log(
+            `  \x1b[31m✖\x1b[0m \x1b[1;31m${tp.name}\x1b[0m | Failed: ${reasons.join("; ")}`,
+          );
         }
 
         testResultsSummary.push({
@@ -410,7 +422,7 @@ async function runVisualQA() {
           overflow: overflowPassed,
           tables: tablesPassed ? `${tableCheck.count} OK` : "FAIL",
           touch44Rate: touchAudit.complianceRate,
-          artifact: screenshotName
+          artifact: screenshotName,
         });
       } catch (err) {
         failedTests++;
@@ -425,14 +437,18 @@ async function runVisualQA() {
   await new Promise((resolve) => server.close(resolve));
 
   // Print Summary Table
-  console.log("\n\x1b[1m======================================================================\x1b[0m");
+  console.log(
+    "\n\x1b[1m======================================================================\x1b[0m",
+  );
   console.log("\x1b[1m Visual QA Test Execution Summary\x1b[0m");
-  console.log("\x1b[1m======================================================================\x1b[0m");
+  console.log(
+    "\x1b[1m======================================================================\x1b[0m",
+  );
   console.log(
     `Total Tests: \x1b[1m${totalTests}\x1b[0m | ` +
       `Passed: \x1b[32m${passedTests}\x1b[0m | ` +
       `Failed: \x1b[31m${failedTests}\x1b[0m | ` +
-      `Artifacts: \x1b[36m${totalTests} images\x1b[0m in \x1b[90m${path.relative(projectRoot, artifactsDir)}\x1b[0m`
+      `Artifacts: \x1b[36m${totalTests} images\x1b[0m in \x1b[90m${path.relative(projectRoot, artifactsDir)}\x1b[0m`,
   );
 
   if (failureDetails.length > 0) {
@@ -445,12 +461,16 @@ async function runVisualQA() {
     }
   }
 
-  console.log("\x1b[1m======================================================================\x1b[0m");
+  console.log(
+    "\x1b[1m======================================================================\x1b[0m",
+  );
   if (failedTests === 0) {
     console.log("\x1b[1;32m🎉 ALL VISUAL QA TESTS PASSED SUCCESSFULLY! (Exit 0)\x1b[0m");
     process.exit(0);
   } else {
-    console.log(`\x1b[1;31m❌ VISUAL QA TESTS FAILED: ${failedTests} test(s) failed. (Exit 1)\x1b[0m`);
+    console.log(
+      `\x1b[1;31m❌ VISUAL QA TESTS FAILED: ${failedTests} test(s) failed. (Exit 1)\x1b[0m`,
+    );
     process.exit(1);
   }
 }

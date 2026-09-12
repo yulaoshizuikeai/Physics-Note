@@ -7,7 +7,6 @@ declare module "*.vue" {
   export default component;
 }
 
-declare module "@waline/client/style";
 declare module "*.css";
 declare module "*.less";
 declare module "*.scss";
