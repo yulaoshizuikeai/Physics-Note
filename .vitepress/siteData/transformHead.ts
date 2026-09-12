@@ -122,10 +122,15 @@ export function buildTransformHead(siteUrl: string, siteName: string, defaultDes
       ...pathParts
         .map((part, index): ListItem => {
           const itemPath = toBreadcrumbItemPath(pathParts, index);
+          // For root-level single pages (pathParts.length === 1), prefer pageData.title
+          // to avoid showing the English slug (e.g. "golden-conclusions") as the breadcrumb name.
+          const isRootSinglePage = pathParts.length === 1 && index === 0;
+          const slugName = toBreadcrumbName(decodeURIComponent(part).replace(/\.html$/i, ""));
+          const name = isRootSinglePage && pageData.title ? pageData.title : slugName;
           return {
             "@type": "ListItem" as const,
             position: index + 2,
-            name: toBreadcrumbName(decodeURIComponent(part).replace(/\.html$/i, "")),
+            name,
             item: `${siteUrl}${itemPath}`,
           };
         })
