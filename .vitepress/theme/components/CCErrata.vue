@@ -15,7 +15,7 @@ const pageUrl = computed(() => {
   if (typeof window !== "undefined") {
     return window.location.href;
   }
-  return `https://note.physics.nx.kg${route.path}`;
+  return `https://physics.yunet.cfd${route.path}`;
 });
 
 const mailtoUrl = computed(() => {

@@ -11,7 +11,7 @@ import mapShortUrl from "./theme/components/shortUrl/mapShortUrl.ts";
 
 const configDir = path.dirname(fileURLToPath(import.meta.url));
 const contentRoot = path.resolve(configDir, "..");
-const siteUrl = "https://note.physics.nx.kg";
+const siteUrl = "https://physics.yunet.cfd";
 const siteName = "高考物理知识库 - Yulaoshizuikeai's Physics Note";
 const defaultDescription =
   "免费高中物理知识库与高考复习指南，覆盖运动学、动力学、圆周与万有引力、机械能与动量、静电场与恒定电流、磁场与电磁感应、交变电流、振动与光、热学、近代物理及物理实验等核心板块，结合人教版教材与可汗学院直观思维，适合高中同步学习与高考复习。";
