@@ -15,7 +15,11 @@
   <img src="./public/images/activity-trend.svg" alt="Activity Trend" width="240" />
 </p>
 
-1. **在线阅读**: [https://physics.yunet.cfd/](https://physics.yunet.cfd/)
+1. **在线阅读与全科矩阵**:
+   - 🪐 **高考物理知识库**: [https://physics.yunet.cfd/](https://physics.yunet.cfd/)
+   - 🌐 **高考全科知识中枢 (总门户)**: [https://note.yunet.cfd/](https://note.yunet.cfd/)
+   - 🧬 **高考生物知识库**: [https://biology.yunet.cfd/](https://biology.yunet.cfd/)
+   - 🧪 **高考化学知识库**: [https://intv.indevs.in/](https://intv.indevs.in/)
 2. **最新 PDF 下载**:
    - 📕 **[完整版 PDF (单文件全书)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-Complete.pdf)** (由 GitHub Actions 随代码更新自动生成)
    - 📦 **[全套分册归档 (.zip)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-All-PDFs.zip)** (包含 19 大专题 99 篇独立高清矢量 PDF)
