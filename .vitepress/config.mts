@@ -46,7 +46,9 @@ export default defineConfig({
     ["meta", { name: "twitter:image", content: `${siteUrl}/images/og-image.png` }],
     ["meta", { name: "twitter:title", content: siteName }],
     ["meta", { name: "twitter:description", content: defaultDescription }],
-    // 搜索引擎站长平台所有权验证（Google 已通过 public/google013928aed71dcb01.html 文件验证）
+    // 搜索引擎站长平台所有权验证（HTML 标签验证与 public 静态文件双重兜底）
+    ["meta", { name: "google-site-verification", content: "0NrFOzhaskGGSNw5Yj76G5-7HbJawGkKNtknQ7t0tPE" }],
+    ["meta", { name: "google-site-verification", content: "Vqz-Z3qwemNKwFr8z_n5K_60USIw5dVPWjD10xl1abg" }],
     [
       "script",
       {},
