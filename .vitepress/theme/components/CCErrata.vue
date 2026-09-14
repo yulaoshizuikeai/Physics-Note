@@ -187,11 +187,7 @@ const copyTemplate = async () => {
 
 .cc-errata:hover {
   border-color: color-mix(in srgb, var(--vp-c-brand-1) 35%, var(--vp-c-border));
-  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.06);
-}
-
-.dark .cc-errata:hover {
-  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--vp-shadow-2);
 }
 
 .cc-errata__main {
@@ -284,14 +280,14 @@ const copyTemplate = async () => {
   background: var(--vp-c-brand-1);
   color: #ffffff !important;
   border: 1px solid var(--vp-c-brand-1);
-  box-shadow: 0 2px 6px -1px rgba(76, 103, 185, 0.25);
+  box-shadow: var(--vp-shadow-1);
 }
 
 .cc-errata__btn--primary:hover {
   background: var(--vp-c-brand-2);
   border-color: var(--vp-c-brand-2);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px -2px rgba(76, 103, 185, 0.35);
+  box-shadow: var(--vp-shadow-2);
 }
 
 .dark .cc-errata__btn--primary {

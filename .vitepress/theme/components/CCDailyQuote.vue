@@ -115,7 +115,20 @@ const handleCopy = async (event: MouseEvent) => {
     >
       <!-- 左侧极简徽章 -->
       <div class="flash-badge">
-        <span class="flash-badge-icon">⚡</span>
+        <span class="flash-badge-icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            width="12"
+            height="12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg>
+        </span>
         <span class="flash-badge-text">每日速记</span>
         <span class="flash-tag">{{ currentItem.tag }}</span>
       </div>
@@ -212,7 +225,7 @@ const handleCopy = async (event: MouseEvent) => {
   border-radius: 12px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 18px -4px rgba(86, 114, 205, 0.12);
+  box-shadow: var(--vp-shadow-1);
   cursor: pointer;
   user-select: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -221,7 +234,7 @@ const handleCopy = async (event: MouseEvent) => {
 .cc-physics-flash-card:hover {
   background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 9%, var(--vp-c-bg-soft));
   border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 35%, transparent);
-  box-shadow: 0 6px 24px -4px rgba(86, 114, 205, 0.2);
+  box-shadow: var(--vp-shadow-2);
   transform: translateY(-1px);
 }
 
@@ -243,8 +256,10 @@ const handleCopy = async (event: MouseEvent) => {
 }
 
 .flash-badge-icon {
-  font-size: 11px;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vp-c-brand-1, #5672cd);
 }
 
 .flash-badge-text {

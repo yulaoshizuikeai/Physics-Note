@@ -16,30 +16,30 @@
 </p>
 
 1. **在线阅读与全科矩阵**:
-   - 🪐 **高考物理知识库**: [https://physics.yunet.cfd/](https://physics.yunet.cfd/)
-   - 🌐 **高考全科知识中枢 (总门户)**: [https://note.yunet.cfd/](https://note.yunet.cfd/)
-   - 🧬 **高考生物知识库**: [https://biology.yunet.cfd/](https://biology.yunet.cfd/)
-   - 🧪 **高考化学知识库**: [https://chemistry-note.seeridia.top/](https://chemistry-note.seeridia.top/)
+   - **高考物理知识库**: [https://physics.yunet.cfd/](https://physics.yunet.cfd/)
+   - **高考全科知识中枢 (总门户)**: [https://note.yunet.cfd/](https://note.yunet.cfd/)
+   - **高考生物知识库**: [https://biology.yunet.cfd/](https://biology.yunet.cfd/)
+   - **高考化学知识库**: [https://chemistry-note.seeridia.top/](https://chemistry-note.seeridia.top/)
 2. **最新 PDF 下载**:
-   - 📕 **[完整版 PDF (单文件全书)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-Complete.pdf)** (由 GitHub Actions 随代码更新自动生成)
-   - 📦 **[全套分册归档 (.zip)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-All-PDFs.zip)** (包含 19 大专题 99 篇独立高清矢量 PDF)
+   - **[完整版 PDF (单文件全书)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-Complete.pdf)** (由 GitHub Actions 随代码更新自动生成)
+   - **[全套分册归档 (.zip)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-All-PDFs.zip)** (包含 19 大专题 99 篇独立高清矢量 PDF)
 3. **知识架构**: 涵盖中国普通高中教科书物理（人教版必修 3 册 + 选必 3 册共 6 本），结合高考物理真题与核心题型模型，深度融合**可汗学院（Khan Academy）**直观物理思维与微积分极限方法，打造全套开源高中物理知识库。
 
 ---
 
-## 💡 创作来源、灵感来源与工程致敬
+## 创作来源、灵感来源与工程致敬
 
-- **📚 创作来源（权威教材体系）**：本项目知识架构严格基于中国普通高中物理教科书（**人教版新课标，涵盖必修第一、二、三册及选择性必修第一、二、三册共六册官方教材**）进行全量梳理与深度重构。完整覆盖高中阶段全部基本物理概念、规律推导与实验操作规范，并按照高考大题实战需求提炼出 19 个大专题及其核心解题模型。
-- **🌟 灵感来源（直观物理与微积分思维）**：深度吸纳**可汗学院（Khan Academy）**直观、启发式的物理思维：
+- **创作来源（权威教材体系）**：本项目知识架构严格基于中国普通高中物理教科书（**人教版新课标，涵盖必修第一、二、三册及选择性必修第一、二、三册共六册官方教材**）进行全量梳理与深度重构。完整覆盖高中阶段全部基本物理概念、规律推导与实验操作规范，并按照高考大题实战需求提炼出 19 个大专题及其核心解题模型。
+- **灵感来源（直观物理与微积分思维）**：深度吸纳**可汗学院（Khan Academy）**直观、启发式的物理思维：
   - **微元法与极限定理**：从 $\lim_{\Delta t \to 0} \frac{\Delta x}{\Delta t}$ 的瞬时变化率理解速度、加速度与感应电动势；
   - **几何面积与微元累积**：从 $v-t$ 图像面积理解位移、$F-x$ 曲线面积理解做功、$F-t$ 曲线面积理解冲量；
   - **守恒量与时空对称性**：从时间与空间平移对称性理解能量守恒与动量守恒，将物理公式还原为清晰的几何物理直觉。
-- **🛠️ 基于什么修改而来（开源工程架构致敬）**：
-  本项目前端文档工程架构与设计风格基于优秀开源项目 [Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来。继承其成熟现代的 VitePress 2.0 静态文档引擎架构、MathJax 3 矢量公式排版规范、组件化考点聚合展示模块（`<CCChapterOverview />`）、短链映射及极速本地搜索系统，并针对物理学科特性研发了全套 78 幅高清矢量 SVG 图解与力热电光原全套高考模型。
+- **基于什么修改而来（开源工程架构致敬）**：
+  本项目前端文档工程架构与设计风格基于开源项目 [Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来。继承其成熟现代的 VitePress 2.0 静态文档引擎架构、MathJax 3 矢量公式排版规范、组件化考点聚合展示模块（`<CCChapterOverview />`）、短链映射及极速本地搜索系统，并针对物理学科特性研发了全套 78 幅高清矢量 SVG 图解与力热电光原全套高考模型。
 
 ---
 
-## 🧭 目录大纲
+## 目录大纲
 
 - **00 说明**
   - [Readme](00%20说明/Readme.md)
@@ -162,14 +162,14 @@
 
 ---
 
-## 👥 项目贡献者 (Contributors)
+## 项目贡献者 (Contributors)
 
 本项目由以下 AI 智能体与开发者协同构建，感谢各位伙伴的深度贡献：
 
 | 贡献者 (Contributor) | 角色与核心贡献 | 平台与技术支持 |
 | :--- | :--- | :--- |
-| 🤖 **Codex** | 架构规划、概念梳理与工程转化支持 | OpenAI Advanced Coding Intelligence |
-| ⚡ **Claude Code** | 深度数理推导、知识架构对齐与物理模型沉淀 | Anthropic Agentic Coding System |
+| **Codex** | 架构规划、概念梳理与工程转化支持 | OpenAI Advanced Coding Intelligence |
+| **Claude Code** | 深度数理推导、知识架构对齐与物理模型沉淀 | Anthropic Agentic Coding System |
 
 ---
 

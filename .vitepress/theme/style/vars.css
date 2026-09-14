@@ -37,24 +37,50 @@
   --vp-c-gutter: rgba(0, 0, 0, 0.04);
 
   /* ------------------------------------------------------------
-     5. Font Stacks (Modern Humanist System First)
+     5. Font Stacks (Anti-Slop Editorial & Monospace Hierarchy)
      ------------------------------------------------------------ */
   --vp-font-family-base:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
+    "Geist", "Geist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --vp-font-family-serif: Georgia, "Songti SC", "Noto Serif SC", STSong, SimSun, serif;
+  --vp-font-family-serif:
+    "Instrument Serif", "Newsreader", "Playfair Display", Georgia, "Songti SC", "Noto Serif SC",
+    STSong, SimSun, serif;
   --vp-font-family-mono:
-    "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+    "Geist Mono", "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", monospace;
 
   /* ------------------------------------------------------------
-     6. Soft Diffused Shadows (Eliminating heavy harsh black shadows)
+     6. Soft Diffused Minimal Shadows (Diffuse, low opacity < 0.04)
      ------------------------------------------------------------ */
-  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.03);
-  --vp-shadow-2: 0 3px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-  --vp-shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --vp-shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-  --vp-shadow-5: 0 25px 50px -12px rgba(0, 0, 0, 0.07);
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --vp-shadow-2: 0 2px 6px rgba(0, 0, 0, 0.03);
+  --vp-shadow-3: 0 4px 12px rgba(0, 0, 0, 0.035);
+  --vp-shadow-4: 0 8px 20px rgba(0, 0, 0, 0.04);
+  --vp-shadow-5: 0 12px 28px rgba(0, 0, 0, 0.04);
+  --vp-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.03);
+
+  /* ------------------------------------------------------------
+     Pastel Discipline Accents (Minimalist Pastels for Knowledge Modules)
+     ------------------------------------------------------------ */
+  --vp-pastel-blue: #e1f3fe;
+  --vp-pastel-blue-text: #1f6c9f;
+  --vp-pastel-blue-border: rgba(31, 108, 159, 0.22);
+
+  --vp-pastel-red: #fdebec;
+  --vp-pastel-red-text: #9f2f2d;
+  --vp-pastel-red-border: rgba(159, 47, 45, 0.22);
+
+  --vp-pastel-green: #edf3ec;
+  --vp-pastel-green-text: #346538;
+  --vp-pastel-green-border: rgba(52, 101, 56, 0.22);
+
+  --vp-pastel-yellow: #fbf3db;
+  --vp-pastel-yellow-text: #956400;
+  --vp-pastel-yellow-border: rgba(149, 100, 0, 0.22);
+
+  --vp-pastel-purple: #f3effc;
+  --vp-pastel-purple-text: #593da8;
+  --vp-pastel-purple-border: rgba(89, 61, 168, 0.22);
 
   /* ------------------------------------------------------------
      7. Code Blocks (Light Mode: Paper Embedded Tone)
@@ -76,25 +102,25 @@
   --vp-code-color: #374ea3;
 
   /* ------------------------------------------------------------
-     8. Custom Callouts (Light Mode: Subtle Paper Tints)
+     8. Custom Callouts (Minimalist Pastels: 1px subtle borders, gentle paper tints)
      ------------------------------------------------------------ */
-  --vp-custom-block-info-border: rgba(86, 114, 205, 0.45);
-  --vp-custom-block-info-text: #2f448c;
-  --vp-custom-block-info-bg: rgba(86, 114, 205, 0.05);
+  --vp-custom-block-info-border: var(--vp-c-border);
+  --vp-custom-block-info-text: var(--vp-c-text-1);
+  --vp-custom-block-info-bg: var(--vp-c-bg-soft);
 
-  --vp-custom-block-tip-border: #435eb8;
-  --vp-custom-block-tip-text: #2f448c;
-  --vp-custom-block-tip-bg: rgba(67, 94, 184, 0.06);
+  --vp-custom-block-tip-border: var(--vp-pastel-blue-border);
+  --vp-custom-block-tip-text: var(--vp-pastel-blue-text);
+  --vp-custom-block-tip-bg: var(--vp-pastel-blue);
 
-  --vp-custom-block-warning-border: #c27803;
-  --vp-custom-block-warning-text: #724602;
-  --vp-custom-block-warning-bg: rgba(194, 120, 3, 0.06);
+  --vp-custom-block-warning-border: var(--vp-pastel-yellow-border);
+  --vp-custom-block-warning-text: var(--vp-pastel-yellow-text);
+  --vp-custom-block-warning-bg: var(--vp-pastel-yellow);
 
-  --vp-custom-block-danger-border: #b9423b;
-  --vp-custom-block-danger-text: #75201b;
-  --vp-custom-block-danger-bg: rgba(185, 66, 59, 0.06);
+  --vp-custom-block-danger-border: var(--vp-pastel-red-border);
+  --vp-custom-block-danger-text: var(--vp-pastel-red-text);
+  --vp-custom-block-danger-bg: var(--vp-pastel-red);
 
-  --vp-custom-block-details-border: rgba(0, 0, 0, 0.1);
+  --vp-custom-block-details-border: var(--vp-c-border);
   --vp-custom-block-details-text: var(--vp-c-text-1);
   --vp-custom-block-details-bg: var(--vp-c-bg-soft);
 
@@ -158,11 +184,33 @@
   --vp-c-gutter: rgba(255, 255, 255, 0.05);
 
   /* Soft Diffused Shadows */
-  --vp-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.35);
-  --vp-shadow-2: 0 4px 8px -1px rgba(0, 0, 0, 0.4);
-  --vp-shadow-3: 0 10px 20px -4px rgba(0, 0, 0, 0.45);
-  --vp-shadow-4: 0 20px 30px -6px rgba(0, 0, 0, 0.5);
-  --vp-shadow-5: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  --vp-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --vp-shadow-2: 0 3px 8px rgba(0, 0, 0, 0.3);
+  --vp-shadow-3: 0 6px 16px rgba(0, 0, 0, 0.35);
+  --vp-shadow-4: 0 10px 24px rgba(0, 0, 0, 0.4);
+  --vp-shadow-5: 0 16px 36px rgba(0, 0, 0, 0.45);
+  --vp-shadow-card: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+  /* Pastel Discipline Accents (Dark Mode: Muted and readable) */
+  --vp-pastel-blue: rgba(31, 108, 159, 0.25);
+  --vp-pastel-blue-text: #90cdf4;
+  --vp-pastel-blue-border: rgba(144, 205, 244, 0.3);
+
+  --vp-pastel-red: rgba(159, 47, 45, 0.25);
+  --vp-pastel-red-text: #feb2b2;
+  --vp-pastel-red-border: rgba(254, 178, 178, 0.3);
+
+  --vp-pastel-green: rgba(52, 101, 56, 0.25);
+  --vp-pastel-green-text: #9ae6b4;
+  --vp-pastel-green-border: rgba(154, 230, 180, 0.3);
+
+  --vp-pastel-yellow: rgba(149, 100, 0, 0.25);
+  --vp-pastel-yellow-text: #fbd38d;
+  --vp-pastel-yellow-border: rgba(251, 211, 141, 0.3);
+
+  --vp-pastel-purple: rgba(89, 61, 168, 0.25);
+  --vp-pastel-purple-text: #d6bcfa;
+  --vp-pastel-purple-border: rgba(214, 188, 250, 0.3);
 
   /* Code Blocks */
   --vp-code-block-bg: #1c1f21;
@@ -181,24 +229,24 @@
   --vp-code-bg: rgba(255, 255, 255, 0.08);
   --vp-code-color: #a8bdfa;
 
-  /* Custom Callouts */
-  --vp-custom-block-info-border: rgba(117, 142, 230, 0.4);
-  --vp-custom-block-info-text: #b8c8fa;
-  --vp-custom-block-info-bg: rgba(117, 142, 230, 0.08);
+  /* Custom Callouts (Minimalist Dark Pastels) */
+  --vp-custom-block-info-border: var(--vp-c-border);
+  --vp-custom-block-info-text: var(--vp-c-text-1);
+  --vp-custom-block-info-bg: var(--vp-c-bg-soft);
 
-  --vp-custom-block-tip-border: #758ee6;
-  --vp-custom-block-tip-text: #c5d4fc;
-  --vp-custom-block-tip-bg: rgba(117, 142, 230, 0.09);
+  --vp-custom-block-tip-border: var(--vp-pastel-blue-border);
+  --vp-custom-block-tip-text: var(--vp-pastel-blue-text);
+  --vp-custom-block-tip-bg: var(--vp-pastel-blue);
 
-  --vp-custom-block-warning-border: #d68f1c;
-  --vp-custom-block-warning-text: #f0c37b;
-  --vp-custom-block-warning-bg: rgba(214, 143, 28, 0.09);
+  --vp-custom-block-warning-border: var(--vp-pastel-yellow-border);
+  --vp-custom-block-warning-text: var(--vp-pastel-yellow-text);
+  --vp-custom-block-warning-bg: var(--vp-pastel-yellow);
 
-  --vp-custom-block-danger-border: #d45951;
-  --vp-custom-block-danger-text: #f49f99;
-  --vp-custom-block-danger-bg: rgba(212, 89, 81, 0.09);
+  --vp-custom-block-danger-border: var(--vp-pastel-red-border);
+  --vp-custom-block-danger-text: var(--vp-pastel-red-text);
+  --vp-custom-block-danger-bg: var(--vp-pastel-red);
 
-  --vp-custom-block-details-border: rgba(255, 255, 255, 0.1);
+  --vp-custom-block-details-border: var(--vp-c-border);
   --vp-custom-block-details-text: var(--vp-c-text-1);
   --vp-custom-block-details-bg: var(--vp-c-bg-soft);
 

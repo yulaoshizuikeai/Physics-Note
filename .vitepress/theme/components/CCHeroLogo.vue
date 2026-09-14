@@ -318,7 +318,7 @@ const tiltStyle = computed(() => {
                   fill="white"
                   opacity="0.95"
                 >
-                  🎉 发现彩蛋！
+                  发现彩蛋！
                 </text>
                 <text
                   x="182"

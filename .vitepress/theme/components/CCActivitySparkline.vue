@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
 
 // 7 天周期滚动窗口访问曲线
@@ -259,7 +259,7 @@ onMounted(() => {
   border-radius: 18px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px -6px rgba(86, 114, 205, 0.15);
+  box-shadow: var(--vp-shadow-1);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
@@ -268,7 +268,7 @@ onMounted(() => {
   transform: translateY(-2px);
   background: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 9%, transparent);
   border-color: color-mix(in srgb, var(--vp-c-brand-1, #5672cd) 32%, transparent);
-  box-shadow: 0 8px 28px -4px rgba(86, 114, 205, 0.28);
+  box-shadow: var(--vp-shadow-2);
 }
 
 .sparkline-svg {
@@ -316,8 +316,7 @@ onMounted(() => {
 
 .cycle-tick.is-today {
   width: 22px;
-  background: linear-gradient(90deg, #38bdf8, #818cf8);
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  background: var(--vp-c-brand-1);
 }
 
 @keyframes sparkline-draw {

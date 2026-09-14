@@ -77,7 +77,7 @@ export const buildSidebarItems = (rootDir: string): DefaultTheme.SidebarItem[] =
   });
 
   const specialItem: DefaultTheme.SidebarItem = {
-    text: "⚡ 考前速查与排雷",
+    text: "考前速查与排雷",
     items: [
       { text: "50 大黄金结论与临界条件", link: "/golden-conclusions" },
       { text: "全专题防踩坑排雷白皮书", link: "/warning-cheatsheet" },

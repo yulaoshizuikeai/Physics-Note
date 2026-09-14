@@ -20,11 +20,11 @@ description: "Yulaoshizuikeai's 高考物理知识库的使用说明，包括创
 
 ## 创作来源、灵感来源与工程致敬
 
-### 1. 📚 创作来源（教材权威体系）
+### 1. 创作来源（教材权威体系）
 
 本项目全面基于中国普通高中物理教科书（**人教版新课标，涵盖必修第一、二、三册及选择性必修第一、二、三册共六册官方教材**）进行全量梳理与结构重构。对齐最新《普通高中物理课程标准》与高考中国高考评价体系，确立了以“力学、电磁学、振动与波、光学、热学、近代物理、实验专题”为主干的 19 大专题知识树。
 
-### 2. 🌟 灵感来源（可汗学院微积分与直观物理）
+### 2. 灵感来源（可汗学院微积分与直观物理）
 
 在传统高中物理公式教学的基础上，深度吸纳**可汗学院（Khan Academy）**直观、启发式的物理思维：
 
@@ -32,9 +32,9 @@ description: "Yulaoshizuikeai's 高考物理知识库的使用说明，包括创
 - **几何面积与积分本质**：将 $v-t$ 图像面积映射为位移、$F-x$ 曲线面积映射为做功、$F-t$ 曲线面积映射为冲量，建立深厚的数理直觉；
 - **守恒量与时空对称性**：从物理系统的时间平移不变性理解能量守恒，从空间平移不变性理解动量守恒，将物理规律统一于对称美之中。
 
-### 3. 🛠️ 基于什么修改而来（开源工程架构致敬）
+### 3. 基于什么修改而来（开源工程架构致敬）
 
-本项目的工程架构、排版美学与交互组件基于优秀开源项目 [Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来：
+本项目的前端工程架构、排版美学与交互组件基于开源项目 [Chemistry-Note (高中化学笔记)](https://github.com/yulaoshizuikeai/Chemistry-Note) 修改定制而来：
 
 - **静态站点架构**：沿用基于 VitePress 2.0 的极速响应引擎与分层模块化设计；
 - **排版与渲染系统**：全面继承 MathJax 3 深度集成方案，确保每一个矢量微元公式均达到出版级排版精度；
@@ -64,12 +64,12 @@ description: "Yulaoshizuikeai's 高考物理知识库的使用说明，包括创
 
 本项目已接入 **GitHub Actions 自动化构建流程**，每当项目发布新版本更新时，云端 CI 会自动编译整站并通过无头浏览器生成最新版矢量 PDF：
 
-1. **📥 在线直接下载最新版 PDF**：
+1. **在线直接下载最新版 PDF**：
    - **[完整版 PDF (单文件全书)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-Complete.pdf)**：包含全书 19 个大专题与全部考点模型（推荐 iPad / 电子书 / 电脑离线完整阅读）。
    - **[全套分册打包 (.zip)](https://github.com/yulaoshizuikeai/Physics-Note/releases/download/latest-pdf/Physics-Note-All-PDFs.zip)**：包含按章节归类的 99 篇独立高清矢量 PDF 归档包。
    - 也可随时点击顶部导航栏右上角的 **「下载」** 菜单直接获取。
-2. **🖨️ 浏览器原生打印 / 导出当前页**：在任意文档页面使用快捷键 `Ctrl + P`（Mac 为 `Cmd + P`），或点击导航栏「下载」->「打印 / 导出本页」，即可调用优化好的 A4 排版导出当前单篇。
-3. **💻 本地批量导出整站 PDF**：
+2. **浏览器原生打印 / 导出当前页**：在任意文档页面使用快捷键 `Ctrl + P`（Mac 为 `Cmd + P`），或点击导航栏「下载」->「打印 / 导出本页」，即可调用优化好的 A4 排版导出当前单篇。
+3. **本地批量导出整站 PDF**：
    ```bash
    npm run pdf:all     # 批量并发导出全站
    npm run pdf:package # 打包为完整版单文件与 ZIP 归档
@@ -81,14 +81,14 @@ description: "Yulaoshizuikeai's 高考物理知识库的使用说明，包括创
 
 ---
 
-## 👥 项目贡献者 (Contributors)
+## 项目贡献者 (Contributors)
 
 本项目由以下 AI 智能体与开发者协同研发构建，感谢各位伙伴的深度贡献：
 
 | 贡献者 (Contributor) | 角色与核心贡献                           | 平台与技术支持                      |
 | :------------------- | :--------------------------------------- | :---------------------------------- |
-| 🤖 **Codex**         | 架构规划、概念梳理与工程转化支持         | OpenAI Advanced Coding Intelligence |
-| ⚡ **Claude Code**   | 深度数理推导、知识架构对齐与物理模型沉淀 | Anthropic Agentic Coding System     |
+| **Codex**            | 架构规划、概念梳理与工程转化支持         | OpenAI Advanced Coding Intelligence |
+| **Claude Code**      | 深度数理推导、知识架构对齐与物理模型沉淀 | Anthropic Agentic Coding System     |
 
 ---
 

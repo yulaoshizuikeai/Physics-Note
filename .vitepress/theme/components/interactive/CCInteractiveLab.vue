@@ -183,7 +183,7 @@ const currentModel = () => models.find((m) => m.key === activeKey.value) || mode
   background: var(--vp-c-brand-1);
   color: #ffffff;
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 2px 8px rgba(86, 114, 205, 0.25);
+  box-shadow: var(--vp-shadow-1);
 }
 
 .lab-simulator-card {

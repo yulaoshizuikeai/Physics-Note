@@ -30,8 +30,8 @@
 }
 
 .dark {
-  --vp-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --vp-shadow-table: 0 6px 20px -4px rgba(0, 0, 0, 0.5);
+  --vp-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --vp-shadow-table: 0 4px 16px -4px rgba(0, 0, 0, 0.25);
 }
 
 /* ============================================================
@@ -61,7 +61,7 @@ body {
   color: var(--vp-c-text-1);
 }
 
-/* Headings with Magazine Solid Stature */
+/* Headings with Editorial Academic Stature & Tight Tracking */
 .vp-doc h1,
 .vp-doc h2,
 .vp-doc h3,
@@ -70,21 +70,24 @@ body {
 .vp-doc h6 {
   color: var(--vp-c-text-1);
   font-weight: 650;
-  letter-spacing: normal;
+  letter-spacing: -0.015em;
   position: relative;
 }
 
 .vp-doc h1 {
-  font-size: 2.15rem;
-  line-height: 1.25;
+  font-family: var(--vp-font-family-serif);
+  font-size: 2.3rem;
+  line-height: 1.18;
   margin-top: 1.2rem;
   margin-bottom: 1.5rem;
   font-weight: 700;
+  letter-spacing: -0.025em;
 }
 
 .vp-doc h2 {
-  font-size: 1.52rem;
-  line-height: 1.35;
+  font-size: 1.55rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
   scroll-margin-top: 5rem;
   margin-top: var(--cc-space-xl);
   margin-bottom: 1rem;
@@ -99,8 +102,9 @@ body {
 }
 
 .vp-doc h3 {
-  font-size: 1.22rem;
-  line-height: 1.4;
+  font-size: 1.25rem;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
   margin-top: var(--cc-space-lg);
   margin-bottom: 0.7rem;
 }
@@ -108,6 +112,7 @@ body {
 .vp-doc h4 {
   font-size: 1.06rem;
   line-height: 1.45;
+  letter-spacing: -0.01em;
   margin-top: 1.4rem;
   margin-bottom: 0.5rem;
 }
@@ -246,172 +251,206 @@ html.dark .flash-kw {
 }
 
 /* ============================================================
-   3. Custom Callouts (Containers): Warm Neo-Minimalism Refinement
+   3. Custom Callouts (Containers): Minimalist Academic Refinement
    ============================================================ */
 .vp-doc .custom-block {
-  border-radius: var(--cc-callout-radius) !important;
+  border-radius: 8px !important;
   padding: 1rem 1.3rem !important;
-  margin: 1.4rem 0 !important;
+  margin: 1.35rem 0 !important;
   border: 1px solid var(--vp-c-border) !important;
-  border-left-width: var(--cc-callout-border-left) !important;
-  box-shadow: var(--vp-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.04)) !important;
-}
-
-.vp-doc .custom-block.info {
-  border-left-color: var(--vp-custom-block-info-border) !important;
-  background-color: var(--vp-custom-block-info-bg) !important;
-  color: var(--vp-custom-block-info-text);
-}
-
-.vp-doc .custom-block.tip {
-  border-left-color: var(--vp-custom-block-tip-border) !important;
-  background-color: var(--vp-custom-block-tip-bg) !important;
-  color: var(--vp-custom-block-tip-text);
-}
-
-.vp-doc .custom-block.warning {
-  border-left-color: var(--vp-custom-block-warning-border) !important;
-  background-color: var(--vp-custom-block-warning-bg) !important;
-  color: var(--vp-custom-block-warning-text);
-}
-
-.vp-doc .custom-block.danger {
-  border-left-color: var(--vp-custom-block-danger-border) !important;
-  background-color: var(--vp-custom-block-danger-bg) !important;
-  color: var(--vp-custom-block-danger-text);
-}
-
-.vp-doc .custom-block.important {
-  border-left-color: #7c3aed !important;
-  background-color: rgba(124, 58, 237, 0.06) !important;
-  color: #4c1d95;
-}
-
-.dark .vp-doc .custom-block.important {
-  border-left-color: #a78bfa !important;
-  background-color: rgba(167, 139, 250, 0.12) !important;
-  color: #ddd6fe;
-}
-
-.vp-doc .custom-block.note {
-  border-left-color: var(--vp-custom-block-info-border, #4c67b9) !important;
-  background-color: var(--vp-custom-block-info-bg, rgba(76, 103, 185, 0.06)) !important;
-  color: var(--vp-custom-block-info-text, #2f448c);
-}
-
-.dark .vp-doc .custom-block.note {
-  border-left-color: #758ee6 !important;
-  background-color: rgba(117, 142, 230, 0.12) !important;
-  color: #b8c8fa;
-}
-
-.vp-doc .custom-block.details {
-  border-left-color: var(--vp-custom-block-details-border) !important;
-  background-color: var(--vp-custom-block-details-bg) !important;
-}
-
-/* Callout Title with Semantic Icons */
-.vp-doc .custom-block .custom-block-title {
-  font-weight: 650;
-  font-size: 0.96rem;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.vp-doc .custom-block-title::before {
-  display: inline-block;
-  font-size: 1em;
-  line-height: 1;
-}
-
-.vp-doc .custom-block.tip .custom-block-title::before {
-  content: "💡";
-}
-
-.vp-doc .custom-block.info .custom-block-title::before {
-  content: "ℹ️";
-}
-
-.vp-doc .custom-block.warning .custom-block-title::before {
-  content: "⚠️";
-}
-
-.vp-doc .custom-block.danger .custom-block-title::before {
-  content: "🛑";
-}
-
-.vp-doc .custom-block.important .custom-block-title::before {
-  content: "📌";
-}
-
-.vp-doc .custom-block.note .custom-block-title::before {
-  content: "📝";
+  border-left: 3px solid var(--vp-c-border) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+  font-size: 0.94rem;
+  line-height: 1.72;
 }
 
 .vp-doc .custom-block p {
-  margin: 0.38rem 0;
+  margin: 0.4rem 0;
   line-height: 1.72;
+}
+
+/* Callout Variants: Minimalist Muted Pastels */
+.vp-doc .custom-block.info,
+.vp-doc .custom-block.note {
+  border-color: var(--vp-c-border) !important;
+  border-left-color: var(--vp-c-brand-1) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.vp-doc .custom-block.tip {
+  border-color: var(--vp-pastel-blue-border) !important;
+  border-left-color: var(--vp-pastel-blue-text) !important;
+  background-color: var(--vp-pastel-blue) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.vp-doc .custom-block.warning {
+  border-color: var(--vp-pastel-yellow-border) !important;
+  border-left-color: var(--vp-pastel-yellow-text) !important;
+  background-color: var(--vp-pastel-yellow) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.vp-doc .custom-block.danger {
+  border-color: var(--vp-pastel-red-border) !important;
+  border-left-color: var(--vp-pastel-red-text) !important;
+  background-color: var(--vp-pastel-red) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.vp-doc .custom-block.important {
+  border-color: var(--vp-pastel-purple-border) !important;
+  border-left-color: var(--vp-pastel-purple-text) !important;
+  background-color: var(--vp-pastel-purple) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.vp-doc .custom-block.details {
+  border-color: var(--vp-c-border) !important;
+  border-left-color: var(--vp-c-border) !important;
+  background-color: var(--vp-c-bg-soft) !important;
+}
+
+/* Callout Title: Vector Mask Icons (No Emojis per Minimalist Protocol) */
+.vp-doc .custom-block .custom-block-title {
+  font-weight: 650;
+  font-size: 0.95rem;
+  letter-spacing: -0.012em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+}
+
+.vp-doc .custom-block .custom-block-title::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: var(--callout-icon) no-repeat center / contain;
+  mask: var(--callout-icon) no-repeat center / contain;
+}
+
+.vp-doc .custom-block.tip {
+  --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='16' x2='12' y2='12'/%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'/%3E%3C/svg%3E");
+}
+.vp-doc .custom-block.tip .custom-block-title {
+  color: var(--vp-pastel-blue-text) !important;
+}
+
+.vp-doc .custom-block.warning {
+  --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/%3E%3Cline x1='12' y1='9' x2='12' y2='13'/%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'/%3E%3C/svg%3E");
+}
+.vp-doc .custom-block.warning .custom-block-title {
+  color: var(--vp-pastel-yellow-text) !important;
+}
+
+.vp-doc .custom-block.danger {
+  --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E");
+}
+.vp-doc .custom-block.danger .custom-block-title {
+  color: var(--vp-pastel-red-text) !important;
+}
+
+.vp-doc .custom-block.info,
+.vp-doc .custom-block.note {
+  --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4'/%3E%3Cpath d='M12 8h.01'/%3E%3C/svg%3E");
+}
+.vp-doc .custom-block.info .custom-block-title,
+.vp-doc .custom-block.note .custom-block-title {
+  color: var(--vp-c-brand-1) !important;
+}
+
+.vp-doc .custom-block.important {
+  --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
+}
+.vp-doc .custom-block.important .custom-block-title {
+  color: var(--vp-pastel-purple-text) !important;
 }
 
 /* Callout Semantic Inline Code Pills */
 .vp-doc .custom-block.tip :not(pre) > code {
-  background-color: rgba(67, 94, 184, 0.12);
-  color: #2f448c;
-  border-color: rgba(67, 94, 184, 0.25);
-}
-.dark .vp-doc .custom-block.tip :not(pre) > code {
-  background-color: rgba(117, 142, 230, 0.18);
-  color: #c5d4fc;
-  border-color: rgba(117, 142, 230, 0.3);
+  background-color: rgba(31, 108, 159, 0.12);
+  color: var(--vp-pastel-blue-text);
+  border-color: var(--vp-pastel-blue-border);
 }
 
 .vp-doc .custom-block.info :not(pre) > code,
 .vp-doc .custom-block.note :not(pre) > code {
-  background-color: rgba(76, 103, 185, 0.12);
-  color: #2f448c;
-  border-color: rgba(76, 103, 185, 0.25);
-}
-.dark .vp-doc .custom-block.info :not(pre) > code,
-.dark .vp-doc .custom-block.note :not(pre) > code {
-  background-color: rgba(117, 142, 230, 0.18);
-  color: #b8c8fa;
-  border-color: rgba(117, 142, 230, 0.3);
+  background-color: var(--vp-c-bg-alt);
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-border);
 }
 
 .vp-doc .custom-block.warning :not(pre) > code {
-  background-color: rgba(194, 120, 3, 0.14);
-  color: #724602;
-  border-color: rgba(194, 120, 3, 0.3);
-}
-.dark .vp-doc .custom-block.warning :not(pre) > code {
-  background-color: rgba(214, 143, 28, 0.2);
-  color: #f0c37b;
-  border-color: rgba(214, 143, 28, 0.35);
+  background-color: rgba(149, 100, 0, 0.12);
+  color: var(--vp-pastel-yellow-text);
+  border-color: var(--vp-pastel-yellow-border);
 }
 
 .vp-doc .custom-block.danger :not(pre) > code {
-  background-color: rgba(185, 66, 59, 0.14);
-  color: #75201b;
-  border-color: rgba(185, 66, 59, 0.3);
-}
-.dark .vp-doc .custom-block.danger :not(pre) > code {
-  background-color: rgba(212, 89, 81, 0.2);
-  color: #f49f99;
-  border-color: rgba(212, 89, 81, 0.35);
+  background-color: rgba(159, 47, 45, 0.12);
+  color: var(--vp-pastel-red-text);
+  border-color: var(--vp-pastel-red-border);
 }
 
 .vp-doc .custom-block.important :not(pre) > code {
-  background-color: rgba(124, 58, 237, 0.14);
-  color: #4c1d95;
-  border-color: rgba(124, 58, 237, 0.3);
+  background-color: rgba(89, 61, 168, 0.12);
+  color: var(--vp-pastel-purple-text);
+  border-color: var(--vp-pastel-purple-border);
 }
-.dark .vp-doc .custom-block.important :not(pre) > code {
-  background-color: rgba(167, 139, 250, 0.2);
-  color: #ddd6fe;
-  border-color: rgba(167, 139, 250, 0.35);
+
+/* Accordion (Details) Minimalist Style */
+.vp-doc details.custom-block {
+  padding: 0.8rem 1.15rem !important;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.vp-doc details.custom-block summary {
+  font-weight: 600;
+  font-size: 0.94rem;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  user-select: none;
+  margin: 0 !important;
+}
+
+.vp-doc details.custom-block summary::-webkit-details-marker {
+  display: none;
+}
+
+.vp-doc details.custom-block summary::after {
+  content: "+";
+  font-family: var(--vp-font-family-mono);
+  font-size: 1.15rem;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--vp-c-text-3);
+  transition: color 0.2s ease;
+}
+
+.vp-doc details.custom-block[open] summary::after {
+  content: "−";
+}
+
+.vp-doc details.custom-block summary:hover::after {
+  color: var(--vp-c-brand-1);
+}
+
+.vp-doc details.custom-block[open] summary {
+  margin-bottom: 0.65rem !important;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
 /* ============================================================
@@ -1487,4 +1526,53 @@ html.dark .flash-kw {
     padding: 0 10px;
     font-size: 0.8rem;
   }
+}
+
+/* ============================================================
+   Keystroke & Physical Key Micro-UI (<kbd>)
+   ============================================================ */
+kbd,
+.vp-doc kbd {
+  display: inline-block;
+  padding: 0.15em 0.45em;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.82em;
+  line-height: 1.2;
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  vertical-align: baseline;
+  letter-spacing: 0.02em;
+}
+
+.dark kbd,
+.dark .vp-doc kbd {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--vp-c-bg-alt);
+}
+
+/* ============================================================
+   MathJax / LaTeX Formula Blocks (Academic Paper Display)
+   ============================================================ */
+.vp-doc mjx-container[jax="CHTML"][display="true"],
+.vp-doc .MathJax_Display {
+  margin: 1.25rem 0 !important;
+  padding: 0.85rem 1rem !important;
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  text-align: center;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.vp-doc mjx-container[jax="CHTML"][display="true"]:hover {
+  border-color: var(--vp-c-brand-soft);
 }

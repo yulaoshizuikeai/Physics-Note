@@ -799,7 +799,7 @@ onBeforeUnmount(() => {
 
       <!-- 画布浮动操作小提示 -->
       <div class="canvas-hint">
-        <span>🖱️ 滚轮/双指缩放 · 拖拽平移 · 拖动节点重构拓扑 · 点击节点锁定剖析</span>
+        <span>滚轮/双指缩放 · 拖拽平移 · 拖动节点重构拓扑 · 点击节点锁定剖析</span>
       </div>
     </div>
 
@@ -820,7 +820,7 @@ onBeforeUnmount(() => {
             <h3 class="detail-title">{{ activeNode.name }}</h3>
           </div>
           <div class="detail-actions">
-            <a :href="activeNode.link" class="detail-jump-link"> 👉 进入本章详细笔记 </a>
+            <a :href="activeNode.link" class="detail-jump-link"> 进入本章详细笔记 &rarr; </a>
             <button
               type="button"
               class="detail-close-btn"

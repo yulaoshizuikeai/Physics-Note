@@ -4,6 +4,7 @@ import DefaultTheme from "vitepress/theme";
 
 import CCActivitySparkline from "./components/CCActivitySparkline.vue";
 import CCBackToTop from "./components/CCBackToTop.vue";
+import CCBentoGrid from "./components/CCBentoGrid.vue";
 import CCChapterOverview from "./components/CCChapterOverview.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCErrata from "./components/CCErrata.vue";
@@ -29,6 +30,7 @@ export default {
     app.component("CCJumper", CCJumper);
     app.component("CCShare", CCShare);
     app.component("CCChapterOverview", CCChapterOverview);
+    app.component("CCBentoGrid", CCBentoGrid);
     app.component("CCActivitySparkline", CCActivitySparkline);
     app.component("CCDailyQuote", CCDailyQuote);
     app.component("CCPhysicsSimulator", CCPhysicsSimulator);

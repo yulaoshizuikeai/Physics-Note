@@ -21,7 +21,7 @@ description: "高考物理 50 大黄金结论与临界条件极速速查表，�
   <a class="cc-quick-pill" href="#m9">09 磁场偏转</a>
   <a class="cc-quick-pill" href="#m10">10 电磁感应</a>
   <a class="cc-quick-pill" href="#m11">11 近代物理</a>
-  <a class="cc-quick-pill cc-quick-pill--accent" href="#tips">🎯 考场口诀</a>
+  <a class="cc-quick-pill cc-quick-pill--accent" href="#tips">考场口诀</a>
 </div>
 
 ---
@@ -154,7 +154,7 @@ description: "高考物理 50 大黄金结论与临界条件极速速查表，�
 
 ---
 
-## 🎯 考场速记口诀精要 {#tips}
+## 考场速记口诀精要 {#tips}
 
 1. **运动追及**：速度相等间距极，刹车先算静止期；平抛偏角正切倍，中点反向线常垂。
 2. **天体引力**：黄金代换消大 $M$，$GM=gR^2$ 常相伴；卫星变轨看能量，高轨速小周期长；密度定理 $\rho$ 测心，$3\pi$ 比上 $GT^2$。

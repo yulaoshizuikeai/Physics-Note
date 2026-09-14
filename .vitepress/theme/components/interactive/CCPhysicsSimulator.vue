@@ -596,7 +596,7 @@ const renderOptics = (ctx: CanvasRenderingContext2D, width: number, height: numb
     // 全反射高亮提示
     ctx.fillStyle = theme.red;
     ctx.font = "bold 14px sans-serif";
-    ctx.fillText("⚡ 发生全反射 (i ≥ 临界角 C)！折射光完全消失", cX - 140, cY - 45);
+    ctx.fillText("发生全反射 (i ≥ 临界角 C)！折射光完全消失", cX - 140, cY - 45);
   }
 };
 
