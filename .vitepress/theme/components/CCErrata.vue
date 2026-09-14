@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { useData, useRoute } from "vitepress";
-import { computed, ref } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 
 const { page } = useData();
 const route = useRoute();
 
 const copySuccess = ref(false);
+let copyTimer: ReturnType<typeof setTimeout> | null = null;
+
+onBeforeUnmount(() => {
+  if (copyTimer) clearTimeout(copyTimer);
+  copyTimer = null;
+});
 
 const pageTitle = computed(() => {
   return page.value.title || "物理专题考点";
@@ -50,13 +56,32 @@ const copyTemplate = async () => {
     `【建议修改】：\n\n` +
     `【推导依据 / 参考资料】：\n`;
 
+  const flashSuccess = () => {
+    copySuccess.value = true;
+    if (copyTimer) clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => {
+      copySuccess.value = false;
+      copyTimer = null;
+    }, 2500);
+  };
   try {
-    if (navigator?.clipboard) {
+    if (
+      typeof navigator !== "undefined" &&
+      navigator.clipboard &&
+      typeof navigator.clipboard.writeText === "function"
+    ) {
       await navigator.clipboard.writeText(text);
-      copySuccess.value = true;
-      setTimeout(() => {
-        copySuccess.value = false;
-      }, 2500);
+      flashSuccess();
+    } else if (typeof document !== "undefined") {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      textarea.remove();
+      flashSuccess();
     }
   } catch {
     // 降级方案

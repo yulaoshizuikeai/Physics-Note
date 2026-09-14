@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+import { useData } from "vitepress";
+import { ref, onMounted, onBeforeUnmount, computed, watch } from "vue";
 
 interface GraphNode {
   id: string;
@@ -30,6 +31,7 @@ const canvasRef = ref<HTMLCanvasElement | null>(null);
 const selectedCategory = ref<string>("all");
 const activeNode = ref<GraphNode | null>(null);
 const hoveredNode = ref<GraphNode | null>(null);
+const { isDark: vpIsDark } = useData();
 
 // 视口变换参数
 const transform = ref({
@@ -367,13 +369,22 @@ const isDark = () => {
 };
 
 const getCategoryColor = (cat: string) => {
-  const map: Record<string, string> = {
-    mechanics: "#5672cd",
-    electromagnetism: "#d45951",
-    waves_optics: "#2da44e",
-    thermal_modern: "#c27803",
-    experiment: "#8b5cf6",
-  };
+  const dark = isDark();
+  const map: Record<string, string> = dark
+    ? {
+        mechanics: "#758ee6",
+        electromagnetism: "#f49f99",
+        waves_optics: "#7ee787",
+        thermal_modern: "#f0c37b",
+        experiment: "#a78bfa",
+      }
+    : {
+        mechanics: "#5672cd",
+        electromagnetism: "#d45951",
+        waves_optics: "#2da44e",
+        thermal_modern: "#c27803",
+        experiment: "#8b5cf6",
+      };
   return map[cat] || "#5672cd";
 };
 
@@ -751,6 +762,10 @@ onMounted(() => {
 
   window.addEventListener("resize", resetView);
   window.addEventListener("keydown", onKeydown);
+  // 主题切换后重绘，避免背景/连线/节点残留旧肤色
+  watch(vpIsDark, () => {
+    redraw();
+  });
 });
 
 onBeforeUnmount(() => {
@@ -910,7 +925,8 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.25rem 0.65rem;
+  min-height: 44px;
+  padding: 0.5rem 0.65rem;
   font-size: 0.82rem;
   font-weight: 500;
   border-radius: 6px;
@@ -932,6 +948,10 @@ onBeforeUnmount(() => {
   border-color: var(--vp-c-brand-1);
 }
 
+.dark .cat-pill.active {
+  color: #121415;
+}
+
 .pill-dot {
   width: 7px;
   height: 7px;
@@ -941,10 +961,12 @@ onBeforeUnmount(() => {
 .tool-actions {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .tool-btn {
-  padding: 0.25rem 0.65rem;
+  min-height: 44px;
+  padding: 0.5rem 0.65rem;
   font-size: 0.8rem;
   font-weight: 500;
   border-radius: 6px;
@@ -1019,10 +1041,10 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 6px;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg);
@@ -1052,9 +1074,12 @@ onBeforeUnmount(() => {
 }
 
 .detail-jump-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.85rem;
   font-weight: 500;
-  padding: 0.3rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 6px;
   background: var(--vp-c-brand-1);
   color: #ffffff !important;
@@ -1064,6 +1089,10 @@ onBeforeUnmount(() => {
 
 .detail-jump-link:hover {
   opacity: 0.9;
+}
+
+.dark .detail-jump-link {
+  color: #121415 !important;
 }
 
 .detail-desc {
@@ -1110,8 +1139,11 @@ onBeforeUnmount(() => {
 }
 
 .conn-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.78rem;
-  padding: 0.15rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   border-radius: 4px;
   background: var(--vp-c-bg);
   color: var(--vp-c-text-2);
@@ -1135,7 +1167,7 @@ onBeforeUnmount(() => {
   opacity: 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .detail-body {
     grid-template-columns: 1fr;
   }

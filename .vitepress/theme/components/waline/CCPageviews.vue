@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { useRoute } from "vitepress";
 import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 
 const route = useRoute();
 const isLoading = ref(true);
-let observer = null;
+let observer: MutationObserver | null = null;
+let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
 const runBusuanzi = () => {
   if (typeof window === "undefined") return;
@@ -18,20 +19,33 @@ const runBusuanzi = () => {
   document.head.appendChild(script);
 };
 
+const stopLoading = () => {
+  isLoading.value = false;
+  if (observer) observer.disconnect();
+  if (fallbackTimer) clearTimeout(fallbackTimer);
+  fallbackTimer = null;
+};
+
 const runPageview = () => {
   isLoading.value = true;
   runBusuanzi();
+  if (fallbackTimer) clearTimeout(fallbackTimer);
+  // 统计脚本被拦截/加载失败时的超时兜底，避免骨架永久 loading
+  fallbackTimer = setTimeout(stopLoading, 4000);
 };
 
 const setupObserver = () => {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  if (typeof MutationObserver === "undefined") return;
   const el = document.getElementById("busuanzi_value_page_pv");
-  if (!el || typeof window === "undefined") return;
+  if (!el) return;
 
+  if (observer) observer.disconnect();
   observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       if (mutation.type === "childList" || mutation.type === "characterData") {
         if (el.textContent && el.textContent !== "--" && el.textContent.trim() !== "") {
-          isLoading.value = false;
+          stopLoading();
         }
       }
     }
@@ -55,6 +69,9 @@ watch(
 
 onBeforeUnmount(() => {
   if (observer) observer.disconnect();
+  observer = null;
+  if (fallbackTimer) clearTimeout(fallbackTimer);
+  fallbackTimer = null;
 });
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 interface PhysicsFlash {
   text: string;
@@ -37,7 +37,7 @@ const PHYSICS_FLASHES: PhysicsFlash[] = [
   { text: "连接体动力学：求系统整体加速度用整体法，求相互作用力用隔离法。", tag: "连接体" },
   { text: "机车恒功率启动：做加速度减小的变加速运动，直到牵引力等于阻力。", tag: "机车启动" },
   { text: "带电粒子匀强磁场圆周运动，周期 T = 2πm/qB 与速率无关。", tag: "磁场回旋" },
-  { text: "平抛运动偏转角正切值等于位移偏角正切值的 2 倍：tanθ = 2tanα。", tag: "平抛几何" },
+  { text: "平抛运动速度偏角正切值等于位移偏角正切值的 2 倍：tanα = 2tanθ。", tag: "平抛几何" },
   { text: "游标卡尺读数不估读，螺旋测微器必须估读到千分位。", tag: "实验规范" },
   { text: "伏安法测电阻：大电阻内接（测值偏大），小电阻外接（测值偏小）。", tag: "电学实验" },
   { text: "卫星变轨：点火加速做离心运动抬升轨道，点火减速进入低轨。", tag: "变轨模型" },
@@ -53,6 +53,14 @@ const PHYSICS_FLASHES: PhysicsFlash[] = [
 const currentIndex = ref<number>(0);
 const isChanging = ref<boolean>(false);
 const copied = ref<boolean>(false);
+let nextTimer: ReturnType<typeof setTimeout> | null = null;
+let copyTimer: ReturnType<typeof setTimeout> | null = null;
+
+onBeforeUnmount(() => {
+  if (nextTimer) clearTimeout(nextTimer);
+  if (copyTimer) clearTimeout(copyTimer);
+  nextTimer = copyTimer = null;
+});
 
 onMounted(() => {
   // 每次页面刷新或载入时随机选择一条
@@ -67,13 +75,15 @@ const currentItem = computed<PhysicsFlash>(() => {
 const handleNext = () => {
   if (isChanging.value) return;
   isChanging.value = true;
-  setTimeout(() => {
+  if (nextTimer) clearTimeout(nextTimer);
+  nextTimer = setTimeout(() => {
     let nextIdx = Math.floor(Math.random() * PHYSICS_FLASHES.length);
     if (nextIdx === currentIndex.value) {
       nextIdx = (nextIdx + 1) % PHYSICS_FLASHES.length;
     }
     currentIndex.value = nextIdx;
     isChanging.value = false;
+    nextTimer = null;
   }, 160);
 };
 
@@ -82,9 +92,13 @@ const handleCopy = async (event: MouseEvent) => {
   event.stopPropagation();
   const text = `【高中物理速记】${currentItem.value.text}（#${currentItem.value.tag}）`;
   try {
-    if (navigator?.clipboard?.writeText) {
+    if (
+      typeof navigator !== "undefined" &&
+      navigator.clipboard &&
+      typeof navigator.clipboard.writeText === "function"
+    ) {
       await navigator.clipboard.writeText(text);
-    } else {
+    } else if (typeof document !== "undefined") {
       const textarea = document.createElement("textarea");
       textarea.value = text;
       document.body.appendChild(textarea);
@@ -93,8 +107,10 @@ const handleCopy = async (event: MouseEvent) => {
       textarea.remove();
     }
     copied.value = true;
-    setTimeout(() => {
+    if (copyTimer) clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => {
       copied.value = false;
+      copyTimer = null;
     }, 1800);
   } catch (e) {
     console.warn("Copy failed:", e);

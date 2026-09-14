@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, shallowRef, useTemplateRef } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, shallowRef, useTemplateRef } from "vue";
 
 import type { SiteFontFamily } from "../composables/useSiteSettings";
 
@@ -15,14 +15,14 @@ const dialogRef = useTemplateRef<HTMLDivElement>("dialog");
 
 const openDialog = async () => {
   isOpen.value = true;
-  document.body.classList.add("cc-settings-modal-open");
+  if (typeof document !== "undefined") document.body.classList.add("cc-settings-modal-open");
   await nextTick();
   dialogRef.value?.focus();
 };
 
 const closeDialog = () => {
   isOpen.value = false;
-  document.body.classList.remove("cc-settings-modal-open");
+  if (typeof document !== "undefined") document.body.classList.remove("cc-settings-modal-open");
 };
 
 const onKeydown = (event: KeyboardEvent) => {
@@ -33,25 +33,24 @@ const updateBooleanSetting = (
   key: "showContributors" | "showOutline" | "showComments",
   event: Event,
 ) => {
-  updateSiteSettings(key, (event.target as HTMLInputElement).checked);
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement)) return;
+  updateSiteSettings(key, target.checked);
 };
 
 const updateFontFamily = (event: Event) => {
-  updateSiteSettings("fontFamily", (event.target as HTMLSelectElement).value as SiteFontFamily);
+  const target = event.target;
+  if (!(target instanceof HTMLSelectElement)) return;
+  updateSiteSettings("fontFamily", target.value as SiteFontFamily);
 };
 
-onBeforeUnmount(() => {
-  document.body.classList.remove("cc-settings-modal-open");
+onMounted(() => {
+  if (typeof window !== "undefined") window.addEventListener("keydown", onKeydown);
 });
 
-if (typeof window !== "undefined") {
-  window.addEventListener("keydown", onKeydown);
-}
-
 onBeforeUnmount(() => {
-  if (typeof window !== "undefined") {
-    window.removeEventListener("keydown", onKeydown);
-  }
+  if (typeof document !== "undefined") document.body.classList.remove("cc-settings-modal-open");
+  if (typeof window !== "undefined") window.removeEventListener("keydown", onKeydown);
 });
 </script>
 

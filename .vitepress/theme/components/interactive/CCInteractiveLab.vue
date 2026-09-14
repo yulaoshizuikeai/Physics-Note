@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 import CCKnowledgeGraph from "./CCKnowledgeGraph.vue";
 import CCPhysicsSimulator from "./CCPhysicsSimulator.vue";
@@ -22,7 +22,7 @@ const activeKey = ref<ModelKey>("graph");
 const models: ModelInfo[] = [
   {
     key: "graph",
-    title: "🪐 全景物理知识网络图谱",
+    title: "全景物理知识网络图谱",
     badge: "高考 19 大专题关联拓扑",
     desc: "宏观统揽高中物理五大领域（力学、电磁学、振动与光、热学近代物理、实验）全景关联图谱。支持画布自由拖拽平移、滚轮缩放、拖拽节点探索关联拓扑，点击任意节点即可锁定核心考点公式并直达对应章节。",
     formula: "牛顿动力学 + 动量动能双守恒 + 电磁场路综合 + 波动量子化",
@@ -54,8 +54,8 @@ const models: ModelInfo[] = [
     key: "projectile",
     title: "平抛运动轨迹与速度矢量三角形",
     badge: "04 抛体运动与曲线运动",
-    desc: "将平抛运动正交分解为水平方向匀速运动与竖直方向自由落体。落地末速度由 vx 与 vy 正交合成，轨迹切线正切值为位移正切值的 2 倍，验证高考黄金结论 tanθ = 2 tanα。",
-    formula: "x = v₀t,  y = ½gt²,  vy = gt,  tanθ = 2·tanα",
+    desc: "将平抛运动正交分解为水平方向匀速运动与竖直方向自由落体。落地末速度由 vx 与 vy 正交合成，速度偏角正切值为位移偏角正切值的 2 倍，验证高考黄金结论 tanα = 2 tanθ（α为速度偏角，θ为位移偏角）。",
+    formula: "x = v₀t,  y = ½gt²,  vy = gt,  tanα = 2·tanθ",
     thinking: "运动的合成与分解（等效替代）、时空解耦法",
     chapterLink: "/04%20抛体运动与曲线运动/03%20平抛运动的规律",
     chapterTitle: "专题 04 03·平抛运动的规律",
@@ -92,7 +92,11 @@ const models: ModelInfo[] = [
   },
 ];
 
-const currentModel = () => models.find((m) => m.key === activeKey.value) || models[0];
+const currentModel = computed<ModelInfo>(() => {
+  const found = models.find((m) => m.key === activeKey.value);
+  const fallback: ModelInfo = models[0] as ModelInfo;
+  return found ?? fallback;
+});
 </script>
 
 <template>
@@ -122,22 +126,22 @@ const currentModel = () => models.find((m) => m.key === activeKey.value) || mode
     <div class="lab-info-card">
       <div class="info-header">
         <div class="info-title-wrap">
-          <span class="info-badge">{{ currentModel().badge }}</span>
-          <h3 class="info-title">{{ currentModel().title }}</h3>
+          <span class="info-badge">{{ currentModel.badge }}</span>
+          <h3 class="info-title">{{ currentModel.title }}</h3>
         </div>
-        <a :href="currentModel().chapterLink" class="chapter-jump-btn"> 深度阅读本章 → </a>
+        <a :href="currentModel.chapterLink" class="chapter-jump-btn"> 深度阅读本章 → </a>
       </div>
 
-      <p class="info-desc">{{ currentModel().desc }}</p>
+      <p class="info-desc">{{ currentModel.desc }}</p>
 
       <div class="info-meta-grid">
         <div class="meta-item">
           <span class="meta-label">核心公式：</span>
-          <code class="meta-code">{{ currentModel().formula }}</code>
+          <code class="meta-code">{{ currentModel.formula }}</code>
         </div>
         <div class="meta-item">
           <span class="meta-label">物理思想：</span>
-          <span class="meta-val">{{ currentModel().thinking }}</span>
+          <span class="meta-val">{{ currentModel.thinking }}</span>
         </div>
       </div>
     </div>
@@ -162,6 +166,7 @@ const currentModel = () => models.find((m) => m.key === activeKey.value) || mode
 }
 
 .tab-btn {
+  min-height: 44px;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
   font-weight: 500;
@@ -184,6 +189,10 @@ const currentModel = () => models.find((m) => m.key === activeKey.value) || mode
   color: #ffffff;
   border-color: var(--vp-c-brand-1);
   box-shadow: var(--vp-shadow-1);
+}
+
+.dark .tab-btn.active {
+  color: #121415;
 }
 
 .lab-simulator-card {

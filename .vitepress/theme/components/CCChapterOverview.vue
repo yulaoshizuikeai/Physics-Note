@@ -14,7 +14,12 @@ const { theme, site, page } = useData();
 const route = useRoute();
 
 const normalizePath = (value: string): string => {
-  const decoded = decodeURI(value || "");
+  let decoded: string;
+  try {
+    decoded = decodeURI(value || "");
+  } catch {
+    decoded = value || "";
+  }
   const noHash = decoded.split("#")[0];
   const noQuery = noHash.split("?")[0];
   const noHtml = noQuery.replace(/\.html$/, "");

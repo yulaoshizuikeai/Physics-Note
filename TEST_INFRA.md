@@ -16,7 +16,7 @@
 | 1 | H2 双边框与顶间距修复 | `style/index.css` | `.vp-doc h2` computed `borderTopWidth === '0px'` |
 | 2 | MathJax 公式基线对齐 | `custom.css` | `.vp-doc mjx-container > svg` computed `verticalAlign !== 'middle'` |
 | 3 | WCAG AA 对比度合规 | `vars.css` | `--vp-c-brand-1` on light bg >= 4.5:1 (ratio 5.05:1) |
-| 4 | 字体栈与西文优先 | `vars.css` | `--vp-font-family-base` starts with `"Inter"` |
+| 4 | 字体栈与西文优先 | `vars.css` | `--vp-font-family-base` starts with `"Geist"` |
 | 5 | SEO 品牌大小写 | `transformHead.ts` | author is `Yulaoshizuikeai` |
 | 6 | 99 篇大表格移动端横滑 | `style/index.css` | `.vp-doc table` computed `overflowX === 'auto'` |
 | 7 | SVG 深色反色保护 | `custom.css` | Base64 SVG in dark mode computed `filter === 'none'` |

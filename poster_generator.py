@@ -543,7 +543,7 @@ class LayoutEngine:
                   "PRODUCED BY AUTONOMOUS DESIGN PIPELINE // PYTHON 3.14 + NUMPY + PILLOW", 
                   font=font_mono, fill=Palette.TEXT_PRIMARY)
         draw.text((self.cfg.margin_x, y_text + 28), 
-                  "高中物理知识库 (YULAOSHIZUIKEAI) 视觉计算实验室 · A4 PRINT STANDARD 2480x3508 @ 300DPI", 
+                  "高中物理知识库 (Yulaoshizuikeai) 视觉计算实验室 · A4 PRINT STANDARD 2480x3508 @ 300DPI", 
                   font=font_cn, fill=Palette.TEXT_MUTED)
         draw.text((self.cfg.margin_x, y_text + 54), 
                   "ALL RIGHTS RESERVED © 2026. OPEN-SOURCE SCIENTIFIC POSTER PROTOTYPE.", 

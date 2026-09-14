@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useData } from "vitepress";
 import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from "vue";
 
 const props = withDefaults(
@@ -19,6 +20,7 @@ const props = withDefaults(
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
 const isVisible = ref(true);
+const { isDark: vpIsDark } = useData();
 let animationFrameId: number | null = null;
 let intersectionObserver: IntersectionObserver | null = null;
 
@@ -822,6 +824,11 @@ watch(
   },
   { deep: true },
 );
+
+// 主题切换（亮/暗色）时重绘，避免画布残留旧肤色
+watch(vpIsDark, () => {
+  redraw();
+});
 </script>
 
 <template>
@@ -915,7 +922,7 @@ watch(
             >末速度: <strong>{{ pResult.vEnd }}</strong> m/s</span
           >
           <span class="badge badge-brand"
-            >偏转角 tanθ: <strong>{{ pResult.tanTheta }}</strong> (= 2 tanα)</span
+            >速度偏角 tanα: <strong>{{ pResult.tanTheta }}</strong> (= 2 tanθ，θ为位移偏角)</span
           >
         </div>
       </div>
@@ -1051,17 +1058,19 @@ watch(
 .ctrl-row input[type="range"] {
   accent-color: var(--vp-c-brand-1);
   cursor: pointer;
-  min-height: 28px;
+  min-height: 44px;
 }
 
 .toggle-row {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .toggle-btn {
-  padding: 0.25rem 0.75rem;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
   font-size: 0.82rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
@@ -1075,6 +1084,10 @@ watch(
   background: var(--vp-c-brand-1);
   color: #ffffff;
   border-color: var(--vp-c-brand-1);
+}
+
+.dark .toggle-btn.active {
+  color: #121415;
 }
 
 .result-badge-row {
@@ -1122,7 +1135,7 @@ watch(
   background: rgba(212, 89, 81, 0.1);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .ctrl-row {
     grid-template-columns: 1fr;
     gap: 0.35rem;

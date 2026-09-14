@@ -33,7 +33,7 @@
 | 1 | H2 双边框与顶间距修复 | 清除 `.vp-doc h2` 的 `border-top` 与 `padding-top: 24px`，保持 `border-bottom` 呼吸感 | M1 | Survey Explorer 1 |
 | 2 | MathJax 公式基线对齐 | 移除 `.vp-doc mjx-container > svg` 强制 `vertical-align: middle !important`，恢复 MathJax 原生计算基线 | M2 | Survey Explorer 1/2 |
 | 3 | WCAG AA 色彩对比度合规 | 浅色 `--vp-c-brand-1` 从 `#5672cd` 调整为 `#4c67b9`（对比度从 4.26:1 提升至 5.05:1），修正 `--vp-c-text-3` 为 `#6e7781` | M1 | Survey Explorer 1 |
-| 4 | 字体栈与西文衬线优先级 | 基础字体栈置前 `Inter`，衬线模式前置 `Georgia`，消除汉字标题负字间距 | M1 | Survey Explorer 1 |
+| 4 | 字体栈与西文衬线优先级 | 基础字体栈置前 `Geist`，衬线模式前置 `Instrument Serif`，消除汉字标题负字间距 | M1 | Survey Explorer 1 |
 | 5 | SEO 署名大小写合规 | `transformHead.ts` 中 `author.name` 修正为规范驼峰 `Yulaoshizuikeai` | M1 | Survey Explorer 1 |
 | 6 | 99 篇大表格移动端横滑修复 | 修正 `index.css:263` 的 `overflow: hidden;` 为 `overflow-x: auto; -webkit-overflow-scrolling: touch;` | M2 | Survey Explorer 2 |
 | 7 | SVG 矢量物理图解深色反色修复 | 修正 `custom.css:2` 选择器以精准排除 Base64 内联 SVG，保护矢量物理标准色 | M2 | Survey Explorer 2 |
@@ -55,7 +55,7 @@
 ## Interface Contracts
 ### CSS Custom Properties & Design Tokens
 - `--vp-c-brand-1`: `#4c67b9` (Light) / `#758ee6` (Dark)
-- `--vp-font-family-base`: `"Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;`
+- `--vp-font-family-base`: `"Geist", "Geist Sans", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;`
 - `--vp-font-family-serif`: `Georgia, "Songti SC", "Noto Serif SC", STSong, SimSun, serif;`
 - `--vp-shadow-card`: `0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);` (Light) / `0 2px 8px rgba(0, 0, 0, 0.25);` (Dark)
 

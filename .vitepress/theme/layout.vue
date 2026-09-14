@@ -19,9 +19,11 @@ const contentImageSelector = ".vp-doc img:not([data-no-zoom])";
 let imageZoom;
 
 const normalizePath = (p) => p.replace(/\/$/, "");
+let rafId = 0;
 const runOnClientFrame = (cb) => {
   if (typeof window === "undefined") return;
-  window.requestAnimationFrame(cb);
+  if (rafId) window.cancelAnimationFrame(rafId);
+  rafId = window.requestAnimationFrame(cb);
 };
 
 const expandCurrentSidebarGroup = () => {
@@ -105,6 +107,8 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  if (rafId) window.cancelAnimationFrame(rafId);
+  rafId = 0;
   imageZoom?.detach();
   imageZoom = undefined;
   document.removeEventListener("click", onSectionTitleClick, true);

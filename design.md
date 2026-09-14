@@ -88,7 +88,7 @@
 ### 3.1 字体栈设计
 
 - **基础正文栈 (Humanist Sans-Serif)**：
-  `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif`
+  `"Geist", "Geist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif`
 - **学术衬线栈 (Serif Mode)**：
   `Georgia, "Songti SC", "Noto Serif SC", STSong, SimSun, serif`
 - **数学与代码等宽栈 (Monospace & Math)**：

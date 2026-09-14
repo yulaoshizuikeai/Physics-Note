@@ -9,8 +9,13 @@ onMounted(() => {
   const id = new URLSearchParams(window.location.search).get("q");
   if (!id || !/^[a-f0-9]{10}$/i.test(id)) return router.go(`/404`);
   axios.get(withBase("/shortmap.json")).then(
-    (res) =>
-      res.data[id] !== undefined ? router.go(`/${encodeURI(res.data[id])}`) : router.go(`/404`),
+    (res: { data?: unknown }) => {
+      const d = res.data;
+      const target =
+        typeof d === "object" && d !== null ? (d as Record<string, string>)[id] : undefined;
+      if (typeof target === "string" && target) router.go(`/${encodeURI(target)}`);
+      else router.go(`/404`);
+    },
     () => router.go(`/404`),
   );
 });

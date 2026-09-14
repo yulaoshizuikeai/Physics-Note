@@ -1,4 +1,4 @@
-# yulaoshizuikeai's Physics Note - Workspace Guidelines
+# Yulaoshizuikeai's Physics Note - Workspace Guidelines
 
 This repository contains **高考物理知识库 (Yulaoshizuikeai's Physics Note)**.
 All agents working in this workspace must adhere to the rules defined in `.agents/rules/`:

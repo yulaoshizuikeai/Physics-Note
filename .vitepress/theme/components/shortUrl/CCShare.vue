@@ -2,6 +2,7 @@
   <div class="share-panel">
     <noscript>需要启用 JavaScript 才能使用分享功能。</noscript>
     <QRCodeVue
+      v-if="link"
       :value="link"
       :size="120"
       render-as="svg"
@@ -9,6 +10,7 @@
       background="transparent"
       :foreground="foreground"
     />
+    <div v-else class="share-qr-placeholder" aria-hidden="true" />
     <button class="copylink" @click="copyLink">
       复制链接
       <span class="copy-indicator-wrapper" :class="expand ? 'expanded' : 'folded'">
@@ -27,7 +29,7 @@
 import md5 from "blueimp-md5";
 import QRCodeVue from "qrcode.vue";
 import { useData } from "vitepress";
-import { computed, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 import { trackUmamiEvent } from "../../utils/umami";
 
@@ -52,8 +54,8 @@ const link = computed(() => {
 });
 
 function copyLink() {
-  if (!link.value || !navigator.clipboard) return;
-  navigator.clipboard.writeText(link.value).then(() => {
+  if (!link.value) return;
+  const done = () => {
     trackUmamiEvent("share_copy_link", {
       page_path: page.value.relativePath || page.value.filePath || "",
       page_title: page.value.title || "",
@@ -65,20 +67,58 @@ function copyLink() {
       expand.value = false;
       timer = null;
     }, 1500);
-  });
+  };
+  if (
+    typeof navigator !== "undefined" &&
+    navigator.clipboard &&
+    typeof navigator.clipboard.writeText === "function"
+  ) {
+    navigator.clipboard.writeText(link.value).then(done, () => fallbackCopy(link.value, done));
+  } else {
+    fallbackCopy(link.value, done);
+  }
+}
+
+function fallbackCopy(text: string, done: () => void) {
+  try {
+    if (typeof document === "undefined") return;
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+    done();
+  } catch {
+    /* 剪贴板不可用时静默失败，保持面板可用 */
+  }
 }
 
 onMounted(() => {
+  if (typeof window === "undefined") return;
   const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
   origin.value = window.location.origin + base;
+});
+
+onBeforeUnmount(() => {
+  if (timer) clearTimeout(timer);
+  timer = null;
 });
 </script>
 
 <style>
-.share-panel > svg {
+.share-panel > svg,
+.share-panel .share-qr-placeholder {
   border-radius: 3px;
   margin: 0 auto;
   margin-bottom: 15px;
+}
+
+.share-panel .share-qr-placeholder {
+  width: 120px;
+  height: 120px;
 }
 
 .share-panel .copy-indicator {

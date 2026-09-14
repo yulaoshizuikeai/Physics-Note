@@ -166,11 +166,13 @@ export default defineConfig({
       return items.filter((item) => {
         // VitePress 生成的 item.url 不带前导斜杠（如 "s.html"），需规范化后再匹配
         const url = `/${item.url}`;
-        // 排除 404、短链跳转页及任何内部隐藏页面
+        // 排除 404、短链跳转页及任何内部隐藏页面（精确/边界匹配，避免误杀含 s 子串的正常路径）
         if (
-          url.includes("/404") ||
-          url.includes("/s.html") ||
-          url.includes("/s") ||
+          url === "/404.html" ||
+          url.startsWith("/404/") ||
+          url === "/s.html" ||
+          url.startsWith("/s.html?") ||
+          url.startsWith("/s/") ||
           url.includes("/hidePage/")
         ) {
           return false;

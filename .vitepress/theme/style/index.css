@@ -1483,8 +1483,8 @@ html.dark .flash-kw {
 .cc-quick-pill {
   display: inline-flex;
   align-items: center;
-  height: 32px;
-  padding: 0 12px;
+  min-height: 44px;
+  padding: 6px 12px;
   font-size: 0.84rem;
   font-weight: 500;
   color: var(--vp-c-text-1) !important;
@@ -1522,8 +1522,8 @@ html.dark .flash-kw {
     gap: 6px;
   }
   .cc-quick-pill {
-    height: 30px;
-    padding: 0 10px;
+    min-height: 44px;
+    padding: 6px 10px;
     font-size: 0.8rem;
   }
 }
