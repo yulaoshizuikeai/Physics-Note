@@ -152,9 +152,9 @@ export default defineConfig({
   },
   vite: {
     build: {
-      // 公式页 inline MathJax SVG 本来就大（单页 400KB+ 属正常），阈值放宽避免噪音；
-      // 传输体积由 Cloudflare 边缘 Brotli + 长缓存解决，见 public/_headers。
-      chunkSizeWarningLimit: 700,
+      // 公式页 inline MathJax SVG 本来就大（如 golden-conclusions.md 聚合 50 个高频公式约 1.3MB 属正常），
+      // 阈值放宽避免 Rolldown 构建噪音；传输体积由 Cloudflare 边缘 Brotli + 长缓存解决，见 public/_headers。
+      chunkSizeWarningLimit: 1400,
     },
   },
   rewrites: {

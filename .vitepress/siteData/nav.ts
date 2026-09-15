@@ -17,7 +17,7 @@ export const buildNavItems = (rootDir: string): DefaultTheme.NavItem[] => {
       items: [
         { text: "高中物理 (当前)", link: "/" },
         { text: "高中生物", link: "https://biology.yunet.cfd" },
-        { text: "高中化学", link: "https://intv.indevs.in" },
+        { text: "高中化学", link: "https://chemistry-note.seeridia.top/" },
         { text: "全科中枢门户", link: "https://note.yunet.cfd" },
       ],
     },

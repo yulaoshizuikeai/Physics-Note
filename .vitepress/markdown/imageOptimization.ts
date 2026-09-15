@@ -1,26 +1,11 @@
 import type { RenderRule } from "markdown-it/lib/renderer.mjs";
 import type { MarkdownRenderer } from "vitepress";
 
-const LOCAL_RASTER_IMAGE = /\.(?:avif|bmp|jpe?g|jfif|png|tiff?|webp)(?:[?#]|$)/i;
 const IMAGE_TAG = /<img\b[^>]*>/gi;
-const SOURCE_ATTRIBUTE = /\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/i;
-const ESA_RESIZE = "image_process=resize,l_1440";
 
 type MarkdownEnvironment = Record<string, unknown> & {
   __ccHasPriorityImage?: boolean;
 };
-
-function addEsaResize(source: string): string {
-  if (
-    !LOCAL_RASTER_IMAGE.test(source) ||
-    /^(?:data:|https?:|\/\/)/i.test(source) ||
-    /(?:^|[?&])image_process=/.test(source)
-  ) {
-    return source;
-  }
-
-  return `${source}${source.includes("?") ? "&" : "?"}${ESA_RESIZE}`;
-}
 
 function addAttribute(tag: string, name: string, value: string): string {
   if (new RegExp(`\\s${name}\\s*=`, "i").test(tag)) return tag;
@@ -28,18 +13,6 @@ function addAttribute(tag: string, name: string, value: string): string {
 }
 
 function optimizeImageTag(tag: string, env: MarkdownEnvironment): string {
-  const sourceMatch = tag.match(SOURCE_ATTRIBUTE);
-  if (sourceMatch) {
-    const source = sourceMatch[1] ?? sourceMatch[2] ?? sourceMatch[3];
-    const optimizedSource = addEsaResize(source);
-
-    if (optimizedSource !== source) {
-      const quote = sourceMatch[1] !== undefined ? '"' : sourceMatch[2] !== undefined ? "'" : '"';
-      tag = tag.replace(SOURCE_ATTRIBUTE, `src=${quote}${optimizedSource}${quote}`);
-      tag = addAttribute(tag, "data-esa-optimized", "true");
-    }
-  }
-
   tag = addAttribute(tag, "decoding", "async");
 
   if (!env.__ccHasPriorityImage) {
