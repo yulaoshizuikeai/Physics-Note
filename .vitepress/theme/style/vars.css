@@ -37,17 +37,18 @@
   --vp-c-gutter: rgba(0, 0, 0, 0.04);
 
   /* ------------------------------------------------------------
-     5. Font Stacks (Anti-Slop Editorial & Monospace Hierarchy)
+     5. Font Stacks (Self-hosted webfonts first, system fallback)
+     Webfont 已本地自托管（theme/style/fonts.css，font-display: swap），
+     大陆访问零外部请求；中文字符本就走系统字体，不受影响。
      ------------------------------------------------------------ */
   --vp-font-family-base:
-    "Geist", "Geist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", sans-serif;
   --vp-font-family-serif:
-    "Instrument Serif", "Newsreader", "Playfair Display", Georgia, "Songti SC", "Noto Serif SC",
-    STSong, SimSun, serif;
+    "Instrument Serif", Georgia, "Songti SC", "Noto Serif SC", STSong, SimSun, serif;
   --vp-font-family-mono:
-    "Geist Mono", "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", monospace;
+    "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+    "Liberation Mono", "JetBrains Mono", monospace;
 
   /* ------------------------------------------------------------
      6. Soft Diffused Minimal Shadows (Diffuse, low opacity < 0.04)

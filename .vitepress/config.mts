@@ -25,15 +25,21 @@ export default defineConfig({
   lang: "zh-CN",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/images/icon.svg" }],
-    ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
-    ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
+    // 性能：字体本地自托管（public/fonts + theme/style/fonts.css，font-display: swap），
+    // 全站零 Google Fonts 外部请求；仅预加载正文字体，其余按需加载。
     [
       "link",
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap",
+        rel: "preload",
+        href: "/fonts/geist-latin.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: "",
       },
     ],
+    ["link", { rel: "preload", href: "/images/icon.svg", as: "image", type: "image/svg+xml" }],
+    // 浏览量统计脚本改为懒加载，这里仅做 DNS 预解析以降低延迟。
+    ["link", { rel: "dns-prefetch", href: "//busuanzi.ibruce.info" }],
     ["meta", { name: "author", content: "Yulaoshizuikeai" }],
     [
       "meta",
@@ -142,6 +148,13 @@ export default defineConfig({
     config: (md) => {
       configureImageOptimization(md);
       configureBracketAndMathPlugin(md);
+    },
+  },
+  vite: {
+    build: {
+      // 公式页 inline MathJax SVG 本来就大（单页 400KB+ 属正常），阈值放宽避免噪音；
+      // 传输体积由 Cloudflare 边缘 Brotli + 长缓存解决，见 public/_headers。
+      chunkSizeWarningLimit: 700,
     },
   },
   rewrites: {

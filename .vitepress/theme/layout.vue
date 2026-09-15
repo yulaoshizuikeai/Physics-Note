@@ -1,5 +1,4 @@
 <script setup>
-import mediumZoom from "medium-zoom";
 import { useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
@@ -43,8 +42,18 @@ const expandCurrentSidebarGroup = () => {
   });
 };
 
-const setupImageZoom = () => {
-  if (!imageZoom) return;
+const setupImageZoom = async () => {
+  if (typeof window === "undefined") return;
+  // 无正文图片时直接跳过，连库都不下载（知识库列表页常见）
+  if (!document.querySelector(contentImageSelector)) return;
+  try {
+    if (!imageZoom) {
+      const { default: mediumZoom } = await import("medium-zoom");
+      imageZoom = mediumZoom({ background: "transparent" });
+    }
+  } catch {
+    return;
+  }
   imageZoom.detach();
   document.querySelectorAll(`${contentImageSelector}[data-esa-optimized]`).forEach((image) => {
     if (!(image instanceof HTMLImageElement)) return;
@@ -100,7 +109,6 @@ const onSectionTitleClick = (event) => {
 };
 
 onMounted(() => {
-  imageZoom = mediumZoom({ background: "transparent" });
   bootstrapSiteSettings();
   document.addEventListener("click", onSectionTitleClick, true);
   runOnClientFrame(refreshPageEnhancements);

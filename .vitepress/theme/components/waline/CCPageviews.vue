@@ -6,6 +6,37 @@ const route = useRoute();
 const isLoading = ref(true);
 let observer: MutationObserver | null = null;
 let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
+let idleHandle: number | ReturnType<typeof setTimeout> | null = null;
+let routeDebounce: ReturnType<typeof setTimeout> | null = null;
+let hasLoadedOnce = false;
+
+const BUSUANZI_SRC = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
+
+// 空闲时执行：优先 requestIdleCallback，大陆低端机兜底 setTimeout，避免阻塞首屏
+const runWhenIdle = (cb: () => void, timeout = 2000) => {
+  if (typeof window === "undefined") return;
+  const w = window as unknown as Record<string, unknown>;
+  const ric = w.requestIdleCallback as
+    | ((cb: () => void, opts?: { timeout: number }) => number)
+    | undefined;
+  if (typeof ric === "function") {
+    idleHandle = ric.call(window, cb, { timeout });
+    return;
+  }
+  idleHandle = setTimeout(cb, 1200);
+};
+
+const cancelIdle = () => {
+  if (idleHandle == null) return;
+  const w = window as unknown as Record<string, unknown>;
+  const cic = w.cancelIdleCallback as ((h: number) => void) | undefined;
+  if (typeof cic === "function" && typeof idleHandle === "number") {
+    cic.call(window, idleHandle);
+  } else {
+    clearTimeout(idleHandle as ReturnType<typeof setTimeout>);
+  }
+  idleHandle = null;
+};
 
 const runBusuanzi = () => {
   if (typeof window === "undefined") return;
@@ -13,9 +44,11 @@ const runBusuanzi = () => {
   if (existing) existing.remove();
   const script = document.createElement("script");
   script.id = "cc-busuanzi-script";
-  script.src = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
+  script.src = BUSUANZI_SRC;
   script.referrerPolicy = "no-referrer-when-downgrade";
   script.async = true;
+  // 明确低优先级，不与正文/公式抢带宽
+  script.setAttribute("fetchpriority", "low");
   document.head.appendChild(script);
 };
 
@@ -26,12 +59,28 @@ const stopLoading = () => {
   fallbackTimer = null;
 };
 
-const runPageview = () => {
+const runPageview = (immediate = false) => {
   isLoading.value = true;
-  runBusuanzi();
+  cancelIdle();
+  const load = () => {
+    runBusuanzi();
+    hasLoadedOnce = true;
+    if (fallbackTimer) clearTimeout(fallbackTimer);
+    // 统计脚本被拦截/加载失败时的超时兜底，避免骨架永久 loading
+    fallbackTimer = setTimeout(stopLoading, 3000);
+  };
+  // 首次进入页面：等浏览器空闲再加载，首屏公式/正文优先
+  if (!hasLoadedOnce && !immediate) {
+    runWhenIdle(load, 2500);
+    // 兜底：空闲回调万一不触发，3s 后强制加载一次
+    fallbackTimer = setTimeout(() => {
+      if (!hasLoadedOnce) load();
+    }, 3500);
+    return;
+  }
   if (fallbackTimer) clearTimeout(fallbackTimer);
-  // 统计脚本被拦截/加载失败时的超时兜底，避免骨架永久 loading
-  fallbackTimer = setTimeout(stopLoading, 4000);
+  // 切页：防抖 + 空闲加载，避免快速连续切页时反复插 script 造成卡顿
+  fallbackTimer = setTimeout(stopLoading, 3000);
 };
 
 const setupObserver = () => {
@@ -63,7 +112,14 @@ watch(
   () => route.path,
   () => {
     if (typeof window === "undefined") return;
-    runPageview();
+    if (routeDebounce) clearTimeout(routeDebounce);
+    // 切页后等 800ms + 浏览器空闲再刷新统计，避免与切页渲染抢主线程
+    routeDebounce = setTimeout(() => {
+      runWhenIdle(() => {
+        isLoading.value = true;
+        runBusuanzi();
+      }, 1500);
+    }, 800);
   },
 );
 
@@ -72,6 +128,9 @@ onBeforeUnmount(() => {
   observer = null;
   if (fallbackTimer) clearTimeout(fallbackTimer);
   fallbackTimer = null;
+  if (routeDebounce) clearTimeout(routeDebounce);
+  routeDebounce = null;
+  cancelIdle();
 });
 </script>
 
