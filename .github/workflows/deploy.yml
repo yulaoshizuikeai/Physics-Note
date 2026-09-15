@@ -1,4 +1,4 @@
-name: Deploy and Build PDF
+name: Build PDF
 
 on:
   push:
@@ -8,11 +8,9 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: build
   cancel-in-progress: false
 
 jobs:
@@ -73,51 +71,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .vitepress/dist
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-  # 可选：Cloudflare Pages 边缘加速（大陆提速主项）
-  # 生效条件：仓库 Secrets 配好 CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID 后自动直发，
-  # 未配置时自动跳过，不影响现有 GitHub Pages 链路（回滚兜底）。
-  # 首次使用需在 Cloudflare Dashboard 建 Pages 项目（构建命令 npm run docs:build，输出 .vitepress/dist），
-  # 并把 physics.yunet.cfd 的 DNS 切到 Pages 域名；public/_headers 会自动生效（长缓存 assets + HTML 回源）。
-  deploy-cloudflare:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy to Cloudflare Pages
-    if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build with VitePress
-        run: npm run docs:build
-
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .vitepress/dist --project-name=physics-note --commit-dirty=true
+  # 站点部署唯一走 Cloudflare Pages（Dashboard 关联仓库自动构建），
+  # 不再经过 GitHub Pages：构建命令 npm run docs:build，输出 .vitepress/dist，
+  # 自定义域 physics.yunet.cfd 在 Pages 项目里绑定，缓存规则见 public/_headers。
