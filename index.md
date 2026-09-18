@@ -1,31 +1,10 @@
 ---
 layout: home
-
+title: "高考物理知识库 - Yulaoshizuikeai's Physics Note"
 description: "Yulaoshizuikeai's 高考物理知识库 是基于中国普通高中物理教科书（人教版）与可汗学院（Khan Academy）直观物理思维的免费高中物理知识库项目，涵盖运动学、相互作用、牛顿定律、曲线与圆周、万有引力、动能与动量、电场电路与磁场、电磁感应、振动与波、光学、热学、近代物理及物理实验等 19 大板块，提供严谨公式推导、核心物理模型与解题算法。"
-
-hero:
-  name: "高考物理知识库"
-  text: "Yulaoshizuikeai's Physics Note"
-  tagline: "结合人教版课本与可汗学院思维，覆盖高考物理 19 大板块，打造系统化高中物理知识库"
-  image:
-    src: /images/icon.svg
-    alt: Yulaoshizuikeai's Physics Note - 高考物理知识库
-  actions:
-    - theme: brand
-      text: 开始阅读
-      link: /00%20说明/Readme
-    - theme: alt
-      text: 可视化交互空间
-      link: /interactive
-    - theme: alt
-      text: 50 大黄金结论
-      link: /golden-conclusions
-    - theme: alt
-      text: 防踩坑排雷白皮书
-      link: /warning-cheatsheet
 ---
 
-<CCBentoGrid />
+<CCHomeIndex />
 
 ## 项目设计与创作说明
 

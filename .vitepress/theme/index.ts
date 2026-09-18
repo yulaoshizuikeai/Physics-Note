@@ -9,6 +9,7 @@ import CCBentoGrid from "./components/CCBentoGrid.vue";
 import CCChapterOverview from "./components/CCChapterOverview.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
 import CCErrata from "./components/CCErrata.vue";
+import CCHomeIndex from "./components/CCHomeIndex.vue";
 import CCPdfDownloadButton from "./components/CCPdfDownloadButton.vue";
 import CCSiteSettings from "./components/CCSiteSettings.vue";
 import "./style/index.css";
@@ -43,6 +44,7 @@ export default {
     app.component("CCBentoGrid", CCBentoGrid);
     app.component("CCActivitySparkline", CCActivitySparkline);
     app.component("CCDailyQuote", CCDailyQuote);
+    app.component("CCHomeIndex", CCHomeIndex);
     app.component("CCPhysicsSimulator", CCPhysicsSimulator);
     app.component("CCInteractiveLab", CCInteractiveLab);
     app.component("CCKnowledgeGraph", CCKnowledgeGraph);
