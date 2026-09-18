@@ -2,12 +2,10 @@
 
 import type { SiteConfig } from "vitepress";
 
+import md5 from "blueimp-md5";
 import fg from "fast-glob";
-import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-
-const md5 = (str: string): string => createHash("md5").update(str, "utf8").digest("hex");
 
 type ShortUrlMap = {
   [key: string]: string;

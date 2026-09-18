@@ -223,6 +223,7 @@ onMounted(() => {
             fill="#38bdf8"
             opacity="0.28"
             class="beacon-halo"
+            :style="`transform-origin: ${points[points.length - 1].x}px ${points[points.length - 1].y}px`"
           />
         </template>
       </svg>
@@ -295,7 +296,6 @@ onMounted(() => {
 
 .beacon-halo {
   animation: beacon-pulse 2.2s ease-in-out infinite;
-  transform-origin: 244px 11px;
 }
 
 /* 7日滚动窗口底轨刻度 (零数字) */
