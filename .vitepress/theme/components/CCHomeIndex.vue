@@ -39,7 +39,7 @@ const chapters: ChapterItem[] = [
     group: "mechanics",
     volume: "必修第一册",
     volumeTag: "bx1",
-    desc: "质点参考系、位移速度加速度、匀变速四大公式与推论、运动图象",
+    desc: "质点参考系、位移速度加速度、匀变速四大公式与推论、运动图像",
     keywords: [
       "质点参考系",
       "位移与速度",
@@ -59,9 +59,9 @@ const chapters: ChapterItem[] = [
     volumeTag: "bx1",
     desc: "重力弹力、静动摩擦力、力的合成与分解、共点力动态平衡",
     keywords: [
-      "重力重心",
+      "重力与重心",
       "胡克定律",
-      "静摩擦与滑动摩擦",
+      "静动摩擦力",
       "力的合成正交分解",
       "动态平衡矢量三角形",
       "轻绳与轻杆",
@@ -76,12 +76,12 @@ const chapters: ChapterItem[] = [
     volumeTag: "bx1",
     desc: "牛顿三定律、力学单位制、超重失重、板块与传送带动力学模型",
     keywords: [
-      "牛顿第一定律惯性",
-      "牛顿第二定律 F=ma",
+      "牛顿第一定律",
+      "牛顿第二定律",
       "超重失重判断",
       "连接体整体隔离法",
-      "板块模型",
-      "水平与倾斜传送带",
+      "板块临界模型",
+      "传送带动能动力",
     ],
     link: "/03%20牛顿运动定律与动力学应用/01%20牛顿第一定律",
   },
@@ -94,10 +94,10 @@ const chapters: ChapterItem[] = [
     desc: "曲线运动条件、平抛运动运动学与轨迹方程、斜面平抛解题模型",
     keywords: [
       "曲线运动条件",
-      "运动的合成与分解",
-      "小船渡河",
-      "平抛分解与时间规律",
-      "速度偏角与位移偏角",
+      "运动合成与分解",
+      "小船渡河模型",
+      "平抛独立性规律",
+      "速度与位移偏角",
       "斜面平抛模型",
     ],
     link: "/04%20抛体运动与曲线运动/01%20曲线运动的特征与条件",
@@ -111,11 +111,11 @@ const chapters: ChapterItem[] = [
     desc: "线速度角速度、向心加速度、轻绳与轻杆竖直圆周临界模型",
     keywords: [
       "线速度与角速度",
-      "向心力与向心加速度",
+      "向心力与加速度",
       "圆锥摆模型",
       "火车转弯外轨超高",
-      "轻绳竖直圆周临界",
-      "轻杆竖直圆周模型",
+      "轻绳竖直圆周",
+      "轻杆临界极值",
     ],
     link: "/05%20圆周运动及其应用/01%20描述圆周运动的物理量",
   },
@@ -129,10 +129,10 @@ const chapters: ChapterItem[] = [
     keywords: [
       "开普勒三定律",
       "万有引力公式",
-      "黄金代换 GM=gR²",
+      "黄金代换式",
       "三大宇宙速度",
       "卫星高轨低速大周期",
-      "卫星椭圆变轨",
+      "椭圆轨道变轨",
       "双星与多星系统",
     ],
     link: "/06%20万有引力与宇宙航行/01%20行星的运动与开普勒定律",
@@ -146,11 +146,11 @@ const chapters: ChapterItem[] = [
     desc: "功与功率、机车启动、动能定理、机械能守恒定律、摩擦生热",
     keywords: [
       "恒力与变力做功",
-      "机车恒功率与恒牵引力启动",
-      "动能定理 W合=ΔEk",
+      "机车恒功率启动",
+      "动能定理核心应用",
       "机械能守恒判据",
-      "功能关系",
-      "摩擦生热 Q=f·Δs相对",
+      "功能转化本质",
+      "相对滑动摩擦生热",
     ],
     link: "/07%20机械能守恒与功能关系/01%20功与功率",
   },
@@ -163,12 +163,12 @@ const chapters: ChapterItem[] = [
     desc: "动量定理、动量守恒定律、完全弹性/非弹性碰撞、反冲与弹簧振子",
     keywords: [
       "动量与冲量",
-      "动量定理 I=Δp",
-      "动量守恒条件",
-      "弹性碰撞速度公式",
-      "完全非弹性碰撞最大能量损",
-      "人船模型",
-      "反冲与火箭",
+      "动量定理应用",
+      "系统动量守恒",
+      "完全弹性碰撞",
+      "完全非弹性碰撞",
+      "人船位移模型",
+      "反冲与喷气动力",
     ],
     link: "/08%20动量守恒定律与碰撞/01%20动量与动量定理",
   },
@@ -182,11 +182,11 @@ const chapters: ChapterItem[] = [
     keywords: [
       "库仑定律",
       "电场强度叠加",
-      "电场线与等势面",
-      "电势能与电势",
-      "电场力做功 W=-ΔEp",
-      "匀强电场 U=Ed",
-      "平行板电容器动态分析",
+      "等势面与电场线",
+      "电势与电势能",
+      "电场力做功本质",
+      "匀强电场场强电势",
+      "电容器动态分析",
     ],
     link: "/09%20静电场与电能/01%20电荷守恒与库仑定律",
   },
@@ -199,10 +199,10 @@ const chapters: ChapterItem[] = [
     desc: "带电粒子在电场中的加速、类平抛偏转轨迹、示波管原理、交变电场运动",
     keywords: [
       "电场直线加速",
-      "匀强电场类平抛偏转",
-      "偏转角与侧移距离",
-      "示波管工作原理",
-      "交变方波电场周期性运动",
+      "电场类平抛偏转",
+      "偏转角与侧移量",
+      "示波管偏转原理",
+      "交变方波电场运动",
     ],
     link: "/10%20带电粒子在电场中的运动/01%20带电粒子在电场中的加速",
   },
@@ -214,12 +214,12 @@ const chapters: ChapterItem[] = [
     volumeTag: "bx3",
     desc: "电流微观式、电阻定律、电表改装、闭合电路欧姆定律与电源输出极值",
     keywords: [
-      "电流微观表达式 I=neSv",
-      "电阻定律与电阻率",
-      "电流表电压表改装",
+      "电流微观表达式",
+      "电阻定律电阻率",
+      "电表改装与校准",
       "闭合电路欧姆定律",
-      "U-I 图线与内外阻",
-      "电源输出功率最大条件",
+      "路端电压U-I图线",
+      "电源最大输出功率",
     ],
     link: "/11%20电路与恒定电流/01%20电流与电阻定律",
   },
@@ -231,12 +231,11 @@ const chapters: ChapterItem[] = [
     volumeTag: "xb2",
     desc: "磁感应强度、安培力与左手定则、洛伦兹力、匀强磁场圆周运动几何轨迹与质谱仪",
     keywords: [
-      "磁感应强度 B",
-      "安培力 F=BIL 与左手定则",
-      "洛伦兹力 F=qvB",
-      "带电粒子磁场匀速圆周",
-      "轨道半径与周期公式",
-      "找圆心定半径定时间",
+      "磁感应强度",
+      "安培力与左手定则",
+      "洛伦兹力不作功",
+      "匀强磁场圆周运动",
+      "找圆心定半径算周期",
       "质谱仪与回旋加速器",
     ],
     link: "/12%20磁场与安培力洛伦兹力/01%20磁场与磁感应强度",
@@ -249,12 +248,11 @@ const chapters: ChapterItem[] = [
     volumeTag: "xb2",
     desc: "楞次定律、法拉第电磁感应定律、动生感生电动势、导轨滑棒力电能量综合",
     keywords: [
-      "磁通量变化",
+      "磁通量变化率",
       "楞次定律增反减同",
-      "法拉第电磁感应定律 E=nΔΦ/Δt",
-      "动生电动势 E=BLv",
-      "感生电场",
-      "单棒导轨收尾速度",
+      "法拉第电磁感应定律",
+      "动生感生电动势",
+      "单棒导轨收尾平衡",
       "双棒与电容导轨系统",
     ],
     link: "/13%20电磁感应与综合应用/01%20电磁感应现象与楞次定律",
@@ -267,11 +265,11 @@ const chapters: ChapterItem[] = [
     volumeTag: "xb2",
     desc: "正弦交变电流四值、理想变压器规律、远距离高压输电、电磁振荡与传感器",
     keywords: [
-      "正弦交流电产生与四值",
-      "有效值计算",
-      "理想变压器电压电流功率关系",
-      "远距离输电回路计算",
-      "LC 电磁振荡周期",
+      "正弦交流电产生",
+      "有效值瞬时值峰值",
+      "理想变压器变比关系",
+      "远距离高压输电",
+      "LC电磁振荡周期",
       "麦克斯韦电磁场理论",
     ],
     link: "/14%20交变电流与电磁波/01%20正弦交变电流的产生与描述",
@@ -284,12 +282,12 @@ const chapters: ChapterItem[] = [
     volumeTag: "xb1",
     desc: "简谐运动回复力与能量、单摆与共振、机械波图像与振动图像互化",
     keywords: [
-      "简谐运动特征 F=-kx",
-      "单摆周期公式 T=2π√(L/g)",
+      "简谐运动回复力",
+      "单摆周期公式",
       "受迫振动与共振",
-      "横波波速波长周期关系",
-      "振动图像与波动图像互化",
-      "波的干涉衍射与多普勒效应",
+      "横波波速波长周期",
+      "波动图像振动图像互化",
+      "波的干涉衍射多普勒",
     ],
     link: "/15%20机械振动与机械波/01%20简谐运动与描述",
   },
@@ -301,12 +299,12 @@ const chapters: ChapterItem[] = [
     volumeTag: "xb1",
     desc: "折射率与全反射、杨氏双缝干涉、薄膜干涉、衍射偏振与激光技术",
     keywords: [
-      "折射定律 n=sinθ1/sinθ2",
-      "全反射临界角 sinC=1/n",
+      "折射定律与折射率",
+      "全反射临界角条件",
       "光的色散与棱镜",
-      "双缝干涉条纹间距公式 Δx=Lλ/d",
+      "双缝干涉条纹间距",
       "薄膜干涉增透膜",
-      "光的衍射偏振与激光",
+      "光的偏振与激光特性",
     ],
     link: "/16%20光学/01%20光的折射与折射率",
   },
@@ -320,10 +318,10 @@ const chapters: ChapterItem[] = [
     keywords: [
       "阿伏加德罗常数微观估算",
       "分子力与分子势能曲线",
-      "玻意耳查理盖吕萨克定律",
-      "理想气体状态方程 pV/T=C",
-      "p-V/p-T/V-T 图像",
-      "热力学第一定律 ΔU=W+Q",
+      "气体实验三定律",
+      "理想气体状态方程",
+      "气体状态变化图像",
+      "热力学第一第二定律",
     ],
     link: "/17%20热学与分子动理论/01%20分子动理论与微观量估算",
   },
@@ -335,13 +333,12 @@ const chapters: ChapterItem[] = [
     volumeTag: "xb3",
     desc: "黑体辐射与光电效应光子说、玻尔氢原子跃迁、衰变半衰期与结合能质能方程",
     keywords: [
-      "普朗克量子假说",
-      "光电效应方程 Ek=hν-W0",
-      "玻尔氢原子轨道与能级",
-      "α/β/γ 射线与衰变规律",
-      "半衰期公式",
-      "核反应方程与结合能",
-      "爱因斯坦质能方程 ΔE=Δmc²",
+      "普朗克能量子假说",
+      "光电效应与光电方程",
+      "玻尔氢原子能级跃迁",
+      "天然放射现象衰变规律",
+      "半衰期计算公式",
+      "结合能与爱因斯坦质能方程",
     ],
     link: "/18%20原子物理与近代物理/01%20黑体辐射与光电效应",
   },
@@ -353,13 +350,13 @@ const chapters: ChapterItem[] = [
     volumeTag: "exp",
     desc: "游标卡尺螺旋测微器读数、打点计时器力学验证、伏安法电表内外接分压限流设计与误差分析",
     keywords: [
-      "游标卡尺10/20/50分度",
-      "螺旋测微器千分尺读数",
-      "打点计时器纸带加速度逐差法",
-      "验证机械能守恒",
+      "游标卡尺无估读规则",
+      "螺旋测微器千分尺估读",
+      "打点计时器加速度逐差",
+      "验证机械能动量守恒",
       "伏安法测电阻内外接判据",
-      "滑动变阻器分压与限流接法",
-      "电表半偏法与等效替代法",
+      "滑动变阻器分压限流接法",
+      "测定电源电动势内阻误差",
     ],
     link: "/19%20物理实验专题/01%20基本仪器使用与读数规范",
   },
@@ -461,6 +458,15 @@ const filteredChapters = computed(() => {
     return true;
   });
 });
+
+// 普通章节与全宽实验章节分离
+const regularChapters = computed(() => {
+  return filteredChapters.value.filter((ch) => ch.num !== "19");
+});
+
+const experimentChapter = computed(() => {
+  return filteredChapters.value.find((ch) => ch.num === "19");
+});
 </script>
 
 <template>
@@ -469,6 +475,9 @@ const filteredChapters = computed(() => {
          1. Master Index Hero Header (顶级学术总索引巨幕)
          ============================================================ -->
     <header class="ci-hero-section">
+      <!-- 柔光氛围背景层 -->
+      <div class="ci-hero-aura" aria-hidden="true" />
+
       <!-- 顶部发布胶囊 -->
       <div class="ci-pill-badge">
         <span class="ci-pill-dot" aria-hidden="true" />
@@ -489,7 +498,7 @@ const filteredChapters = computed(() => {
         <strong>50 大黄金临界模型</strong>，助你建立完整清晰的物理图景，告别题海死记硬背。
       </p>
 
-      <!-- 核心快捷入口按钮组 -->
+      <!-- 核心快捷入口按钮组 (主次清晰) -->
       <div class="ci-actions-group">
         <a :href="withBase('/00%20说明/Readme')" class="ci-btn ci-btn-primary">
           <svg
@@ -506,7 +515,7 @@ const filteredChapters = computed(() => {
           <span class="ci-btn-arrow">→</span>
         </a>
 
-        <a :href="withBase('/golden-conclusions')" class="ci-btn ci-btn-alt">
+        <a :href="withBase('/golden-conclusions')" class="ci-btn ci-btn-secondary">
           <svg
             class="ci-btn-icon"
             viewBox="0 0 24 24"
@@ -518,10 +527,10 @@ const filteredChapters = computed(() => {
               points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
             />
           </svg>
-          <span>50 大黄金结论</span>
+          <span>50 大黄金结论速查</span>
         </a>
 
-        <a :href="withBase('/warning-cheatsheet')" class="ci-btn ci-btn-alt">
+        <a :href="withBase('/warning-cheatsheet')" class="ci-btn ci-btn-ghost">
           <svg
             class="ci-btn-icon"
             viewBox="0 0 24 24"
@@ -533,10 +542,10 @@ const filteredChapters = computed(() => {
             <line x1="12" y1="9" x2="12" y2="13" />
             <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
-          <span>防踩坑排雷白皮书</span>
+          <span>防踩坑排雷</span>
         </a>
 
-        <a :href="withBase('/interactive')" class="ci-btn ci-btn-alt">
+        <a :href="withBase('/interactive')" class="ci-btn ci-btn-ghost">
           <svg
             class="ci-btn-icon"
             viewBox="0 0 24 24"
@@ -548,35 +557,35 @@ const filteredChapters = computed(() => {
             <path d="m3.6 9 16.8 6" />
             <path d="m3.6 15 16.8-6" />
           </svg>
-          <span>可视化交互空间</span>
+          <span>交互空间</span>
         </a>
       </div>
 
-      <!-- 四联硬核指标背书条 -->
-      <div class="ci-metrics-deck">
-        <div class="ci-metric-item">
-          <span class="ci-metric-val">19</span>
-          <span class="ci-metric-label">大体系专题板块</span>
+      <!-- 极简通透数据指标条 (无沉重灰框，纯粹学术读数) -->
+      <div class="ci-stats-strip">
+        <div class="ci-stat-col">
+          <div class="ci-stat-number">19</div>
+          <div class="ci-stat-title">大体系专题板块</div>
         </div>
-        <div class="ci-metric-sep" />
-        <div class="ci-metric-item">
-          <span class="ci-metric-val">78</span>
-          <span class="ci-metric-label">幅自研高清矢量图解</span>
+        <div class="ci-stat-divider" aria-hidden="true" />
+        <div class="ci-stat-col">
+          <div class="ci-stat-number">78</div>
+          <div class="ci-stat-title">幅自研矢量图解</div>
         </div>
-        <div class="ci-metric-sep" />
-        <div class="ci-metric-item">
-          <span class="ci-metric-val">50</span>
-          <span class="ci-metric-label">大黄金结论与临界条件</span>
+        <div class="ci-stat-divider" aria-hidden="true" />
+        <div class="ci-stat-col">
+          <div class="ci-stat-number">50</div>
+          <div class="ci-stat-title">大黄金临界模型</div>
         </div>
-        <div class="ci-metric-sep" />
-        <div class="ci-metric-item">
-          <span class="ci-metric-val">100%</span>
-          <span class="ci-metric-label">离线可用 · 零外部依赖</span>
+        <div class="ci-stat-divider" aria-hidden="true" />
+        <div class="ci-stat-col">
+          <div class="ci-stat-number">100%</div>
+          <div class="ci-stat-title">离线自托管可用</div>
         </div>
       </div>
 
-      <!-- 每日速记微电台嵌入栏 -->
-      <div class="ci-quote-dock">
+      <!-- 考点微速记播报栏 (融合式极简胶囊，避免双层嵌套) -->
+      <div class="ci-flash-bar">
         <ClientOnly>
           <CCDailyQuote />
         </ClientOnly>
@@ -597,7 +606,7 @@ const filteredChapters = computed(() => {
           </p>
         </div>
         <div class="ci-head-count">
-          共 <span class="ci-highlight">{{ filteredChapters.length }}</span> / 19 个专题
+          显示 <span class="ci-highlight">{{ filteredChapters.length }}</span> / 19 个专题
         </div>
       </div>
 
@@ -662,47 +671,111 @@ const filteredChapters = computed(() => {
         </div>
       </div>
 
-      <!-- 19 章节精工卡片网格 -->
-      <div v-if="filteredChapters.length > 0" class="ci-chapter-grid">
-        <a
-          v-for="ch in filteredChapters"
-          :key="ch.num"
-          :href="withBase(ch.link)"
-          class="ci-chapter-card"
-        >
-          <!-- 顶部序号与教材徽章 -->
-          <div class="ci-card-header">
-            <span class="ci-card-num">{{ ch.num }}</span>
-            <span class="ci-card-vol-badge" :class="`vol-${ch.volumeTag}`">{{ ch.volume }}</span>
-          </div>
+      <!-- 章节网格区域 (前 18 章节为标准网格，第 19 实验专题为专属全景大卡片) -->
+      <div v-if="filteredChapters.length > 0" class="ci-chapters-wrapper">
+        <!-- 1~18 章节 3 列网格 -->
+        <div v-if="regularChapters.length > 0" class="ci-chapter-grid">
+          <a
+            v-for="ch in regularChapters"
+            :key="ch.num"
+            :href="withBase(ch.link)"
+            class="ci-chapter-card"
+          >
+            <!-- 顶部序号与教材徽章 -->
+            <div class="ci-card-header">
+              <span class="ci-card-num">{{ ch.num }}</span>
+              <span class="ci-card-vol-badge" :class="`vol-${ch.volumeTag}`">{{ ch.volume }}</span>
+            </div>
 
-          <!-- 章节标题 -->
-          <h3 class="ci-card-title">{{ ch.title }}</h3>
+            <!-- 章节标题 -->
+            <h3 class="ci-card-title">{{ ch.title }}</h3>
 
-          <!-- 章节概述 -->
-          <p class="ci-card-desc">{{ ch.desc }}</p>
+            <!-- 章节概述 -->
+            <p class="ci-card-desc">{{ ch.desc }}</p>
 
-          <!-- 核心关键词标签提炼 -->
-          <div class="ci-card-keywords">
-            <span v-for="(kw, idx) in ch.keywords.slice(0, 4)" :key="idx" class="ci-keyword-tag">
-              {{ kw }}
-            </span>
-            <span v-if="ch.keywords.length > 4" class="ci-keyword-more">...</span>
-          </div>
+            <!-- 核心关键词标签提炼 (精选整洁短词，杜绝公式代码折行混乱) -->
+            <div class="ci-card-keywords">
+              <span v-for="(kw, idx) in ch.keywords.slice(0, 5)" :key="idx" class="ci-keyword-tag">
+                {{ kw }}
+              </span>
+            </div>
 
-          <!-- 底部直达提示与悬浮微动箭头 -->
-          <div class="ci-card-footer">
-            <span class="ci-card-action">研读本章模型</span>
-            <svg class="ci-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor">
-              <path
-                d="M6 12l4-4-4-4"
-                stroke-width="1.75"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-        </a>
+            <!-- 底部直达提示与悬浮微动箭头 -->
+            <div class="ci-card-footer">
+              <span class="ci-card-action">研读本章核心推导</span>
+              <svg class="ci-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor">
+                <path
+                  d="M6 12l4-4-4-4"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </a>
+        </div>
+
+        <!-- 19 物理实验专题：全景通栏核心卡片 (解决 19 个元素在 3 列网格末尾悬空的问题) -->
+        <div v-if="experimentChapter" class="ci-pano-wrap">
+          <a :href="withBase(experimentChapter.link)" class="ci-chapter-card ci-chapter-card--pano">
+            <div class="ci-pano-grid">
+              <!-- 左侧主信息 -->
+              <div class="ci-pano-main">
+                <div class="ci-card-header">
+                  <div class="ci-pano-header-left">
+                    <span class="ci-card-num ci-card-num--pano">{{ experimentChapter.num }}</span>
+                    <span class="ci-card-vol-badge vol-exp">高考压轴实验专题</span>
+                  </div>
+                  <span class="ci-pano-indicator">全面攻克 15 分主观实验题</span>
+                </div>
+
+                <h3 class="ci-card-title ci-card-title--pano">
+                  {{ experimentChapter.title }}与科学探究
+                </h3>
+                <p class="ci-card-desc ci-card-desc--pano">
+                  涵盖高中阶段基本仪器读数规范、经典力学验证探究实验与伏安法电表内外接分压限流设计，全景拆解误差来源与实战得分要领。
+                </p>
+
+                <div class="ci-card-footer ci-card-footer--pano">
+                  <span class="ci-card-action">研读实验完整体系与误差分析 →</span>
+                </div>
+              </div>
+
+              <!-- 右侧三大实验板块切片 -->
+              <div class="ci-pano-subtopics">
+                <div class="ci-pano-subcard">
+                  <div class="ci-subcard-title">
+                    <span class="ci-subcard-bullet bullet-blue" />
+                    仪器使用与读数规范
+                  </div>
+                  <p class="ci-subcard-desc">
+                    游标卡尺(无估读)、螺旋测微器(估读千分位)、秒表与打点计时器
+                  </p>
+                </div>
+
+                <div class="ci-pano-subcard">
+                  <div class="ci-subcard-title">
+                    <span class="ci-subcard-bullet bullet-green" />
+                    力学验证探究实验
+                  </div>
+                  <p class="ci-subcard-desc">
+                    探究加速度与力/质量、验证机械能守恒、动量守恒频闪/光电门
+                  </p>
+                </div>
+
+                <div class="ci-pano-subcard">
+                  <div class="ci-subcard-title">
+                    <span class="ci-subcard-bullet bullet-purple" />
+                    电学测量与电路设计
+                  </div>
+                  <p class="ci-subcard-desc">
+                    伏安法内外接判据、滑动变阻器分压限流选择、测电源电动势与内阻
+                  </p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
 
       <!-- 无搜索结果时友好回退 -->
@@ -763,43 +836,67 @@ const filteredChapters = computed(() => {
 .ci-master-container {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
+  padding: 1.5rem 1.5rem 4rem;
   box-sizing: border-box;
 }
 
 /* ============================================================
-   1. Master Index Hero Header
+   1. Master Index Hero Header (告别厚重灰块，通透学术大气)
    ============================================================ */
 .ci-hero-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 2rem 0 3.2rem;
+  padding: 2.5rem 0 3.5rem;
   border-bottom: 1px solid var(--vp-c-divider);
   margin-bottom: 3.2rem;
+  overflow: visible;
+}
+
+/* 柔和背景光晕 (Subtle Atmospheric Aura) */
+.ci-hero-aura {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 380px;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--vp-c-brand-1) 16%, transparent) 0%,
+    color-mix(in srgb, var(--vp-c-brand-1) 3%, transparent) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
 }
 
 /* 顶部发布胶囊 */
 .ci-pill-badge {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 5px 14px;
   background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg-elv));
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 25%, var(--vp-c-border));
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 22%, var(--vp-c-border));
   border-radius: 9999px;
   font-size: 0.82rem;
   font-weight: 550;
   color: var(--vp-c-text-1);
   margin-bottom: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease;
 }
 
 .ci-pill-badge:hover {
   border-color: var(--vp-c-brand-1);
   background: color-mix(in srgb, var(--vp-c-brand-1) 12%, var(--vp-c-bg-elv));
+  transform: translateY(-1px);
 }
 
 .ci-pill-dot {
@@ -807,7 +904,7 @@ const filteredChapters = computed(() => {
   height: 7px;
   border-radius: 50%;
   background-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent);
 }
 
 .ci-pill-arrow {
@@ -817,10 +914,12 @@ const filteredChapters = computed(() => {
 
 /* 宏伟主标题 */
 .ci-hero-title {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   margin: 0 0 1.25rem 0;
   border: none !important;
   padding: 0 !important;
@@ -828,10 +927,10 @@ const filteredChapters = computed(() => {
 
 .ci-hero-title-main {
   font-family: var(--vp-font-family-serif);
-  font-size: 3.4rem;
+  font-size: 3.5rem;
   font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.12;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   color: var(--vp-c-text-1);
   background: var(
     --vp-home-hero-name-background,
@@ -844,17 +943,19 @@ const filteredChapters = computed(() => {
 
 .ci-hero-title-tag {
   font-family: var(--vp-font-family-mono);
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--vp-c-text-2);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--vp-c-text-3);
   text-transform: uppercase;
 }
 
 /* 核心导言 */
 .ci-hero-tagline {
+  position: relative;
+  z-index: 1;
   max-width: 820px;
-  font-size: 1.08rem;
+  font-size: 1.06rem;
   line-height: 1.75;
   color: var(--vp-c-text-2);
   margin: 0 0 2rem 0;
@@ -865,8 +966,10 @@ const filteredChapters = computed(() => {
   font-weight: 600;
 }
 
-/* 快捷行动按钮组 */
+/* 快捷行动按钮组 (主次鲜明，避免堆砌) */
 .ci-actions-group {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -881,7 +984,7 @@ const filteredChapters = computed(() => {
   gap: 8px;
   min-height: 44px;
   padding: 8px 18px;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 600;
   border-radius: 9999px;
   text-decoration: none !important;
@@ -889,17 +992,18 @@ const filteredChapters = computed(() => {
   box-sizing: border-box;
 }
 
+/* Primary 主按钮 */
 .ci-btn-primary {
   background: var(--vp-c-brand-1);
   color: #ffffff !important;
   border: 1px solid var(--vp-c-brand-1);
-  box-shadow: 0 4px 14px rgba(76, 103, 185, 0.28);
+  box-shadow: 0 4px 14px rgba(76, 103, 185, 0.3);
 }
 
 .ci-btn-primary:hover {
   background: var(--vp-c-brand-2);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(76, 103, 185, 0.38);
+  box-shadow: 0 6px 20px rgba(76, 103, 185, 0.42);
 }
 
 .ci-btn-arrow {
@@ -910,18 +1014,33 @@ const filteredChapters = computed(() => {
   transform: translateX(3px);
 }
 
-.ci-btn-alt {
+/* Secondary 次高亮按钮 */
+.ci-btn-secondary {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg-elv));
+  color: var(--vp-c-brand-1) !important;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 24%, var(--vp-c-border));
+  box-shadow: var(--vp-shadow-1);
+}
+
+.ci-btn-secondary:hover {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 14%, var(--vp-c-bg-elv));
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-1px);
+  box-shadow: var(--vp-shadow-2);
+}
+
+/* Ghost 轻量按钮 */
+.ci-btn-ghost {
   background: var(--vp-c-bg-elv);
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-text-2) !important;
   border: 1px solid var(--vp-c-border);
   box-shadow: var(--vp-shadow-1);
 }
 
-.ci-btn-alt:hover {
+.ci-btn-ghost:hover {
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1) !important;
   transform: translateY(-1px);
-  box-shadow: var(--vp-shadow-2);
 }
 
 .ci-btn-icon {
@@ -930,50 +1049,54 @@ const filteredChapters = computed(() => {
   flex-shrink: 0;
 }
 
-/* 四联硬核指标背书条 */
-.ci-metrics-deck {
-  display: inline-flex;
+/* ============================================================
+   通透学术指标条 (纯净数字读数，取代沉重灰板)
+   ============================================================ */
+.ci-stats-strip {
+  position: relative;
+  z-index: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  padding: 12px 24px;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-border);
-  border-radius: 12px;
-  gap: 20px;
-  margin-bottom: 1.8rem;
-  box-shadow: var(--vp-shadow-1);
+  gap: 2.5rem;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
 }
 
-.ci-metric-item {
+.ci-stat-col {
   display: flex;
-  align-items: baseline;
-  gap: 6px;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
 }
 
-.ci-metric-val {
+.ci-stat-number {
   font-family: var(--vp-font-family-mono);
-  font-size: 1.28rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--vp-c-brand-1);
+  line-height: 1.15;
 }
 
-.ci-metric-label {
-  font-size: 0.82rem;
+.ci-stat-title {
+  font-size: 0.8rem;
   font-weight: 500;
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-3);
+  letter-spacing: 0.02em;
 }
 
-.ci-metric-sep {
+.ci-stat-divider {
   width: 1px;
-  height: 16px;
+  height: 28px;
   background: var(--vp-c-divider);
 }
 
 /* 每日速记微电台嵌入栏 */
-.ci-quote-dock {
+.ci-flash-bar {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 780px;
+  max-width: 680px;
   margin: 0 auto;
 }
 
@@ -1034,8 +1157,8 @@ const filteredChapters = computed(() => {
 .ci-control-panel {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.25rem 1.4rem;
+  gap: 0.9rem;
+  padding: 1.15rem 1.35rem;
   background: var(--vp-c-bg-elv);
   border: 1px solid var(--vp-c-border);
   border-radius: 14px;
@@ -1111,7 +1234,7 @@ const filteredChapters = computed(() => {
 }
 
 .ci-filter-row--sub {
-  padding-top: 0.5rem;
+  padding-top: 0.45rem;
   border-top: 1px dashed var(--vp-c-divider);
 }
 
@@ -1181,7 +1304,15 @@ const filteredChapters = computed(() => {
   font-weight: 600;
 }
 
-/* 19 章节卡片网格 */
+/* ============================================================
+   1~18 章节卡片 3 列网格 (整齐划一，避免高度参差)
+   ============================================================ */
+.ci-chapters-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .ci-chapter-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1217,7 +1348,7 @@ const filteredChapters = computed(() => {
 
 .ci-card-num {
   font-family: var(--vp-font-family-mono);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--vp-c-brand-1);
 }
@@ -1278,7 +1409,7 @@ const filteredChapters = computed(() => {
   flex: 1;
 }
 
-/* 核心关键词标签 */
+/* 核心关键词标签 (精简短语，杜绝溢出折行) */
 .ci-card-keywords {
   display: flex;
   align-items: center;
@@ -1291,15 +1422,12 @@ const filteredChapters = computed(() => {
   display: inline-block;
   padding: 2px 7px;
   font-size: 0.74rem;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
   background: var(--vp-c-bg-soft);
   border-radius: 4px;
   border: 1px solid var(--vp-c-divider);
-}
-
-.ci-keyword-more {
-  font-size: 0.74rem;
-  color: var(--vp-c-text-3);
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
 /* 卡片底栏 */
@@ -1322,6 +1450,130 @@ const filteredChapters = computed(() => {
 
 .ci-chapter-card:hover .ci-card-arrow {
   transform: translateX(4px);
+}
+
+/* ============================================================
+   19 实验专题：全景通栏大卡片 (完美化解 19 个元素末尾悬空设计硬伤)
+   ============================================================ */
+.ci-pano-wrap {
+  width: 100%;
+}
+
+.ci-chapter-card--pano {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--vp-pastel-yellow) 40%, var(--vp-c-bg-elv)) 0%,
+    var(--vp-c-bg-elv) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--vp-pastel-yellow-border) 60%, var(--vp-c-border));
+  padding: 1.6rem 1.8rem;
+}
+
+.ci-chapter-card--pano:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: var(--vp-shadow-3);
+  transform: translateY(-2px);
+}
+
+.ci-pano-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.85fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.ci-pano-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.ci-pano-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ci-card-num--pano {
+  font-size: 1.4rem;
+}
+
+.ci-pano-indicator {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--vp-pastel-yellow-text);
+  letter-spacing: 0.04em;
+}
+
+.ci-card-title--pano {
+  font-size: 1.35rem;
+  margin: 0.4rem 0 0.5rem 0;
+}
+
+.ci-card-desc--pano {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.ci-card-footer--pano {
+  border: none;
+  padding: 0;
+}
+
+/* 右侧三大子实验卡片矩阵 */
+.ci-pano-subtopics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.ci-pano-subcard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0.9rem 1rem;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.ci-chapter-card--pano:hover .ci-pano-subcard {
+  background: var(--vp-c-bg-elv);
+}
+
+.ci-subcard-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
+  font-weight: 650;
+  color: var(--vp-c-text-1);
+}
+
+.ci-subcard-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bullet-blue {
+  background-color: #3b82f6;
+}
+.bullet-green {
+  background-color: #10b981;
+}
+.bullet-purple {
+  background-color: #8b5cf6;
+}
+
+.ci-subcard-desc {
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+  margin: 0;
 }
 
 /* 空搜索状态 */
@@ -1501,6 +1753,10 @@ const filteredChapters = computed(() => {
   .ci-chapter-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .ci-pano-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1510,15 +1766,21 @@ const filteredChapters = computed(() => {
   .ci-hero-tagline {
     font-size: 0.98rem;
   }
-  .ci-metrics-deck {
-    gap: 12px;
-    padding: 10px 14px;
+  .ci-stats-strip {
+    gap: 14px;
   }
-  .ci-metric-sep {
+  .ci-stat-number {
+    font-size: 1.3rem;
+  }
+  .ci-stat-title {
+    font-size: 0.74rem;
+  }
+  .ci-stat-divider {
     display: none;
   }
   .ci-chapter-grid,
-  .ci-specials-grid {
+  .ci-specials-grid,
+  .ci-pano-subtopics {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
