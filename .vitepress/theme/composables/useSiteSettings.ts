@@ -81,8 +81,8 @@ const loadSiteSettings = () => {
 };
 
 export const bootstrapSiteSettings = () => {
+  // loadSiteSettings() 内部末尾已调用 applySiteSettings()，无需重复
   loadSiteSettings();
-  applySiteSettings();
 };
 
 export const updateSiteSettings = <K extends keyof SiteSettings>(

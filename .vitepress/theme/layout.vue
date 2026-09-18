@@ -111,7 +111,6 @@ const onSectionTitleClick = (event) => {
 onMounted(() => {
   bootstrapSiteSettings();
   document.addEventListener("click", onSectionTitleClick, true);
-  runOnClientFrame(refreshPageEnhancements);
 });
 
 onBeforeUnmount(() => {

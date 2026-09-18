@@ -47,7 +47,7 @@ const link = computed(() => {
   const baseUrl = origin.value;
 
   if (!baseUrl) return "";
-  if (encodedPath.length < 10) return `${baseUrl}/${encodedPath}`;
+  if (normalizedPath.length < 10) return `${baseUrl}/${encodedPath}`;
 
   // Must match the short-link jump page route (GitHub Pages serves s.html, not extensionless /s).
   return `${baseUrl}/s.html?q=${md5(normalizedPath).slice(0, 10)}`;

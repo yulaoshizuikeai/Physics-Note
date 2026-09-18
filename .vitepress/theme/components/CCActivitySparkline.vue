@@ -66,19 +66,7 @@ const formatDateKey = (date: Date): string => {
 };
 
 onMounted(() => {
-  // 1. 隐式静默统计（Busuanzi 增量上报，零数字展示）
-  if (typeof window !== "undefined") {
-    const existing = document.getElementById("cc-busuanzi-script");
-    if (existing) existing.remove();
-    const script = document.createElement("script");
-    script.id = "cc-busuanzi-script";
-    script.src = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
-    script.referrerPolicy = "no-referrer-when-downgrade";
-    script.async = true;
-    document.head.appendChild(script);
-  }
-
-  // 2. 7天滚动窗口周期数据计算 (Sliding Window: 过去6天 + 今天)
+  // 7天滚动窗口周期数据计算 (Sliding Window: 过去6天 + 今天)
   try {
     const STORAGE_KEY = "cc_physics_7d_window";
     const raw = localStorage.getItem(STORAGE_KEY);

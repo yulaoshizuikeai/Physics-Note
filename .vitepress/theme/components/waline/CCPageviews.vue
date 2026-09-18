@@ -118,6 +118,9 @@ watch(
       runWhenIdle(() => {
         isLoading.value = true;
         runBusuanzi();
+        // stopLoading 会 disconnect observer，切页后必须重连，
+        // 否则 loading 骨架要等 3s 超时兜底才消失
+        setupObserver();
       }, 1500);
     }, 800);
   },
