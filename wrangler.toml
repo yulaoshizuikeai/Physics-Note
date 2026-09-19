@@ -1,0 +1,19 @@
+name = "physics-knowledge-search"
+main = "src/worker.js"
+compatibility_date = "2026-01-01"
+
+# Workers AI 原生绑定
+[ai]
+binding = "AI"
+
+# Vectorize 向量数据库索引绑定
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "docs-index"
+
+# 开启边缘日志与追踪可观测性
+[observability]
+enabled = true
+
+[observability.traces]
+enabled = false
