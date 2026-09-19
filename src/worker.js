@@ -55,11 +55,75 @@ export default {
       });
     }
 
-    // 路由限定：只接受 /api/search 或根路径 POST
-    if (url.pathname !== "/api/search" && url.pathname !== "/") {
-      return new Response(JSON.stringify({ error: "Not Found. Use POST /api/search" }), {
+    // 路由限定：只接受 /api/search、/api/proxy 或根路径 POST
+    if (
+      url.pathname !== "/api/search" &&
+      url.pathname !== "/api/proxy" &&
+      url.pathname !== "/"
+    ) {
+      return new Response(JSON.stringify({ error: "Not Found. Use POST /api/search or POST /api/proxy" }), {
         status: 404,
         headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+      });
+    }
+
+    // --- /api/proxy：通用 OpenAI 兼容流式代理（解决 CORS 限制）---
+    // 请求体: { endpoint, apiKey, payload }
+    // payload 将原样转发至 endpoint，适配 NVIDIA NIM / 任意 OpenAI 兼容接口
+    if (url.pathname === "/api/proxy") {
+      if (request.method !== "POST") {
+        return new Response(JSON.stringify({ error: "Method Not Allowed. Use POST" }), {
+          status: 405,
+          headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+        });
+      }
+
+      let proxyBody;
+      try {
+        proxyBody = await request.json();
+      } catch {
+        return new Response(JSON.stringify({ error: "Invalid JSON request body" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+        });
+      }
+
+      const { endpoint: targetEndpoint, apiKey: proxyApiKey, payload } = proxyBody;
+      if (!targetEndpoint || typeof targetEndpoint !== "string") {
+        return new Response(JSON.stringify({ error: "Missing required field: endpoint" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+        });
+      }
+
+      const proxyHeaders = { "Content-Type": "application/json" };
+      if (proxyApiKey) {
+        proxyHeaders["Authorization"] = `Bearer ${proxyApiKey}`;
+      }
+
+      let upstreamRes;
+      try {
+        upstreamRes = await fetch(targetEndpoint, {
+          method: "POST",
+          headers: proxyHeaders,
+          body: JSON.stringify(payload || {}),
+        });
+      } catch (fetchErr) {
+        return new Response(
+          JSON.stringify({ error: `Failed to reach upstream: ${fetchErr.message}` }),
+          { status: 502, headers: { "Content-Type": "application/json", ...CORS_HEADERS } },
+        );
+      }
+
+      // 原样透传响应体（含流式 SSE），仅添加 CORS 头
+      const proxyRespHeaders = {
+        ...CORS_HEADERS,
+        "Content-Type": upstreamRes.headers.get("Content-Type") || "application/json",
+      };
+
+      return new Response(upstreamRes.body, {
+        status: upstreamRes.status,
+        headers: proxyRespHeaders,
       });
     }
 

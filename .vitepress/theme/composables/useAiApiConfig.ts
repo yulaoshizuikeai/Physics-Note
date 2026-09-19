@@ -69,6 +69,15 @@ export const AI_API_PRESETS: AiApiPreset[] = [
     model: "llama3.1:8b",
     description: "本地运行无网络消耗，数据 100% 留在本机",
   },
+  {
+    id: "nvidia",
+    name: "NVIDIA NIM (经 Worker 代理)",
+    badge: "GPU 推理",
+    protocol: "openai",
+    endpoint: "https://integrate.api.nvidia.com/v1/chat/completions",
+    model: "meta/llama-3.1-8b-instruct",
+    description: "NVIDIA NIM 云端 GPU 推理，因 CORS 限制自动经 Worker 代理转发，需填入 NVIDIA API Key",
+  },
 ];
 
 export const DEFAULT_AI_SYSTEM_PROMPT = `你是高中物理知识库与高考备考辅导专家。你的职责是依据物理学科核心素养，为用户提供概念严谨、推导规范、客观无废话的高考物理权威解答。
@@ -165,6 +174,44 @@ export function normalizeOpenAiEndpoint(rawEndpoint: string): string {
   return `${url}/v1/chat/completions`;
 }
 
+/** Worker 代理端点（绕过 CORS 限制） */
+const WORKER_PROXY_ENDPOINT =
+  "https://physics-knowledge-search.harlan0804.workers.dev/api/proxy";
+
+/**
+ * 判断某个 endpoint 是否因 CORS 无法从浏览器直连，需要通过 Worker 代理
+ * 已知不开放浏览器 CORS 的域名：
+ * - integrate.api.nvidia.com（NVIDIA NIM）
+ */
+const CORS_BLOCKED_DOMAINS = ["integrate.api.nvidia.com", "api.nvidia.com"];
+
+export function needsWorkerProxy(endpoint: string): boolean {
+  try {
+    const host = new URL(endpoint).hostname;
+    return CORS_BLOCKED_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`));
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * 封装通过 Worker 代理发起的 fetch（流式）
+ * 把 { endpoint, apiKey, payload } 包装后 POST 到 /api/proxy
+ */
+export async function fetchViaProxy(
+  endpoint: string,
+  apiKey: string,
+  payload: Record<string, unknown>,
+  signal?: AbortSignal,
+): Promise<Response> {
+  return fetch(WORKER_PROXY_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ endpoint, apiKey, payload }),
+    signal,
+  });
+}
+
 /**
  * 规范化 Anthropic 兼容端点
  */
@@ -205,24 +252,26 @@ export const testAiApiConnection = async (
 
     if (config.protocol === "openai") {
       const endpoint = normalizeOpenAiEndpoint(config.endpoint);
-      const headers: Record<string, string> = {
-        "Content-Type": "application/json",
+      const testPayload = {
+        model: config.model || "gpt-4o-mini",
+        messages: [{ role: "user", content: "请只回复两个字：收到" }],
+        max_tokens: 10,
+        temperature: 0.1,
+        stream: false,
       };
-      if (config.apiKey) {
-        headers["Authorization"] = `Bearer ${config.apiKey}`;
-      }
 
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          model: config.model || "gpt-4o-mini",
-          messages: [{ role: "user", content: "请只回复两个字：收到" }],
-          max_tokens: 10,
-          temperature: 0.1,
-          stream: false,
-        }),
-      });
+      let res: Response;
+      if (needsWorkerProxy(endpoint)) {
+        res = await fetchViaProxy(endpoint, config.apiKey, testPayload);
+      } else {
+        const headers: Record<string, string> = { "Content-Type": "application/json" };
+        if (config.apiKey) headers["Authorization"] = `Bearer ${config.apiKey}`;
+        res = await fetch(endpoint, {
+          method: "POST",
+          headers,
+          body: JSON.stringify(testPayload),
+        });
+      }
 
       const latencyMs = Date.now() - startTime;
       if (!res.ok) {
@@ -421,27 +470,30 @@ export const streamAiChat = async (
   // OpenAI 兼容流式协议
   if (config.protocol === "openai") {
     const endpoint = normalizeOpenAiEndpoint(config.endpoint);
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
+    const oaiPayload = {
+      model: config.model || "gpt-4o-mini",
+      messages: [
+        { role: "system", content: config.systemPrompt || DEFAULT_AI_SYSTEM_PROMPT },
+        { role: "user", content: userContent },
+      ],
+      temperature: config.temperature ?? 0.3,
+      stream: true,
     };
-    if (config.apiKey) {
-      headers["Authorization"] = `Bearer ${config.apiKey}`;
-    }
 
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        model: config.model || "gpt-4o-mini",
-        messages: [
-          { role: "system", content: config.systemPrompt || DEFAULT_AI_SYSTEM_PROMPT },
-          { role: "user", content: userContent },
-        ],
-        temperature: config.temperature ?? 0.3,
-        stream: true,
-      }),
-      signal,
-    });
+    // 自动检测是否需要通过 Worker 代理（NVIDIA NIM 等不开放 CORS 的服务）
+    let res: Response;
+    if (needsWorkerProxy(endpoint)) {
+      res = await fetchViaProxy(endpoint, config.apiKey, oaiPayload, signal);
+    } else {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (config.apiKey) headers["Authorization"] = `Bearer ${config.apiKey}`;
+      res = await fetch(endpoint, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(oaiPayload),
+        signal,
+      });
+    }
 
     if (!res.ok) {
       const errJson = await res.json().catch(() => ({}));
