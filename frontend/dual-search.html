@@ -576,6 +576,58 @@
       color: var(--text-main);
     }
 
+    .answer-content .ai-table-wrapper {
+      margin: 14px 0;
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg-soft);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .answer-content .ai-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .answer-content .ai-table th,
+    .answer-content .ai-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--card-border);
+      border-right: 1px solid var(--card-border);
+    }
+
+    .answer-content .ai-table th:last-child,
+    .answer-content .ai-table td:last-child {
+      border-right: none;
+    }
+
+    .answer-content .ai-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .answer-content .ai-table th {
+      background: rgba(0, 0, 0, 0.04);
+      font-weight: 650;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    [data-theme="dark"] .answer-content .ai-table th {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .answer-content .ai-table tr:nth-child(even) {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="dark"] .answer-content .ai-table tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
     /* 错误提示框 */
     .error-banner {
       display: none;
@@ -1043,6 +1095,7 @@
         const mathInlines = [];
         const codeBlocks = [];
         const codeInlines = [];
+        const tableBlocks = [];
 
         let s = text.replace(/\r\n/g, '\n');
 
@@ -1104,7 +1157,10 @@
         s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         s = s.replace(/\*([^\*\n]+?)\*/g, '<em>$1</em>');
 
-        // 7. 解析列表 (非贪婪，按连续行聚合)
+        // 7. 解析 Markdown 表格并占位保护
+        s = parseMarkdownTables(s, tableBlocks);
+
+        // 8. 解析列表 (非贪婪，按连续行聚合)
         s = s.replace(/(?:^[ \t]*[-*][ \t]+.+(?:\n|$))+/gm, (match) => {
           const items = match
             .trim()
@@ -1127,28 +1183,142 @@
           return `<ol>\n${items}\n</ol>\n`;
         });
 
-        // 8. 确保块级公式与代码块前后有独立换行，避免被包裹进 <p>
+        // 9. 确保块级公式、代码块与表格块前后有独立换行，避免被包裹进 <p>
         s = s.replace(/(\n?___AI_MATH_BLOCK_\d+___\n?)/g, '\n\n$1\n\n');
         s = s.replace(/(\n?___AI_CODE_BLOCK_\d+___\n?)/g, '\n\n$1\n\n');
+        s = s.replace(/(\n?___AI_TABLE_BLOCK_\d+___\n?)/g, '\n\n$1\n\n');
 
-        // 9. 段落换行
+        // 10. 段落换行
         const paragraphs = s.split(/\n{2,}/).map(p => {
           p = p.trim();
           if (!p) return '';
-          if (p.startsWith('<h') || p.startsWith('<ul>') || p.startsWith('<ol>') || p.startsWith('___AI_CODE_BLOCK_') || p.startsWith('___AI_MATH_BLOCK_')) {
+          if (p.startsWith('<h') || p.startsWith('<ul>') || p.startsWith('<ol>') || p.startsWith('___AI_CODE_BLOCK_') || p.startsWith('___AI_MATH_BLOCK_') || p.startsWith('___AI_TABLE_BLOCK_')) {
             return p;
           }
           return `<p>${p.replace(/\n/g, '<br>')}</p>`;
         });
         s = paragraphs.filter(Boolean).join('\n');
 
-        // 10. 回填公式与代码
+        // 11. 回填表格、公式与代码
+        s = s.replace(/___AI_TABLE_BLOCK_(\d+)___/g, (_, i) => tableBlocks[Number(i)] || '');
         s = s.replace(/___AI_MATH_BLOCK_(\d+)___/g, (_, i) => mathBlocks[Number(i)] || '');
         s = s.replace(/___AI_MATH_INLINE_(\d+)___/g, (_, i) => mathInlines[Number(i)] || '');
         s = s.replace(/___AI_CODE_BLOCK_(\d+)___/g, (_, i) => codeBlocks[Number(i)] || '');
         s = s.replace(/___AI_CODE_INLINE_(\d+)___/g, (_, i) => codeInlines[Number(i)] || '');
 
         return s;
+      }
+
+      function splitTableRow(line) {
+        const protectedLine = line.replace(/\\\|/g, '___AI_ESCAPED_PIPE___');
+        let trimmed = protectedLine.trim();
+        if (trimmed.startsWith('|')) trimmed = trimmed.slice(1);
+        if (trimmed.endsWith('|')) trimmed = trimmed.slice(0, -1);
+        return trimmed.split('|').map(cell =>
+          cell
+            .replace(/___AI_ESCAPED_PIPE___/g, '|')
+            .trim()
+            .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
+        );
+      }
+
+      function isDelimiterRow(line) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.includes('-') || !trimmed.includes('|')) return false;
+        let content = trimmed;
+        if (content.startsWith('|')) content = content.slice(1);
+        if (content.endsWith('|')) content = content.slice(0, -1);
+        const parts = content.split('|');
+        if (parts.length === 0) return false;
+        return parts.every(p => /^\s*:?-+:?\s*$/.test(p));
+      }
+
+      function parseAlignments(delimiterLine) {
+        let content = delimiterLine.trim();
+        if (content.startsWith('|')) content = content.slice(1);
+        if (content.endsWith('|')) content = content.slice(0, -1);
+        return content.split('|').map(cell => {
+          const t = cell.trim();
+          const leftColon = t.startsWith(':');
+          const rightColon = t.endsWith(':');
+          if (leftColon && rightColon) return 'center';
+          if (rightColon) return 'right';
+          if (leftColon) return 'left';
+          return 'left';
+        });
+      }
+
+      function renderTableHtml(headers, alignments, rows) {
+        const colCount = Math.max(headers.length, alignments.length);
+        let html = '<div class="ai-table-wrapper"><table class="ai-table"><thead><tr>';
+        for (let i = 0; i < colCount; i++) {
+          const text = headers[i] || '';
+          const align = alignments[i] || 'left';
+          html += `<th style="text-align:${align};">${text}</th>`;
+        }
+        html += '</tr></thead><tbody>';
+        for (const row of rows) {
+          html += '<tr>';
+          for (let i = 0; i < colCount; i++) {
+            const text = row[i] || '';
+            const align = alignments[i] || 'left';
+            html += `<td style="text-align:${align};">${text}</td>`;
+          }
+          html += '</tr>';
+        }
+        html += '</tbody></table></div>';
+        return html;
+      }
+
+      function parseMarkdownTables(text, tableBlocks) {
+        const lines = text.split('\n');
+        const resultLines = [];
+        let i = 0;
+
+        while (i < lines.length) {
+          const currentLine = lines[i];
+          const nextLine = lines[i + 1];
+
+          if (
+            currentLine !== undefined &&
+            nextLine !== undefined &&
+            currentLine.includes('|') &&
+            isDelimiterRow(nextLine)
+          ) {
+            const alignments = parseAlignments(nextLine);
+            const headers = splitTableRow(currentLine);
+            const rows = [];
+            i += 2;
+
+            while (i < lines.length) {
+              const rowLine = lines[i];
+              const trimmedRow = rowLine.trim();
+
+              if (
+                !trimmedRow ||
+                !trimmedRow.includes('|') ||
+                trimmedRow.startsWith('#') ||
+                trimmedRow.startsWith('>') ||
+                trimmedRow.startsWith('```')
+              ) {
+                break;
+              }
+
+              rows.push(splitTableRow(rowLine));
+              i++;
+            }
+
+            const tableHtml = renderTableHtml(headers, alignments, rows);
+            const idx = tableBlocks.length;
+            tableBlocks.push(tableHtml);
+            resultLines.push(`___AI_TABLE_BLOCK_${idx}___`);
+          } else {
+            resultLines.push(currentLine);
+            i++;
+          }
+        }
+
+        return resultLines.join('\n');
       }
 
       const SYSTEM_PROMPT = `你是高中物理知识库与高考备考辅导专家。你的职责是依据物理学科核心素养，为用户提供概念严谨、推导规范、客观无废话的高考物理权威解答。

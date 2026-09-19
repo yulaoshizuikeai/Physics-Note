@@ -128,6 +128,54 @@ assert(bracketTex.includes('<span class="ai-math-inline">'), "反斜杠圆括号
 assert(bracketTex.includes('<div class="ai-math-display">'), "反斜杠方括号块级公式未解析");
 console.log("✓ 反斜杠括号公式规范解析正常");
 
+// 1.11 Markdown 表格规范解析与 KaTeX 数学公式/比较符深度集成 (针对用户提报的真实用例)
+const userScreenshotCase = `3. 关键结论与避坑指南
+
+| 比较项 | 外接法 (方案 A) | 内接法 (方案 B) |
+| :--- | :--- | :--- |
+| 电压表测得 | 路端电压 $U$ | 变阻器电压 $U_R$ |
+| 电流表测得 | 支路电流 $I$ | 干路总电流 $I_总$ |
+| 内阻测量结果 | $r_测 < r_真$ | $r_测 > r_真$ |
+| 适用场景 | 干电池（内阻小） | 水果电池（内阻极大） |
+
+⚠️ 高考避坑点：`;
+
+const renderedTable = renderAiMarkdown(userScreenshotCase);
+assert(renderedTable.includes('<div class="ai-table-wrapper">'), "未生成 ai-table-wrapper 容器");
+assert(renderedTable.includes('<table class="ai-table">'), "未生成 table 标签");
+assert(renderedTable.includes('>比较项</th>'), "表头未正确解析");
+assert(renderedTable.includes('>外接法 (方案 A)</th>'), "表头外接法未正确解析");
+assert(renderedTable.includes('>内接法 (方案 B)</th>'), "表头内接法未正确解析");
+assert(renderedTable.includes("路端电压"), "数据单元格未解析");
+assert(renderedTable.includes('class="katex"'), "表格内部的 LaTeX 公式未被 KaTeX 正确渲染");
+assert(!renderedTable.includes("| 比较项 |"), "表格文本仍原样残留，未转换为 HTML 表格");
+assert(!renderedTable.includes("| :--- |"), "表格分隔符原样残留");
+assert(!renderedTable.includes('<p class="ai-doc-p"><div class="ai-table-wrapper">'), "表格被非法嵌套在 p 标签内");
+console.log("✓ Markdown 表格规范解析及公式集成通过 (含用户真实截图片段)");
+
+// 1.12 表格对齐方式 (左/中/右) 与转义竖线 \|
+const alignTableCase = `| 左对齐 | 居中对齐 | 右对齐 |
+| :--- | :---: | ---: |
+| 变量 $x$ | $E = mc^2$ | 数值 100 |
+| 带\\|转义 | 居中项 | 50% |`;
+
+const renderedAlignTable = renderAiMarkdown(alignTableCase);
+assert(renderedAlignTable.includes('th style="text-align:left;"'), "左对齐样式缺失");
+assert(renderedAlignTable.includes('th style="text-align:center;"'), "居中对齐样式缺失");
+assert(renderedAlignTable.includes('th style="text-align:right;"'), "右对齐样式缺失");
+assert(renderedAlignTable.includes("带|转义"), "转义竖线未正确恢复为普通字符");
+console.log("✓ 表格列对齐语法 (:---, :---:, ---:) 及转义竖线解析正常");
+
+// 1.13 表格紧贴标题无空行容错
+const tightTableCase = `### 伏安特性测试
+| 参数 | 标称值 |
+|---|---|
+| 电压 | $220\\,\\text{V}$ |`;
+const renderedTightTable = renderAiMarkdown(tightTableCase);
+assert(renderedTightTable.includes('<h4 class=\'ai-doc-h4\'>伏安特性测试</h4>'), "标题未正常解析");
+assert(renderedTightTable.includes('<table class="ai-table">'), "紧贴标题的表格未正常解析");
+console.log("✓ 无空行紧贴标题的表格容错解析正常");
+
 console.log("\n=== 2. 测试自定义 API 配置与预设体系 ===");
 
 // 2.1 默认配置

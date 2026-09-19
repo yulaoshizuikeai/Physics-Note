@@ -42,6 +42,7 @@ export function renderAiMarkdown(text: string): string {
   const mathInlines: string[] = [];
   const codeBlocks: string[] = [];
   const codeInlines: string[] = [];
+  const tableBlocks: string[] = [];
 
   // 标准化换行符
   let s = text.replace(/\r\n/g, "\n");
@@ -115,8 +116,11 @@ export function renderAiMarkdown(text: string): string {
   s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   s = s.replace(/\*([^\*\n]+?)\*/g, "<em>$1</em>");
 
-  // 7. 严谨解析有序列表与无序列表（按连续行聚类，严禁跨段落贪婪匹配）
-  // 7.1 无序列表 (- 或 *)
+  // 7. 解析 Markdown 表格并占位保护（必须在列表解析前执行，防止表格首行被误解析为有序/无序列表）
+  s = parseMarkdownTables(s, tableBlocks);
+
+  // 8. 严谨解析有序列表与无序列表（按连续行聚类，严禁跨段落贪婪匹配）
+  // 8.1 无序列表 (- 或 *)
   s = s.replace(/(?:^[ \t]*[-*][ \t]+.+(?:\n|$))+/gm, (match) => {
     const items = match
       .trim()
@@ -128,7 +132,7 @@ export function renderAiMarkdown(text: string): string {
     return `<ul>\n${items}\n</ul>\n`;
   });
 
-  // 7.2 有序列表 (1. 2. 3.)
+  // 8.2 有序列表 (1. 2. 3.)
   s = s.replace(/(?:^[ \t]*\d+\.[ \t]+.+(?:\n|$))+/gm, (match) => {
     const items = match
       .trim()
@@ -140,11 +144,12 @@ export function renderAiMarkdown(text: string): string {
     return `<ol>\n${items}\n</ol>\n`;
   });
 
-  // 8. 确保块级公式与代码块前后有独立换行，杜绝被包裹进 <p> 标签产生非法 DOM 嵌套
+  // 9. 确保块级公式、代码块与表格块前后有独立换行，杜绝被包裹进 <p> 标签产生非法 DOM 嵌套
   s = s.replace(/(\n?___AI_MATH_BLOCK_\d+___\n?)/g, "\n\n$1\n\n");
   s = s.replace(/(\n?___AI_CODE_BLOCK_\d+___\n?)/g, "\n\n$1\n\n");
+  s = s.replace(/(\n?___AI_TABLE_BLOCK_\d+___\n?)/g, "\n\n$1\n\n");
 
-  // 9. 分段与自然换行
+  // 10. 分段与自然换行
   const rawParagraphs = s.split(/\n{2,}/);
   const formattedParagraphs = rawParagraphs.map((p) => {
     const trimmed = p.trim();
@@ -155,7 +160,8 @@ export function renderAiMarkdown(text: string): string {
       trimmed.startsWith("<ol>") ||
       trimmed.startsWith("<blockquote") ||
       trimmed.startsWith("___AI_CODE_BLOCK_") ||
-      trimmed.startsWith("___AI_MATH_BLOCK_")
+      trimmed.startsWith("___AI_MATH_BLOCK_") ||
+      trimmed.startsWith("___AI_TABLE_BLOCK_")
     ) {
       return trimmed;
     }
@@ -164,11 +170,141 @@ export function renderAiMarkdown(text: string): string {
 
   s = formattedParagraphs.filter(Boolean).join("\n");
 
-  // 10. 回填公式块与代码块
+  // 11. 回填表格、公式块与代码块（表格先回填，确保单元格内的内联公式与代码占位符能被随后正确解析）
+  s = s.replace(/___AI_TABLE_BLOCK_(\d+)___/g, (_, i) => tableBlocks[Number(i)] || "");
   s = s.replace(/___AI_MATH_BLOCK_(\d+)___/g, (_, i) => mathBlocks[Number(i)] || "");
   s = s.replace(/___AI_MATH_INLINE_(\d+)___/g, (_, i) => mathInlines[Number(i)] || "");
   s = s.replace(/___AI_CODE_BLOCK_(\d+)___/g, (_, i) => codeBlocks[Number(i)] || "");
   s = s.replace(/___AI_CODE_INLINE_(\d+)___/g, (_, i) => codeInlines[Number(i)] || "");
 
   return s;
+}
+
+/**
+ * 分割 Markdown 表格行，支持转义竖线并去除首尾竖线
+ */
+function splitTableRow(line: string): string[] {
+  const protectedLine = line.replace(/\\\|/g, "___AI_ESCAPED_PIPE___");
+  let trimmed = protectedLine.trim();
+  if (trimmed.startsWith("|")) trimmed = trimmed.slice(1);
+  if (trimmed.endsWith("|")) trimmed = trimmed.slice(0, -1);
+  return trimmed.split("|").map((cell) =>
+    cell
+      .replace(/___AI_ESCAPED_PIPE___/g, "|")
+      .trim()
+      .replace(/&lt;br\s*\/?&gt;/gi, "<br>"),
+  );
+}
+
+/**
+ * 判断一行是否为合法的 Markdown 表格对齐分隔行（如 | :--- | :---: | ---: |）
+ */
+function isDelimiterRow(line: string): boolean {
+  const trimmed = line.trim();
+  if (!trimmed || !trimmed.includes("-") || !trimmed.includes("|")) return false;
+  let content = trimmed;
+  if (content.startsWith("|")) content = content.slice(1);
+  if (content.endsWith("|")) content = content.slice(0, -1);
+  const parts = content.split("|");
+  if (parts.length === 0) return false;
+  return parts.every((p) => /^\s*:?-+:?\s*$/.test(p));
+}
+
+/**
+ * 解析分隔行各列对齐规则
+ */
+function parseAlignments(delimiterLine: string): string[] {
+  let content = delimiterLine.trim();
+  if (content.startsWith("|")) content = content.slice(1);
+  if (content.endsWith("|")) content = content.slice(0, -1);
+  return content.split("|").map((cell) => {
+    const t = cell.trim();
+    const leftColon = t.startsWith(":");
+    const rightColon = t.endsWith(":");
+    if (leftColon && rightColon) return "center";
+    if (rightColon) return "right";
+    if (leftColon) return "left";
+    return "left";
+  });
+}
+
+/**
+ * 将解析出的表头、对齐方式与数据行渲染为规范 HTML 表格
+ */
+function renderTableHtml(headers: string[], alignments: string[], rows: string[][]): string {
+  const colCount = Math.max(headers.length, alignments.length);
+
+  let html = '<div class="ai-table-wrapper"><table class="ai-table"><thead><tr>';
+  for (let i = 0; i < colCount; i++) {
+    const text = headers[i] || "";
+    const align = alignments[i] || "left";
+    html += `<th style="text-align:${align};">${text}</th>`;
+  }
+  html += "</tr></thead><tbody>";
+  for (const row of rows) {
+    html += "<tr>";
+    for (let i = 0; i < colCount; i++) {
+      const text = row[i] || "";
+      const align = alignments[i] || "left";
+      html += `<td style="text-align:${align};">${text}</td>`;
+    }
+    html += "</tr>";
+  }
+  html += "</tbody></table></div>";
+  return html;
+}
+
+/**
+ * 扫描并提取 Markdown 表格，替换为独立占位符
+ */
+function parseMarkdownTables(text: string, tableBlocks: string[]): string {
+  const lines = text.split("\n");
+  const resultLines: string[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const currentLine = lines[i];
+    const nextLine = lines[i + 1];
+
+    if (
+      currentLine !== undefined &&
+      nextLine !== undefined &&
+      currentLine.includes("|") &&
+      isDelimiterRow(nextLine)
+    ) {
+      const alignments = parseAlignments(nextLine);
+      const headers = splitTableRow(currentLine);
+
+      const rows: string[][] = [];
+      i += 2;
+
+      while (i < lines.length) {
+        const rowLine = lines[i];
+        const trimmedRow = rowLine.trim();
+
+        if (
+          !trimmedRow ||
+          !trimmedRow.includes("|") ||
+          trimmedRow.startsWith("#") ||
+          trimmedRow.startsWith(">") ||
+          trimmedRow.startsWith("```")
+        ) {
+          break;
+        }
+
+        rows.push(splitTableRow(rowLine));
+        i++;
+      }
+
+      const tableHtml = renderTableHtml(headers, alignments, rows);
+      const idx = tableBlocks.length;
+      tableBlocks.push(tableHtml);
+      resultLines.push(`___AI_TABLE_BLOCK_${idx}___`);
+    } else {
+      resultLines.push(currentLine);
+      i++;
+    }
+  }
+
+  return resultLines.join("\n");
 }
