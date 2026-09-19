@@ -262,7 +262,10 @@ onBeforeUnmount(() => {
             <label class="cc-settings-option cc-ai-master-toggle">
               <div class="cc-option-info">
                 <span class="cc-settings-option__text">启用自定义 API 接口</span>
-                <span class="cc-option-desc">接入私有 DeepSeek, OpenAI, Claude 或本地模型</span>
+                <span class="cc-option-desc"
+                  >接入私有 OpenAI 兼容通用 (OAI 格式 / NVIDIA NIM / OneAPI / DeepSeek) 或 Claude
+                  等</span
+                >
               </div>
               <span class="cc-switch">
                 <input
@@ -312,7 +315,9 @@ onBeforeUnmount(() => {
                     })
                   "
                 >
-                  <option value="openai">OpenAI 兼容协议 (DeepSeek, GPT, Ollama, 硅基流动)</option>
+                  <option value="openai">
+                    OpenAI 兼容通用协议 (OAI 规范 / NVIDIA NIM / OneAPI / DeepSeek / 官方)
+                  </option>
                   <option value="anthropic">Anthropic 协议 (Claude 3.5 Sonnet 等)</option>
                   <option value="worker">Cloudflare 边缘原生 Worker SSE</option>
                 </select>
@@ -324,13 +329,17 @@ onBeforeUnmount(() => {
                   type="text"
                   class="cc-form-control"
                   :value="config.endpoint"
-                  placeholder="例如: https://api.deepseek.com/v1/chat/completions"
+                  placeholder="例如: https://api.openai.com/v1 或 https://integrate.api.nvidia.com/v1"
                   @input="
                     updateAiApiConfig({
                       endpoint: ($event.target as HTMLInputElement).value.trim(),
                     })
                   "
                 />
+                <span class="cc-form-hint"
+                  >OAI 格式兼容：支持 Base URL (如 https://.../v1) 或完整端点，自动智能补全
+                  /chat/completions</span
+                >
               </div>
 
               <div class="cc-form-group">
@@ -340,7 +349,7 @@ onBeforeUnmount(() => {
                     :type="showApiKey ? 'text' : 'password'"
                     class="cc-form-control cc-password-input"
                     :value="config.apiKey"
-                    placeholder="输入您的私有 API Key (例如 sk-...)"
+                    placeholder="输入您的私有 API Key (例如 sk-... 或 nvapi-...)"
                     @input="
                       updateAiApiConfig({
                         apiKey: ($event.target as HTMLInputElement).value.trim(),
@@ -365,7 +374,7 @@ onBeforeUnmount(() => {
                   type="text"
                   class="cc-form-control"
                   :value="config.model"
-                  placeholder="例如: deepseek-chat, gpt-4o-mini, claude-3-5-sonnet-20241022"
+                  placeholder="例如: gpt-4o-mini, meta/llama-3.3-70b-instruct, deepseek-chat"
                   @input="
                     updateAiApiConfig({
                       model: ($event.target as HTMLInputElement).value.trim(),

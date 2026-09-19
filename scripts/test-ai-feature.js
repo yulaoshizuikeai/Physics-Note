@@ -4,6 +4,8 @@ import {
   DEFAULT_AI_API_CONFIG,
   AI_API_PRESETS,
   DEFAULT_AI_SYSTEM_PROMPT,
+  normalizeOpenAiEndpoint,
+  normalizeAnthropicEndpoint,
 } from "../.vitepress/theme/composables/useAiApiConfig.ts";
 import { renderAiMarkdown, renderLatex } from "../.vitepress/theme/utils/aiMarkdown.ts";
 
@@ -138,12 +140,39 @@ console.log("✓ 默认 API 配置与系统提示词规范正确");
 // 2.2 预设完整性
 const presetIds = AI_API_PRESETS.map((p) => p.id);
 assert(presetIds.includes("worker"), "缺少 worker 预设");
-assert(presetIds.includes("deepseek"), "缺少 deepseek 预设");
 assert(presetIds.includes("openai"), "缺少 openai 预设");
+assert(presetIds.includes("deepseek"), "缺少 deepseek 预设");
 assert(presetIds.includes("anthropic"), "缺少 anthropic 预设");
 assert(presetIds.includes("ollama"), "缺少 ollama 预设");
-assert(presetIds.includes("siliconflow"), "缺少 siliconflow 预设");
-console.log("✓ 包含完整主流预设 (Worker, DeepSeek, OpenAI, Anthropic, Ollama, SiliconFlow)");
+console.log("✓ 包含完整核心通用预设 (Worker, OpenAI 通用兼容, DeepSeek, Anthropic, Ollama)");
+
+// 2.3 测试 OpenAI 通用端点智能规范化 (OAI 格式兼容)
+assert.strictEqual(
+  normalizeOpenAiEndpoint("https://integrate.api.nvidia.com/v1"),
+  "https://integrate.api.nvidia.com/v1/chat/completions",
+  "NVIDIA NIM Base URL 未正确自动补全 /chat/completions",
+);
+assert.strictEqual(
+  normalizeOpenAiEndpoint("https://api.openai.com/v1/"),
+  "https://api.openai.com/v1/chat/completions",
+  "带斜杠的 Base URL 未正确自动去除并补全",
+);
+assert.strictEqual(
+  normalizeOpenAiEndpoint("https://api.deepseek.com"),
+  "https://api.deepseek.com/v1/chat/completions",
+  "域名根地址未正确自动补全 /v1/chat/completions",
+);
+assert.strictEqual(
+  normalizeOpenAiEndpoint("https://api.openai.com/v1/chat/completions"),
+  "https://api.openai.com/v1/chat/completions",
+  "完整端点未保持原样",
+);
+assert.strictEqual(
+  normalizeAnthropicEndpoint("https://api.anthropic.com/v1"),
+  "https://api.anthropic.com/v1/messages",
+  "Anthropic Base URL 未正确自动补全 /messages",
+);
+console.log("✓ 通用 OAI / Anthropic 端点智能规范化测试全部通过 (支持 Base URL、带斜杠与完整端点)");
 
 console.log("\n==========================================");
 console.log("🎉 所有 LaTeX 公式渲染与自定义 API 单元验证全部通过！");

@@ -33,6 +33,16 @@ export const AI_API_PRESETS: AiApiPreset[] = [
     description: "毫秒级向量召回 + 边缘 Llama 3.1 模型，无需自带 API Key，免翻墙可用",
   },
   {
+    id: "openai",
+    name: "OpenAI 兼容通用 (OAI 格式)",
+    badge: "通用标准",
+    protocol: "openai",
+    endpoint: "https://api.openai.com/v1/chat/completions",
+    model: "gpt-4o-mini",
+    description:
+      "通用 OAI 规范接口，支持 NVIDIA NIM、OneAPI / NewAPI、DeepSeek、官方及任意兼容中转代理",
+  },
+  {
     id: "deepseek",
     name: "DeepSeek (深度求索)",
     badge: "超强推导",
@@ -40,15 +50,6 @@ export const AI_API_PRESETS: AiApiPreset[] = [
     endpoint: "https://api.deepseek.com/v1/chat/completions",
     model: "deepseek-chat",
     description: "理科推导极强，深度优化数学物理公式与 LaTeX 排版",
-  },
-  {
-    id: "openai",
-    name: "OpenAI (ChatGPT)",
-    badge: "主流国际",
-    protocol: "openai",
-    endpoint: "https://api.openai.com/v1/chat/completions",
-    model: "gpt-4o-mini",
-    description: "支持 gpt-4o, gpt-4o-mini 等官方或兼容的反代中转接口",
   },
   {
     id: "anthropic",
@@ -67,15 +68,6 @@ export const AI_API_PRESETS: AiApiPreset[] = [
     endpoint: "http://localhost:11434/v1/chat/completions",
     model: "llama3.1:8b",
     description: "本地运行无网络消耗，数据 100% 留在本机",
-  },
-  {
-    id: "siliconflow",
-    name: "SiliconFlow (硅基流动)",
-    badge: "国内高速",
-    protocol: "openai",
-    endpoint: "https://api.siliconflow.cn/v1/chat/completions",
-    model: "Qwen/Qwen2.5-7B-Instruct",
-    description: "国内超高速推理，支持通义千问 Qwen、DeepSeek 等",
   },
 ];
 
@@ -153,6 +145,43 @@ export const resetAiApiConfig = () => {
 };
 
 /**
+ * 规范化 OpenAI 兼容端点 (通用 OAI 格式)
+ * 智能兼容用户输入的各种 URL 风格：
+ * - 基础 Base URL (如 https://integrate.api.nvidia.com/v1 或 https://api.openai.com/v1) -> 自动补全 /chat/completions
+ * - 根域名 Base URL (如 https://api.deepseek.com) -> 自动补全 /v1/chat/completions
+ * - 完整 Endpoint (如 https://api.openai.com/v1/chat/completions) -> 保持原样
+ * - 尾部多余斜杠 -> 自动去除
+ */
+export function normalizeOpenAiEndpoint(rawEndpoint: string): string {
+  let url = (rawEndpoint || "").trim();
+  if (!url) return "https://api.openai.com/v1/chat/completions";
+  url = url.replace(/\/+$/, "");
+  if (url.endsWith("/chat/completions")) {
+    return url;
+  }
+  if (url.endsWith("/v1")) {
+    return `${url}/chat/completions`;
+  }
+  return `${url}/v1/chat/completions`;
+}
+
+/**
+ * 规范化 Anthropic 兼容端点
+ */
+export function normalizeAnthropicEndpoint(rawEndpoint: string): string {
+  let url = (rawEndpoint || "").trim();
+  if (!url) return "https://api.anthropic.com/v1/messages";
+  url = url.replace(/\/+$/, "");
+  if (url.endsWith("/messages")) {
+    return url;
+  }
+  if (url.endsWith("/v1")) {
+    return `${url}/messages`;
+  }
+  return `${url}/v1/messages`;
+}
+
+/**
  * 测试自定义 API 连接连通性与密钥有效性
  */
 export const testAiApiConnection = async (
@@ -175,6 +204,7 @@ export const testAiApiConnection = async (
     }
 
     if (config.protocol === "openai") {
+      const endpoint = normalizeOpenAiEndpoint(config.endpoint);
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
       };
@@ -182,11 +212,11 @@ export const testAiApiConnection = async (
         headers["Authorization"] = `Bearer ${config.apiKey}`;
       }
 
-      const res = await fetch(config.endpoint, {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers,
         body: JSON.stringify({
-          model: config.model || "deepseek-chat",
+          model: config.model || "gpt-4o-mini",
           messages: [{ role: "user", content: "请只回复两个字：收到" }],
           max_tokens: 10,
           temperature: 0.1,
@@ -204,6 +234,7 @@ export const testAiApiConnection = async (
     }
 
     if (config.protocol === "anthropic") {
+      const endpoint = normalizeAnthropicEndpoint(config.endpoint);
       const headers: Record<string, string> = {
         "Content-Type": "application/json",
         "x-api-key": config.apiKey,
@@ -211,7 +242,7 @@ export const testAiApiConnection = async (
         "anthropic-dangerous-direct-browser-access": "true",
       };
 
-      const res = await fetch(config.endpoint, {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers,
         body: JSON.stringify({
@@ -389,6 +420,7 @@ export const streamAiChat = async (
 
   // OpenAI 兼容流式协议
   if (config.protocol === "openai") {
+    const endpoint = normalizeOpenAiEndpoint(config.endpoint);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
     };
@@ -396,11 +428,11 @@ export const streamAiChat = async (
       headers["Authorization"] = `Bearer ${config.apiKey}`;
     }
 
-    const res = await fetch(config.endpoint, {
+    const res = await fetch(endpoint, {
       method: "POST",
       headers,
       body: JSON.stringify({
-        model: config.model || "deepseek-chat",
+        model: config.model || "gpt-4o-mini",
         messages: [
           { role: "system", content: config.systemPrompt || DEFAULT_AI_SYSTEM_PROMPT },
           { role: "user", content: userContent },
@@ -458,6 +490,7 @@ export const streamAiChat = async (
 
   // Anthropic Claude 协议
   if (config.protocol === "anthropic") {
+    const endpoint = normalizeAnthropicEndpoint(config.endpoint);
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       "x-api-key": config.apiKey,
@@ -465,7 +498,7 @@ export const streamAiChat = async (
       "anthropic-dangerous-direct-browser-access": "true",
     };
 
-    const res = await fetch(config.endpoint, {
+    const res = await fetch(endpoint, {
       method: "POST",
       headers,
       body: JSON.stringify({
