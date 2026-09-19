@@ -14,6 +14,8 @@ import CCHomeIndex from "./components/CCHomeIndex.vue";
 import CCPdfDownloadButton from "./components/CCPdfDownloadButton.vue";
 import "./style/index.css";
 import "./custom.css";
+import "katex/dist/katex.min.css";
+
 import CCSiteSettings from "./components/CCSiteSettings.vue";
 import CCJumper from "./components/shortUrl/CCJumper.vue";
 import CCShare from "./components/shortUrl/CCShare.vue";

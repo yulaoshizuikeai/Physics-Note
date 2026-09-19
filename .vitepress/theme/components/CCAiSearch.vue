@@ -1,11 +1,54 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
+
+import {
+  useAiApiConfig,
+  AI_API_PRESETS,
+  DEFAULT_AI_SYSTEM_PROMPT,
+  type AiApiPreset,
+} from "../composables/useAiApiConfig";
+import { renderAiMarkdown } from "../utils/aiMarkdown";
 
 const props = defineProps<{
   mode?: "floating" | "embedded";
 }>();
 
-const WORKER_ENDPOINT = "https://physics-knowledge-search.harlan0804.workers.dev/api/search";
+// 自定义 API 配置与状态管理
+const { config, updateAiApiConfig, resetAiApiConfig, testAiApiConnection, streamAiChat } =
+  useAiApiConfig();
+const showConfigPanel = ref(false);
+const showApiKey = ref(false);
+const showAdvancedConfig = ref(false);
+const testState = ref<{ testing: boolean; message: string; success?: boolean } | null>(null);
+
+const applyPreset = (preset: AiApiPreset) => {
+  if (preset.id === "worker") {
+    updateAiApiConfig({
+      enabled: false,
+      protocol: "worker",
+      endpoint: preset.endpoint,
+      model: preset.model,
+    });
+  } else {
+    updateAiApiConfig({
+      enabled: true,
+      protocol: preset.protocol,
+      endpoint: preset.endpoint,
+      model: preset.model,
+    });
+  }
+};
+
+const isPresetSelected = (p: AiApiPreset) => {
+  if (p.id === "worker") return !config.enabled || config.protocol === "worker";
+  return config.enabled && config.protocol === p.protocol && config.endpoint === p.endpoint;
+};
+
+const runConnectionTest = async () => {
+  testState.value = { testing: true, message: "正在测试连接..." };
+  const res = await testAiApiConnection(config);
+  testState.value = { testing: false, message: res.message, success: res.success };
+};
 
 // 弹窗状态与数据
 const isOpen = ref(props.mode === "embedded");
@@ -49,24 +92,6 @@ const setQueryAndSearch = (q: string) => {
   executeSearch();
 };
 
-const formatMarkdown = (text: string) => {
-  if (!text) return "";
-  let html = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  // 标题
-  html = html.replace(/^###\s+(.+)$/gm, "<h4 class='ai-doc-h4'>$1</h4>");
-  html = html.replace(/^##\s+(.+)$/gm, "<h3 class='ai-doc-h3'>$1</h3>");
-  // 加粗
-  html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-  // 行内代码
-  html = html.replace(/`([^`]+)`/g, "<code class='ai-code'>$1</code>");
-  // 列表
-  html = html.replace(/^\*\s+(.+)$/gm, "<li>$1</li>");
-  html = html.replace(/(<li>.*<\/li>)/s, "<ul>$1</ul>");
-
-  return html;
-};
-
 // 执行双轨搜索与流式问答
 const executeSearch = async () => {
   const q = query.value.trim();
@@ -81,89 +106,50 @@ const executeSearch = async () => {
   aiText.value = "";
   errorMessage.value = "";
   statusCode.value = "searching";
-  statusText.value = "正在检索知识库 (Vectorize)...";
+  statusText.value = config.enabled
+    ? `正在连接模型 (${config.model})...`
+    : "正在检索知识库 (Vectorize)...";
 
   abortController = new AbortController();
 
   try {
-    const res = await fetch(WORKER_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: q }),
-      signal: abortController.signal,
-    });
-
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error || `HTTP ${res.status}`);
-    }
-
-    if (!res.body) throw new Error("No readable stream received");
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let buffer = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const eventBlocks = buffer.split("\n\n");
-      buffer = eventBlocks.pop() || "";
-
-      for (const block of eventBlocks) {
-        const trimmed = block.trim();
-        if (!trimmed) continue;
-
-        const lines = trimmed.split("\n");
-        let eventType = "message";
-        let dataText = "";
-
-        for (const line of lines) {
-          if (line.startsWith("event:")) {
-            eventType = line.replace(/^event:\s*/, "").trim();
-          } else if (line.startsWith("data:")) {
-            dataText += line.replace(/^data:\s*/, "").trim();
-          }
-        }
-
-        if (!dataText) continue;
-
-        let parsedData: any = {};
-        try {
-          parsedData = JSON.parse(dataText);
-        } catch {
-          parsedData = { text: dataText };
-        }
-
-        if (eventType === "sources") {
-          sources.value = parsedData.sources || [];
+    await streamAiChat(
+      q,
+      config,
+      {
+        onSources: (retrievedSources) => {
+          sources.value = retrievedSources;
           statusCode.value = "generating";
-          statusText.value = sources.value.length
-            ? `已精准召回 ${sources.value.length} 篇参考文档，AI 智能总结中...`
-            : "知识库中未检索到与该问题高相关的内容";
-        } else if (eventType === "delta") {
-          if (parsedData.text) {
-            aiText.value += parsedData.text;
-          }
-        } else if (eventType === "done") {
+          statusText.value = retrievedSources.length
+            ? `已精准召回 ${retrievedSources.length} 篇参考文档，AI 智能推导中...`
+            : "知识库中未检索到高相关切片，模型直接推导中...";
+        },
+        onDelta: (text) => {
+          aiText.value += text;
+          statusCode.value = "generating";
+          statusText.value = config.enabled
+            ? `大模型 (${config.model}) 正在严密推导...`
+            : "边缘物理大模型正在严密推导...";
+        },
+        onDone: () => {
           statusCode.value = "done";
           statusText.value = "解答生成完毕";
-        } else if (eventType === "error") {
+        },
+        onError: (err) => {
           statusCode.value = "error";
           statusText.value = "服务异常";
-          errorMessage.value = parsedData.message || "处理出现异常";
-        }
-      }
-    }
+          errorMessage.value = err.message || "处理出现异常";
+        },
+      },
+      abortController.signal,
+    );
   } catch (err: any) {
     if (err.name === "AbortError") {
       statusText.value = "提问已取消";
     } else {
       statusCode.value = "error";
       statusText.value = "网络请求失败";
-      errorMessage.value = err.message || "网络异常，请稍后重试";
+      errorMessage.value = err.message || "网络异常，请检查网络或 API 配置";
     }
   } finally {
     isSearching.value = false;
@@ -365,62 +351,19 @@ const triggerModalAiAnswer = async (q: string, shell: Element) => {
   let accumulated = "";
 
   try {
-    const res = await fetch(WORKER_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: q }),
-      signal: activeLocalSearchAbort.signal,
-    });
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    if (!res.body) throw new Error("No body");
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let buffer = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const eventBlocks = buffer.split("\n\n");
-      buffer = eventBlocks.pop() || "";
-
-      for (const block of eventBlocks) {
-        const trimmed = block.trim();
-        if (!trimmed) continue;
-
-        const lines = trimmed.split("\n");
-        let eventType = "message";
-        let dataText = "";
-
-        for (const line of lines) {
-          if (line.startsWith("event:")) {
-            eventType = line.replace(/^event:\s*/, "").trim();
-          } else if (line.startsWith("data:")) {
-            dataText += line.replace(/^data:\s*/, "").trim();
-          }
-        }
-
-        if (!dataText) continue;
-
-        let parsed: any = {};
-        try {
-          parsed = JSON.parse(dataText);
-        } catch {
-          parsed = { text: dataText };
-        }
-
-        if (eventType === "sources" && parsed.sources) {
+    await streamAiChat(
+      q,
+      config,
+      {
+        onSources: (retrievedSources) => {
           if (statusEl) {
-            statusEl.textContent = parsed.sources.length
-              ? `已精准召回 ${parsed.sources.length} 篇参考文档`
+            statusEl.textContent = retrievedSources.length
+              ? `已精准召回 ${retrievedSources.length} 篇参考文档`
               : "知识库未检索到高相关内容";
           }
-          if (sourcesBar && parsed.sources.length) {
+          if (sourcesBar && retrievedSources.length) {
             sourcesBar.style.display = "flex";
-            sourcesBar.innerHTML = parsed.sources
+            sourcesBar.innerHTML = retrievedSources
               .map(
                 (s: any) => `
                 <a href="${s.url}" class="vp-ai-source-chip" target="_blank" title="${s.title}">
@@ -431,29 +374,33 @@ const triggerModalAiAnswer = async (q: string, shell: Element) => {
               )
               .join("");
           }
-        } else if (eventType === "delta" && parsed.text) {
-          accumulated += parsed.text;
+        },
+        onDelta: (text) => {
+          accumulated += text;
           if (answerBody) {
             answerBody.innerHTML =
-              formatMarkdown(accumulated) + '<span class="vp-ai-cursor"></span>';
+              renderAiMarkdown(accumulated) + '<span class="vp-ai-cursor"></span>';
           }
-        } else if (eventType === "done") {
+        },
+        onDone: () => {
           if (statusEl) statusEl.textContent = "解答推导完毕";
           const cursor = answerBody?.querySelector(".vp-ai-cursor");
           if (cursor) cursor.remove();
-        } else if (eventType === "error") {
+        },
+        onError: (err) => {
           if (statusEl) statusEl.textContent = "服务异常";
           if (answerBody) {
-            answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ ${parsed.message || "请求失败"}</span>`;
+            answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ ${err.message || "请求失败"}</span>`;
           }
-        }
-      }
-    }
+        },
+      },
+      activeLocalSearchAbort.signal,
+    );
   } catch (err: any) {
     if (err.name !== "AbortError") {
       if (statusEl) statusEl.textContent = "请求失败";
       if (answerBody) {
-        answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ 无法连接到边缘 AI 服务，请检查网络或稍后再试。</span>`;
+        answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ 无法连接到 AI 服务，请检查网络或 API 配置。</span>`;
       }
     }
   } finally {
@@ -534,10 +481,47 @@ if (typeof window !== "undefined") {
             <!-- 面板顶栏 -->
             <div class="neo-ai-header">
               <div class="neo-ai-title-wrap">
-                <span class="neo-ai-badge">Cloudflare Edge Vector RAG</span>
+                <div class="neo-ai-badges-row">
+                  <span class="neo-ai-badge" :class="{ 'is-custom': config.enabled }">
+                    {{
+                      config.enabled
+                        ? `🚀 自定义大模型: ${config.model}`
+                        : "⚡ Cloudflare 边缘向量检索 (Vectorize)"
+                    }}
+                  </span>
+                  <button
+                    type="button"
+                    class="neo-ai-config-toggle"
+                    :class="{ 'is-active': showConfigPanel, 'is-custom': config.enabled }"
+                    title="自定义大模型 API 接口配置 (DeepSeek, OpenAI, Claude, 本地 Ollama)"
+                    @click="showConfigPanel = !showConfigPanel"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="3"></circle>
+                      <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6 1.65 1.65 0 0 0 10 3.09V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.46.49.82.93 1H21a2 2 0 0 1 0 4h-.09c-.47.18-.82.54-1.51 1Z"
+                      ></path>
+                    </svg>
+                    <span>{{ showConfigPanel ? "收起设置" : "自定义 API" }}</span>
+                  </button>
+                </div>
                 <h2 class="neo-ai-heading">高考物理知识库 · 双轨流式问答</h2>
                 <p class="neo-ai-sub">
-                  毫秒级向量召回 (Vectorize) + 边缘大模型 (Llama 3.1) 严格防幻觉推导
+                  {{
+                    config.enabled
+                      ? `已启用用户自选 ${config.model} 大模型，结合知识库精准文献进行严密物理推导`
+                      : "毫秒级向量召回 (Vectorize) + 边缘大模型严格防幻觉推导 (LaTeX 深度排版)"
+                  }}
                 </p>
               </div>
               <button
@@ -551,6 +535,211 @@ if (typeof window !== "undefined") {
                 ✕
               </button>
             </div>
+
+            <!-- 自定义 API 抽屉设置面板 -->
+            <Transition name="neo-slide">
+              <div v-if="showConfigPanel" class="neo-ai-config-drawer">
+                <div class="config-drawer-top">
+                  <div class="drawer-title-box">
+                    <span class="drawer-title">⚙️ 自定义大模型与 API 接口</span>
+                    <span class="drawer-subtitle">
+                      纯本地浏览器存储 (localStorage)，API Key 绝不上报
+                    </span>
+                  </div>
+                  <label class="config-toggle-switch">
+                    <span class="switch-label-text">{{
+                      config.enabled ? "已启用自定义 API" : "默认边缘网关"
+                    }}</span>
+                    <input
+                      type="checkbox"
+                      :checked="config.enabled"
+                      @change="
+                        updateAiApiConfig({
+                          enabled: ($event.target as HTMLInputElement).checked,
+                        })
+                      "
+                    />
+                    <span class="switch-slider"></span>
+                  </label>
+                </div>
+
+                <!-- 预设快速填入 -->
+                <div class="config-presets-group">
+                  <span class="preset-label-text">快速预设:</span>
+                  <button
+                    v-for="p in AI_API_PRESETS"
+                    :key="p.id"
+                    type="button"
+                    class="preset-select-chip"
+                    :class="{ 'is-selected': isPresetSelected(p) }"
+                    @click="applyPreset(p)"
+                  >
+                    <span>{{ p.name }}</span>
+                    <span v-if="p.badge" class="preset-chip-badge">{{ p.badge }}</span>
+                  </button>
+                </div>
+
+                <!-- 详细参数表单 -->
+                <div v-if="config.enabled" class="config-form-grid">
+                  <div class="config-form-item">
+                    <label class="item-label">接口协议</label>
+                    <select
+                      class="item-select"
+                      :value="config.protocol"
+                      @change="
+                        updateAiApiConfig({
+                          protocol: ($event.target as HTMLSelectElement).value as any,
+                        })
+                      "
+                    >
+                      <option value="openai">
+                        OpenAI 兼容协议 (DeepSeek, GPT, Ollama, 硅基流动等)
+                      </option>
+                      <option value="anthropic">Anthropic 协议 (Claude 3.5 Sonnet 等)</option>
+                      <option value="worker">Cloudflare 边缘原生 Worker SSE</option>
+                    </select>
+                  </div>
+
+                  <div class="config-form-item">
+                    <label class="item-label">接口端点 (Endpoint URL)</label>
+                    <input
+                      type="text"
+                      class="item-input"
+                      :value="config.endpoint"
+                      placeholder="例如: https://api.deepseek.com/v1/chat/completions"
+                      @input="
+                        updateAiApiConfig({
+                          endpoint: ($event.target as HTMLInputElement).value.trim(),
+                        })
+                      "
+                    />
+                  </div>
+
+                  <div class="config-form-item">
+                    <label class="item-label">API 密钥 (API Key)</label>
+                    <div class="input-password-box">
+                      <input
+                        :type="showApiKey ? 'text' : 'password'"
+                        class="item-input"
+                        :value="config.apiKey"
+                        placeholder="输入您的私有 API Key (例如 sk-...)"
+                        @input="
+                          updateAiApiConfig({
+                            apiKey: ($event.target as HTMLInputElement).value.trim(),
+                          })
+                        "
+                      />
+                      <button
+                        type="button"
+                        class="btn-pwd-eye"
+                        :title="showApiKey ? '隐藏密钥' : '明文显示'"
+                        @click="showApiKey = !showApiKey"
+                      >
+                        {{ showApiKey ? "🙈" : "👁️" }}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="config-form-item">
+                    <label class="item-label">模型标识 (Model)</label>
+                    <input
+                      type="text"
+                      class="item-input"
+                      :value="config.model"
+                      placeholder="例如: deepseek-chat, gpt-4o-mini, claude-3-5-sonnet-20241022"
+                      @input="
+                        updateAiApiConfig({
+                          model: ($event.target as HTMLInputElement).value.trim(),
+                        })
+                      "
+                    />
+                  </div>
+
+                  <div
+                    class="config-advanced-toggle"
+                    @click="showAdvancedConfig = !showAdvancedConfig"
+                  >
+                    <span>{{
+                      showAdvancedConfig
+                        ? "▼ 收起高级设置 (温度与系统提示词)"
+                        : "▶ 展开高级设置 (温度与系统提示词)"
+                    }}</span>
+                  </div>
+
+                  <div v-if="showAdvancedConfig" class="config-advanced-panel">
+                    <div class="config-form-item">
+                      <div class="label-with-val">
+                        <label class="item-label">生成温度 (Temperature)</label>
+                        <span class="range-val">{{ config.temperature ?? 0.3 }}</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        class="item-range"
+                        :value="config.temperature ?? 0.3"
+                        @input="
+                          updateAiApiConfig({
+                            temperature: parseFloat(($event.target as HTMLInputElement).value),
+                          })
+                        "
+                      />
+                    </div>
+
+                    <div class="config-form-item">
+                      <div class="label-with-val">
+                        <label class="item-label">自定义系统提示词 (强制 LaTeX 输出约束)</label>
+                        <button
+                          type="button"
+                          class="btn-reset-prompt"
+                          title="重置为知识库标准提示词"
+                          @click="updateAiApiConfig({ systemPrompt: DEFAULT_AI_SYSTEM_PROMPT })"
+                        >
+                          重置提示词
+                        </button>
+                      </div>
+                      <textarea
+                        class="item-textarea"
+                        rows="4"
+                        :value="config.systemPrompt"
+                        placeholder="输入系统提示词 System Prompt..."
+                        @input="
+                          updateAiApiConfig({
+                            systemPrompt: ($event.target as HTMLTextAreaElement).value,
+                          })
+                        "
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 底部操作与连通性测试 -->
+                <div class="config-drawer-bottom">
+                  <div
+                    v-if="testState"
+                    class="test-status-pill"
+                    :class="{ 'is-ok': testState.success, 'is-fail': !testState.success }"
+                  >
+                    <span v-if="testState.testing" class="neo-spinner"></span>
+                    <span>{{ testState.message }}</span>
+                  </div>
+                  <div class="btn-actions-group">
+                    <button
+                      type="button"
+                      class="btn-config-test"
+                      :disabled="testState?.testing"
+                      @click="runConnectionTest"
+                    >
+                      {{ testState?.testing ? "测试中..." : "测试连接" }}
+                    </button>
+                    <button type="button" class="btn-config-reset" @click="resetAiApiConfig">
+                      恢复默认
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Transition>
 
             <!-- 搜索提问栏 -->
             <div class="neo-ai-input-box">
@@ -645,7 +834,7 @@ if (typeof window !== "undefined") {
               <div class="track-card track-summary">
                 <div class="track-caption">🤖 AI 智能总结 (严格基于事实)</div>
                 <div class="summary-container">
-                  <div v-if="aiText" class="summary-prose" v-html="formatMarkdown(aiText)"></div>
+                  <div v-if="aiText" class="summary-prose" v-html="renderAiMarkdown(aiText)"></div>
                   <div v-else-if="isSearching" class="summary-placeholder">
                     <span class="neo-spinner"></span>
                     <span style="margin-left: 10px">物理知识库模型正在阅读文献并严密推导...</span>
@@ -793,6 +982,389 @@ if (typeof window !== "undefined") {
   border-radius: 4px;
   width: fit-content;
   font-family: var(--vp-font-family-mono);
+}
+
+.neo-ai-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.neo-ai-badge.is-custom {
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.neo-ai-config-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.neo-ai-config-toggle:hover,
+.neo-ai-config-toggle.is-active {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.neo-ai-config-drawer {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.config-drawer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.drawer-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.drawer-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.drawer-subtitle {
+  font-size: 11.5px;
+  color: var(--vp-c-text-3);
+}
+
+.config-toggle-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.switch-label-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
+.config-toggle-switch input {
+  display: none;
+}
+
+.switch-slider {
+  position: relative;
+  width: 38px;
+  height: 20px;
+  background-color: var(--vp-c-divider);
+  border-radius: 9999px;
+  transition: background-color 0.2s;
+}
+
+.switch-slider::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.config-toggle-switch input:checked + .switch-slider {
+  background-color: var(--vp-c-brand-1);
+}
+
+.config-toggle-switch input:checked + .switch-slider::before {
+  transform: translateX(18px);
+}
+
+.config-presets-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.preset-label-text {
+  color: var(--vp-c-text-3);
+  font-size: 11.5px;
+}
+
+.preset-select-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-2);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-select-chip:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.preset-select-chip.is-selected {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.preset-chip-badge {
+  font-size: 9.5px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.config-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px 14px;
+}
+
+.config-form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--vp-c-text-3);
+}
+
+.item-input,
+.item-select {
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12.5px;
+  color: var(--vp-c-text-1);
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.item-input:focus,
+.item-select:focus {
+  border-color: var(--vp-c-brand-1);
+}
+
+.input-password-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-box .item-input {
+  width: 100%;
+  padding-right: 32px;
+}
+
+.btn-pwd-eye {
+  position: absolute;
+  right: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+  opacity: 0.7;
+}
+
+.btn-pwd-eye:hover {
+  opacity: 1;
+}
+
+.config-advanced-toggle {
+  grid-column: 1 / -1;
+  font-size: 11.5px;
+  color: var(--vp-c-brand-1);
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+  font-weight: 500;
+}
+
+.config-advanced-toggle:hover {
+  text-decoration: underline;
+}
+
+.config-advanced-panel {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--vp-c-bg);
+  border: 1px dashed var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.label-with-val {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.range-val {
+  font-size: 11px;
+  font-family: var(--vp-font-family-mono);
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.btn-reset-prompt {
+  background: none;
+  border: none;
+  color: var(--vp-c-brand-1);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.btn-reset-prompt:hover {
+  color: var(--vp-c-brand-2);
+}
+
+.item-range {
+  width: 100%;
+  accent-color: var(--vp-c-brand-1);
+  cursor: pointer;
+}
+
+.item-textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 6px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+}
+
+.item-textarea:focus {
+  border-color: var(--vp-c-brand-1);
+}
+
+.config-drawer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.test-status-pill {
+  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vp-c-text-2);
+}
+
+.test-status-pill.is-ok {
+  color: var(--vp-c-success-1, #10b981);
+}
+
+.test-status-pill.is-fail {
+  color: var(--vp-c-danger-1, #b9423b);
+}
+
+.btn-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.btn-config-test,
+.btn-config-reset {
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-config-test {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 30%, transparent);
+}
+
+.btn-config-test:hover:not(:disabled) {
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
+}
+
+.btn-config-test:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-config-reset {
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-3);
+}
+
+.btn-config-reset:hover {
+  color: var(--vp-c-text-1);
+  border-color: var(--vp-c-text-3);
+}
+
+.neo-slide-enter-active,
+.neo-slide-leave-active {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-slide-enter-from,
+.neo-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 .neo-ai-heading {
@@ -1105,9 +1677,56 @@ if (typeof window !== "undefined") {
   font-weight: 650;
 }
 
-.summary-prose :deep(ul) {
+.summary-prose :deep(ul),
+.summary-prose :deep(ol) {
   padding-left: 20px;
   margin: 6px 0;
+}
+
+.summary-prose :deep(.ai-math-display) {
+  margin: 12px 0;
+  padding: 10px 14px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.summary-prose :deep(.ai-math-inline) {
+  display: inline-block;
+  vertical-align: baseline;
+  margin: 0 2px;
+}
+
+.summary-prose :deep(.ai-code-block) {
+  margin: 10px 0;
+  padding: 10px 12px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 13px;
+  font-family: var(--vp-font-family-mono);
+  line-height: 1.5;
+}
+
+.summary-prose :deep(.ai-blockquote) {
+  margin: 8px 0;
+  padding: 6px 12px;
+  border-left: 3px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg);
+  border-radius: 0 6px 6px 0;
+  color: var(--vp-c-text-2);
+}
+
+.summary-prose :deep(.ai-doc-p) {
+  margin: 6px 0;
+}
+
+.summary-prose :deep(.katex) {
+  font-size: 1.05em;
+  color: var(--vp-c-text-1);
 }
 
 .neo-cursor {
@@ -1298,6 +1917,12 @@ if (typeof window !== "undefined") {
   font-weight: 600;
 }
 
+.vp-ai-answer-body ul,
+.vp-ai-answer-body ol {
+  padding-left: 20px;
+  margin: 6px 0;
+}
+
 .vp-ai-answer-body .ai-doc-h3 {
   font-size: 14px;
   color: var(--vp-c-brand-1);
@@ -1312,6 +1937,35 @@ if (typeof window !== "undefined") {
   border-radius: 4px;
   color: var(--vp-c-brand-1);
   font-family: var(--vp-font-family-mono);
+}
+
+.vp-ai-answer-body .ai-math-display {
+  margin: 10px 0;
+  padding: 8px 12px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 6px;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.vp-ai-answer-body .ai-math-inline {
+  display: inline-block;
+  vertical-align: baseline;
+  margin: 0 2px;
+}
+
+.vp-ai-answer-body .ai-code-block {
+  margin: 8px 0;
+  padding: 8px 10px;
+  background: var(--vp-c-bg);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 12px;
+}
+
+.vp-ai-answer-body .katex {
+  font-size: 1.05em;
 }
 
 .vp-ai-cursor {

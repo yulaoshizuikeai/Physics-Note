@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>知识库双轨检索与流式 AI 问答</title>
+  <!-- KaTeX 数学公式渲染引擎 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <style>
     :root {
       --bg: #FAF9F5;
@@ -103,28 +106,121 @@
     }
 
     /* 设置与端点配置 */
-    .endpoint-bar {
+    .config-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .config-toggle-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .config-status-label {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
-      color: var(--text-muted);
-      background: var(--card-bg-soft);
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--card-border);
-      width: fit-content;
-      margin: 0 auto;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
     }
 
-    .endpoint-bar input {
-      background: transparent;
-      border: none;
+    .config-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: var(--accent-blue-soft);
       color: var(--accent-blue);
-      font-size: 12px;
       font-family: ui-monospace, monospace;
+    }
+
+    .config-arrow {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    .config-content {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .config-content.is-open {
+      display: flex;
+    }
+
+    .config-presets {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .config-preset-btn {
+      background: var(--card-bg-soft);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .config-preset-btn:hover,
+    .config-preset-btn.active {
+      background: var(--accent-blue-soft);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    .config-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .config-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .config-field label {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .config-field input,
+    .config-field select {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12.5px;
+      color: var(--text-main);
       outline: none;
-      width: 260px;
+      font-family: inherit;
+    }
+
+    .config-field input:focus,
+    .config-field select:focus {
+      border-color: var(--accent-blue);
     }
 
     /* 搜索框区域 */
@@ -448,6 +544,38 @@
       margin: 8px 0;
     }
 
+    .answer-content .ai-math-display {
+      margin: 12px 0;
+      padding: 10px 14px;
+      background: var(--card-bg-soft);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .answer-content .ai-math-inline {
+      display: inline-block;
+      vertical-align: baseline;
+      margin: 0 2px;
+    }
+
+    .answer-content .ai-code-block {
+      margin: 10px 0;
+      padding: 10px 12px;
+      background: var(--card-bg-soft);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 13px;
+      font-family: ui-monospace, monospace;
+    }
+
+    .answer-content .katex {
+      font-size: 1.05em;
+      color: var(--text-main);
+    }
+
     /* 错误提示框 */
     .error-banner {
       display: none;
@@ -488,10 +616,49 @@
       <p class="subtitle">毫秒级文档召回 (≤300ms) + 边缘流式 AI 解答 (TTFT ≤600ms)</p>
     </header>
 
-    <!-- 端点配置栏 -->
-    <div class="endpoint-bar">
-      <span>API Endpoint:</span>
-      <input type="text" id="apiEndpoint" value="https://physics-knowledge-search.harlan0804.workers.dev/api/search" placeholder="如: /api/search 或完整 Worker URL" />
+    <!-- API 与模型设置栏 -->
+    <div class="config-box">
+      <div class="config-toggle-bar" id="configToggle">
+        <div class="config-status-label">
+          <span>⚙️ 接口配置:</span>
+          <span id="configCurrentBadge" class="config-badge">Cloudflare 边缘默认</span>
+        </div>
+        <span class="config-arrow" id="configArrow">▼</span>
+      </div>
+      <div class="config-content" id="configContent">
+        <!-- 预设提供商快速选择 -->
+        <div class="config-presets">
+          <span style="color: var(--text-muted); font-size: 11.5px;">快速预设:</span>
+          <button type="button" class="config-preset-btn active" data-preset="worker">Cloudflare 边缘 (默认)</button>
+          <button type="button" class="config-preset-btn" data-preset="deepseek">DeepSeek (深度求索)</button>
+          <button type="button" class="config-preset-btn" data-preset="openai">OpenAI (ChatGPT)</button>
+          <button type="button" class="config-preset-btn" data-preset="anthropic">Anthropic (Claude)</button>
+          <button type="button" class="config-preset-btn" data-preset="ollama">Ollama (本地)</button>
+        </div>
+
+        <div class="config-grid">
+          <div class="config-field">
+            <label for="apiProtocol">请求协议</label>
+            <select id="apiProtocol">
+              <option value="worker">Cloudflare 边缘 Worker SSE</option>
+              <option value="openai">OpenAI 兼容协议 (DeepSeek, GPT, Ollama)</option>
+              <option value="anthropic">Anthropic 协议 (Claude 3.5)</option>
+            </select>
+          </div>
+          <div class="config-field">
+            <label for="apiEndpoint">接口端点 (URL)</label>
+            <input type="text" id="apiEndpoint" value="https://physics-knowledge-search.harlan0804.workers.dev/api/search" placeholder="输入请求 URL" />
+          </div>
+          <div class="config-field">
+            <label for="apiKey">API 密钥 (Key)</label>
+            <input type="password" id="apiKey" placeholder="输入私有 API Key (例如 sk-...)" />
+          </div>
+          <div class="config-field">
+            <label for="apiModel">模型名称 (Model)</label>
+            <input type="text" id="apiModel" value="deepseek-chat" placeholder="例如: deepseek-chat, gpt-4o-mini" />
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 搜索输入框 -->
@@ -586,7 +753,14 @@
       const searchBtn = document.getElementById('searchBtn');
       const btnText = document.getElementById('btnText');
       const clearBtn = document.getElementById('clearBtn');
+      const configToggle = document.getElementById('configToggle');
+      const configContent = document.getElementById('configContent');
+      const configArrow = document.getElementById('configArrow');
+      const configCurrentBadge = document.getElementById('configCurrentBadge');
+      const apiProtocolInput = document.getElementById('apiProtocol');
       const apiEndpointInput = document.getElementById('apiEndpoint');
+      const apiKeyInput = document.getElementById('apiKey');
+      const apiModelInput = document.getElementById('apiModel');
       const sourcesList = document.getElementById('sourcesList');
       const sourcesBadge = document.getElementById('sourcesBadge');
       const answerContainer = document.getElementById('answerContainer');
@@ -597,6 +771,111 @@
       let currentAbortController = null;
       let isSearching = false;
       let rawAiText = '';
+
+      // 本地存储 key
+      const STORAGE_KEY = 'cc-dual-search-api-config';
+
+      // 预设配置
+      const PRESETS = {
+        worker: {
+          protocol: 'worker',
+          endpoint: 'https://physics-knowledge-search.harlan0804.workers.dev/api/search',
+          model: 'Llama 3.1 8B (Vectorize RAG)',
+          label: 'Cloudflare 边缘默认'
+        },
+        deepseek: {
+          protocol: 'openai',
+          endpoint: 'https://api.deepseek.com/v1/chat/completions',
+          model: 'deepseek-chat',
+          label: 'DeepSeek (深度求索)'
+        },
+        openai: {
+          protocol: 'openai',
+          endpoint: 'https://api.openai.com/v1/chat/completions',
+          model: 'gpt-4o-mini',
+          label: 'OpenAI (ChatGPT)'
+        },
+        anthropic: {
+          protocol: 'anthropic',
+          endpoint: 'https://api.anthropic.com/v1/messages',
+          model: 'claude-3-5-sonnet-20241022',
+          label: 'Anthropic (Claude)'
+        },
+        ollama: {
+          protocol: 'openai',
+          endpoint: 'http://localhost:11434/v1/chat/completions',
+          model: 'llama3.1:8b',
+          label: 'Ollama (本地离线)'
+        }
+      };
+
+      // 从 localStorage 加载配置
+      function loadSavedConfig() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const data = JSON.parse(raw);
+            if (data.protocol) apiProtocolInput.value = data.protocol;
+            if (data.endpoint) apiEndpointInput.value = data.endpoint;
+            if (data.apiKey) apiKeyInput.value = data.apiKey;
+            if (data.model) apiModelInput.value = data.model;
+          }
+        } catch (e) {}
+        updateBadge();
+      }
+
+      function saveConfig() {
+        try {
+          const data = {
+            protocol: apiProtocolInput.value,
+            endpoint: apiEndpointInput.value.trim(),
+            apiKey: apiKeyInput.value.trim(),
+            model: apiModelInput.value.trim()
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (e) {}
+        updateBadge();
+      }
+
+      function updateBadge() {
+        const proto = apiProtocolInput.value;
+        if (proto === 'worker') {
+          configCurrentBadge.textContent = 'Cloudflare 边缘默认';
+        } else {
+          configCurrentBadge.textContent = `${proto.toUpperCase()}: ${apiModelInput.value || '自定义模型'}`;
+        }
+      }
+
+      // 折叠展开配置面板
+      configToggle.addEventListener('click', () => {
+        const isOpen = configContent.classList.toggle('is-open');
+        configArrow.textContent = isOpen ? '▲' : '▼';
+      });
+
+      // 配置输入监听
+      [apiProtocolInput, apiEndpointInput, apiKeyInput, apiModelInput].forEach(el => {
+        el.addEventListener('change', saveConfig);
+        el.addEventListener('input', saveConfig);
+      });
+
+      // 预设按钮
+      document.querySelectorAll('.config-preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pKey = btn.getAttribute('data-preset');
+          const preset = PRESETS[pKey];
+          if (!preset) return;
+
+          document.querySelectorAll('.config-preset-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          apiProtocolInput.value = preset.protocol;
+          apiEndpointInput.value = preset.endpoint;
+          apiModelInput.value = preset.model;
+          saveConfig();
+        });
+      });
+
+      loadSavedConfig();
 
       // 清空按钮显隐
       searchInput.addEventListener('input', () => {
@@ -632,7 +911,6 @@
 
       searchBtn.addEventListener('click', () => {
         if (isSearching) {
-          // 如果正在搜索，点击按钮可取消
           if (currentAbortController) {
             currentAbortController.abort();
           }
@@ -658,17 +936,15 @@
         btnText.innerHTML = '<span class="spinner"></span> 停止';
         searchBtn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
 
-        // 重置状态徽章
         sourcesBadge.className = 'status-badge status-searching';
         sourcesBadge.textContent = '检索中...';
         aiBadge.className = 'status-badge status-searching';
-        aiBadge.textContent = '等待文档...';
+        aiBadge.textContent = '思考推导中...';
 
-        // 骨架屏清空
         sourcesList.innerHTML = `
           <div class="empty-state">
             <span class="spinner" style="width: 24px; height: 24px; border-width: 3px; color: var(--accent-blue);"></span>
-            <span style="margin-top: 8px;">正在 Vectorize 向量检索中...</span>
+            <span style="margin-top: 8px;">正在检索知识库 (Vectorize)...</span>
           </div>
         `;
         rawAiText = '';
@@ -682,7 +958,6 @@
         searchBtn.style.background = 'linear-gradient(135deg, #0284c7, #2563eb)';
         currentAbortController = null;
 
-        // 移除光标
         const cursor = answerContainer.querySelector('.cursor');
         if (cursor) cursor.remove();
       }
@@ -722,27 +997,154 @@
       }
 
       /**
-       * 简单的 Markdown 格式渲染 (保留换行、加粗与行内代码)
+       * KaTeX 单公式渲染
        */
-      function formatMarkdown(text) {
-        let html = text
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;');
-
-        // 加粗 **text**
-        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        // 行内代码 `code`
-        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-        // 标题 ###
-        html = html.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
-        html = html.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
-
-        return html;
+      function renderLatex(tex, displayMode) {
+        if (!tex || !tex.trim()) return '';
+        if (typeof window !== 'undefined' && window.katex) {
+          try {
+            return window.katex.renderToString(tex.trim(), {
+              displayMode: displayMode,
+              throwOnError: false,
+              strict: false
+            });
+          } catch (e) {}
+        }
+        const esc = tex.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return displayMode ? `<pre class="katex-fallback">$$${esc}$$</pre>` : `<code>$${esc}$</code>`;
       }
 
       /**
-       * 核心搜索执行逻辑
+       * 深度支持 KaTeX 数学公式、代码块保护与 Markdown 排版
+       */
+      function formatMarkdown(text) {
+        if (!text) return '';
+        const mathBlocks = [];
+        const mathInlines = [];
+        const codeBlocks = [];
+        const codeInlines = [];
+
+        let s = text.replace(/\r\n/g, '\n');
+
+        // 1. 保护代码块
+        s = s.replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, (_, lang, code) => {
+          const idx = codeBlocks.length;
+          const escaped = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          codeBlocks.push(`<pre class="ai-code-block"><code class="language-${lang || 'text'}">${escaped}</code></pre>`);
+          return `___AI_CODE_BLOCK_${idx}___`;
+        });
+
+        // 2. 保护行内代码
+        s = s.replace(/`([^`\n]+)`/g, (_, code) => {
+          const idx = codeInlines.length;
+          const escaped = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          codeInlines.push(`<code class="ai-code">${escaped}</code>`);
+          return `___AI_CODE_INLINE_${idx}___`;
+        });
+
+        // 3. 解析块级独立公式 ($$...$$ 与 \\[...\\])
+        s = s.replace(/\$\$([\s\S]*?)\$\$/g, (_, tex) => {
+          const idx = mathBlocks.length;
+          const rendered = renderLatex(tex, true);
+          mathBlocks.push(`<div class="ai-math-display">${rendered}</div>`);
+          return `___AI_MATH_BLOCK_${idx}___`;
+        });
+        s = s.replace(/\\\[([\s\S]*?)\\\]/g, (_, tex) => {
+          const idx = mathBlocks.length;
+          const rendered = renderLatex(tex, true);
+          mathBlocks.push(`<div class="ai-math-display">${rendered}</div>`);
+          return `___AI_MATH_BLOCK_${idx}___`;
+        });
+
+        // 4. 解析行内公式 ($...$、带内侧空格的 $ ... $ 与 \\(...\\))
+        const inlineMathRegex =
+          /\$(?!\$)(?:([^\$\n\s](?:[^\$\n]*?[^\$\n\s])?)|[ \t]+([a-zA-Z\\+\\-](?:[^\$\n]*?[a-zA-Z0-9\}\)\\_\\+\\-])?)[ \t]+)\$/g;
+
+        s = s.replace(inlineMathRegex, (_, texA, texB) => {
+          const tex = texA || texB || '';
+          const idx = mathInlines.length;
+          const rendered = renderLatex(tex, false);
+          mathInlines.push(`<span class="ai-math-inline">${rendered}</span>`);
+          return `___AI_MATH_INLINE_${idx}___`;
+        });
+        s = s.replace(/\\\((.+?)\\\)/g, (_, tex) => {
+          const idx = mathInlines.length;
+          const rendered = renderLatex(tex, false);
+          mathInlines.push(`<span class="ai-math-inline">${rendered}</span>`);
+          return `___AI_MATH_INLINE_${idx}___`;
+        });
+
+        // 5. 正文普通文本 HTML 转义
+        s = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        // 6. Markdown 标题、加粗、斜体
+        s = s.replace(/^####\s+(.+)$/gm, '<h4>$1</h4>');
+        s = s.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+        s = s.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+        s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        s = s.replace(/\*([^\*\n]+?)\*/g, '<em>$1</em>');
+
+        // 7. 解析列表 (非贪婪，按连续行聚合)
+        s = s.replace(/(?:^[ \t]*[-*][ \t]+.+(?:\n|$))+/gm, (match) => {
+          const items = match
+            .trim()
+            .split('\n')
+            .map((line) => line.replace(/^[ \t]*[-*][ \t]+/, '').trim())
+            .filter(Boolean)
+            .map((item) => `<li>${item}</li>`)
+            .join('\n');
+          return `<ul>\n${items}\n</ul>\n`;
+        });
+
+        s = s.replace(/(?:^[ \t]*\d+\.[ \t]+.+(?:\n|$))+/gm, (match) => {
+          const items = match
+            .trim()
+            .split('\n')
+            .map((line) => line.replace(/^[ \t]*\d+\.[ \t]+/, '').trim())
+            .filter(Boolean)
+            .map((item) => `<li>${item}</li>`)
+            .join('\n');
+          return `<ol>\n${items}\n</ol>\n`;
+        });
+
+        // 8. 确保块级公式与代码块前后有独立换行，避免被包裹进 <p>
+        s = s.replace(/(\n?___AI_MATH_BLOCK_\d+___\n?)/g, '\n\n$1\n\n');
+        s = s.replace(/(\n?___AI_CODE_BLOCK_\d+___\n?)/g, '\n\n$1\n\n');
+
+        // 9. 段落换行
+        const paragraphs = s.split(/\n{2,}/).map(p => {
+          p = p.trim();
+          if (!p) return '';
+          if (p.startsWith('<h') || p.startsWith('<ul>') || p.startsWith('<ol>') || p.startsWith('___AI_CODE_BLOCK_') || p.startsWith('___AI_MATH_BLOCK_')) {
+            return p;
+          }
+          return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+        });
+        s = paragraphs.filter(Boolean).join('\n');
+
+        // 10. 回填公式与代码
+        s = s.replace(/___AI_MATH_BLOCK_(\d+)___/g, (_, i) => mathBlocks[Number(i)] || '');
+        s = s.replace(/___AI_MATH_INLINE_(\d+)___/g, (_, i) => mathInlines[Number(i)] || '');
+        s = s.replace(/___AI_CODE_BLOCK_(\d+)___/g, (_, i) => codeBlocks[Number(i)] || '');
+        s = s.replace(/___AI_CODE_INLINE_(\d+)___/g, (_, i) => codeInlines[Number(i)] || '');
+
+        return s;
+      }
+
+      const SYSTEM_PROMPT = `你是高中物理知识库与高考备考辅导专家。你的职责是依据物理学科核心素养，为用户提供概念严谨、推导规范、客观无废话的高考物理权威解答。
+请严格遵守以下物理与数学排版规范：
+1. 物理公式与数学符号规范 (强制 LaTeX 输出)：
+   - 所有物理量符号、变量、数值单位、物理公式、定理定律及推导过程（例如 $E = U + Ir$、$F = ma$ 等），必须且只能使用规范的标准 LaTeX 语法输出。
+   - 【行内公式】：必须统一使用单美元符号包围，格式为 $公式内容$。严禁使用 \\( \\)。
+   - 【块级/独立推导公式】：重要核心公式或推导步骤必须独立成行，统一使用双美元符号包围：
+$$
+公式内容
+$$
+     严禁使用 \\[ \\]。
+2. 语言客观精炼，使用 Markdown 格式排版。`;
+
+      /**
+       * 核心搜索执行逻辑（支持 Worker SSE / OpenAI / Anthropic）
        */
       async function executeSearch() {
         const query = searchInput.value.trim();
@@ -751,77 +1153,255 @@
           return;
         }
 
-        const endpoint = apiEndpointInput.value.trim() || '/api/search';
+        const protocol = apiProtocolInput.value || 'worker';
+        const endpoint = apiEndpointInput.value.trim() || 'https://physics-knowledge-search.harlan0804.workers.dev/api/search';
+        const apiKey = apiKeyInput.value.trim();
+        const model = apiModelInput.value.trim() || 'deepseek-chat';
 
         startSearchState();
         currentAbortController = new AbortController();
+        const signal = currentAbortController.signal;
 
         try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ query }),
-            signal: currentAbortController.signal,
-          });
+          if (protocol === 'worker') {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ query }),
+              signal,
+            });
 
-          if (!response.ok) {
-            let errMsg = `请求失败 (HTTP ${response.status})`;
+            if (!response.ok) {
+              let errMsg = `请求失败 (HTTP ${response.status})`;
+              try {
+                const errJson = await response.json();
+                if (errJson.error) errMsg = errJson.error;
+              } catch {}
+              throw new Error(errMsg);
+            }
+
+            if (!response.body) throw new Error('响应未包含流式内容 (ReadableStream)');
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let buffer = '';
+
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+
+              buffer += decoder.decode(value, { stream: true });
+              const eventBlocks = buffer.split('\n\n');
+              buffer = eventBlocks.pop() || '';
+
+              for (const block of eventBlocks) {
+                const trimmed = block.trim();
+                if (!trimmed) continue;
+
+                const lines = trimmed.split('\n');
+                let eventType = 'message';
+                let dataText = '';
+
+                for (const line of lines) {
+                  if (line.startsWith('event:')) {
+                    eventType = line.replace(/^event:\s*/, '').trim();
+                  } else if (line.startsWith('data:')) {
+                    dataText += line.replace(/^data:\s*/, '').trim();
+                  }
+                }
+
+                if (!dataText) continue;
+
+                let dataObj = {};
+                try {
+                  dataObj = JSON.parse(dataText);
+                } catch {
+                  dataObj = { raw: dataText };
+                }
+
+                handleServerEvent(eventType, dataObj);
+              }
+            }
+          } else if (protocol === 'openai' || protocol === 'anthropic') {
+            // 自定义协议：先尝试从 Worker 获取知识切片 (超时 2.5s)
+            let contextSnippet = '';
             try {
-              const errJson = await response.json();
-              if (errJson.error) errMsg = errJson.error;
-            } catch {}
-            throw new Error(errMsg);
-          }
+              const ragController = new AbortController();
+              const timer = setTimeout(() => ragController.abort(), 2500);
+              if (signal) signal.addEventListener('abort', () => ragController.abort(), { once: true });
 
-          if (!response.body) {
-            throw new Error('响应未包含流式内容 (ReadableStream)');
-          }
+              const ragRes = await fetch(PRESETS.worker.endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query, searchOnly: true }),
+                signal: ragController.signal
+              });
+              clearTimeout(timer);
 
-          // 处理 ReadableStream SSE 流式数据
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder('utf-8');
-          let buffer = '';
-
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            buffer += decoder.decode(value, { stream: true });
-
-            // SSE 协议事件块之间以双换行 \n\n 分隔
-            const eventBlocks = buffer.split('\n\n');
-            // 保留最后一个可能未完整的事件片段
-            buffer = eventBlocks.pop() || '';
-
-            for (const block of eventBlocks) {
-              const trimmed = block.trim();
-              if (!trimmed) continue;
-
-              const lines = trimmed.split('\n');
-              let eventType = 'message';
-              let dataText = '';
-
-              for (const line of lines) {
-                if (line.startsWith('event:')) {
-                  eventType = line.replace(/^event:\s*/, '').trim();
-                } else if (line.startsWith('data:')) {
-                  dataText += line.replace(/^data:\s*/, '').trim();
+              if (ragRes.ok && ragRes.body) {
+                const reader = ragRes.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+                let buffer = '';
+                while (true) {
+                  const { done, value } = await reader.read();
+                  if (done) break;
+                  buffer += decoder.decode(value, { stream: true });
+                  const blocks = buffer.split('\n\n');
+                  buffer = blocks.pop() || '';
+                  for (const b of blocks) {
+                    if (b.includes('event: sources')) {
+                      const m = b.match(/data:\s*(.+)/);
+                      if (m && m[1]) {
+                        try {
+                          const sData = JSON.parse(m[1]);
+                          if (sData.sources?.length) {
+                            renderSources(sData.sources);
+                            contextSnippet = `【高考物理知识库参考文档资料】：\n${sData.sources
+                              .map((s, idx) => `[${idx + 1}] 《${s.title}》 (${s.url}):\n${s.snippet || '相关物理考点与公式'}`)
+                              .join('\n\n')}\n\n`;
+                          }
+                        } catch (e) {}
+                      }
+                    }
+                  }
+                  if (contextSnippet) {
+                    reader.cancel();
+                    break;
+                  }
                 }
               }
+            } catch (e) {}
 
-              if (!dataText) continue;
+            if (!contextSnippet) {
+              sourcesBadge.className = 'status-badge status-ready';
+              sourcesBadge.textContent = '直连模式';
+              sourcesList.innerHTML = `
+                <div class="empty-state">
+                  <span>已启用 ${protocol.toUpperCase()} 自定义模型直连推导</span>
+                </div>
+              `;
+            }
 
-              let dataObj = {};
-              try {
-                dataObj = JSON.parse(dataText);
-              } catch {
-                dataObj = { raw: dataText };
+            const userContent = `${contextSnippet}【用户问题】：\n${query}`;
+
+            if (protocol === 'openai') {
+              const headers = { 'Content-Type': 'application/json' };
+              if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`;
+
+              const response = await fetch(endpoint, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                  model,
+                  messages: [
+                    { role: 'system', content: SYSTEM_PROMPT },
+                    { role: 'user', content: userContent }
+                  ],
+                  temperature: 0.3,
+                  stream: true
+                }),
+                signal
+              });
+
+              if (!response.ok) {
+                const err = await response.json().catch(() => ({}));
+                throw new Error(err?.error?.message || `HTTP ${response.status}`);
               }
 
-              // 分发 SSE 事件
-              handleServerEvent(eventType, dataObj);
+              aiBadge.className = 'status-badge status-generating';
+              aiBadge.textContent = `${model} 生成中...`;
+
+              const reader = response.body.getReader();
+              const decoder = new TextDecoder('utf-8');
+              let buffer = '';
+
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                  const trimmed = line.trim();
+                  if (!trimmed || !trimmed.startsWith('data:')) continue;
+                  const dataStr = trimmed.replace(/^data:\s*/, '').trim();
+                  if (dataStr === '[DONE]') {
+                    handleServerEvent('done', {});
+                    return;
+                  }
+                  try {
+                    const parsed = JSON.parse(dataStr);
+                    const content = parsed.choices?.[0]?.delta?.content || parsed.choices?.[0]?.delta?.reasoning_content;
+                    if (content) {
+                      handleServerEvent('delta', { text: content });
+                    }
+                  } catch {}
+                }
+              }
+              handleServerEvent('done', {});
+            } else if (protocol === 'anthropic') {
+              const headers = {
+                'Content-Type': 'application/json',
+                'x-api-key': apiKey,
+                'anthropic-version': '2023-06-01',
+                'anthropic-dangerous-direct-browser-access': 'true'
+              };
+
+              const response = await fetch(endpoint, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                  model,
+                  system: SYSTEM_PROMPT,
+                  messages: [{ role: 'user', content: userContent }],
+                  max_tokens: 2048,
+                  temperature: 0.3,
+                  stream: true
+                }),
+                signal
+              });
+
+              if (!response.ok) {
+                const err = await response.json().catch(() => ({}));
+                throw new Error(err?.error?.message || `HTTP ${response.status}`);
+              }
+
+              aiBadge.className = 'status-badge status-generating';
+              aiBadge.textContent = `${model} 生成中...`;
+
+              const reader = response.body.getReader();
+              const decoder = new TextDecoder('utf-8');
+              let buffer = '';
+
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+
+                for (const line of lines) {
+                  const trimmed = line.trim();
+                  if (!trimmed || !trimmed.startsWith('data:')) continue;
+                  const dataStr = trimmed.replace(/^data:\s*/, '').trim();
+                  try {
+                    const parsed = JSON.parse(dataStr);
+                    if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
+                      handleServerEvent('delta', { text: parsed.delta.text });
+                    } else if (parsed.type === 'message_stop') {
+                      handleServerEvent('done', {});
+                      return;
+                    } else if (parsed.type === 'error') {
+                      showError(parsed.error?.message || 'Anthropic 接口调用异常');
+                      return;
+                    }
+                  } catch {}
+                }
+              }
+              handleServerEvent('done', {});
             }
           }
         } catch (err) {
@@ -832,7 +1412,7 @@
             sourcesBadge.className = 'status-badge status-error';
             sourcesBadge.textContent = '异常中断';
             aiBadge.className = 'status-badge status-error';
-            aiBadge.textContent = '异常中断';
+            aiBadge.textContent = '服务异常';
           }
         } finally {
           finishSearchState();
@@ -859,7 +1439,7 @@
 
           case 'done':
             aiBadge.className = 'status-badge status-done';
-            aiBadge.textContent = '生成完成';
+            aiBadge.textContent = '解答生成完毕';
             const cursor = answerContainer.querySelector('.cursor');
             if (cursor) cursor.remove();
             break;
