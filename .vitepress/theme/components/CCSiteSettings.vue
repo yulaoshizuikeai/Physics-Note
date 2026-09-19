@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
               :class="{ 'is-active': activeTab === 'ai' }"
               @click="activeTab = 'ai'"
             >
-              ⚡ AI 模型与接口
+              AI 模型与接口
               <span v-if="config.enabled" class="cc-tab-dot"></span>
             </button>
           </div>
@@ -362,7 +362,7 @@ onBeforeUnmount(() => {
                     :title="showApiKey ? '隐藏密钥' : '显示明文'"
                     @click="showApiKey = !showApiKey"
                   >
-                    {{ showApiKey ? "🙈" : "👁️" }}
+                    {{ showApiKey ? "隐" : "显" }}
                   </button>
                 </div>
                 <span class="cc-form-hint">安全保障：密钥仅存放于浏览器本地 localStorage</span>

@@ -608,9 +608,9 @@
   <div class="container">
     <header>
       <div class="brand-badge">
-        <span>⚡ 边缘双轨并行检索</span>
+        <span>边缘双轨并行检索</span>
         <span>•</span>
-        <span>Cloudflare Workers & Vectorize</span>
+        <span>Cloudflare Workers &amp; Vectorize</span>
       </div>
       <h1>高中物理知识库 · 智能搜索与问答</h1>
       <p class="subtitle">毫秒级文档召回 (≤300ms) + 边缘流式 AI 解答 (TTFT ≤600ms)</p>
@@ -620,7 +620,7 @@
     <div class="config-box">
       <div class="config-toggle-bar" id="configToggle">
         <div class="config-status-label">
-          <span>⚙️ 接口配置:</span>
+          <span>接口配置:</span>
           <span id="configCurrentBadge" class="config-badge">Cloudflare 边缘默认</span>
         </div>
         <span class="config-arrow" id="configArrow">▼</span>
@@ -689,11 +689,11 @@
 
     <!-- 预设快捷提问 -->
     <div class="preset-tags">
-      <span class="preset-label">🔥 示例提问:</span>
-      <button class="preset-btn" data-q="电池电动势内阻的测量相关实验的原理是什么">⚡ 电池电动势与内阻测定原理</button>
-      <button class="preset-btn" data-q="小灯泡伏安特性曲线为什么会向下弯曲">💡 小灯泡伏安特性曲线机制</button>
-      <button class="preset-btn" data-q="动生电动势与感生电动势的区别是什么">🧲 动生电动势 vs 感生电动势</button>
-      <button class="preset-btn" data-q="测定金属电阻率时为什么要用电流表外接法">📏 金属丝电阻率外接法误差分析</button>
+      <span class="preset-label">示例提问:</span>
+      <button class="preset-btn" data-q="电池电动势内阻的测量相关实验的原理是什么">电池电动势与内阻测定原理</button>
+      <button class="preset-btn" data-q="小灯泡伏安特性曲线为什么会向下弯曲">小灯泡伏安特性曲线机制</button>
+      <button class="preset-btn" data-q="动生电动势与感生电动势的区别是什么">动生电动势 vs 感生电动势</button>
+      <button class="preset-btn" data-q="测定金属电阻率时为什么要用电流表外接法">金属丝电阻率外接法误差分析</button>
     </div>
 
     <!-- 错误横幅 -->
@@ -712,7 +712,7 @@
       <section class="panel">
         <div class="panel-header">
           <div class="panel-title">
-            <span>⚡ 相关文档推荐</span>
+            <span>相关文档推荐</span>
           </div>
           <span id="sourcesBadge" class="status-badge status-ready">待检索</span>
         </div>
@@ -735,7 +735,7 @@
       <section class="panel">
         <div class="panel-header">
           <div class="panel-title">
-            <span>🤖 AI 智能总结</span>
+            <span>AI 智能总结</span>
           </div>
           <span id="aiBadge" class="status-badge status-ready">等待就绪</span>
         </div>
@@ -1336,6 +1336,10 @@ $$
               const decoder = new TextDecoder('utf-8');
               let buffer = '';
 
+              // <think>...</think> 标签过滤状态机（Qwen3 / mimo / DeepSeek-R1 等推理模型）
+              let inThinkTag = false;
+              let thinkBuf = '';
+
               while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
@@ -1354,9 +1358,42 @@ $$
                   }
                   try {
                     const parsed = JSON.parse(dataStr);
-                    const content = parsed.choices?.[0]?.delta?.content || parsed.choices?.[0]?.delta?.reasoning_content;
-                    if (content) {
-                      handleServerEvent('delta', { text: content });
+                    let chunk = parsed.choices?.[0]?.delta?.content;
+                    // 注意：忽略 reasoning_content，避免思维链内容泄露给用户
+                    if (!chunk) continue;
+
+                    // 状态机：过滤 <think>...</think> 标签内容
+                    thinkBuf += chunk;
+                    let output = '';
+
+                    while (thinkBuf.length > 0) {
+                      if (inThinkTag) {
+                        const endIdx = thinkBuf.indexOf('</think>');
+                        if (endIdx !== -1) {
+                          thinkBuf = thinkBuf.slice(endIdx + '</think>'.length);
+                          inThinkTag = false;
+                        } else {
+                          break;
+                        }
+                      } else {
+                        const startIdx = thinkBuf.indexOf('<think>');
+                        if (startIdx !== -1) {
+                          output += thinkBuf.slice(0, startIdx);
+                          thinkBuf = thinkBuf.slice(startIdx + '<think>'.length);
+                          inThinkTag = true;
+                        } else {
+                          const partialTagLen = '<think>'.length - 1;
+                          if (thinkBuf.length > partialTagLen) {
+                            output += thinkBuf.slice(0, thinkBuf.length - partialTagLen);
+                            thinkBuf = thinkBuf.slice(thinkBuf.length - partialTagLen);
+                          }
+                          break;
+                        }
+                      }
+                    }
+
+                    if (output) {
+                      handleServerEvent('delta', { text: output });
                     }
                   } catch {}
                 }

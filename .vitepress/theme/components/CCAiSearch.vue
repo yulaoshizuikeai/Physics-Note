@@ -210,7 +210,7 @@ const setupVitePressSearchEnhancement = () => {
       promptBar.style.display = "none";
       promptBar.innerHTML = `
         <div class="vp-ai-prompt-left">
-          <span class="vp-ai-prompt-icon">⚡</span>
+          <span class="vp-ai-prompt-icon">›</span>
           <span class="vp-ai-prompt-text">向高考物理 AI 提问</span>
         </div>
         <button type="button" class="vp-ai-prompt-btn">流式解答 ↵</button>
@@ -280,7 +280,7 @@ const setupVitePressSearchEnhancement = () => {
       aiCard.innerHTML = `
         <div class="vp-ai-card-header">
           <div class="vp-ai-header-left">
-            <span class="vp-ai-pill">⚡ 高考物理知识库 · AI 深度解答</span>
+            <span class="vp-ai-pill">高考物理知识库 · AI 深度解答</span>
             <span class="vp-ai-status">等待提问</span>
           </div>
           <div class="vp-ai-header-right">
@@ -390,7 +390,7 @@ const triggerModalAiAnswer = async (q: string, shell: Element) => {
         onError: (err) => {
           if (statusEl) statusEl.textContent = "服务异常";
           if (answerBody) {
-            answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ ${err.message || "请求失败"}</span>`;
+            answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">${err.message || "请求失败"}</span>`;
           }
         },
       },
@@ -400,7 +400,7 @@ const triggerModalAiAnswer = async (q: string, shell: Element) => {
     if (err.name !== "AbortError") {
       if (statusEl) statusEl.textContent = "请求失败";
       if (answerBody) {
-        answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ 无法连接到 AI 服务，请检查网络或 API 配置。</span>`;
+        answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">无法连接到 AI 服务，请检查网络或 API 配置。</span>`;
       }
     }
   } finally {
@@ -485,8 +485,8 @@ if (typeof window !== "undefined") {
                   <span class="neo-ai-badge" :class="{ 'is-custom': config.enabled }">
                     {{
                       config.enabled
-                        ? `🚀 自定义大模型: ${config.model}`
-                        : "⚡ Cloudflare 边缘向量检索 (Vectorize)"
+                        ? `自定义大模型: ${config.model}`
+                        : "Cloudflare 边缘向量检索 (Vectorize)"
                     }}
                   </span>
                   <button
@@ -541,7 +541,7 @@ if (typeof window !== "undefined") {
               <div v-if="showConfigPanel" class="neo-ai-config-drawer">
                 <div class="config-drawer-top">
                   <div class="drawer-title-box">
-                    <span class="drawer-title">⚙️ 自定义大模型与 API 接口</span>
+                    <span class="drawer-title">自定义大模型与 API 接口</span>
                     <span class="drawer-subtitle">
                       纯本地浏览器存储 (localStorage)，API Key 绝不上报
                     </span>
@@ -635,7 +635,7 @@ if (typeof window !== "undefined") {
                         :title="showApiKey ? '隐藏密钥' : '明文显示'"
                         @click="showApiKey = !showApiKey"
                       >
-                        {{ showApiKey ? "🙈" : "👁️" }}
+                        {{ showApiKey ? "隐" : "显" }}
                       </button>
                     </div>
                   </div>
@@ -777,7 +777,7 @@ if (typeof window !== "undefined") {
 
             <!-- 推荐高频问题 -->
             <div class="neo-ai-presets">
-              <span class="preset-hint">💡 推荐考点:</span>
+              <span class="preset-hint">推荐考点:</span>
               <button
                 v-for="q in presetQuestions"
                 :key="q"
@@ -801,13 +801,13 @@ if (typeof window !== "undefined") {
             </div>
 
             <!-- 异常警告 -->
-            <div v-if="errorMessage" class="neo-error-alert">⚠️ {{ errorMessage }}</div>
+            <div v-if="errorMessage" class="neo-error-alert">{{ errorMessage }}</div>
 
             <!-- 双轨内容区 -->
             <div class="neo-dual-track">
               <!-- 轨道 1：相关参考文档 -->
               <div class="track-card track-sources">
-                <div class="track-caption">⚡ 相关参考文档</div>
+                <div class="track-caption">相关参考文档</div>
                 <div v-if="sources.length === 0" class="track-placeholder">
                   {{ isSearching ? "正在检索 Vectorize 向量索引..." : "暂无参考文档" }}
                 </div>
@@ -832,7 +832,7 @@ if (typeof window !== "undefined") {
 
               <!-- 轨道 2：AI 智能流式总结 -->
               <div class="track-card track-summary">
-                <div class="track-caption">🤖 AI 智能总结 (严格基于事实)</div>
+                <div class="track-caption">AI 智能总结 (严格基于事实)</div>
                 <div class="summary-container">
                   <div v-if="aiText" class="summary-prose" v-html="renderAiMarkdown(aiText)"></div>
                   <div v-else-if="isSearching" class="summary-placeholder">

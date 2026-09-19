@@ -454,6 +454,10 @@ export const streamAiChat = async (
     const decoder = new TextDecoder("utf-8");
     let buffer = "";
 
+    // <think>...</think> 标签过滤状态机（Qwen3 / mimo / DeepSeek-R1 等推理模型）
+    let inThinkTag = false;
+    let thinkBuf = ""; // 用于缓冲可能跨 chunk 的 <think> 标签片段
+
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -473,13 +477,49 @@ export const streamAiChat = async (
 
         try {
           const parsed = JSON.parse(dataStr);
-          const deltaContent = parsed.choices?.[0]?.delta?.content;
-          const reasoningContent = parsed.choices?.[0]?.delta?.reasoning_content;
-          if (deltaContent) {
-            callbacks.onDelta(deltaContent);
-          } else if (reasoningContent) {
-            // 兼容 DeepSeek Reasoner (R1) 思考过程流
-            callbacks.onDelta(reasoningContent);
+          let chunk = parsed.choices?.[0]?.delta?.content;
+          // 注意：忽略 reasoning_content (思维链内容)，避免将模型内部思考过程泄露给用户
+          if (!chunk) continue;
+
+          // 状态机：过滤 <think>...</think> 标签内容
+          // 将 chunk 追加到 thinkBuf，然后逐步处理
+          thinkBuf += chunk;
+          let output = "";
+
+          while (thinkBuf.length > 0) {
+            if (inThinkTag) {
+              // 在 think 标签内，查找结束标记
+              const endIdx = thinkBuf.indexOf("</think>");
+              if (endIdx !== -1) {
+                // 找到结束标记，丢弃 think 内容，从结束标记之后继续处理
+                thinkBuf = thinkBuf.slice(endIdx + "</think>".length);
+                inThinkTag = false;
+              } else {
+                // 还没找到结束标记，继续等待更多 chunk
+                break;
+              }
+            } else {
+              // 不在 think 标签内，查找开始标记
+              const startIdx = thinkBuf.indexOf("<think>");
+              if (startIdx !== -1) {
+                // 开始标记之前的内容是正常输出
+                output += thinkBuf.slice(0, startIdx);
+                thinkBuf = thinkBuf.slice(startIdx + "<think>".length);
+                inThinkTag = true;
+              } else {
+                // 没有开始标记，但需要保留足够的尾部以防 "<think" 跨 chunk 断开
+                const partialTagLen = "<think>".length - 1;
+                if (thinkBuf.length > partialTagLen) {
+                  output += thinkBuf.slice(0, thinkBuf.length - partialTagLen);
+                  thinkBuf = thinkBuf.slice(thinkBuf.length - partialTagLen);
+                }
+                break;
+              }
+            }
+          }
+
+          if (output) {
+            callbacks.onDelta(output);
           }
         } catch {}
       }
