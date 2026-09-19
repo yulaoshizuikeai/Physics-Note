@@ -3,6 +3,7 @@ import { useRoute } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { nextTick, onMounted, onBeforeUnmount, watch } from "vue";
 
+import CCAiSearch from "./components/CCAiSearch.vue";
 import CCBackToTop from "./components/CCBackToTop.vue";
 import Breadcrumb from "./components/CCBreadCrumb.vue";
 import CCDailyQuote from "./components/CCDailyQuote.vue";
@@ -184,10 +185,11 @@ watch(
       <CCFooter />
     </template>
 
-    <!-- 全局平滑返回顶部悬浮按钮 -->
+    <!-- 全局平滑返回顶部悬浮按钮 与 AI 知识库智能问答浮窗 -->
     <template #layout-bottom>
       <ClientOnly>
         <CCBackToTop />
+        <CCAiSearch />
       </ClientOnly>
     </template>
   </Layout>

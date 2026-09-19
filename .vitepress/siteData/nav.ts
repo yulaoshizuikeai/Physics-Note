@@ -21,6 +21,7 @@ export const buildNavItems = (rootDir: string): DefaultTheme.NavItem[] => {
         { text: "全科中枢门户", link: "https://note.yunet.cfd" },
       ],
     },
+    { text: "⚡ AI 问答", link: "/ai-search" },
     { text: "交互空间", link: "/interactive" },
     {
       text: "考前速查",
