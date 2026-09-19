@@ -165,14 +165,28 @@ export default {
           const userPrompt = `【参考文档片段】：\n${contextContent}\n\n【用户问题】：\n${query}`;
 
           // --- 轨道 2：LLM 流式问答 (首字 TTFT <= 600ms) ---
-          const aiStream = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
-            messages: [
-              { role: "system", content: SYSTEM_PROMPT },
-              { role: "user", content: userPrompt },
-            ],
-            max_tokens: 1024,
-            stream: true,
-          });
+          // 优先使用当前官方主流的 Llama 3.1 8B (FP8 精准量化低神经元消耗版)
+          let aiStream;
+          try {
+            aiStream = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
+              messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                { role: "user", content: userPrompt },
+              ],
+              max_tokens: 1024,
+              stream: true,
+            });
+          } catch (modelErr) {
+            // 降级使用超轻量多语言 Llama 3.2 3B
+            aiStream = await env.AI.run("@cf/meta/llama-3.2-3b-instruct", {
+              messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                { role: "user", content: userPrompt },
+              ],
+              max_tokens: 1024,
+              stream: true,
+            });
+          }
 
           // 解析 Workers AI 原生 SSE 响应流，转换为统一契约的 delta 事件
           const reader = aiStream.getReader();
