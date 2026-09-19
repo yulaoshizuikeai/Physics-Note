@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick, watch } from "vue";
 
 const props = defineProps<{
   mode?: "floating" | "embedded";
@@ -13,12 +13,12 @@ const query = ref("");
 const isSearching = ref(false);
 const sources = ref<Array<{ title: string; url: string; score: number }>>([]);
 const aiText = ref("");
-const statusText = ref("等待提问");
+const statusText = ref("等待输入问题");
 const statusCode = ref<"ready" | "searching" | "generating" | "done" | "error">("ready");
 const errorMessage = ref("");
 let abortController: AbortController | null = null;
 
-// 预设高频高考物理问题
+// 预设高频高考物理考点
 const presetQuestions = [
   "电池电动势内阻的测量相关实验的原理是什么",
   "伏安法测电阻为什么要区分内接法和外接法",
@@ -54,12 +54,12 @@ const formatMarkdown = (text: string) => {
   let html = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
   // 标题
-  html = html.replace(/^###\s+(.+)$/gm, "<h4 class='ai-h4'>$1</h4>");
-  html = html.replace(/^##\s+(.+)$/gm, "<h3 class='ai-h3'>$1</h3>");
+  html = html.replace(/^###\s+(.+)$/gm, "<h4 class='ai-doc-h4'>$1</h4>");
+  html = html.replace(/^##\s+(.+)$/gm, "<h3 class='ai-doc-h3'>$1</h3>");
   // 加粗
   html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
   // 行内代码
-  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+  html = html.replace(/`([^`]+)`/g, "<code class='ai-code'>$1</code>");
   // 列表
   html = html.replace(/^\*\s+(.+)$/gm, "<li>$1</li>");
   html = html.replace(/(<li>.*<\/li>)/s, "<ul>$1</ul>");
@@ -67,7 +67,7 @@ const formatMarkdown = (text: string) => {
   return html;
 };
 
-// 执行双轨搜索与问答
+// 执行双轨搜索与流式问答
 const executeSearch = async () => {
   const q = query.value.trim();
   if (!q) return;
@@ -141,29 +141,29 @@ const executeSearch = async () => {
           sources.value = parsedData.sources || [];
           statusCode.value = "generating";
           statusText.value = sources.value.length
-            ? `已召回 ${sources.value.length} 篇相关文档，AI 总结中...`
-            : "知识库中未检索到高相关内容";
+            ? `已精准召回 ${sources.value.length} 篇参考文档，AI 智能总结中...`
+            : "知识库中未检索到与该问题高相关的内容";
         } else if (eventType === "delta") {
           if (parsedData.text) {
             aiText.value += parsedData.text;
           }
         } else if (eventType === "done") {
           statusCode.value = "done";
-          statusText.value = "解答完成";
+          statusText.value = "解答生成完毕";
         } else if (eventType === "error") {
           statusCode.value = "error";
           statusText.value = "服务异常";
-          errorMessage.value = parsedData.message || "请求发生错误";
+          errorMessage.value = parsedData.message || "处理出现异常";
         }
       }
     }
   } catch (err: any) {
     if (err.name === "AbortError") {
-      statusText.value = "已取消";
+      statusText.value = "提问已取消";
     } else {
       statusCode.value = "error";
-      statusText.value = "请求失败";
-      errorMessage.value = err.message || "网络异常，请重试";
+      statusText.value = "网络请求失败";
+      errorMessage.value = err.message || "网络异常，请稍后重试";
     }
   } finally {
     isSearching.value = false;
@@ -171,375 +171,726 @@ const executeSearch = async () => {
   }
 };
 
-// -------------------------------------------------------------
-// 深度融合：拦截与增强 VitePress 原生搜索弹窗 (.VPLocalSearchBox)
-// -------------------------------------------------------------
-let observer: MutationObserver | null = null;
+// ---------------------------------------------------------------------
+// 深度无缝融合：对 VitePress 原生搜索弹窗 (.VPLocalSearchBox) 的温润新极简主义增强
+// ---------------------------------------------------------------------
+let searchObserver: MutationObserver | null = null;
+let activeLocalSearchAbort: AbortController | null = null;
 
-const setupVitePressSearchIntegration = () => {
+const setupVitePressSearchEnhancement = () => {
   if (typeof window === "undefined") return;
 
-  observer = new MutationObserver(() => {
+  searchObserver = new MutationObserver(() => {
     const searchModal = document.querySelector(".VPLocalSearchBox");
     if (!searchModal) return;
 
     const shell = searchModal.querySelector(".shell");
     const searchBar = searchModal.querySelector(".search-bar");
     const searchInput = searchModal.querySelector<HTMLInputElement>("#localsearch-input");
-    const actions = searchModal.querySelector(".search-actions");
+    // 桌面端操作容器位于输入框右侧（排除移动端左侧的 .search-actions.before）
+    const allActions = searchModal.querySelectorAll(".search-actions");
+    const actions =
+      searchModal.querySelector(".search-bar > .search-actions:not(.before)") ||
+      (allActions.length > 1 ? allActions[allActions.length - 1] : allActions[0]);
 
-    if (!shell || !searchBar || !searchInput || !actions) return;
+    if (!shell || !searchBar || !searchInput) return;
 
-    // 1. 在 search-actions 中注入“🤖 问 AI”快捷按钮（避免重复注入）
-    if (!actions.querySelector(".vp-ai-search-btn")) {
+    // 1. 注入温润物理钴蓝风格的“⚡ 问 AI”快捷按钮
+    if (actions && !actions.querySelector(".vp-ai-neo-btn")) {
       const aiBtn = document.createElement("button");
       aiBtn.type = "button";
-      aiBtn.className = "vp-ai-search-btn";
-      aiBtn.title = "唤起 AI 智能问答系统";
-      aiBtn.innerHTML = `<span>⚡ 问 AI</span>`;
+      aiBtn.className = "vp-ai-neo-btn";
+      aiBtn.title = "针对当前输入向高中物理 AI 提问 (Shift + Enter)";
+      aiBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+        <span>问 AI</span>
+      `;
+
       aiBtn.onclick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const currentQ = searchInput.value.trim();
-        openModal(currentQ);
+        triggerModalAiAnswer(searchInput.value.trim(), shell);
       };
       actions.prepend(aiBtn);
     }
 
-    // 2. 在 search-bar 下方注入快捷 AI 提示横幅
-    if (!shell.querySelector(".vp-ai-banner")) {
-      const banner = document.createElement("div");
-      banner.className = "vp-ai-banner";
-      banner.innerHTML = `
-        <div class="vp-ai-banner-content">
-          <span class="ai-sparkle">✨</span>
-          <span class="ai-hint">需要深度概念推导或实验原理解答？</span>
-          <button class="ai-banner-action">点击让 AI 解答</button>
+    // 2. 注入快捷提问提示条 (在搜索输入下方即时提示向 AI 提问)
+    let promptBar = shell.querySelector<HTMLElement>(".vp-ai-prompt-bar");
+    if (!promptBar) {
+      promptBar = document.createElement("div");
+      promptBar.className = "vp-ai-prompt-bar";
+      promptBar.style.display = "none";
+      promptBar.innerHTML = `
+        <div class="vp-ai-prompt-left">
+          <span class="vp-ai-prompt-icon">⚡</span>
+          <span class="vp-ai-prompt-text">向高考物理 AI 提问</span>
         </div>
+        <button type="button" class="vp-ai-prompt-btn">流式解答 ↵</button>
       `;
-      banner.querySelector(".ai-banner-action")?.addEventListener("click", (e) => {
+      promptBar.onclick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        openModal(searchInput.value.trim());
+        triggerModalAiAnswer(searchInput.value.trim(), shell);
+      };
+      searchBar.insertAdjacentElement("afterend", promptBar);
+    }
+
+    // 3. 监听搜索框输入与回车快捷键
+    if (!searchInput.dataset.hasAiListener) {
+      searchInput.dataset.hasAiListener = "true";
+
+      const updatePrompt = () => {
+        const val = searchInput.value.trim();
+        const pBar = shell.querySelector<HTMLElement>(".vp-ai-prompt-bar");
+        const aCard = shell.querySelector<HTMLElement>(".vp-modal-ai-card");
+        if (!pBar) return;
+        if (!val || (aCard && aCard.style.display !== "none")) {
+          pBar.style.display = "none";
+        } else {
+          pBar.style.display = "flex";
+          const textEl = pBar.querySelector(".vp-ai-prompt-text");
+          if (textEl) {
+            const escaped = val.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            textEl.innerHTML = `向物理知识库 AI 提问：“<strong>${escaped}</strong>”`;
+          }
+        }
+      };
+
+      searchInput.addEventListener("input", updatePrompt);
+
+      searchInput.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter") {
+          const selectedItem = searchModal.querySelector(".result.selected");
+          // 若按下 Shift/Ctrl 或者是长句提问或本地无选中项，直接走 AI
+          if (e.shiftKey || e.ctrlKey || !selectedItem || searchInput.value.trim().length >= 8) {
+            const val = searchInput.value.trim();
+            if (val) {
+              e.preventDefault();
+              e.stopPropagation();
+              triggerModalAiAnswer(val, shell);
+            }
+          }
+        }
       });
-      // 插入到 searchBar 后面
-      searchBar.insertAdjacentElement("afterend", banner);
+    }
+
+    // 4. 注入底部快捷键提示
+    const shortcuts = searchModal.querySelector(".search-keyboard-shortcuts");
+    if (shortcuts && !shortcuts.querySelector(".vp-ai-kbd-hint")) {
+      const hint = document.createElement("span");
+      hint.className = "vp-ai-kbd-hint";
+      hint.innerHTML = `<kbd>Shift</kbd><kbd>↵</kbd> 问 AI`;
+      shortcuts.appendChild(hint);
+    }
+
+    // 5. 注入常驻 AI 智能问答卡片容器 (若尚未存在)
+    let aiCard = shell.querySelector<HTMLElement>(".vp-modal-ai-card");
+    if (!aiCard) {
+      aiCard = document.createElement("div");
+      aiCard.className = "vp-modal-ai-card";
+      aiCard.style.display = "none";
+      aiCard.innerHTML = `
+        <div class="vp-ai-card-header">
+          <div class="vp-ai-header-left">
+            <span class="vp-ai-pill">⚡ 高考物理知识库 · AI 深度解答</span>
+            <span class="vp-ai-status">等待提问</span>
+          </div>
+          <div class="vp-ai-header-right">
+            <a href="/ai-search" class="vp-ai-fullscreen-link" target="_blank" title="以独立全屏模式打开深度推导">全屏问答 ↗</a>
+            <button type="button" class="vp-ai-card-close" title="收起 AI 解答">✕</button>
+          </div>
+        </div>
+        <div class="vp-ai-sources-bar" style="display: none;"></div>
+        <div class="vp-ai-answer-body"></div>
+      `;
+
+      aiCard.querySelector(".vp-ai-card-close")?.addEventListener("click", () => {
+        if (aiCard) aiCard.style.display = "none";
+        if (activeLocalSearchAbort) {
+          activeLocalSearchAbort.abort();
+          activeLocalSearchAbort = null;
+        }
+        const pBar = shell.querySelector<HTMLElement>(".vp-ai-prompt-bar");
+        if (pBar && searchInput.value.trim()) {
+          pBar.style.display = "flex";
+        }
+      });
+
+      // 放置在 search-bar / prompt-bar 与 results 之间
+      if (promptBar) {
+        promptBar.insertAdjacentElement("afterend", aiCard);
+      } else {
+        searchBar.insertAdjacentElement("afterend", aiCard);
+      }
     }
   });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+  searchObserver.observe(document.body, { childList: true, subtree: true });
+};
+
+// 在搜索弹窗内部直接执行流式 AI 问答
+const triggerModalAiAnswer = async (q: string, shell: Element) => {
+  if (!q) return;
+
+  const aiCard = shell.querySelector<HTMLElement>(".vp-modal-ai-card");
+  const promptBar = shell.querySelector<HTMLElement>(".vp-ai-prompt-bar");
+  if (promptBar) promptBar.style.display = "none";
+  if (!aiCard) return;
+
+  const statusEl = aiCard.querySelector<HTMLElement>(".vp-ai-status");
+  const sourcesBar = aiCard.querySelector<HTMLElement>(".vp-ai-sources-bar");
+  const answerBody = aiCard.querySelector<HTMLElement>(".vp-ai-answer-body");
+  const fsLink = aiCard.querySelector<HTMLAnchorElement>(".vp-ai-fullscreen-link");
+  if (fsLink) {
+    fsLink.href = `/ai-search?q=${encodeURIComponent(q)}`;
+  }
+
+  aiCard.style.display = "flex";
+  if (statusEl) statusEl.textContent = "正在检索知识库 (Vectorize)...";
+  if (sourcesBar) {
+    sourcesBar.style.display = "none";
+    sourcesBar.innerHTML = "";
+  }
+  if (answerBody) {
+    answerBody.innerHTML = `<span class="vp-ai-loading-spinner"></span> 正在阅读知识库文献并严密推导...`;
+  }
+
+  if (activeLocalSearchAbort) {
+    activeLocalSearchAbort.abort();
+  }
+  activeLocalSearchAbort = new AbortController();
+
+  let accumulated = "";
+
+  try {
+    const res = await fetch(WORKER_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: q }),
+      signal: activeLocalSearchAbort.signal,
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.body) throw new Error("No body");
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let buffer = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const eventBlocks = buffer.split("\n\n");
+      buffer = eventBlocks.pop() || "";
+
+      for (const block of eventBlocks) {
+        const trimmed = block.trim();
+        if (!trimmed) continue;
+
+        const lines = trimmed.split("\n");
+        let eventType = "message";
+        let dataText = "";
+
+        for (const line of lines) {
+          if (line.startsWith("event:")) {
+            eventType = line.replace(/^event:\s*/, "").trim();
+          } else if (line.startsWith("data:")) {
+            dataText += line.replace(/^data:\s*/, "").trim();
+          }
+        }
+
+        if (!dataText) continue;
+
+        let parsed: any = {};
+        try {
+          parsed = JSON.parse(dataText);
+        } catch {
+          parsed = { text: dataText };
+        }
+
+        if (eventType === "sources" && parsed.sources) {
+          if (statusEl) {
+            statusEl.textContent = parsed.sources.length
+              ? `已精准召回 ${parsed.sources.length} 篇参考文档`
+              : "知识库未检索到高相关内容";
+          }
+          if (sourcesBar && parsed.sources.length) {
+            sourcesBar.style.display = "flex";
+            sourcesBar.innerHTML = parsed.sources
+              .map(
+                (s: any) => `
+                <a href="${s.url}" class="vp-ai-source-chip" target="_blank" title="${s.title}">
+                  <span>${s.title}</span>
+                  <span class="vp-ai-score">${Math.round(s.score * 100)}%</span>
+                </a>
+              `,
+              )
+              .join("");
+          }
+        } else if (eventType === "delta" && parsed.text) {
+          accumulated += parsed.text;
+          if (answerBody) {
+            answerBody.innerHTML =
+              formatMarkdown(accumulated) + '<span class="vp-ai-cursor"></span>';
+          }
+        } else if (eventType === "done") {
+          if (statusEl) statusEl.textContent = "解答推导完毕";
+          const cursor = answerBody?.querySelector(".vp-ai-cursor");
+          if (cursor) cursor.remove();
+        } else if (eventType === "error") {
+          if (statusEl) statusEl.textContent = "服务异常";
+          if (answerBody) {
+            answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ ${parsed.message || "请求失败"}</span>`;
+          }
+        }
+      }
+    }
+  } catch (err: any) {
+    if (err.name !== "AbortError") {
+      if (statusEl) statusEl.textContent = "请求失败";
+      if (answerBody) {
+        answerBody.innerHTML = `<span style="color: var(--vp-c-danger-1, #b9423b);">⚠️ 无法连接到边缘 AI 服务，请检查网络或稍后再试。</span>`;
+      }
+    }
+  } finally {
+    activeLocalSearchAbort = null;
+  }
 };
 
 onMounted(() => {
-  setupVitePressSearchIntegration();
-});
+  setupVitePressSearchEnhancement();
 
-onBeforeUnmount(() => {
-  if (observer) {
-    observer.disconnect();
-    observer = null;
+  // 支持 URL 参数 ?q=... 自动开启提问
+  if (typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    const qParam = params.get("q");
+    if (qParam && (props.mode === "embedded" || window.location.pathname.includes("ai-search"))) {
+      query.value = qParam;
+      nextTick(() => {
+        executeSearch();
+      });
+    }
   }
 });
 
-// 暴露全局触发方法供导航或其他组件使用
+onBeforeUnmount(() => {
+  if (searchObserver) {
+    searchObserver.disconnect();
+    searchObserver = null;
+  }
+  if (activeLocalSearchAbort) {
+    activeLocalSearchAbort.abort();
+    activeLocalSearchAbort = null;
+  }
+});
+
+// 暴露全局触发器
 if (typeof window !== "undefined") {
   (window as any).__OPEN_AI_SEARCH__ = openModal;
 }
 </script>
 
 <template>
-  <div>
-    <!-- 1. 全局悬浮触发按钮 (仅在非嵌入模式下展示) -->
+  <div class="cc-ai-search-root">
+    <!-- 1. 全局温润浮窗按钮 (右下角常驻，与 BackToTop 保持 100% 严谨一致的 44px 圆形 Warm Neo-Minimalism 风格) -->
     <button
       v-if="mode !== 'embedded'"
-      class="ai-floating-trigger"
-      title="高考物理 AI 智能问答 (Cloudflare 双轨检索)"
+      class="cc-ai-floating-btn"
+      type="button"
+      aria-label="高考物理 AI 知识库智能问答"
+      title="高考物理 AI 智能问答 (双轨检索与文献溯源)"
       @click="openModal()"
     >
-      <span class="trigger-icon">⚡</span>
-      <span class="trigger-text">AI 问答</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      </svg>
     </button>
 
-    <!-- 2. AI 问答弹窗 (或者全屏/嵌入模式卡片) -->
+    <!-- 2. AI 智能问答工作台 (独立弹窗或嵌入页面模式) -->
     <Teleport to="body" :disabled="mode === 'embedded'">
-      <div
-        v-if="isOpen || mode === 'embedded'"
-        class="ai-search-overlay"
-        :class="{ 'is-embedded': mode === 'embedded' }"
-        @click.self="closeModal"
-      >
-        <div class="ai-modal-card">
-          <!-- 头部 -->
-          <div class="ai-modal-header">
-            <div class="ai-brand">
-              <span class="ai-chip">Cloudflare Edge AI</span>
-              <h2 class="ai-title">高考物理知识库 · 双轨流式问答</h2>
-            </div>
-            <button
-              v-if="mode !== 'embedded'"
-              class="ai-close-btn"
-              title="关闭"
-              @click="closeModal"
-            >
-              ✕
-            </button>
-          </div>
-
-          <!-- 输入区 -->
-          <div class="ai-input-wrap">
-            <input
-              v-model="query"
-              type="text"
-              class="ai-search-input"
-              placeholder="输入物理问题（如：伏安法测电阻为什么区分内接法和外接法、电池电动势测定原理）..."
-              @keydown.enter="executeSearch"
-            />
-            <button
-              class="ai-submit-btn"
-              :disabled="isSearching || !query.trim()"
-              @click="executeSearch"
-            >
-              <span v-if="isSearching" class="ai-spinner"></span>
-              <span>{{ isSearching ? "生成中" : "提问" }}</span>
-            </button>
-          </div>
-
-          <!-- 推荐问题标签 -->
-          <div class="ai-preset-list">
-            <span class="preset-title">💡 推荐考点:</span>
-            <button
-              v-for="q in presetQuestions"
-              :key="q"
-              class="ai-preset-tag"
-              @click="setQueryAndSearch(q)"
-            >
-              {{ q }}
-            </button>
-          </div>
-
-          <!-- 状态提示栏 -->
-          <div class="ai-status-row">
-            <div class="ai-status-badge" :class="`status-${statusCode}`">
-              <span class="status-dot"></span>
-              <span>{{ statusText }}</span>
-            </div>
-            <span v-if="sources.length" class="ai-meta-info">
-              召回 {{ sources.length }} 条向量切片
-            </span>
-          </div>
-
-          <!-- 错误提醒 -->
-          <div v-if="errorMessage" class="ai-error-box">⚠️ {{ errorMessage }}</div>
-
-          <!-- 双轨结果展示区 -->
-          <div class="ai-body-grid">
-            <!-- 轨道 1：相关参考文档 -->
-            <div class="ai-track-sources">
-              <div class="track-header">⚡ 相关参考文档</div>
-              <div v-if="sources.length === 0" class="track-empty">
-                {{ isSearching ? "正在检索向量库..." : "暂无召回参考文档" }}
+      <Transition name="neo-fade">
+        <div
+          v-if="isOpen || mode === 'embedded'"
+          class="neo-ai-backdrop"
+          :class="{ 'is-embedded': mode === 'embedded' }"
+          @click.self="closeModal"
+        >
+          <div class="neo-ai-panel">
+            <!-- 面板顶栏 -->
+            <div class="neo-ai-header">
+              <div class="neo-ai-title-wrap">
+                <span class="neo-ai-badge">Cloudflare Edge Vector RAG</span>
+                <h2 class="neo-ai-heading">高考物理知识库 · 双轨流式问答</h2>
+                <p class="neo-ai-sub">
+                  毫秒级向量召回 (Vectorize) + 边缘大模型 (Llama 3.1) 严格防幻觉推导
+                </p>
               </div>
-              <div v-else class="sources-cards">
-                <a
-                  v-for="(doc, idx) in sources"
-                  :key="idx"
-                  :href="doc.url || '#'"
-                  class="source-item"
-                  target="_blank"
+              <button
+                v-if="mode !== 'embedded'"
+                class="neo-ai-close"
+                type="button"
+                aria-label="关闭问答"
+                title="关闭 (Esc)"
+                @click="closeModal"
+              >
+                ✕
+              </button>
+            </div>
+
+            <!-- 搜索提问栏 -->
+            <div class="neo-ai-input-box">
+              <span class="input-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 >
-                  <div class="source-item-title">{{ doc.title }}</div>
-                  <div class="source-item-footer">
-                    <span>#{{ idx + 1 }}</span>
-                    <span class="score-pill">
-                      {{ Math.round((doc.score || 0) * 100) }}% 相似度
-                    </span>
-                  </div>
-                </a>
-              </div>
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input
+                v-model="query"
+                type="text"
+                class="neo-input"
+                placeholder="输入物理问题（例如：电池电动势内阻的测量实验原理、伏安法内外接误差）..."
+                @keydown.enter="executeSearch"
+              />
+              <button
+                class="neo-btn-ask"
+                :disabled="isSearching || !query.trim()"
+                @click="executeSearch"
+              >
+                <span v-if="isSearching" class="neo-spinner"></span>
+                <span>{{ isSearching ? "思考中" : "提问" }}</span>
+              </button>
             </div>
 
-            <!-- 轨道 2：AI 智能流式总结 -->
-            <div class="ai-track-answer">
-              <div class="track-header">🤖 AI 智能总结 (Llama 3.1 8B)</div>
-              <div class="answer-box">
-                <div v-if="aiText" class="answer-markdown" v-html="formatMarkdown(aiText)"></div>
-                <div v-else-if="isSearching" class="answer-placeholder">
-                  <span class="ai-spinner"></span>
-                  <span style="margin-left: 8px">AI 正在研读参考文档并组织思路...</span>
+            <!-- 推荐高频问题 -->
+            <div class="neo-ai-presets">
+              <span class="preset-hint">💡 推荐考点:</span>
+              <button
+                v-for="q in presetQuestions"
+                :key="q"
+                type="button"
+                class="neo-preset-chip"
+                @click="setQueryAndSearch(q)"
+              >
+                {{ q }}
+              </button>
+            </div>
+
+            <!-- 状态信息条 -->
+            <div class="neo-status-bar">
+              <div class="status-indicator" :class="`state-${statusCode}`">
+                <span class="indicator-dot"></span>
+                <span>{{ statusText }}</span>
+              </div>
+              <span v-if="sources.length" class="sources-count">
+                已匹配 {{ sources.length }} 个知识切片
+              </span>
+            </div>
+
+            <!-- 异常警告 -->
+            <div v-if="errorMessage" class="neo-error-alert">⚠️ {{ errorMessage }}</div>
+
+            <!-- 双轨内容区 -->
+            <div class="neo-dual-track">
+              <!-- 轨道 1：相关参考文档 -->
+              <div class="track-card track-sources">
+                <div class="track-caption">⚡ 相关参考文档</div>
+                <div v-if="sources.length === 0" class="track-placeholder">
+                  {{ isSearching ? "正在检索 Vectorize 向量索引..." : "暂无参考文档" }}
                 </div>
-                <div v-else class="answer-empty">
-                  输入物理问题后，大模型将严格基于知识库为您生成客观解答。
+                <div v-else class="sources-list">
+                  <a
+                    v-for="(doc, idx) in sources"
+                    :key="idx"
+                    :href="doc.url || '#'"
+                    class="source-anchor"
+                    target="_blank"
+                  >
+                    <span class="source-name">{{ doc.title }}</span>
+                    <div class="source-foot">
+                      <span class="source-idx">参考 #{{ idx + 1 }}</span>
+                      <span class="source-match"
+                        >{{ Math.round((doc.score || 0) * 100) }}% 相似度</span
+                      >
+                    </div>
+                  </a>
                 </div>
-                <span v-if="isSearching" class="typewriter-cursor"></span>
+              </div>
+
+              <!-- 轨道 2：AI 智能流式总结 -->
+              <div class="track-card track-summary">
+                <div class="track-caption">🤖 AI 智能总结 (严格基于事实)</div>
+                <div class="summary-container">
+                  <div v-if="aiText" class="summary-prose" v-html="formatMarkdown(aiText)"></div>
+                  <div v-else-if="isSearching" class="summary-placeholder">
+                    <span class="neo-spinner"></span>
+                    <span style="margin-left: 10px">物理知识库模型正在阅读文献并严密推导...</span>
+                  </div>
+                  <div v-else class="summary-empty">
+                    输入物理考点或实验问题，AI 将严格基于 19
+                    大体系物理笔记为您生成客观、无废话的解析。
+                  </div>
+                  <span v-if="isSearching" class="neo-cursor"></span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Transition>
     </Teleport>
   </div>
 </template>
 
 <style scoped>
-/* 悬浮按钮 */
-.ai-floating-trigger {
+/* ------------------------------------------------------------
+   Warm Neo-Minimalism 风格悬浮胶囊按钮
+   ------------------------------------------------------------ */
+.cc-ai-floating-btn {
   position: fixed;
+  bottom: 78px;
   right: 24px;
-  bottom: 84px;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #0284c7, #2563eb);
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 9999px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.ai-floating-trigger:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
-}
-
-/* 遮罩与弹窗 */
-.ai-search-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 15, 29, 0.75);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-2);
+  border: 1px solid var(--vp-c-border);
+  box-shadow: var(--vp-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02));
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.ai-search-overlay.is-embedded {
+.cc-ai-floating-btn:hover {
+  transform: scale(1.05);
+  color: var(--vp-c-brand-1);
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 50%, var(--vp-c-border));
+  box-shadow: var(--vp-shadow-3, 0 4px 16px rgba(0, 0, 0, 0.12));
+}
+
+.cc-ai-floating-btn:active {
+  transform: scale(0.95);
+}
+
+.cc-ai-floating-btn svg {
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+  .cc-ai-floating-btn {
+    bottom: 72px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+/* ------------------------------------------------------------
+   Neo-Minimalism 模态遮罩与面板 (温润纸本白 / 深玄灰自适应)
+   ------------------------------------------------------------ */
+.neo-ai-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.neo-ai-backdrop.is-embedded {
   position: static;
   background: transparent;
   backdrop-filter: none;
   padding: 0;
-  margin-top: 24px;
+  margin: 16px 0;
 }
 
-.ai-modal-card {
+.neo-ai-panel {
   width: 100%;
-  max-width: 860px;
-  max-height: 88vh;
-  background: #0f172a;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
+  max-width: 880px;
+  max-height: 86vh;
+  background: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 14px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-  color: #f1f5f9;
+  box-shadow: var(--vp-shadow-5, 0 12px 28px rgba(0, 0, 0, 0.08));
+  color: var(--vp-c-text-1);
+  font-family: var(--vp-font-family-base);
 }
 
-.is-embedded .ai-modal-card {
+.is-embedded .neo-ai-panel {
   max-height: none;
-  box-shadow: none;
-  background: rgba(15, 23, 42, 0.6);
+  box-shadow: var(--vp-shadow-card);
+  background: var(--vp-c-bg-soft);
 }
 
-.ai-modal-header {
+/* 顶栏 */
+.neo-ai-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.ai-brand {
+.neo-ai-title-wrap {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.ai-chip {
+.neo-ai-badge {
   font-size: 11px;
   font-weight: 600;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.12);
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
   padding: 2px 8px;
-  border-radius: 9999px;
+  border-radius: 4px;
   width: fit-content;
+  font-family: var(--vp-font-family-mono);
 }
 
-.ai-title {
-  font-size: 18px;
+.neo-ai-heading {
+  font-size: 19px;
   font-weight: 700;
+  color: var(--vp-c-text-1);
   margin: 0;
-  color: #f8fafc;
+  letter-spacing: -0.02em;
 }
 
-.ai-close-btn {
+.neo-ai-sub {
+  font-size: 12.5px;
+  color: var(--vp-c-text-2);
+  margin: 0;
+}
+
+.neo-ai-close {
   background: transparent;
   border: none;
-  color: #94a3b8;
-  font-size: 20px;
+  color: var(--vp-c-text-3);
+  font-size: 18px;
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 6px;
+  transition: all 0.15s ease;
 }
 
-.ai-close-btn:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+.neo-ai-close:hover {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg-soft);
 }
 
-/* 输入栏 */
-.ai-input-wrap {
+/* 输入框 */
+.neo-ai-input-box {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(30, 41, 59, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 6px 8px 6px 16px;
-  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  padding: 6px 8px 6px 14px;
+  border-radius: 10px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
-.ai-input-wrap:focus-within {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+.neo-ai-input-box:focus-within {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 3px var(--vp-c-brand-soft);
 }
 
-.ai-search-input {
+.input-icon {
+  color: var(--vp-c-text-3);
+  display: flex;
+}
+
+.neo-input {
   flex: 1;
   background: transparent;
   border: none;
-  color: #f8fafc;
+  color: var(--vp-c-text-1);
   font-size: 15px;
   outline: none;
+  font-family: inherit;
 }
 
-.ai-submit-btn {
-  background: linear-gradient(135deg, #0284c7, #2563eb);
-  color: white;
+.neo-input::placeholder {
+  color: var(--vp-c-text-3);
+}
+
+.neo-btn-ask {
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
   border: none;
   padding: 8px 18px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
+  transition:
+    background-color 0.15s,
+    opacity 0.15s;
 }
 
-.ai-submit-btn:disabled {
+.neo-btn-ask:hover:not(:disabled) {
+  background: var(--vp-c-brand-2);
+}
+
+.neo-btn-ask:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-/* 预设提问标签 */
-.ai-preset-list {
+/* 预设考点标签 */
+.neo-ai-presets {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -547,87 +898,91 @@ if (typeof window !== "undefined") {
   font-size: 12px;
 }
 
-.preset-title {
-  color: #94a3b8;
+.preset-hint {
+  color: var(--vp-c-text-3);
+  font-size: 12px;
 }
 
-.ai-preset-tag {
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #cbd5e1;
+.neo-preset-chip {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-2);
   padding: 3px 10px;
   border-radius: 6px;
   font-size: 12px;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
 }
 
-.ai-preset-tag:hover {
-  border-color: #38bdf8;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.1);
+.neo-preset-chip:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
 }
 
-/* 状态 */
-.ai-status-row {
+/* 状态条 */
+.neo-status-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 12px;
+  padding: 2px 0;
 }
 
-.ai-status-badge {
+.status-indicator {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 10px;
+  padding: 2px 10px;
   border-radius: 9999px;
   font-size: 11.5px;
+  font-weight: 500;
 }
 
-.status-dot {
+.indicator-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: currentColor;
 }
 
-.status-ready {
-  background: rgba(148, 163, 184, 0.1);
-  color: #94a3b8;
+.state-ready {
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-3);
 }
-.status-searching {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fbbf24;
+.state-searching {
+  background: var(--vp-c-warning-soft, rgba(194, 120, 3, 0.1));
+  color: var(--vp-c-warning-1, #c27803);
 }
-.status-generating {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
+.state-generating {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
 }
-.status-done {
-  background: rgba(52, 211, 153, 0.15);
-  color: #34d399;
+.state-done {
+  background: var(--vp-c-success-soft, rgba(52, 211, 153, 0.1));
+  color: var(--vp-c-success-1, #10b981);
 }
-.status-error {
-  background: rgba(248, 113, 113, 0.15);
-  color: #f87171;
-}
-
-.ai-meta-info {
-  color: #64748b;
+.state-error {
+  background: var(--vp-c-danger-soft, rgba(185, 66, 59, 0.1));
+  color: var(--vp-c-danger-1, #b9423b);
 }
 
-.ai-error-box {
-  background: rgba(239, 68, 68, 0.12);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #fca5a5;
+.sources-count {
+  color: var(--vp-c-text-3);
+  font-size: 11.5px;
+}
+
+.neo-error-alert {
+  background: var(--vp-c-danger-soft, rgba(185, 66, 59, 0.1));
+  border: 1px solid var(--vp-c-danger-1, #b9423b);
+  color: var(--vp-c-danger-1, #b9423b);
   padding: 8px 12px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
-/* 双轨网格 */
-.ai-body-grid {
+/* 双轨区域 */
+.neo-dual-track {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 16px;
@@ -635,114 +990,137 @@ if (typeof window !== "undefined") {
 }
 
 @media (max-width: 768px) {
-  .ai-body-grid {
+  .neo-dual-track {
     grid-template-columns: 1fr;
   }
 }
 
-.track-header {
-  font-size: 13px;
+.track-caption {
+  font-size: 12px;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--vp-c-text-3);
   margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.sources-cards {
+.track-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.sources-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.source-item {
-  background: rgba(30, 41, 59, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.source-anchor {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
   border-radius: 8px;
   padding: 10px;
   text-decoration: none;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
 }
 
-.source-item:hover {
-  border-color: #38bdf8;
-  background: rgba(30, 41, 59, 0.9);
+.source-anchor:hover {
+  border-color: var(--vp-c-brand-1);
+  background: color-mix(in srgb, var(--vp-c-brand-soft) 40%, var(--vp-c-bg-soft));
+  transform: translateY(-1px);
 }
 
-.source-item-title {
+.source-name {
   font-size: 12.5px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: var(--vp-c-text-1);
   line-height: 1.4;
 }
 
-.source-item-footer {
+.source-foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 11px;
-  color: #64748b;
+  color: var(--vp-c-text-3);
 }
 
-.score-pill {
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.1);
+.source-match {
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
   padding: 1px 6px;
   border-radius: 4px;
-  font-family: monospace;
+  font-family: var(--vp-font-family-mono);
+  font-size: 10.5px;
 }
 
-.track-empty,
-.answer-empty {
-  color: #64748b;
+.track-placeholder,
+.summary-empty {
+  color: var(--vp-c-text-3);
   font-size: 13px;
-  padding: 24px 0;
+  padding: 32px 16px;
   text-align: center;
 }
 
-.answer-box {
-  background: rgba(30, 41, 59, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.summary-container {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
   border-radius: 10px;
   padding: 16px;
   min-height: 240px;
   font-size: 14.5px;
-  line-height: 1.7;
-  color: #e2e8f0;
+  line-height: 1.8;
+  color: var(--vp-c-text-1);
 }
 
-.answer-markdown :deep(.ai-h3) {
-  color: #38bdf8;
+.summary-prose :deep(.ai-doc-h3) {
+  color: var(--vp-c-brand-1);
   font-size: 15px;
-  margin: 12px 0 6px;
+  font-weight: 650;
+  margin: 14px 0 6px;
 }
 
-.answer-markdown :deep(.ai-h4) {
-  color: #818cf8;
+.summary-prose :deep(.ai-doc-h4) {
+  color: var(--vp-c-text-1);
   font-size: 14px;
-  margin: 8px 0 4px;
+  font-weight: 600;
+  margin: 10px 0 4px;
 }
 
-.answer-markdown :deep(code) {
-  background: rgba(15, 23, 42, 0.8);
+.summary-prose :deep(.ai-code) {
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
   padding: 2px 6px;
   border-radius: 4px;
+  font-family: var(--vp-font-family-mono);
   font-size: 13px;
-  color: #7dd3fc;
+  color: var(--vp-c-brand-1);
 }
 
-.typewriter-cursor {
+.summary-prose :deep(strong) {
+  color: var(--vp-c-brand-1);
+  font-weight: 650;
+}
+
+.summary-prose :deep(ul) {
+  padding-left: 20px;
+  margin: 6px 0;
+}
+
+.neo-cursor {
   display: inline-block;
-  width: 7px;
+  width: 6px;
   height: 15px;
-  background-color: #38bdf8;
+  background-color: var(--vp-c-brand-1);
   vertical-align: text-bottom;
   margin-left: 3px;
-  animation: blink 0.8s infinite;
+  animation: neo-blink 0.8s infinite;
 }
 
-@keyframes blink {
+@keyframes neo-blink {
   0%,
   100% {
     opacity: 1;
@@ -752,75 +1130,298 @@ if (typeof window !== "undefined") {
   }
 }
 
-.ai-spinner {
+.neo-spinner {
   display: inline-block;
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--vp-c-divider);
   border-top-color: currentColor;
   border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+  animation: neo-spin 0.6s linear infinite;
 }
 
-@keyframes spin {
+@keyframes neo-spin {
   to {
     transform: rotate(360deg);
   }
 }
+
+.neo-fade-enter-active,
+.neo-fade-leave-active {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.neo-fade-enter-from,
+.neo-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.98);
+}
 </style>
 
-<!-- 全局注入到 VitePress 搜索弹窗的样式 -->
+<!-- ------------------------------------------------------------
+     全局注入到 VitePress 原生搜索弹窗 (.VPLocalSearchBox) 的温润设计
+     ------------------------------------------------------------ -->
 <style>
-.vp-ai-search-btn {
-  background: linear-gradient(135deg, #0284c7, #2563eb);
-  color: #ffffff;
-  border: none;
-  font-size: 11px;
+.vp-ai-neo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 35%, transparent);
+  font-size: 11.5px;
   font-weight: 600;
-  padding: 3px 8px;
+  padding: 3px 9px;
   border-radius: 6px;
   cursor: pointer;
   margin-right: 6px;
-  transition: opacity 0.15s;
+  font-family: var(--vp-font-family-base);
+  transition: all 0.15s ease;
 }
 
-.vp-ai-search-btn:hover {
-  opacity: 0.9;
+.vp-ai-neo-btn:hover {
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
+  border-color: var(--vp-c-brand-1);
 }
 
-.vp-ai-banner {
-  margin: 8px 12px 0;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: 8px;
-  padding: 6px 12px;
+.vp-modal-ai-card {
+  margin: 10px 14px 4px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 30%, var(--vp-c-border));
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--vp-shadow-card);
+  animation: neo-slide-down 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.vp-ai-banner-content {
+@keyframes neo-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vp-ai-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vp-ai-header-left {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
-  color: #cbd5e1;
 }
 
-.ai-sparkle {
-  color: #38bdf8;
+.vp-ai-pill {
+  font-size: 11.5px;
+  font-weight: 650;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 
-.ai-banner-action {
-  margin-left: auto;
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 2px 10px;
-  border-radius: 6px;
+.vp-ai-status {
   font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
+  color: var(--vp-c-text-3);
 }
 
-.ai-banner-action:hover {
-  background: rgba(56, 189, 248, 0.25);
+.vp-ai-card-close {
+  background: transparent;
+  border: none;
+  color: var(--vp-c-text-3);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.vp-ai-card-close:hover {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
+}
+
+.vp-ai-sources-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.vp-ai-source-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-1);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.vp-ai-source-chip:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.vp-ai-score {
+  color: var(--vp-c-brand-1);
+  font-family: var(--vp-font-family-mono);
+  font-weight: 600;
+}
+
+.vp-ai-answer-body {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--vp-c-text-1);
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.vp-ai-answer-body strong {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.vp-ai-answer-body .ai-doc-h3 {
+  font-size: 14px;
+  color: var(--vp-c-brand-1);
+  margin: 10px 0 4px;
+  font-weight: 650;
+}
+
+.vp-ai-answer-body .ai-code {
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--vp-c-brand-1);
+  font-family: var(--vp-font-family-mono);
+}
+
+.vp-ai-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 14px;
+  background-color: var(--vp-c-brand-1);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: neo-blink 0.8s infinite;
+}
+
+.vp-ai-loading-spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--vp-c-divider);
+  border-top-color: var(--vp-c-brand-1);
+  border-radius: 50%;
+  animation: neo-spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+/* 搜索栏下方快捷建议栏 */
+.vp-ai-prompt-bar {
+  margin: 8px 14px 2px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 25%, var(--vp-c-border));
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  animation: neo-slide-down 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vp-ai-prompt-bar:hover {
+  background: color-mix(in srgb, var(--vp-c-brand-soft) 40%, var(--vp-c-bg-soft));
+  border-color: var(--vp-c-brand-1);
+}
+
+.vp-ai-prompt-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--vp-c-text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vp-ai-prompt-icon {
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
+}
+
+.vp-ai-prompt-text strong {
+  color: var(--vp-c-brand-1);
+}
+
+.vp-ai-prompt-btn {
+  flex-shrink: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 30%, transparent);
+  border-radius: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.vp-ai-prompt-bar:hover .vp-ai-prompt-btn {
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
+}
+
+.vp-ai-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vp-ai-fullscreen-link {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.vp-ai-fullscreen-link:hover {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.vp-ai-kbd-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
 }
 </style>
