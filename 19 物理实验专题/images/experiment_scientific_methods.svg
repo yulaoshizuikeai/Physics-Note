@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <linearGradient id="card-grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="card-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdf2f8"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="card-grad-3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="card-grad-4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="card-grad-5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#faf5ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="390" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">高中物理实验五大科学探究思想与核心模型</text>
+
+  <!-- 卡片 1：控制变量法 -->
+  <g transform="translate(16, 50)">
+    <rect width="138" height="300" rx="8" fill="url(#card-grad-1)" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect x="0" y="0" width="138" height="36" rx="8" fill="#2563eb"/>
+    <text x="69" y="23" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">① 控制变量法</text>
+
+    <text x="69" y="55" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">【多因素解耦】</text>
+    <text x="69" y="73" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">每次仅改变单一物理量，</text>
+    <text x="69" y="87" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">其余变量严格保持恒定。</text>
+
+    <line x1="12" y1="97" x2="126" y2="97" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="12" y="115" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1e293b">经典教材实验：</text>
+    <text x="12" y="136" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#2563eb">牛二定律</tspan>：</text>
+    <text x="18" y="152" font-family="sans-serif" font-size="9" fill="#64748b">定 M 探 a-F</text>
+    <text x="18" y="166" font-family="sans-serif" font-size="9" fill="#64748b">定 F 探 a-(1/M)</text>
+
+    <text x="12" y="188" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#2563eb">向心力探究</tspan>：</text>
+    <text x="18" y="204" font-family="sans-serif" font-size="9" fill="#64748b">槽径、转速、质量</text>
+
+    <text x="12" y="226" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#2563eb">电阻定律</tspan>：</text>
+    <text x="18" y="242" font-family="sans-serif" font-size="9" fill="#64748b">材料、长度、截面</text>
+
+    <text x="12" y="264" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#2563eb">气体三定律</tspan>：</text>
+    <text x="18" y="280" font-family="sans-serif" font-size="9" fill="#64748b">等温/等容/等压</text>
+  </g>
+
+  <!-- 卡片 2：放大法 -->
+  <g transform="translate(168, 50)">
+    <rect width="138" height="300" rx="8" fill="url(#card-grad-2)" stroke="#fbcfe8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="138" height="36" rx="8" fill="#db2777"/>
+    <text x="69" y="23" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">② 放大法</text>
+
+    <text x="69" y="55" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9d174d" text-anchor="middle">【微小量显化】</text>
+    <text x="69" y="73" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">几何或物理手段放大，</text>
+    <text x="69" y="87" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">显化不可见微小形变。</text>
+
+    <line x1="12" y1="97" x2="126" y2="97" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="12" y="115" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1e293b">经典教材实验：</text>
+    <text x="12" y="136" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#db2777">微差放大</tspan>：</text>
+    <text x="18" y="152" font-family="sans-serif" font-size="9" fill="#64748b">游标卡尺 1/N 差值</text>
+
+    <text x="12" y="174" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#db2777">螺旋放大</tspan>：</text>
+    <text x="18" y="190" font-family="sans-serif" font-size="9" fill="#64748b">螺旋测微器 0.01mm</text>
+
+    <text x="12" y="212" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#db2777">光杠杆放大</tspan>：</text>
+    <text x="18" y="228" font-family="sans-serif" font-size="9" fill="#64748b">卡文迪什扭秤测 G</text>
+    <text x="18" y="242" font-family="sans-serif" font-size="9" fill="#64748b">桌面微小弹性形变</text>
+
+    <text x="12" y="264" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#db2777">容积液柱放大</tspan>：</text>
+    <text x="18" y="280" font-family="sans-serif" font-size="9" fill="#64748b">大玻璃扁瓶挤压</text>
+  </g>
+
+  <!-- 卡片 3：等效替代法 -->
+  <g transform="translate(320, 50)">
+    <rect width="138" height="300" rx="8" fill="url(#card-grad-3)" stroke="#bbf7d0" stroke-width="1.5"/>
+    <rect x="0" y="0" width="138" height="36" rx="8" fill="#059669"/>
+    <text x="69" y="23" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">③ 等效替代法</text>
+
+    <text x="69" y="55" font-family="sans-serif" font-size="11" font-weight="bold" fill="#065f46" text-anchor="middle">【同效果代换】</text>
+    <text x="69" y="73" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">保持物理效果完全相同，</text>
+    <text x="69" y="87" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">替代复杂未知状态量。</text>
+
+    <line x1="12" y1="97" x2="126" y2="97" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="12" y="115" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1e293b">经典教材实验：</text>
+    <text x="12" y="136" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#059669">力的平行四边形</tspan>：</text>
+    <text x="18" y="152" font-family="sans-serif" font-size="9" fill="#64748b">结点 O 拉至同位置</text>
+    <text x="18" y="166" font-family="sans-serif" font-size="9" fill="#64748b">单弹簧替代双弹簧</text>
+
+    <text x="12" y="188" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#059669">电阻箱替代法</tspan>：</text>
+    <text x="18" y="204" font-family="sans-serif" font-size="9" fill="#64748b">电流表指针复位</text>
+    <text x="18" y="218" font-family="sans-serif" font-size="9" fill="#64748b">Rx = R箱</text>
+
+    <text x="12" y="240" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#059669">动量守恒</tspan>：</text>
+    <text x="18" y="256" font-family="sans-serif" font-size="9" fill="#64748b">水平射程代换速度</text>
+    <text x="18" y="270" font-family="sans-serif" font-size="9" fill="#64748b">下落时间严格相同</text>
+  </g>
+
+  <!-- 卡片 4：累积微元法 -->
+  <g transform="translate(472, 50)">
+    <rect width="138" height="300" rx="8" fill="url(#card-grad-4)" stroke="#fed7aa" stroke-width="1.5"/>
+    <rect x="0" y="0" width="138" height="36" rx="8" fill="#ea580c"/>
+    <text x="69" y="23" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">④ 累积微元法</text>
+
+    <text x="69" y="55" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9a3412" text-anchor="middle">【累加与积分】</text>
+    <text x="69" y="73" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">大量叠加均分降误，</text>
+    <text x="69" y="87" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">或微元面积积分求和。</text>
+
+    <line x1="12" y1="97" x2="126" y2="97" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="12" y="115" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1e293b">经典教材实验：</text>
+    <text x="12" y="136" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#ea580c">单摆多周期</tspan>：</text>
+    <text x="18" y="152" font-family="sans-serif" font-size="9" fill="#64748b">测 30~50 次求 T</text>
+
+    <text x="12" y="174" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#ea580c">油膜法分子</tspan>：</text>
+    <text x="18" y="190" font-family="sans-serif" font-size="9" fill="#64748b">数 N 滴测单滴体积</text>
+
+    <text x="12" y="212" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#ea580c">双缝干涉</tspan>：</text>
+    <text x="18" y="228" font-family="sans-serif" font-size="9" fill="#64748b">Δx = |xn-x1|/(n-1)</text>
+
+    <text x="12" y="250" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#ea580c">电容充放电</tspan>：</text>
+    <text x="18" y="266" font-family="sans-serif" font-size="9" fill="#64748b">I-t 图线面积积分</text>
+    <text x="18" y="280" font-family="sans-serif" font-size="9" fill="#64748b">求总电量 Q = ∫Idt</text>
+  </g>
+
+  <!-- 卡片 5：转换与传感法 -->
+  <g transform="translate(624, 50)">
+    <rect width="138" height="300" rx="8" fill="url(#card-grad-5)" stroke="#e9d5ff" stroke-width="1.5"/>
+    <rect x="0" y="0" width="138" height="36" rx="8" fill="#9333ea"/>
+    <text x="69" y="23" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">⑤ 转换与传感法</text>
+
+    <text x="69" y="55" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6b21a8" text-anchor="middle">【非电量变电量】</text>
+    <text x="69" y="73" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">数字化传感器实时采集，</text>
+    <text x="69" y="87" font-family="sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">破除传统机械测量极限。</text>
+
+    <line x1="12" y1="97" x2="126" y2="97" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="12" y="115" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1e293b">经典教材实验：</text>
+    <text x="12" y="136" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#9333ea">光电门</tspan>：</text>
+    <text x="18" y="152" font-family="sans-serif" font-size="9" fill="#64748b">时间转瞬时速度</text>
+    <text x="18" y="166" font-family="sans-serif" font-size="9" fill="#64748b">v = d / Δt</text>
+
+    <text x="12" y="188" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#9333ea">力传感器</tspan>：</text>
+    <text x="18" y="204" font-family="sans-serif" font-size="9" fill="#64748b">直接测绳真实拉力</text>
+    <text x="18" y="218" font-family="sans-serif" font-size="9" fill="#64748b">彻底免除 m≪M</text>
+
+    <text x="12" y="240" font-family="sans-serif" font-size="9.5" fill="#475569">• <tspan font-weight="bold" fill="#9333ea">敏感元件应用</tspan>：</text>
+    <text x="18" y="256" font-family="sans-serif" font-size="9" fill="#64748b">光敏/热敏电阻</text>
+    <text x="18" y="270" font-family="sans-serif" font-size="9" fill="#64748b">继电器自动控制</text>
+  </g>
+</svg>

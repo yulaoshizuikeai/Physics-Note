@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hooke-steel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-dark" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="390" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">力学基础实验：胡克定律与力的平行四边形定则</text>
+
+  <!-- 左卡片：探究胡克定律 -->
+  <g transform="translate(20, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">1. 探究弹簧弹力与形变量（胡克定律）</text>
+
+    <!-- 实验装置简图 -->
+    <g transform="translate(20, 36)">
+      <!-- 铁架台横梁 -->
+      <line x1="10" y1="10" x2="110" y2="10" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+      <rect x="25" y="10" width="8" height="155" fill="#94a3b8" rx="1"/>
+
+      <!-- 刻度尺 -->
+      <rect x="95" y="10" width="16" height="155" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
+      <line x1="95" y1="20" x2="103" y2="20" stroke="#ca8a04" stroke-width="1"/>
+      <line x1="95" y1="50" x2="106" y2="50" stroke="#ca8a04" stroke-width="1.5"/>
+      <line x1="95" y1="80" x2="103" y2="80" stroke="#ca8a04" stroke-width="1"/>
+      <line x1="95" y1="110" x2="106" y2="110" stroke="#ca8a04" stroke-width="1.5"/>
+      <line x1="95" y1="140" x2="103" y2="140" stroke="#ca8a04" stroke-width="1"/>
+
+      <!-- 弹簧 -->
+      <path d="M 60 10 L 60 25 
+               L 50 32 L 70 39 L 50 46 L 70 53 L 50 60 L 70 67 L 50 74 L 70 81 L 50 88 L 70 95 L 60 102
+               L 60 115" 
+            fill="none" stroke="#2563eb" stroke-width="2"/>
+
+      <!-- 指针 -->
+      <line x1="60" y1="115" x2="95" y2="115" stroke="#dc2626" stroke-width="2"/>
+      <polygon points="95,115 90,112 90,118" fill="#dc2626"/>
+
+      <!-- 挂钩与钩码 -->
+      <rect x="48" y="115" width="24" height="20" rx="3" fill="#64748b" stroke="#334155" stroke-width="1.5"/>
+      <text x="60" y="129" font-family="sans-serif" font-size="10" fill="#ffffff" font-weight="bold" text-anchor="middle">mg</text>
+
+      <!-- 原长与伸长量标注 -->
+      <line x1="42" y1="10" x2="42" y2="70" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2"/>
+      <text x="36" y="45" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">原长 L₀</text>
+      <line x1="42" y1="70" x2="42" y2="115" stroke="#ea580c" stroke-width="1.5"/>
+      <text x="36" y="96" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ea580c" text-anchor="end">形变 x</text>
+    </g>
+
+    <!-- F-L / F-x 图像 -->
+    <g transform="translate(180, 48)">
+      <!-- 坐标轴 -->
+      <line x1="20" y1="130" x2="155" y2="130" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark)"/>
+      <text x="155" y="145" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b">L (cm)</text>
+      <line x1="20" y1="130" x2="20" y2="15" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark)"/>
+      <text x="15" y="12" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b">F (N)</text>
+
+      <!-- F-L 图线 (横截距为 L0) -->
+      <line x1="55" y1="130" x2="140" y2="35" stroke="#2563eb" stroke-width="2"/>
+      <!-- 原长截距标示 -->
+      <circle cx="55" cy="130" r="3" fill="#dc2626"/>
+      <text x="55" y="145" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">L₀</text>
+
+      <!-- 斜率标注 -->
+      <path d="M 90 91 L 120 91 L 120 57" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="2 2"/>
+      <text x="105" y="103" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">ΔL</text>
+      <text x="128" y="76" font-family="sans-serif" font-size="10" fill="#64748b">ΔF</text>
+      <text x="50" y="48" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">斜率 k = ΔF/ΔL</text>
+    </g>
+
+    <!-- 说明卡片 -->
+    <g transform="translate(15, 218)">
+      <rect width="335" height="78" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="11.5" fill="#334155">【规律】胡克定律：<tspan font-weight="bold" fill="#2563eb">F = k x = k(L - L₀)</tspan></text>
+      <text x="12" y="40" font-family="sans-serif" font-size="11.5" fill="#334155">【自重修正】挂盘自然悬挂时记为 <tspan font-weight="bold" fill="#dc2626">L₀</tspan>，自重不改变图线斜率！</text>
+      <text x="12" y="60" font-family="sans-serif" font-size="11" fill="#64748b">【注意】严禁挂过重钩码超出弹性限度（超出后图线上端弯曲）。</text>
+    </g>
+  </g>
+
+  <!-- 右卡片：力的平行四边形定则 -->
+  <g transform="translate(395, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">2. 探究力的平行四边形定则（等效替代法）</text>
+
+    <!-- 矢量合成图解 (缩小上移，为文本腾出空间) -->
+    <g transform="translate(25, 38)">
+      <!-- 固定点 A -->
+      <circle cx="160" cy="8" r="4" fill="#1e293b"/>
+      <text x="160" y="0" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b" text-anchor="middle">A (固定端)</text>
+
+      <!-- 橡皮条 AO -->
+      <line x1="160" y1="8" x2="160" y2="68" stroke="#ea580c" stroke-width="3"/>
+      <text x="175" y="42" font-family="sans-serif" font-size="10.5" fill="#ea580c">橡皮条</text>
+
+      <!-- 结点 O -->
+      <circle cx="160" cy="68" r="4.5" fill="#dc2626"/>
+      <text x="178" y="72" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">O (结点)</text>
+
+      <!-- 分力 F1 测力计拉线 -->
+      <line x1="160" y1="68" x2="75" y2="128" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+      <text x="65" y="140" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">F₁ (分力1)</text>
+
+      <!-- 分力 F2 测力计拉线 -->
+      <line x1="160" y1="68" x2="245" y2="128" stroke="#2563eb" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+      <text x="250" y="140" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">F₂ (分力2)</text>
+
+      <!-- 平行四边形辅助虚线 -->
+      <line x1="75" y1="128" x2="160" y2="188" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3 3"/>
+      <line x1="245" y1="128" x2="160" y2="188" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3 3"/>
+
+      <!-- 理论合力 F (作图得出，对角线虚线) -->
+      <line x1="160" y1="68" x2="160" y2="184" stroke="#059669" stroke-width="2.2" stroke-dasharray="4 2" marker-end="url(#arrow-green)"/>
+      <text x="145" y="165" font-family="sans-serif" font-size="11" font-weight="bold" fill="#059669" text-anchor="end">F (作图理论值)</text>
+
+      <!-- 实测合力 F' (单弹簧实测，严格沿橡皮条轴线) -->
+      <line x1="160" y1="68" x2="163" y2="180" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+      <text x="175" y="180" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">F' (单测力计实测值)</text>
+    </g>
+
+    <!-- 说明卡片 -->
+    <g transform="translate(15, 222)">
+      <rect width="335" height="74" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="18" font-family="sans-serif" font-size="11" fill="#334155">【等效核心】两次拉伸，橡皮条结点 <tspan font-weight="bold" fill="#dc2626">O 必须拉到同一点</tspan>！</text>
+      <text x="12" y="36" font-family="sans-serif" font-size="11" fill="#334155">【图示辨析】<tspan font-weight="bold" fill="#dc2626">F' 必与 AO 轴线共线</tspan>；对角线作出的 <tspan font-weight="bold" fill="#059669">F</tspan> 存在作图微差。</text>
+      <text x="12" y="54" font-family="sans-serif" font-size="10.5" fill="#64748b">【夹角原则】两拉力夹角适宜在 60°~120°，拉力适当大以减小相对误差。</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arrow-blue4" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red4" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-green4" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="390" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">电磁感应、交变电流与传感器核心实验全景</text>
+
+  <!-- 左卡片：楞次定律与可拆变压器 -->
+  <g transform="translate(20, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">1. 楞次定律判据与可拆变压器结构</text>
+
+    <!-- 楞次定律示意图 -->
+    <g transform="translate(20, 40)">
+      <!-- 条形磁铁 -->
+      <rect x="25" y="10" width="20" height="25" fill="#dc2626" rx="2"/>
+      <text x="35" y="27" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">N</text>
+      <rect x="25" y="35" width="20" height="25" fill="#2563eb" rx="2"/>
+      <text x="35" y="52" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">S</text>
+
+      <!-- 运动箭头 -->
+      <line x1="15" y1="25" x2="15" y2="55" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-red4)"/>
+      <text x="12" y="70" font-family="sans-serif" font-size="9.5" fill="#ea580c" text-anchor="middle">插入</text>
+
+      <!-- 螺线管线圈 -->
+      <ellipse cx="85" cy="40" rx="22" ry="30" fill="none" stroke="#64748b" stroke-width="3"/>
+      <path d="M 85 10 Q 105 10 105 40 T 85 70" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#arrow-green4)"/>
+
+      <!-- 磁感应矢量标示 -->
+      <text x="50" y="20" font-family="sans-serif" font-size="10" fill="#dc2626">B原 ↓</text>
+      <text x="50" y="65" font-family="sans-serif" font-size="10" font-weight="bold" fill="#059669">B感 ↑</text>
+      <text x="50" y="80" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1e293b">“增反减同”</text>
+    </g>
+
+    <!-- 可拆变压器铁芯结构 -->
+    <g transform="translate(195, 40)">
+      <!-- 扼铁 (闭合磁路) -->
+      <rect x="15" y="10" width="125" height="15" fill="#475569" stroke="#1e293b" stroke-width="1" rx="2"/>
+      <text x="77" y="22" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle">条形扼铁(防漏磁)</text>
+
+      <!-- U 形铁芯 -->
+      <path d="M 15 25 v 75 h 125 v -75 h -20 v 55 h -85 v -55 z" fill="#64748b" stroke="#1e293b" stroke-width="1"/>
+
+      <!-- 原线圈 n1 -->
+      <rect x="25" y="38" width="18" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" rx="2"/>
+      <text x="34" y="62" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1e40af" text-anchor="middle">n₁</text>
+
+      <!-- 副线圈 n2 -->
+      <rect x="112" y="38" width="18" height="40" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" rx="2"/>
+      <text x="121" y="62" font-family="sans-serif" font-size="9" font-weight="bold" fill="#991b1b" text-anchor="middle">n₂</text>
+
+      <text x="34" y="93" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#2563eb" text-anchor="middle">U₁ 交流</text>
+      <text x="121" y="93" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#dc2626" text-anchor="middle">U₂ 输出</text>
+    </g>
+
+    <!-- 说明卡片 -->
+    <g transform="translate(15, 175)">
+      <rect width="335" height="120" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【楞次定律核心】感应电流磁场总阻碍磁通量变化：</text>
+      <text x="12" y="38" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">增反减同</tspan>：磁通量增加时感应磁场反向，减少时同向；</text>
+      <text x="12" y="56" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#ea580c">来拒去留</tspan>：靠近时受排斥安培阻力，远离时受吸引力。</text>
+      <text x="12" y="76" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【变压器刚性铁律】</text>
+      <text x="12" y="94" font-family="sans-serif" font-size="11" fill="#dc2626" font-weight="bold">① 严禁通直流电！直流不产生交变磁通量且烧线圈。</text>
+      <text x="12" y="112" font-family="sans-serif" font-size="11" fill="#2563eb">② 闭合铁芯：U₁ / U₂ = n₁ / n₂（漏磁使实测 U₂ 略偏小）。</text>
+    </g>
+  </g>
+
+  <!-- 右卡片：传感器与电磁继电器 -->
+  <g transform="translate(395, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">2. 传感器与电磁继电器控制电路设计</text>
+
+    <!-- 继电器工作原理图解 -->
+    <g transform="translate(25, 40)">
+      <!-- 低压控制回路 (直流) -->
+      <rect x="10" y="10" width="130" height="85" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="3 3" rx="4"/>
+      <text x="75" y="24" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#334155" text-anchor="middle">低压控制回路 (直流)</text>
+
+      <!-- 光敏电阻 RG -->
+      <rect x="25" y="38" width="30" height="15" fill="#fef08a" stroke="#ca8a04" stroke-width="1.2"/>
+      <text x="40" y="49" font-family="sans-serif" font-size="9" font-weight="bold" fill="#854d0e" text-anchor="middle">RG</text>
+      <text x="40" y="65" font-family="sans-serif" font-size="8.5" fill="#ca8a04" text-anchor="middle">光敏电阻</text>
+
+      <!-- 电磁铁线圈 -->
+      <rect x="90" y="35" width="35" height="45" fill="#e2e8f0" stroke="#475569" stroke-width="1"/>
+      <circle cx="107" cy="57" r="10" fill="#94a3b8"/>
+      <text x="107" y="61" font-family="sans-serif" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">线圈</text>
+
+      <!-- 衔铁与动触点 -->
+      <line x1="145" y1="35" x2="145" y2="75" stroke="#334155" stroke-width="3"/>
+      <text x="145" y="28" font-family="sans-serif" font-size="9" fill="#334155" text-anchor="middle">衔铁</text>
+
+      <!-- 高压工作回路 (交流220V) -->
+      <rect x="175" y="10" width="140" height="85" fill="#fef2f2" stroke="#fca5a5" stroke-dasharray="3 3" rx="4"/>
+      <text x="245" y="24" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#991b1b" text-anchor="middle">高压工作回路 (220V交流)</text>
+
+      <!-- 常闭触点 -->
+      <circle cx="185" cy="50" r="3" fill="#dc2626"/>
+      <line x1="185" y1="50" x2="160" y2="50" stroke="#dc2626" stroke-width="1.5"/>
+
+      <!-- 路灯 L -->
+      <circle cx="270" cy="50" r="14" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+      <line x1="260" y1="40" x2="280" y2="60" stroke="#ca8a04" stroke-width="1.5"/>
+      <line x1="260" y1="60" x2="280" y2="40" stroke="#ca8a04" stroke-width="1.5"/>
+      <text x="270" y="78" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#ca8a04" text-anchor="middle">路灯 L</text>
+    </g>
+
+    <!-- 说明卡片 (两行换行排版，彻底防文字截断) -->
+    <g transform="translate(15, 175)">
+      <rect width="335" height="120" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【光控路灯控制逻辑分析】</text>
+      <text x="12" y="37" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#059669">白天（光照强）</tspan>：RG 阻值小 ⟹ 控制电流大 ⟹ 电磁铁吸下衔铁</text>
+      <text x="22" y="52" font-family="sans-serif" font-size="11" fill="#334155">⟹ 常闭触点断开 ⟹ <tspan font-weight="bold" fill="#64748b">路灯自动熄灭</tspan>。</text>
+      <text x="12" y="69" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">夜晚（光照弱）</tspan>：RG 阻值剧增 ⟹ 控制电流微弱 ⟹ 弹簧拉回衔铁</text>
+      <text x="22" y="84" font-family="sans-serif" font-size="11" fill="#334155">⟹ 常闭触点复位接通 ⟹ <tspan font-weight="bold" fill="#dc2626">路灯自动点亮</tspan>！</text>
+      <text x="12" y="103" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#2563eb">【敏感元件】光敏(光强阻小)；NTC(温高阻小)；霍尔(测磁场)。</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arrow-blue5" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red5" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-dark5" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="390" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">光热与近代物理实验：双缝干涉光路与光电效应测普朗克常量</text>
+
+  <!-- 左卡片：双缝干涉测量光波长 -->
+  <g transform="translate(20, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">1. 双缝干涉光具座器件严格排列顺序</text>
+
+    <!-- 光路流程器件排布 -->
+    <g transform="translate(10, 42)">
+      <!-- 白炽光源 -->
+      <rect x="5" y="20" width="30" height="45" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5" rx="3"/>
+      <text x="20" y="47" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#854d0e" text-anchor="middle">光源</text>
+
+      <line x1="37" y1="42" x2="48" y2="42" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-red5)"/>
+
+      <!-- 滤光片 -->
+      <rect x="50" y="22" width="10" height="41" fill="#fca5a5" stroke="#dc2626" stroke-width="1.2"/>
+      <text x="55" y="15" font-family="sans-serif" font-size="9" fill="#dc2626" text-anchor="middle">滤光片</text>
+
+      <line x1="62" y1="42" x2="73" y2="42" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrow-red5)"/>
+
+      <!-- 单缝 -->
+      <rect x="75" y="22" width="10" height="41" fill="#cbd5e1" stroke="#475569" stroke-width="1.2"/>
+      <line x1="80" y1="36" x2="80" y2="48" stroke="#ffffff" stroke-width="2"/>
+      <text x="80" y="15" font-family="sans-serif" font-size="9" fill="#475569" text-anchor="middle">单缝</text>
+
+      <line x1="87" y1="42" x2="98" y2="42" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrow-red5)"/>
+
+      <!-- 双缝 -->
+      <rect x="100" y="22" width="10" height="41" fill="#cbd5e1" stroke="#475569" stroke-width="1.2"/>
+      <line x1="105" y1="33" x2="105" y2="41" stroke="#ffffff" stroke-width="1.5"/>
+      <line x1="105" y1="44" x2="105" y2="52" stroke="#ffffff" stroke-width="1.5"/>
+      <text x="105" y="15" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1e40af" text-anchor="middle">双缝</text>
+
+      <!-- 遮光筒 -->
+      <rect x="117" y="18" width="135" height="49" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2" rx="2"/>
+      <text x="184" y="47" font-family="sans-serif" font-size="10" fill="#475569" text-anchor="middle">遮光筒 (长度 l)</text>
+
+      <!-- 毛玻璃屏 -->
+      <rect x="254" y="22" width="8" height="41" fill="#93c5fd" stroke="#2563eb" stroke-width="1.2"/>
+      <text x="258" y="15" font-family="sans-serif" font-size="9" fill="#2563eb" text-anchor="middle">光屏</text>
+
+      <!-- 测量头 -->
+      <rect x="268" y="15" width="40" height="55" fill="#f1f5f9" stroke="#1e293b" stroke-width="1.5" rx="3"/>
+      <text x="288" y="46" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#0f172a" text-anchor="middle">测量头</text>
+    </g>
+
+    <!-- 说明卡片 -->
+    <g transform="translate(15, 140)">
+      <rect width="335" height="155" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【元件排列口诀】源 ➔ 滤 ➔ 单 ➔ 双 ➔ 筒 ➔ 屏 ➔ 头</text>
+      <text x="12" y="38" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">单缝</tspan>提供线光源；<tspan font-weight="bold" fill="#2563eb">双缝</tspan>产生频率相干光波。</text>
+      <text x="12" y="56" font-family="sans-serif" font-size="11" fill="#334155">• 调中：单缝与双缝必须<tspan font-weight="bold" fill="#ea580c">严格平行</tspan>且中心共轴。</text>
+      <text x="12" y="78" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【条纹间距公式】Δx = (l / d) λ  ⟹  λ = (d / l) Δx</text>
+      <text x="12" y="96" font-family="sans-serif" font-size="11" fill="#334155">• 累积测间距：<tspan font-weight="bold" fill="#dc2626">Δx = |xn - x₁| / (n - 1)</tspan> （分母不能写 n！）</text>
+      <text x="12" y="115" font-family="sans-serif" font-size="11" fill="#2563eb">• 增大条纹间距：增大屏距 l、减小双缝间距 d、用红光。</text>
+      <text x="12" y="138" font-family="sans-serif" font-size="10.5" fill="#64748b">同一装置下条纹宽度：红光条纹最宽，紫光条纹最窄。</text>
+    </g>
+  </g>
+
+  <!-- 右卡片：光电效应测普朗克常量 -->
+  <g transform="translate(395, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">2. 光电效应实验与测普朗克常量（反向截止）</text>
+
+    <!-- 光电管反向回路与 Uc-ν 图像 -->
+    <g transform="translate(20, 38)">
+      <!-- 左：反向电路简图 -->
+      <rect x="5" y="10" width="135" height="85" fill="#ffffff" stroke="#cbd5e1" rx="4"/>
+      <text x="72" y="24" font-family="sans-serif" font-size="9" font-weight="bold" fill="#334155" text-anchor="middle">反向截止回路</text>
+      <circle cx="45" cy="55" r="14" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5"/>
+      <line x1="37" y1="45" x2="37" y2="65" stroke="#dc2626" stroke-width="2"/>
+      <text x="30" y="58" font-family="sans-serif" font-size="8.5" fill="#dc2626">K</text>
+      <line x1="53" y1="45" x2="53" y2="65" stroke="#2563eb" stroke-width="2"/>
+      <text x="60" y="58" font-family="sans-serif" font-size="8.5" fill="#2563eb">A</text>
+      <text x="72" y="85" font-family="sans-serif" font-size="8.5" fill="#ea580c" text-anchor="middle">阳极A接负，阴极K接正</text>
+
+      <!-- 右：Uc - ν 图像 -->
+      <line x1="165" y1="75" x2="280" y2="75" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark5)"/>
+      <text x="280" y="88" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e293b">ν (Hz)</text>
+      <line x1="165" y1="95" x2="165" y2="10" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark5)"/>
+      <text x="155" y="10" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e293b">Uc</text>
+
+      <!-- 线性拟合图线 -->
+      <line x1="195" y1="75" x2="265" y2="20" stroke="#dc2626" stroke-width="2"/>
+      <!-- 虚线延伸至负半轴 -->
+      <line x1="165" y1="92" x2="195" y2="75" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+      <!-- 截止频率截距 ν0 -->
+      <circle cx="195" cy="75" r="3" fill="#059669"/>
+      <text x="195" y="88" font-family="sans-serif" font-size="9" font-weight="bold" fill="#059669" text-anchor="middle">ν₀</text>
+
+      <!-- 纵截距 -W0/e -->
+      <text x="170" y="98" font-family="sans-serif" font-size="8.5" fill="#dc2626">-W₀/e</text>
+
+      <!-- 斜率标注 (移到红线上方左侧避让) -->
+      <text x="195" y="24" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#2563eb">斜率 k = h/e</text>
+    </g>
+
+    <!-- 说明卡片 -->
+    <g transform="translate(15, 140)">
+      <rect width="335" height="155" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【遏止电压方程】e Uc = Ekm = h ν - W₀</text>
+      <text x="12" y="38" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">化曲为直</tspan>：Uc = (h/e) ν - W₀/e 一次函数直线；</text>
+      <text x="12" y="56" font-family="sans-serif" font-size="11" fill="#2563eb">• <tspan font-weight="bold" fill="#2563eb">斜率求 h</tspan>：k = h/e ⟹ 普朗克常量 <tspan font-weight="bold" fill="#dc2626">h = e · k</tspan>！</text>
+      <text x="12" y="74" font-family="sans-serif" font-size="11" fill="#059669">• <tspan font-weight="bold" fill="#059669">横截距</tspan>对应截止频率 ν₀；纵截距绝对值等于 W₀/e。</text>
+      <text x="12" y="96" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【高频避坑铁律】</text>
+      <text x="12" y="115" font-family="sans-serif" font-size="11" fill="#dc2626" font-weight="bold">遏止电压 Uc 仅取决于入射光频率 ν，与光强绝对无关！</text>
+      <text x="12" y="136" font-family="sans-serif" font-size="10.5" fill="#64748b">增大光强只增大单位时间逸出电子数（即饱和光电流增大）。</text>
+    </g>
+  </g>
+</svg>

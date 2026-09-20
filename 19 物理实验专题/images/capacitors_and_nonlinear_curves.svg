@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 370" width="100%" height="100%">
+  <defs>
+    <marker id="arrow-blue3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-dark3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="390" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="bold" fill="#0f172a" text-anchor="middle">电学核心实验：电容器特性（静电计与充放电）与小灯泡伏安特性</text>
+
+  <!-- 左卡片：电容器与充放电微元积分 -->
+  <g transform="translate(20, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">1. 平行板电容器与 RC 充放电微元积分</text>
+
+    <!-- 上部：静电计测电势差 -->
+    <g transform="translate(25, 40)">
+      <!-- 电容器极板 -->
+      <rect x="15" y="10" width="8" height="60" fill="#94a3b8" stroke="#475569" stroke-width="1"/>
+      <rect x="55" y="10" width="8" height="60" fill="#94a3b8" stroke="#475569" stroke-width="1"/>
+      <line x1="23" y1="70" x2="23" y2="80" stroke="#475569" stroke-width="1.5"/>
+      <line x1="15" y1="80" x2="31" y2="80" stroke="#475569" stroke-width="1.5"/>
+      <text x="39" y="8" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">极板间距 d</text>
+
+      <!-- 连接导线 -->
+      <line x1="63" y1="40" x2="110" y2="40" stroke="#dc2626" stroke-width="1.5"/>
+
+      <!-- 静电计 -->
+      <circle cx="125" cy="40" r="15" fill="#f1f5f9" stroke="#334155" stroke-width="1.5"/>
+      <line x1="125" y1="30" x2="125" y2="50" stroke="#334155" stroke-width="2"/>
+      <!-- 指针偏转 -->
+      <line x1="125" y1="40" x2="137" y2="47" stroke="#dc2626" stroke-width="2"/>
+      <text x="125" y="68" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">偏角 θ ∝ U</text>
+    </g>
+
+    <!-- 下部：I - t 充放电图线与积分面积 -->
+    <g transform="translate(195, 40)">
+      <!-- 坐标轴 -->
+      <line x1="20" y1="80" x2="135" y2="80" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark3)"/>
+      <text x="135" y="93" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e293b">t (s)</text>
+      <line x1="20" y1="80" x2="20" y2="10" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark3)"/>
+      <text x="15" y="10" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e293b">I (A)</text>
+
+      <!-- 充放电阴影面积 -->
+      <path d="M 20 20 Q 40 65 110 79 L 20 79 Z" fill="#dbeafe" stroke="none"/>
+      <!-- 指数衰减图线 -->
+      <path d="M 20 20 Q 40 65 110 79" fill="none" stroke="#2563eb" stroke-width="2"/>
+
+      <text x="50" y="55" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e40af">面积 S = Q</text>
+      <text x="25" y="102" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#059669">C = Q / E = ∫I dt / E</text>
+    </g>
+
+    <!-- 说明卡片 -->
+    <g transform="translate(15, 175)">
+      <rect width="335" height="120" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【静电计判据】充电后断开电源（Q 不变）：</text>
+      <text x="12" y="38" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">增大板距 d</tspan> ⟹ C 减小 ⟹ U 增大 ⟹ 静电计偏角 θ 增大</text>
+      <text x="12" y="56" font-family="sans-serif" font-size="11" fill="#334155">• <tspan font-weight="bold" fill="#dc2626">插入电介质 εr</tspan> ⟹ C 增大 ⟹ U 减小 ⟹ 静电计偏角 θ 减小</text>
+      <text x="12" y="74" font-family="sans-serif" font-size="11" fill="#2563eb">• 极板间匀强场强 E = 4πkQ / (εr S)，仅改变 d 时 E 恒定不变！</text>
+      <text x="12" y="94" font-family="sans-serif" font-size="11" font-weight="bold" fill="#059669">【微元累积】I-t 曲线与时间轴所围面积即为总电量 Q！</text>
+      <text x="12" y="112" font-family="sans-serif" font-size="10.5" fill="#64748b">计算机传感器实时高速采样，彻底解决瞬态电量难测瓶颈。</text>
+    </g>
+  </g>
+
+  <!-- 右卡片：描绘小灯泡伏安特性曲线 -->
+  <g transform="translate(395, 48)">
+    <rect width="365" height="308" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="182" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#1e293b" text-anchor="middle">2. 描绘小灯泡伏安特性曲线（分压外接法）</text>
+
+    <!-- 分压外接电路图 -->
+    <g transform="translate(25, 40)">
+      <!-- 电源 E -->
+      <line x1="20" y1="10" x2="20" y2="80" stroke="#334155" stroke-width="1.5"/>
+      <line x1="12" y1="40" x2="28" y2="40" stroke="#334155" stroke-width="2"/>
+      <line x1="15" y1="48" x2="25" y2="48" stroke="#334155" stroke-width="1"/>
+      <text x="8" y="38" font-family="sans-serif" font-size="10" fill="#334155">E</text>
+
+      <!-- 滑动变阻器分压接法 -->
+      <line x1="20" y1="10" x2="50" y2="10" stroke="#334155" stroke-width="1.5"/>
+      <line x1="20" y1="80" x2="50" y2="80" stroke="#334155" stroke-width="1.5"/>
+      <rect x="50" y="10" width="10" height="70" fill="#cbd5e1" stroke="#475569" stroke-width="1"/>
+      <line x1="55" y1="45" x2="75" y2="45" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue3)"/>
+      <text x="45" y="93" font-family="sans-serif" font-size="9" fill="#64748b">分压变阻器</text>
+
+      <!-- 外接测量回路 -->
+      <line x1="75" y1="45" x2="85" y2="45" stroke="#334155" stroke-width="1.5"/>
+      <!-- 电流表 A -->
+      <circle cx="95" cy="45" r="9" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="95" y="49" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">A</text>
+
+      <line x1="104" y1="45" x2="115" y2="45" stroke="#334155" stroke-width="1.5"/>
+      <!-- 小灯泡 L -->
+      <circle cx="125" cy="45" r="9" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+      <line x1="119" y1="39" x2="131" y2="51" stroke="#dc2626" stroke-width="1.5"/>
+      <line x1="119" y1="51" x2="131" y2="39" stroke="#dc2626" stroke-width="1.5"/>
+      <line x1="134" y1="45" x2="145" y2="45" stroke="#334155" stroke-width="1.5"/>
+      <line x1="145" y1="45" x2="145" y2="80" stroke="#334155" stroke-width="1.5"/>
+      <line x1="50" y1="80" x2="145" y2="80" stroke="#334155" stroke-width="1.5"/>
+
+      <!-- 并联电压表 V (外接) -->
+      <line x1="115" y1="45" x2="115" y2="20" stroke="#059669" stroke-width="1.2"/>
+      <line x1="115" y1="20" x2="120" y2="20" stroke="#059669" stroke-width="1.2"/>
+      <circle cx="128" cy="20" r="8" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+      <text x="128" y="24" font-family="sans-serif" font-size="9" font-weight="bold" fill="#059669" text-anchor="middle">V</text>
+      <line x1="136" y1="20" x2="140" y2="20" stroke="#059669" stroke-width="1.2"/>
+      <line x1="140" y1="20" x2="140" y2="45" stroke="#059669" stroke-width="1.2"/>
+    </g>
+
+    <!-- I - U 伏安特性图线 (文字避让) -->
+    <g transform="translate(195, 40)">
+      <!-- 坐标轴 -->
+      <line x1="20" y1="80" x2="145" y2="80" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark3)"/>
+      <text x="145" y="93" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e293b">U (V)</text>
+      <line x1="20" y1="80" x2="20" y2="10" stroke="#1e293b" stroke-width="1.5" marker-end="url(#arrow-dark3)"/>
+      <text x="15" y="10" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e293b">I (A)</text>
+
+      <!-- 伏安特性曲线 (向下弯曲) -->
+      <path d="M 20 80 Q 75 45 130 30" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+      <!-- 参考线性割线 -->
+      <line x1="20" y1="80" x2="110" y2="15" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2"/>
+
+      <text x="35" y="22" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#dc2626">曲线向下弯曲</text>
+      <text x="35" y="36" font-family="sans-serif" font-size="9.5" fill="#475569">割线斜率 1/R 减小</text>
+      <text x="35" y="50" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2563eb">⟹ 电阻 R 增大！</text>
+    </g>
+
+    <!-- 说明卡片 (严格防文字截断) -->
+    <g transform="translate(15, 175)">
+      <rect width="335" height="120" rx="5" fill="#ffffff" stroke="#e2e8f0"/>
+      <text x="12" y="20" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e293b">【电路选型两大刚性铁律】</text>
+      <text x="12" y="38" font-family="sans-serif" font-size="11" fill="#334155">① <tspan font-weight="bold" fill="#dc2626">控制电路必用分压式</tspan>：要求电压必须从 0 连续变化！</text>
+      <text x="12" y="56" font-family="sans-serif" font-size="11" fill="#334155">② <tspan font-weight="bold" fill="#2563eb">测量电路必用外接法</tspan>：冷态阻值&lt;2Ω，Rx ≪ Rv 分流微弱。</text>
+      <text x="12" y="80" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ea580c">【物理本质】钨丝电阻率随温度剧烈升高而显著增大。</text>
+      <text x="12" y="98" font-family="sans-serif" font-size="10.5" fill="#64748b">注意：图线上某点与原点连线的割线斜率为 1/R，切线无意义！</text>
+    </g>
+  </g>
+</svg>
