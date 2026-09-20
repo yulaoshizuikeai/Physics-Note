@@ -1203,7 +1203,7 @@ html.dark .flash-kw {
   --vp-c-brand-1: var(--vp-c-brand-1);
 }
 
-.VPLocalSearchBox .search-input {
+.VPLocalSearchBox .search-bar {
   border-radius: 10px !important;
   border: 1px solid var(--vp-c-border) !important;
   background-color: var(--vp-c-bg-elv) !important;
@@ -1213,13 +1213,19 @@ html.dark .flash-kw {
     box-shadow 0.2s ease;
 }
 
-.VPLocalSearchBox .search-input:focus-within {
+.VPLocalSearchBox .search-bar:focus-within {
   border-color: color-mix(in srgb, var(--vp-c-brand-1) 45%, var(--vp-c-border)) !important;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent) !important;
 }
 
-.VPLocalSearchBox .search-input input {
+.VPLocalSearchBox .search-input {
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
   color: var(--vp-c-text-1) !important;
+  outline: none !important;
+  min-width: 0 !important;
 }
 
 /* Search results */

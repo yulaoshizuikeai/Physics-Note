@@ -76,7 +76,8 @@ export const AI_API_PRESETS: AiApiPreset[] = [
     protocol: "openai",
     endpoint: "https://integrate.api.nvidia.com/v1/chat/completions",
     model: "meta/llama-3.1-8b-instruct",
-    description: "NVIDIA NIM 云端 GPU 推理，因 CORS 限制自动经 Worker 代理转发，需填入 NVIDIA API Key",
+    description:
+      "NVIDIA NIM 云端 GPU 推理，因 CORS 限制自动经 Worker 代理转发，需填入 NVIDIA API Key",
   },
 ];
 
@@ -181,8 +182,7 @@ export function normalizeOpenAiEndpoint(rawEndpoint: string): string {
 }
 
 /** Worker 代理端点（绕过 CORS 限制） */
-const WORKER_PROXY_ENDPOINT =
-  "https://physics-knowledge-search.harlan0804.workers.dev/api/proxy";
+const WORKER_PROXY_ENDPOINT = "https://physics-knowledge-search.harlan0804.workers.dev/api/proxy";
 
 /**
  * 判断某个 endpoint 是否因 CORS 无法从浏览器直连，需要通过 Worker 代理

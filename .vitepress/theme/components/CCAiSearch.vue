@@ -188,10 +188,10 @@ const setupVitePressSearchEnhancement = () => {
       aiBtn.className = "vp-ai-neo-btn";
       aiBtn.title = "针对当前输入向高中物理 AI 提问 (Shift + Enter)";
       aiBtn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="vp-ai-neo-btn-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
         </svg>
-        <span>问 AI</span>
+        <span class="vp-ai-neo-btn-text">问&nbsp;AI</span>
       `;
 
       aiBtn.onclick = (e) => {
@@ -1831,27 +1831,59 @@ if (typeof window !== "undefined") {
      全局注入到 VitePress 原生搜索弹窗 (.VPLocalSearchBox) 的温润设计
      ------------------------------------------------------------ -->
 <style>
-.vp-ai-neo-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 35%, transparent);
-  font-size: 11.5px;
-  font-weight: 600;
-  padding: 3px 9px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-right: 6px;
-  font-family: var(--vp-font-family-base);
-  transition: all 0.15s ease;
+.VPLocalSearchBox .search-actions {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
 }
 
+.VPLocalSearchBox .search-actions .vp-ai-neo-btn,
+.vp-ai-neo-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  height: 26px !important;
+  max-height: 26px !important;
+  box-sizing: border-box !important;
+  padding: 0 8px !important;
+  background: var(--vp-c-brand-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 35%, transparent) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  margin: 0 4px 0 0 !important;
+  font-family: var(--vp-font-family-base) !important;
+  transition: all 0.15s ease !important;
+  align-self: center !important;
+  vertical-align: middle !important;
+}
+
+.VPLocalSearchBox .search-actions .vp-ai-neo-btn span,
+.vp-ai-neo-btn span,
+.vp-ai-neo-btn-text {
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+}
+
+.VPLocalSearchBox .search-actions .vp-ai-neo-btn svg,
+.vp-ai-neo-btn svg,
+.vp-ai-neo-btn-icon {
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+.VPLocalSearchBox .search-actions .vp-ai-neo-btn:hover,
 .vp-ai-neo-btn:hover {
-  background: var(--vp-c-brand-1);
-  color: #ffffff;
-  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-1) !important;
+  color: #ffffff !important;
+  border-color: var(--vp-c-brand-1) !important;
 }
 
 .vp-modal-ai-card {

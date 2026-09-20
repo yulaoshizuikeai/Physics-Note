@@ -143,14 +143,17 @@ const userScreenshotCase = `3. 关键结论与避坑指南
 const renderedTable = renderAiMarkdown(userScreenshotCase);
 assert(renderedTable.includes('<div class="ai-table-wrapper">'), "未生成 ai-table-wrapper 容器");
 assert(renderedTable.includes('<table class="ai-table">'), "未生成 table 标签");
-assert(renderedTable.includes('>比较项</th>'), "表头未正确解析");
-assert(renderedTable.includes('>外接法 (方案 A)</th>'), "表头外接法未正确解析");
-assert(renderedTable.includes('>内接法 (方案 B)</th>'), "表头内接法未正确解析");
+assert(renderedTable.includes(">比较项</th>"), "表头未正确解析");
+assert(renderedTable.includes(">外接法 (方案 A)</th>"), "表头外接法未正确解析");
+assert(renderedTable.includes(">内接法 (方案 B)</th>"), "表头内接法未正确解析");
 assert(renderedTable.includes("路端电压"), "数据单元格未解析");
 assert(renderedTable.includes('class="katex"'), "表格内部的 LaTeX 公式未被 KaTeX 正确渲染");
 assert(!renderedTable.includes("| 比较项 |"), "表格文本仍原样残留，未转换为 HTML 表格");
 assert(!renderedTable.includes("| :--- |"), "表格分隔符原样残留");
-assert(!renderedTable.includes('<p class="ai-doc-p"><div class="ai-table-wrapper">'), "表格被非法嵌套在 p 标签内");
+assert(
+  !renderedTable.includes('<p class="ai-doc-p"><div class="ai-table-wrapper">'),
+  "表格被非法嵌套在 p 标签内",
+);
 console.log("✓ Markdown 表格规范解析及公式集成通过 (含用户真实截图片段)");
 
 // 1.12 表格对齐方式 (左/中/右) 与转义竖线 \|
@@ -172,7 +175,7 @@ const tightTableCase = `### 伏安特性测试
 |---|---|
 | 电压 | $220\\,\\text{V}$ |`;
 const renderedTightTable = renderAiMarkdown(tightTableCase);
-assert(renderedTightTable.includes('<h4 class=\'ai-doc-h4\'>伏安特性测试</h4>'), "标题未正常解析");
+assert(renderedTightTable.includes("<h4 class='ai-doc-h4'>伏安特性测试</h4>"), "标题未正常解析");
 assert(renderedTightTable.includes('<table class="ai-table">'), "紧贴标题的表格未正常解析");
 console.log("✓ 无空行紧贴标题的表格容错解析正常");
 

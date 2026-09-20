@@ -60,15 +60,14 @@ export default {
     }
 
     // 路由限定：只接受 /api/search、/api/proxy 或根路径 POST
-    if (
-      url.pathname !== "/api/search" &&
-      url.pathname !== "/api/proxy" &&
-      url.pathname !== "/"
-    ) {
-      return new Response(JSON.stringify({ error: "Not Found. Use POST /api/search or POST /api/proxy" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json", ...CORS_HEADERS },
-      });
+    if (url.pathname !== "/api/search" && url.pathname !== "/api/proxy" && url.pathname !== "/") {
+      return new Response(
+        JSON.stringify({ error: "Not Found. Use POST /api/search or POST /api/proxy" }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+        },
+      );
     }
 
     // --- /api/proxy：通用 OpenAI 兼容流式代理（解决 CORS 限制）---
