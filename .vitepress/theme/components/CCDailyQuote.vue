@@ -333,6 +333,7 @@ const handleCopy = async (event: MouseEvent) => {
 }
 
 .flash-action-icon-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -344,6 +345,15 @@ const handleCopy = async (event: MouseEvent) => {
   color: var(--vp-c-text-3);
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.flash-action-icon-btn::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  left: -8px;
+  right: -8px;
 }
 
 .flash-action-icon-btn:hover {

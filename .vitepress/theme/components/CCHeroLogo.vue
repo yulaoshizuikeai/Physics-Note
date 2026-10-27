@@ -611,4 +611,14 @@ const tiltStyle = computed(() => {
     max-width: 250px;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .flip-wrap,
+  .levitate-box,
+  .atom-orbit,
+  .atom-orbit-2,
+  .atom-electron {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 </style>
